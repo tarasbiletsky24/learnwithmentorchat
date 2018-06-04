@@ -26,7 +26,7 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.url}/${id}`).pipe(
-      catchError(this.handleError<User>(`getHero id=${id}`))
+      catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
 
