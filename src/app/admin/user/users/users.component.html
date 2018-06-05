@@ -10,3 +10,9 @@
     <span>{{r.Id}} </span> {{r.Name}}
   </li>
 </ul>
+
+<div>
+  <h4>User Search</h4>
+ 
+  <input #searchBox (keyup)="search(searchBox.value)" />
+</div>
