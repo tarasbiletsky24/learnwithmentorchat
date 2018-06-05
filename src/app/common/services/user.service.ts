@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { Role } from '../models/role';
 import {Observable, of} from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -44,8 +45,14 @@ export class UserService {
 
   deleteUserById (id: number): Observable<User> {  
     return this.http.delete<User>(`${this.url}/${id}`, this.httpOptions).pipe(
-      catchError(this.handleError<User>('deletePart'))
+      catchError(this.handleError<User>('deleteUser'))
     );
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.url}/roles`).pipe(
+      catchError(this.handleError<Role[]>('getRole'))
+    )
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
