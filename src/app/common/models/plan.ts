@@ -1,5 +1,5 @@
 export class Plan {
     Id: number;
     Name: string;
-    //add properties from dto
+    // add properties from dto
 }

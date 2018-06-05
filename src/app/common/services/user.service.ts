@@ -55,6 +55,12 @@ export class UserService {
     );
   }
 
+  search(param: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}search?q=${param}`).pipe(
+      catchError(this.handleError<User[]>(`searchUsers`))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
