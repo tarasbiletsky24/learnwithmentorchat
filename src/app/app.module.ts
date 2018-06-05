@@ -6,6 +6,7 @@ import { UsersComponent } from './admin/user/users/users.component';
 import { CommentComponent } from './task/comment/comment.component';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
