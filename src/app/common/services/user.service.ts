@@ -43,7 +43,7 @@ export class UserService {
     );
   }
 
-  deleteUserById (id: number): Observable<User> {  
+  deleteUserById (id: number): Observable<User> {
     return this.http.delete<User>(`${this.url}/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
@@ -52,7 +52,7 @@ export class UserService {
   getRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(`${this.url}/roles`).pipe(
       catchError(this.handleError<Role[]>('getRole'))
-    )
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
@@ -62,5 +62,4 @@ export class UserService {
       return of(result as T);
     };
   }
-
 }
