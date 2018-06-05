@@ -1,0 +1,21 @@
+<div class="main">
+<mat-form-field>
+    <mat-select placeholder="Roles">
+      <mat-option *ngFor="let r of roles" [value]="r.value">
+        {{ r.Name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+<ul>
+  <li *ngFor="let p of users">
+  <div class="user">
+
+    <span>  <mat-checkbox></mat-checkbox>  {{p.LastName}}  {{p.FirstName}}  {{p.Role}}</span>
+  </div>
+  </li>
+</ul>
+</div>
+
