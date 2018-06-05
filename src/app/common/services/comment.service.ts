@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import { Comment } from '../models/comment';
 import { Role } from '../models/role';
-=======
-import { User } from '../models/user';
->>>>>>> d1f646673d4d5224be90c27abc004f55fbb2d999
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -21,22 +17,14 @@ export class CommentService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-<<<<<<< HEAD
   private url = `${environment.apiUrl}`;
 
   getComments(taskId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.url}task/${taskId}/comment`).pipe(
-=======
-  private url = `${environment.apiUrl}/task`;
-
-  getComments(taskId: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.url}/${taskId}`).pipe(
->>>>>>> d1f646673d4d5224be90c27abc004f55fbb2d999
       catchError(this.handleError<Comment[]>(`getComments`))
     );
   }
 
-<<<<<<< HEAD
   getComment(id): Observable<Comment> {
     return this.http.get<Comment>(`${this.url}comment/${id}`).pipe(
       catchError(this.handleError<Comment>(`getComment id=${id}`))
@@ -45,30 +33,18 @@ export class CommentService {
 
   updateComment(comment: Comment): Observable<any> {
     return this.http.put<Comment>(`${this.url}comment/${comment.Id}`, comment, this.httpOptions).pipe(
-=======
-  updateComment(comment: Comment, taskId: number): Observable<any> {
-    return this.http.put<Comment>(`${this.url}/${taskId}/comment`, comment, this.httpOptions).pipe(
->>>>>>> d1f646673d4d5224be90c27abc004f55fbb2d999
       catchError(this.handleError<any>('updateComment'))
     );
   }
 
   addComment(comment: Comment, taskId: number): Observable<Comment> {
-<<<<<<< HEAD
     return this.http.post<Comment>(`${this.url}task/${taskId}/comment`, comment, this.httpOptions).pipe(
-=======
-    return this.http.post<Comment>(`${this.url}/${taskId}`, comment, this.httpOptions).pipe(
->>>>>>> d1f646673d4d5224be90c27abc004f55fbb2d999
       catchError(this.handleError<Comment>('addComment'))
     );
   }
 
   deleteCommentById (id: number): Observable<Comment> {  
-<<<<<<< HEAD
     return this.http.delete<Comment>(`${this.url}comment/${id}`, this.httpOptions).pipe(
-=======
-    return this.http.delete<Comment>(`${this.url}/comment/${id}`, this.httpOptions).pipe(
->>>>>>> d1f646673d4d5224be90c27abc004f55fbb2d999
       catchError(this.handleError<Comment>('deleteComment'))
     );
   }
