@@ -17,7 +17,7 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private url = environment.apiUrl;
+  private url = `${environment.apiUrl}user`;
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
@@ -32,7 +32,7 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.http.put<User>(`${this.url}/${user.id}`, user, this.httpOptions).pipe(
+    return this.http.put<User>(`${this.url}/${user.Id}`, user, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
