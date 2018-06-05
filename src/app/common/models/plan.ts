@@ -1,5 +1,6 @@
-export class Plan{
-    id: number;
-    name:string;
 
+export class Plan {
+    Id: number;
+    Name: string;
+    // add properties from dto
 }

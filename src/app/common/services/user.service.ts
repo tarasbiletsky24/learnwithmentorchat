@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Role } from '../models/role';
-import {Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -37,13 +37,13 @@ export class UserService {
     );
   }
 
-  addUser(part: User): Observable<User> {
-    return this.http.post<User>(this.url, part, this.httpOptions).pipe(
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
       catchError(this.handleError<User>('addUser'))
     );
   }
 
-  deleteUserById (id: number): Observable<User> {  
+  deleteUserById (id: number): Observable<User> {
     return this.http.delete<User>(`${this.url}/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
@@ -52,7 +52,13 @@ export class UserService {
   getRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(`${this.url}/roles`).pipe(
       catchError(this.handleError<Role[]>('getRole'))
-    )
+    );
+  }
+
+  search(param: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/search?q=${param}`).pipe(
+      catchError(this.handleError<User[]>(`searchUsers`))
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
@@ -62,5 +68,4 @@ export class UserService {
       return of(result as T);
     };
   }
-
 }
