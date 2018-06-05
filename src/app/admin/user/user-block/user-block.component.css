@@ -1,8 +1,30 @@
+*{
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 .main{
-    width: 100%
+    width: 100%;
 }
-.user{
-    width: 80%;
+.user{    
     height: 50px;
-
 }
+.search{
+    width: 80%;
+}
+.list-users{
+    width: 80%;
+}
+.container {
+    display: flex;
+    justify-content: center;
+  }
+ .search-input{
+      width: 100%;
+  }
+  .no-result-error{  
+      font-size: 40px;
+      color: lightgray;
+      text-align: center;
+  }
+  .button-delete{
+      float: right;
+  }

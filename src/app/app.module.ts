@@ -13,6 +13,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -34,7 +37,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatToolbarModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
 
 
 
