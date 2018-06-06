@@ -6,7 +6,6 @@ import { UsersComponent } from './admin/user/users/users.component';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
-import { UserBlockComponent } from './admin/user/user-block/user-block.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,19 +16,11 @@ import {MatInputModule} from '@angular/material/input';
 
 import {MatButtonModule} from '@angular/material/button';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    UserBlockComponent,
-    NavbarComponent,
-  
-
-       
+    NavbarComponent,         
   ],
   imports: [
     BrowserModule,
@@ -40,10 +31,6 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatButtonModule
-
-
-
- 
   ],
   providers: [],
   bootstrap: [AppComponent]

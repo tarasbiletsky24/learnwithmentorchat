@@ -13,7 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  private error='lalalla';
    private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
