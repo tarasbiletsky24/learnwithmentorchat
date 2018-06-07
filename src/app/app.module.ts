@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './admin/user/users/users.component';
+import { CommentComponent } from './task/comment/comment.component';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { AppRoutingModule } from './/app-routing.module';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -21,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
     AppComponent,
     UsersComponent,
     NavbarComponent,         
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatCheckboxModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
