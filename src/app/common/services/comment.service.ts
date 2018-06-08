@@ -25,7 +25,7 @@ export class CommentService {
     );
   }
 
-  getComment(id): Observable<Comment> {
+  getComment(id: number): Observable<Comment> {
     return this.http.get<Comment>(`${this.url}comment/${id}`).pipe(
       catchError(this.handleError<Comment>(`getComment id=${id}`))
     );
