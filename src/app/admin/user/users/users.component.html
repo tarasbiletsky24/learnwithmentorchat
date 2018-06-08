@@ -10,6 +10,13 @@
             placeholder="Enter user name or surname"
             />
          </mat-form-field>   
+ <!-- for sort -->
+<div class="flex-container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+
  <!-- for select -->
 <div >
     <mat-form-field>
@@ -28,34 +35,33 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="users">
   
-      <!-- Position Column -->
+      <!-- check column -->
       <ng-container matColumnDef="Check">
         <th mat-header-cell *matHeaderCellDef>   </th>
         <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox>  </td>
       </ng-container>
   
-      <!-- Name Column -->
+      <!-- FirstName Column -->
       <ng-container matColumnDef="FirstName">
         <th mat-header-cell *matHeaderCellDef> LastName </th>
         <td mat-cell *matCellDef="let element"> {{element.LastName}}  </td>
       </ng-container>
   
-      <!-- Weight Column -->
+      <!-- LastName Column -->
       <ng-container matColumnDef="LastName">
         <th mat-header-cell *matHeaderCellDef> FirstName </th>
         <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
       </ng-container>
   
-      <!-- Symbol Column -->
+      <!-- Role Column -->
       <ng-container matColumnDef="Role">
         <th mat-header-cell *matHeaderCellDef> Role </th>
         <td mat-cell *matCellDef="let element">{{element.Role}} </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   
-
   </div>
 </div> 
