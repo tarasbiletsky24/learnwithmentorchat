@@ -56,8 +56,8 @@ export class UserService {
     );
   }
 
-  search(param: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/search?q=${param}`).pipe(
+  search(param: string, roleName: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
   }

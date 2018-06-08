@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term:string) => this.userService.search(term))
+      switchMap((term:string) => this.userService.search(term, this.roles[0].Name))
     ).subscribe(u => this.users = u);
   }
 }
