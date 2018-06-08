@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 
 import {MatButtonModule} from '@angular/material/button';
 
@@ -34,7 +35,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

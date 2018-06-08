@@ -25,6 +25,8 @@
       color: lightgray;
       text-align: center;
   }
-  .button-delete{
-      float: right;
+
+  table {
+    width: 100%;
   }
+  

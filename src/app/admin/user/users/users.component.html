@@ -1,3 +1,4 @@
+ <!-- for search -->
 <app-navbar></app-navbar>
 <div style="height: 50px;"></div>
 <div class="main container">
@@ -9,8 +10,7 @@
             placeholder="Enter user name or surname"
             />
          </mat-form-field>   
-    
-
+ <!-- for select -->
 <div >
     <mat-form-field>
         <mat-select placeholder="Roles">
@@ -24,20 +24,38 @@
       
           <div style="height: 10px;"></div>
     </div>
-
-    
-  <div class="list-users  " >
-      <div class="user">        
-        
-              <a *ngFor="let p of users">
-                    <div class="user">
-                      <span>  <mat-checkbox></mat-checkbox>  {{p.LastName}}    {{p.FirstName}} {{p.Role}}</span>
-                    
-                    </div>
-                  </a>
-                  <div *ngIf="users==0" class="container" > <div class="no-result-error "><span>No result</span></div> </div>
-   </div>
+ <!-- for table for users -->
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="users">
   
+      <!-- Position Column -->
+      <ng-container matColumnDef="Check">
+        <th mat-header-cell *matHeaderCellDef>   </th>
+        <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox>  </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="FirstName">
+        <th mat-header-cell *matHeaderCellDef> LastName </th>
+        <td mat-cell *matCellDef="let element"> {{element.LastName}}  </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="LastName">
+        <th mat-header-cell *matHeaderCellDef> FirstName </th>
+        <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="Role">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let element">{{element.Role}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+
+  </div>
 </div> 
-
-
