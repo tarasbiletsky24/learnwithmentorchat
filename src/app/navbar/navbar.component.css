@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;    
+  }
+  
+  .item1 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+  }
+  .item2 {
+    grid-column-start: 2;
+    grid-column-end: 2;
+  }
+  
+  .item15 {
+    grid-column-start: 15;
+    grid-column-end: 15;
+  }
+  .item16 {
+    grid-column-start: 16;
+    grid-column-end: 16;
+  }
+
+

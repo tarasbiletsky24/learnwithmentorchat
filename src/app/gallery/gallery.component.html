@@ -1,0 +1,18 @@
+<!--<mat-grid-list cols="4" rowHeight="4`:1">
+  <mat-grid-tile *ngFor="let plan of plans" style="padding: 10px;background-color: cornflowerblue; border: solid black 1px ">
+    <img src={{plan.imageUrl}} width="25%" height="auto">
+    <div>{{plan.name}}</div>
+  </mat-grid-tile>
+</mat-grid-list> -->
+<mat-grid-list cols="4" rowHeight="4`:1">
+  <mat-grid-tile style="padding: 10px;background-color: cornflowerblue; border: solid black 1px ">
+    <a routerLink="/plan-for-guest"><img src="./assets/forGallery/Csharp.png" width="25%" height="auto"></a>     
+  </mat-grid-tile>
+  <mat-grid-tile style="padding: 10px;background-color: cornflowerblue; border: solid black 1px ">
+      <a routerLink="/plan-for-guest"><img src="./assets/forGallery/angular2.png" width="25%" height="auto"></a>        
+    </mat-grid-tile>
+    <mat-grid-tile style="padding: 10px;background-color: cornflowerblue; border: solid black 1px ">
+        <a routerLink="/plan-for-guest"><img src="./assets/forGallery/Csharp.png" width="25%" height="auto"></a></mat-grid-tile>
+</mat-grid-list>
+<router-outlet></router-outlet>
+

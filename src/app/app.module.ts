@@ -18,13 +18,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 
 import {MatButtonModule} from '@angular/material/button';
+import { SliderComponent } from './slider/slider.component';
+import { FooterComponent } from './footer/footer.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent
+    CommentComponent, SliderComponent, FooterComponent, GalleryComponent
   ],
   imports: [
     BrowserModule,
