@@ -29,4 +29,13 @@
   table {
     width: 100%;
   }
+  .flex-container {
+    display: flex;
+    justify-content: flex-start;
+
+  }
   
+  .flex-container > div {
+    margin: 10px;
+    text-decoration: none;
+  }
