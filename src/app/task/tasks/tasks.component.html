@@ -1,0 +1,18 @@
+<h2>Plan Tasks</h2>
+<ul class="Tasks">
+    <li *ngFor="let task of tasks"
+    [class.selected]="task === selectedTask"
+    (click)="onSelect(task)"> 
+      <span class="badge">{{task.name}}</span>      
+    </li>
+  </ul>
+  <app-task-detail [task]="selectedTask"></app-task-detail>
+<!-- <mat-selection-list #tasks>
+  <mat-list-option *ngFor="let task of tasks">
+    {{task.name}}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>
+  Options selected: {{tasks.selectedOptions.selected.length}}
+</p> -->
