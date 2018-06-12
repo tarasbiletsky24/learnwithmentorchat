@@ -11,6 +11,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component';
+import {MaterialModule} from './material.module';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
@@ -22,13 +23,14 @@ import { SliderComponent } from './slider/slider.component';
 import { FooterComponent } from './footer/footer.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { BenefitsComponent } from './benefits/benefits.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent
+    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent, BenefitsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { MainPageComponent } from './main-page/main-page.component';
     MatInputModule,
     MatButtonModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
