@@ -21,13 +21,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { SliderComponent } from './slider/slider.component';
 import { FooterComponent } from './footer/footer.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent, SliderComponent, FooterComponent, GalleryComponent
+    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent
   ],
   imports: [
     BrowserModule,
