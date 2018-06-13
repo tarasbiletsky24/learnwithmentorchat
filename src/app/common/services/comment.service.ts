@@ -43,7 +43,7 @@ export class CommentService {
     );
   }
 
-  deleteCommentById (id: number): Observable<Comment> {  
+  deleteCommentById (id: number): Observable<Comment> {
     return this.http.delete<Comment>(`${this.url}comment/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<Comment>('deleteComment'))
     );
