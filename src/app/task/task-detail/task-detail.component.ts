@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Task} from '../../common/models/task';
+import { Task } from '../../common/models/task';
 import { MatDialog } from '@angular/material';
 import { TaskEditorComponent } from '../task-editor/task-editor.component';
 
@@ -12,24 +12,22 @@ export class TaskDetailComponent implements OnInit {
 
   @Input()
   task: Task;
-  //dialog: MatDialog;
   constructor(public dialog: MatDialog) { }
 
-  
+
   ngOnInit() {
   }
 
   openEditDialog(): void {
-    let dialogRef = this.dialog.open(TaskEditorComponent, {
-      //width: '500px',
+    const dialogRef = this.dialog.open(TaskEditorComponent, {
       data: this.task
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.task = result;
-      //send to API
-    });    
+      // this.task = result;
+      // send to API
+    });
   }
 
 }

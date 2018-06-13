@@ -15,11 +15,10 @@ export class TaskEditorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Task) { this.task = data; }
 
   onNoClick(): void {
-    this.dialogRef.close();    
+    this.dialogRef.close();
   }
-  onSaveClick()
-  {
-    //throw to API
+  onSaveClick() {
+      // throw to API
   }
   ngOnInit() {
   }
