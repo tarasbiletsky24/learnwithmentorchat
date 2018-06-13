@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{task.Name}}</h2>
+<mat-dialog-content>
+  <h3>Task description:</h3>
+  <textarea matInput placeholder="Task description">{{task.Description}}</textarea>
+    <mat-form-field>
+      <mat-label>Task section</mat-label>
+      <mat-select>
+          <mat-option value="side">Side</mat-option>
+          <mat-option value="over">Over</mat-option>
+          <mat-option value="push">Push</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Task priority</mat-label>
+      <mat-select>
+          <mat-option>Unset</mat-option>
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close (click)="onSaveClick()">Save</button>
+</mat-dialog-actions>

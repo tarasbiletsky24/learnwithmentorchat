@@ -1,4 +1,32 @@
 <div *ngIf="task">
-  <mat-card>{{task.description}}</mat-card> 
+  <mat-card>
+    <mat-card-title>{{task.Name}}</mat-card-title>
+    <mat-card-content>
+      <p>
+        <h3>{{task.Description}}</h3>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+        Creator: {{task.CreatorName}}
+      </p>
+      <p>
+        Create date: {{task.CreateDate}}
+      </p>
+      <div *ngIf="task.ModifierName">
+        <p>
+          Modifier name: {{task.ModifierName}}
+        </p>
+        <p>
+          Modify date: {{task.ModDate}}
+        </p>
+      </div>
+    </mat-card-content>
+    <div>
+      <mat-card-actions>
+        <button mat-button (click)="openEditDialog()">
+          Edit
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
 </div>
-

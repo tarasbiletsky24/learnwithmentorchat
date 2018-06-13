@@ -18,13 +18,23 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 
 import {MatButtonModule} from '@angular/material/button';
+import { TasksComponent } from './task/tasks/tasks.component';
+import {MatListModule, MatListBase} from '@angular/material/list';
+import { TaskDetailComponent } from './task/task-detail/task-detail.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule, MatAccordion, MatExpansionPanel} from '@angular/material/expansion';
+import { TaskEditorComponent } from './task/task-editor/task-editor.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSidenavModule, MatDrawer, MatDrawerContainer} from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent
+    CommentComponent, TasksComponent, TaskDetailComponent, TaskEditorComponent    
+
   ],
   imports: [
     BrowserModule,
@@ -36,8 +46,14 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MatListModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSidenavModule
   ],
+  entryComponents: [TaskEditorComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
