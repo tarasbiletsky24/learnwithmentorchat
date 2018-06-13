@@ -1,3 +1,28 @@
-<h1>
-    Here you can sign in
-</h1>
+<mat-card class="cardUpdate">
+  <h1>Enter your credentials</h1>
+  <form class="example-form">
+    <mat-form-field class="example-full-width containerUpdate">
+      <input matInput type="email" placeholder="Your email" >
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width containerUpdate">
+      <input matInput type="password" placeholder="Enter Password">
+    </mat-form-field>
+  </form>
+
+  <mat-form-field>
+    <mat-select placeholder="Select" class="containerUpdate">
+      <mat-option value="student">Student</mat-option>
+      <mat-option value="mentor">Mentor</mat-option>
+      <mat-option value="admin">Admin</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary">
+    Submit
+  </button>
+  <button mat-raised-button color="primary">
+    Forgott Password
+  </button>
+</mat-card>

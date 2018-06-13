@@ -1,7 +1,6 @@
 *{
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 0;    
 }
 
 .ordItem{
@@ -9,24 +8,24 @@
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;    
+    display: grid;    
+    grid-template-columns: repeat(16, 1fr);  
   }
   
-  .item1 {
+  .cell1 {
     grid-column-start: 1;
     grid-column-end: 1;
   }
-  .item2 {
+  .cell2 {
     grid-column-start: 2;
     grid-column-end: 2;
   }
   
-  .item15 {
+  .cell15 {
     grid-column-start: 15;
     grid-column-end: 15;
   }
-  .item16 {
+  .cell16 {
     grid-column-start: 16;
     grid-column-end: 16;
   }

@@ -4,18 +4,21 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
 
+
 @NgModule({
-    imports:[
+    imports:[ 
+       
         MatCardModule,
         MatGridListModule,
         MatListModule,
-        MatToolbarModule              
+        MatToolbarModule
+            
     ],
-    exports:[
+    exports:[             
         MatCardModule,
         MatGridListModule,
         MatListModule,
-        MatToolbarModule   
+        MatToolbarModule
     ]
 })
 export class MaterialModule{

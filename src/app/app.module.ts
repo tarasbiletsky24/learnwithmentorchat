@@ -21,7 +21,6 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { SliderComponent } from './slider/slider.component';
 import { FooterComponent } from './footer/footer.component';
-import { GalleryComponent } from './gallery/gallery.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -32,7 +31,13 @@ import { SigninComponent } from './auth/signin/signin.component';
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent, BenefitsComponent, SignupComponent, SigninComponent
+    CommentComponent, 
+    SliderComponent, 
+    FooterComponent, 
+    MainPageComponent, 
+    BenefitsComponent, 
+    SignupComponent, 
+    SigninComponent
   ],
   imports: [
     AppRoutingModule,
