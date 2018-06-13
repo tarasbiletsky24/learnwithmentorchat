@@ -1,61 +1,89 @@
  <!-- for search -->
-<app-navbar></app-navbar>
-<div style="height: 50px;"></div>
+
 <div class="main container">
     <div class="search ">
         <mat-form-field class="search-input"  >
             <input 
             matInput 
-            #searchBox (keyup)="search(searchBox.value)"
+            #searchBox (keyup)="search(searchBox.value,roleName)"
             placeholder="Enter user name or surname"
             />
          </mat-form-field>   
+         
+<!-- for sort -->
+<div class="flex-container">
+    <div 
+    (click)="getType(null)"
+    (click)="getByRole(-1)">
+      All
+    </div>     
+    <div *ngFor="let r of roles"     
+        (click)="getType(r.Name)"
+        (click)="getByRole(r.Id)">
+        {{r.Name}}               
+    </div>  
+</div>
+
  <!-- for select -->
 <div >
+    
     <mat-form-field>
         <mat-select placeholder="Roles">
-          <mat-option *ngFor="let r of roles" [value]="r.value">
+          <mat-option *ngFor="let r of roles" [value]="r.Name" 
+          >
             {{ r.Name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button class="button-change">Change</button>
-      <button mat-raised-button color="primary" class="button-delete">Delete</button>
       
-          <div style="height: 10px;"></div>
+      <div class="flex-button">
+      <button mat-raised-button class="button-change"  
+      
+      
+      >Change</button>
+      <button mat-raised-button color="primary" class="button-delete"
+      (click)="blockUser(delete)">
+      Blocked </button>      
     </div>
+    </div>
+
  <!-- for table for users -->
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="users">
-  
-      <!-- Position Column -->
+        
+      <!-- check column -->
       <ng-container matColumnDef="Check">
         <th mat-header-cell *matHeaderCellDef>   </th>
-        <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox>  </td>
+        <td mat-cell *matCellDef="let element"> <mat-checkbox (click)="Choose(element.Id)" > </mat-checkbox>  </td>
       </ng-container>
   
-      <!-- Name Column -->
+      <!-- FirstName Column -->
       <ng-container matColumnDef="FirstName">
         <th mat-header-cell *matHeaderCellDef> LastName </th>
-        <td mat-cell *matCellDef="let element"> {{element.LastName}}  </td>
+        <td mat-cell *matCellDef="let element" > <span [ngClass]="{'choice':isMarked}" >{{element.LastName}}</span>  </td>
       </ng-container>
   
-      <!-- Weight Column -->
+      <!-- LastName Column -->
       <ng-container matColumnDef="LastName">
         <th mat-header-cell *matHeaderCellDef> FirstName </th>
         <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
       </ng-container>
   
-      <!-- Symbol Column -->
+      <!-- Role Column -->
       <ng-container matColumnDef="Role">
         <th mat-header-cell *matHeaderCellDef> Role </th>
         <td mat-cell *matCellDef="let element">{{element.Role}} </td>
       </ng-container>
-  
+
+       <!-- Role Column -->
+          <ng-container matColumnDef="Blocked">
+              <th mat-header-cell *matHeaderCellDef> Blocked </th>
+              <td mat-cell *matCellDef="let element">{{element.Blocked}} </td>
+            </ng-container>
+   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   
-
   </div>
 </div> 

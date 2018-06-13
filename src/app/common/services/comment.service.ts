@@ -43,13 +43,13 @@ export class CommentService {
     );
   }
 
-  deleteCommentById (id: number): Observable<Comment> {  
+  deleteCommentById(id: number): Observable<Comment> {
     return this.http.delete<Comment>(`${this.url}comment/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<Comment>('deleteComment'))
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       // Let the app keep running by returning an empty result.
