@@ -16,6 +16,6 @@ export class CommentComponent implements OnInit {
   ngOnInit() {
     this.commentService.getComments(0).subscribe(
       u => this.comments = u
-    )
+    );
   }
 }

@@ -4,5 +4,5 @@ export class User {
     Id: number;
     Email: string;
     Role: string;
-    Blocked:boolean;
+    Blocked: boolean;
 }

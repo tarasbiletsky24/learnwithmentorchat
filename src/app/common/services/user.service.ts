@@ -11,16 +11,15 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
- roleName:string;
+  roleName: string;
   constructor(private http: HttpClient) { }
 
-   private httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   private url = `${environment.apiUrl}user`;
 
- 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
       catchError(this.handleError<User[]>(`getUsers`))
@@ -30,6 +29,12 @@ export class UserService {
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
+    );
+  }
+
+  getUserByRole_id(id: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/inrole/${id}`).pipe(
+      catchError(this.handleError<User[]>(`getUserbyrole`))
     );
   }
 
@@ -45,8 +50,8 @@ export class UserService {
     );
   }
 
-  blockUserById (id: number) {
-    return this.http.delete(`${this.url}/${id}`, this.httpOptions).pipe(
+  blockUserById(id: number) {
+    return this.http.delete(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
   }
@@ -57,15 +62,13 @@ export class UserService {
     );
   }
 
-
-  
-  search(param: string, roleName:string): Observable<User[]> {
+  search(param: string, roleName: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       // Let the app keep running by returning an empty result.

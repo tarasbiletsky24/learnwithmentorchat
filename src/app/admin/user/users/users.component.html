@@ -1,6 +1,5 @@
  <!-- for search -->
-<app-navbar></app-navbar>
-<div style="height: 50px;"></div>
+
 <div class="main container">
     <div class="search ">
         <mat-form-field class="search-input"  >
@@ -10,18 +9,19 @@
             placeholder="Enter user name or surname"
             />
          </mat-form-field>   
- <!-- for sort -->
-
+         
+<!-- for sort -->
 <div class="flex-container">
     <div 
-    (click)="getType(null)">
+    (click)="getType(null)"
+    (click)="getByRole(-1)">
       All
     </div>     
     <div *ngFor="let r of roles"     
-        (click)="getType(r.Name)">   
+        (click)="getType(r.Name)"
+        (click)="getByRole(r.Id)">
         {{r.Name}}               
     </div>  
-
 </div>
 
  <!-- for select -->
@@ -29,26 +29,28 @@
     
     <mat-form-field>
         <mat-select placeholder="Roles">
-          <mat-option *ngFor="let r of roles" [value]="r.Name" >
+          <mat-option *ngFor="let r of roles" [value]="r.Name" 
+          >
             {{ r.Name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       
       <div class="flex-button">
-      <button mat-raised-button class="button-change"      
+      <button mat-raised-button class="button-change"  
+      
       
       >Change</button>
       <button mat-raised-button color="primary" class="button-delete"
-      (click)="blockUser(6)">
-      Delete</button>      
+      (click)="blockUser(delete)">
+      Blocked </button>      
     </div>
     </div>
+
  <!-- for table for users -->
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="users" 
-     >
-  
+    <table mat-table [dataSource]="users">
+        
       <!-- check column -->
       <ng-container matColumnDef="Check">
         <th mat-header-cell *matHeaderCellDef>   </th>
@@ -73,7 +75,7 @@
         <td mat-cell *matCellDef="let element">{{element.Role}} </td>
       </ng-container>
 
-          <!-- Role Column -->
+       <!-- Role Column -->
           <ng-container matColumnDef="Blocked">
               <th mat-header-cell *matHeaderCellDef> Blocked </th>
               <td mat-cell *matCellDef="let element">{{element.Blocked}} </td>
