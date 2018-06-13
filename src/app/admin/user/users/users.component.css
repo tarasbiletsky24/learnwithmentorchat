@@ -29,4 +29,19 @@
   table {
     width: 100%;
   }
-  
+  .flex-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .flex-button {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 3%;
+  }
+  .flex-container > div {
+    margin: 10px;
+    text-decoration: none;
+      }
+  .choice{
+      font-style:oblique;
+  }
