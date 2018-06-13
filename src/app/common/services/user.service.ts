@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-
+ roleName:string;
   constructor(private http: HttpClient) { }
 
    private httpOptions = {
@@ -20,6 +20,7 @@ export class UserService {
 
   private url = `${environment.apiUrl}user`;
 
+ 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
       catchError(this.handleError<User[]>(`getUsers`))
@@ -44,8 +45,8 @@ export class UserService {
     );
   }
 
-  deleteUserById (id: number): Observable<User> {
-    return this.http.delete<User>(`${this.url}/${id}`, this.httpOptions).pipe(
+  blockUserById (id: number) {
+    return this.http.delete(`${this.url}/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
   }
@@ -56,7 +57,9 @@ export class UserService {
     );
   }
 
-  search(param: string, roleName: string): Observable<User[]> {
+
+  
+  search(param: string, roleName:string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
