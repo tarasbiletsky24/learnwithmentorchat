@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.ordItem{
+  color: aliceblue;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;    

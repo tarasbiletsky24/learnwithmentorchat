@@ -24,15 +24,18 @@ import { FooterComponent } from './footer/footer.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { BenefitsComponent } from './benefits/benefits.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,         
-    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent, BenefitsComponent
+    CommentComponent, SliderComponent, FooterComponent, GalleryComponent, MainPageComponent, BenefitsComponent, SignupComponent, SigninComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     MatToolbarModule,
@@ -40,8 +43,7 @@ import { BenefitsComponent } from './benefits/benefits.component';
     MatCheckboxModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule,
-    AppRoutingModule,
+    MatButtonModule,    
     MatTableModule,
     MaterialModule
   ],

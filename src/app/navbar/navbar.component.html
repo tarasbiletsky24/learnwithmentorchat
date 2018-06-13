@@ -1,8 +1,24 @@
 <mat-toolbar color="primary">
   <div class="grid-container">
-    <div class = "item1"> {{mainTag}} </div> 
-    <div class = "item2"> Start Learning </div> 
-    <div class = "item15">Sign In</div>
-    <div class = "item16">Sign Up</div>           
+    <div class="item1"> {{mainTag}} </div>
+    <div class="item2">
+      <a routerLink="main-page" class="ordItem">
+        <button mat-button>Start Learning</button>
+      </a>
+    </div>
+    <div class="item15">
+      <a routerLink="signin">
+        <button mat-raised-button color="primary">
+          Sign In
+        </button>
+      </a>
+    </div>
+    <div class="item16">
+      <a routerLink="signup">
+        <button mat-raised-button color="primary">
+          Sign Up
+        </button>
+      </a>
+    </div>
   </div>
 </mat-toolbar>
