@@ -1,0 +1,21 @@
+.cardImage{   
+    height: 100px;
+    float: right;
+    width: auto;
+}
+
+.cardContent{
+    text-align: center;
+    font-size: 20px;
+    width: 75%;
+}
+
+.cardUpdate{
+    position: relative;
+    left: 12.5%;
+    width: 60%;
+    height: auto;
+    margin: 10px;
+}
+
+
