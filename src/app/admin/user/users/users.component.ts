@@ -66,8 +66,8 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
 
     this.userService.getRoles().subscribe(
-      r => this.roles = r
-    );
+      r => this.roles = r);
+
     this.userService.getUsers().subscribe(
       u => this.users = u
     );
