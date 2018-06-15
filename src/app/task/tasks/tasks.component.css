@@ -1,0 +1,13 @@
+.selected {
+    background: yellow;
+  }
+  .mat-list[dense] mat-list-item{
+      height: 80px;
+  }
+  mat-card{
+    width: 250px;
+  }
+  mat-checkbox
+  {
+    float: right;
+  }

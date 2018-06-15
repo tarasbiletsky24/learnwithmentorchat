@@ -15,6 +15,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+
+import { TasksComponent } from './task/tasks/tasks.component';
+import { MatListModule, MatListBase } from '@angular/material/list';
+import { TaskDetailComponent } from './task/task-detail/task-detail.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule, MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
+import { TaskEditorComponent } from './task/task-editor/task-editor.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule, MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+
 import { MainPageComponent } from './main-page/main-page.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -27,10 +37,13 @@ import {BenefitsComponent} from './main-page/benefits/benefits.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
+    NavbarComponent,
+    TasksComponent, TaskDetailComponent, TaskEditorComponent,
     CommentComponent,
     MainPageComponent,
     SigninComponent,
@@ -40,6 +53,7 @@ import { MaterialModule } from './material.module';
     SliderComponent,
     GalleryComponent,
     BenefitsComponent
+
   ],
   imports: [
     AppRoutingModule,
@@ -51,9 +65,17 @@ import { MaterialModule } from './material.module';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatListModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSidenavModule
     MatTableModule,
     MaterialModule,
   ],
+  entryComponents: [TaskEditorComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

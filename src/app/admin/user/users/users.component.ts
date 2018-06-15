@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
+
   updateUsers: User[];
   delete: number;
   roleName: string = null;
@@ -35,7 +36,9 @@ export class UsersComponent implements OnInit {
     return id;
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private userService: UserService) {
+
 
   }
 
