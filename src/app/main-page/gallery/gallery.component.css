@@ -5,7 +5,7 @@
 }
 .grid-container {
   position: relative;
-  left: 10%;
+  left: 15%;
   width: 70%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
