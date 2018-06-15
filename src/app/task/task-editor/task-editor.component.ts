@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TaskService } from '../../common/services/task.service';
 
 @Component({
   selector: 'app-task-editor',
@@ -9,6 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class TaskEditorComponent implements OnInit {
 
+  private taskService : TaskService
   @Input()
   task: Task;
   constructor(public dialogRef: MatDialogRef<TaskEditorComponent>,
@@ -18,7 +20,7 @@ export class TaskEditorComponent implements OnInit {
     this.dialogRef.close();
   }
   onSaveClick() {
-      // throw to API
+    this.taskService.updateTask(this.task);
   }
   ngOnInit() {
   }
