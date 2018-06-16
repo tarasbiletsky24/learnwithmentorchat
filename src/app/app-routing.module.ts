@@ -11,9 +11,7 @@ const routes: Routes = [
 {path : '', redirectTo: 'main-page', pathMatch : 'full'},
 {path : 'main-page', component : MainPageComponent},
 {path : 'users', component : UsersComponent},
-{path : 'comment', component : CommentComponent},
-{path : 'signin', component : SigninComponent},
-{path : 'signup', component : SignupComponent}
+{path : 'comment', component : CommentComponent}
 ];
 
 @NgModule({

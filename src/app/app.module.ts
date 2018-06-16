@@ -55,7 +55,9 @@ import { MaterialModule } from './material.module';
     MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[SigninComponent, SignupComponent]
+  
 })
 
 export class AppModule { }
