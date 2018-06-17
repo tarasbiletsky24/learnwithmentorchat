@@ -23,7 +23,6 @@ export class UsersComponent implements OnInit {
   surname: string;
   role: string;
   blocked: boolean;
-  updateUsers: User[];
   id: number;
   selectedType: Role;
   roleName: string = null;
@@ -42,11 +41,9 @@ export class UsersComponent implements OnInit {
     return this.id = id;
   }
 
-  onSelect(role: Role): void {
-    this.selectedType = role;
-  }
 
   constructor(private userService: UserService) {
+
   }
 
   search(term: string, roleName: string): void {
