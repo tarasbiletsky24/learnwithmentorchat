@@ -62,6 +62,12 @@ export class UserService {
     );
   }
 
+  userAuthentication(email, password) {
+    var data = "email=" + email + "&password=" + password + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+    return this.http.post(this.url + '/token', data, { headers: reqHeader });
+  }
+
   search(param: string, roleName: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
