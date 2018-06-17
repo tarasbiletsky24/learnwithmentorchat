@@ -22,7 +22,12 @@ export class TaskEditorComponent implements OnInit {
   }
   onSaveClick(description:string) {       
     this.task.Description = description;
-    this.taskService.updateTask(this.task);
+    /// you need to change to real user Id
+    this.task.ModifierId = 0; //here
+    this.taskService.updateTask(this.task).subscribe();
+  }
+  onDeleteClick() {
+    this.taskService.deleteTask(this.task).subscribe();
   }
   ngOnInit() {
   }

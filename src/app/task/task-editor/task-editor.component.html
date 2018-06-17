@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>{{task.Name}}</h2>
+<h2 mat-dialog-title>{{task.Name}} 
+  <button class="deleteButton" mat-button mat-dialog-close (click)="onDeleteClick()">Delete</button>
+</h2>
 <mat-dialog-content>
   <h3>Task description:</h3>
   <textarea matInput placeholder="Task description"
