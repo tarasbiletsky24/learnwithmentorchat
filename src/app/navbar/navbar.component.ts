@@ -15,12 +15,12 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  openSignInDialog(){
-    let dialogRef = this.dialog.open(SigninComponent, {});
+  openSignInDialog() {
+    const dialogRef = this.dialog.open(SigninComponent, {});
   }
 
-  openSignUpDialog(){
-    let dialogRef = this.dialog.open(SignupComponent, {});
+  openSignUpDialog() {
+    const dialogRef = this.dialog.open(SignupComponent, {});
   }
 
   ngOnInit() {

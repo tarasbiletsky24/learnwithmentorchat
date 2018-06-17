@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type' : 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   private url = `${environment.apiUrl}user`;
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   updateUser(user: User) {
-     return this.http.put(`${this.url}/${user.Id}`, user ).pipe(
+    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
@@ -64,8 +64,8 @@ export class UserService {
   }
 
   userAuthentication(email, password) {
-    var data = "email=" + email + "&password=" + password + "&grant_type=password";
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+    const data = 'email=' + email + '&password=' + password + '&grant_type=password';
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
     return this.http.post(this.url + '/token', data, { headers: reqHeader });
   }
 
