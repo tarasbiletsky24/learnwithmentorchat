@@ -79,6 +79,7 @@ import { MaterialModule } from './material.module';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents:[TaskEditorComponent,SigninComponent, SignupComponent]  
+
 })
 
 export class AppModule { }
