@@ -21,11 +21,11 @@ export class TaskService {
     return this.http.get(this.url);
   }
   getTask(id: number) {
-    return this.http.get('${this.url}/${id}');
+    return this.http.get(`${this.url}/${id}`);
   }
-  updateTask (task: Task): Observable<any> {
-    debugger
-    return this.http.put(this.url+task.Id, task, httpOptions).pipe(
+  updateTask (task: Task) : Observable<any> {      
+    let link =  `${this.url}/${task.Id}`;
+    return this.http.put<Task>(link, task, httpOptions).pipe(
       tap(_ => console.log(`updated task id=${task.Id}`))
     );
   }

@@ -10,14 +10,12 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NavbarComponent } from './navbar/navbar.component';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
-import { MatButtonModule } from '@angular/material/button';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
 import { TaskDetailComponent } from './task/task-detail/task-detail.component';
@@ -27,16 +25,38 @@ import { TaskEditorComponent } from './task/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule, MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
 
+import { MainPageComponent } from './main-page/main-page.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import {FooterComponent} from './footer/footer.component';
+import {SliderComponent} from './main-page/slider/slider.component';
+import {GalleryComponent} from './main-page/gallery/gallery.component';
+import {BenefitsComponent} from './main-page/benefits/benefits.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MaterialModule } from './material.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,
-    CommentComponent, TasksComponent, TaskDetailComponent, TaskEditorComponent
+    TasksComponent, TaskDetailComponent, TaskEditorComponent,
+    CommentComponent,
+    MainPageComponent,
+    SigninComponent,
+    SignupComponent,
+    NavbarComponent,
+    FooterComponent,
+    SliderComponent,
+    GalleryComponent,
+    BenefitsComponent
 
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     MatToolbarModule,
@@ -51,10 +71,13 @@ import { MatSidenavModule, MatDrawer, MatDrawerContainer } from '@angular/materi
     MatCardModule,
     MatExpansionModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTableModule,
+    MaterialModule
   ],
   entryComponents: [TaskEditorComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

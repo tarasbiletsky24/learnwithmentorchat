@@ -1,10 +1,11 @@
 <h2 mat-dialog-title>{{task.Name}}</h2>
 <mat-dialog-content>
   <h3>Task description:</h3>
-  <textarea matInput placeholder="Task description">{{task.Description}}</textarea>
+  <textarea matInput placeholder="Task description"
+  #descriptionTbx>{{task.Description}}</textarea>
     <mat-form-field>
       <mat-label>Task section</mat-label>
-      <mat-select>
+      <mat-select #TaskSection>
           <mat-option value="side">Side</mat-option>
           <mat-option value="over">Over</mat-option>
           <mat-option value="push">Push</mat-option>
@@ -12,7 +13,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Task priority</mat-label>
-      <mat-select>
+      <mat-select #TaskPriority>
           <mat-option>Unset</mat-option>
           <mat-option [value]="true">True</mat-option>
           <mat-option [value]="false">False</mat-option>
@@ -21,5 +22,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close (click)="onSaveClick()">Save</button>
+  <button mat-button mat-dialog-close (click)="onSaveClick(descriptionTbx.value)">Save</button>
 </mat-dialog-actions>

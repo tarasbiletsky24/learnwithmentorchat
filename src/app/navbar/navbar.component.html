@@ -1,8 +1,24 @@
-
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>LearnWithMentor</span>
-
-  </mat-toolbar-row>
- 
-  </mat-toolbar>
+  <div class="grid-container">
+    <div class="cell1"> {{mainTag}} </div>
+    <div class="cell2">
+      <a routerLink="main-page" class="ordItem">
+        <button mat-button>Start Learning</button>
+      </a>
+    </div>
+    <div class="cell15">
+      <a routerLink="signin">
+        <button mat-raised-button color="primary">
+          Sign In
+        </button>
+      </a>
+    </div>
+    <div class="cell16">
+      <a routerLink="signup">
+        <button mat-raised-button color="primary">
+          Sign Up
+        </button>
+      </a>
+    </div>
+  </div>
+</mat-toolbar>

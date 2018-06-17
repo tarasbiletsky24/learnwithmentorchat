@@ -10,16 +10,18 @@ import { TaskService } from '../../common/services/task.service';
 })
 export class TaskEditorComponent implements OnInit {
 
-  private taskService : TaskService
+  //private taskService : TaskService
   @Input()
   task: Task;
   constructor(public dialogRef: MatDialogRef<TaskEditorComponent>,
+    private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: Task) { this.task = data; }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSaveClick() {
+  onSaveClick(description:string) {       
+    this.task.Description = description;
     this.taskService.updateTask(this.task);
   }
   ngOnInit() {

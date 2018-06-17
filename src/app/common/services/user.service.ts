@@ -11,10 +11,10 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-
+  roleName: string;
   constructor(private http: HttpClient) { }
 
-   private httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
@@ -32,6 +32,12 @@ export class UserService {
     );
   }
 
+  getUserByRole_id(id: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/inrole/${id}`).pipe(
+      catchError(this.handleError<User[]>(`getUserbyrole`))
+    );
+  }
+
   updateUser(user: User): Observable<any> {
     return this.http.put<User>(`${this.url}/${user.Id}`, user, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
@@ -44,8 +50,8 @@ export class UserService {
     );
   }
 
-  deleteUserById (id: number): Observable<User> {
-    return this.http.delete<User>(`${this.url}/${id}`, this.httpOptions).pipe(
+  blockUserById(id: number) {
+    return this.http.delete(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
   }
@@ -56,13 +62,13 @@ export class UserService {
     );
   }
 
-  search(param: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/search?q=${param}`).pipe(
+  search(param: string, roleName: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       // Let the app keep running by returning an empty result.
