@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../common/models/user';
 import { Role } from '../../../common/models/role';
 import { UserService } from '../../../common/services/user.service';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
 import { Observable, Subject, of } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
@@ -18,9 +18,13 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
-
-  updateUsers: User[];
-  delete: number;
+  user: User;
+  name: string;
+  surname: string;
+  role: string;
+  blocked: boolean;
+  id: number;
+  selectedType: Role;
   roleName: string = null;
   isMarked = false;
   dataSource = new MatTableDataSource<User>(this.users);
@@ -30,46 +34,76 @@ export class UsersComponent implements OnInit {
     return this.roleName = roleName;
   }
 
-  Choose(id: number): number {
-    this.delete = id;
-    console.log(this.delete);
-    return id;
+  chooseUser(id: number, role: string, name: string, surname: string): number {
+
+    this.surname = surname;
+    this.name = name;
+    return this.id = id;
   }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private userService: UserService) {
 
+  constructor(private userService: UserService) {
 
   }
 
   search(term: string, roleName: string): void {
     this.searchTerms.next(term);
   }
-  changeRole(id: number): void {
-    return console.log(id);
 
+  getRole(role: string) {
+    console.log(role);
+    return this.role = role;
   }
-  update(user: User): void {
-    this.userService.updateUser(user);
+
+  updateRole(id: number, role: string, name: string, surname: string) {
+    if (window.confirm('Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')) {
+      const u = { Role: role, Id: id };
+      this.userService.updateUser(u as User).subscribe();
+      this.users.forEach(element => {
+        if (element.Id === id) {
+          element.Role = role;
+        }
+      });
+    }
   }
-  blockUser(id: number) {
-    this.userService.blockUserById(id).subscribe();
+
+  blockUser(id: number, name: string, surname: string) {
+    if (window.confirm('Are sure you want to block ' + name + ' ' + surname + ' ?')) {
+      this.userService.blockUserById(id).subscribe();
+      this.users.forEach(element => {
+        if (element.Id === id) {
+          element.Blocked = true;
+        }
+      });
+    }
   }
+
+  unblockUser(id: number, name: string, surname: string) {
+    this.blocked = false;
+    if (window.confirm('Are sure you want to unblock  user : ' + name + ' ' + surname + ' ?')) {
+      const u = { Blocked: false, Id: id };
+      this.userService.updateUser(u as User).subscribe();
+      this.users.forEach(element => {
+        if (element.Id === id) {
+          element.Blocked = false;
+        }
+      });
+    }
+  }
+
   getByRole(id: number) {
     if (id === -1) {
       this.userService.getUsers().subscribe(u => this.users = u);
     }
-    else {
       this.userService.getUserByRole_id(id).subscribe(u => this.users = u);
-    }
   }
-  ngOnInit() {
 
+  ngOnInit() {
     this.userService.getRoles().subscribe(
       r => this.roles = r);
 
     this.userService.getUsers().subscribe(
-      u => this.users = u
+    u => this.users = u
     );
     this.searchTerms.pipe(
       debounceTime(300),
