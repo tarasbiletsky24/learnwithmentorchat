@@ -2,7 +2,7 @@
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 .main{
-    width: 100%;
+    padding-top: 2%;
 }
 .user{    
     height: 50px;
@@ -39,9 +39,16 @@
     padding-bottom: 3%;
   }
   .flex-container > div {
-    margin: 10px;
+    margin: 0.5%;
     text-decoration: none;
+    color: #a2a2a2;
       }
   .choice{
       font-style:oblique;
+  }  
+ .selected {  
+    color :#3d50b7 !important;
   }
+.roles > div{
+    cursor: pointer;
+}
