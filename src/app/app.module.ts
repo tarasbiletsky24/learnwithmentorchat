@@ -71,14 +71,14 @@ import { MaterialModule } from './material.module';
     MatCardModule,
     MatExpansionModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
     MatTableModule,
     MaterialModule,
     MatRadioModule
   ],
-  entryComponents: [TaskEditorComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[TaskEditorComponent,SigninComponent, SignupComponent]  
 })
 
 export class AppModule { }
