@@ -15,10 +15,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type' : 'application/json' })
   };
 
   private url = `${environment.apiUrl}user`;
+
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
@@ -26,8 +27,8 @@ export class UserService {
     );
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.url}/${id}`).pipe(
+  getUser(id: number) {
+    return this.http.get(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
@@ -38,8 +39,8 @@ export class UserService {
     );
   }
 
-  updateUser(user: User): Observable<any> {
-    return this.http.put<User>(`${this.url}/${user.Id}`, user, this.httpOptions).pipe(
+  updateUser(user: User) {
+     return this.http.put(`${this.url}/${user.Id}`, user ).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }

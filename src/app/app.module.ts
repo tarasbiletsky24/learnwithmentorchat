@@ -33,7 +33,7 @@ import {FooterComponent} from './footer/footer.component';
 import {SliderComponent} from './main-page/slider/slider.component';
 import {GalleryComponent} from './main-page/gallery/gallery.component';
 import {BenefitsComponent} from './main-page/benefits/benefits.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 
@@ -74,10 +74,12 @@ import { MaterialModule } from './material.module';
     MatSidenavModule,
     MatTableModule,
     MaterialModule,
+    MatRadioModule
   ],
-  entryComponents: [TaskEditorComponent, SigninComponent, SignupComponent],
   providers: [],
-  bootstrap: [AppComponent],  
+  bootstrap: [AppComponent],
+  entryComponents:[TaskEditorComponent,SigninComponent, SignupComponent]  
+
 })
 
 export class AppModule { }
