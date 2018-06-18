@@ -20,14 +20,15 @@ export class UserService {
 
   private url = `${environment.apiUrl}user`;
 
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
       catchError(this.handleError<User[]>(`getUsers`))
     );
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.url}/${id}`).pipe(
+  getUser(id: number) {
+    return this.http.get(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
@@ -38,8 +39,8 @@ export class UserService {
     );
   }
 
-  updateUser(user: User): Observable<any> {
-    return this.http.put<User>(`${this.url}/${user.Id}`, user, this.httpOptions).pipe(
+  updateUser(user: User) {
+    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
@@ -60,6 +61,12 @@ export class UserService {
     return this.http.get<Role[]>(`${this.url}/roles`).pipe(
       catchError(this.handleError<Role[]>('getRole'))
     );
+  }
+
+  userAuthentication(email, password) {
+    const data = 'email=' + email + '&password=' + password + '&grant_type=password';
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
+    return this.http.post(this.url + '/token', data, { headers: reqHeader });
   }
 
   search(param: string, roleName: string): Observable<User[]> {
