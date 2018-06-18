@@ -35,20 +35,16 @@ export class UsersComponent implements OnInit {
   }
 
   chooseUser(id: number, role: string, name: string, surname: string): number {
-
     this.surname = surname;
     this.name = name;
     return this.id = id;
   }
-  onSelect(r:number){
-    this.userService.getUserByRole_id(r).subscribe(
+  onSelect(roleId: number) {
+    this.userService.getUserByRole_id(roleId).subscribe(
       u => this.users = u
     );
   }
-
-
   constructor(private userService: UserService) {
-
   }
 
   search(term: string, roleName: string): void {
@@ -100,7 +96,7 @@ export class UsersComponent implements OnInit {
     if (id === -1) {
       this.userService.getUsers().subscribe(u => this.users = u);
     }
-      this.userService.getUserByRole_id(id).subscribe(u => this.users = u);
+    this.userService.getUserByRole_id(id).subscribe(u => this.users = u);
   }
 
   ngOnInit() {
@@ -108,7 +104,7 @@ export class UsersComponent implements OnInit {
       r => this.roles = r);
 
     this.userService.getUsers().subscribe(
-    u => this.users = u
+      u => this.users = u
     );
     this.searchTerms.pipe(
       debounceTime(300),

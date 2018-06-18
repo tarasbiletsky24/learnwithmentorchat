@@ -21,29 +21,29 @@ export class TaskService {
   private url = `${environment.apiUrl}`;
 
   getTasks(planId?: number): Observable<Task[]> {
-    if (planId)
+    if (planId) {
       return this.http.get<Task[]>(`${this.url}/plan/${planId}/tasks`).pipe(
         catchError(this.handleError<Task[]>(`get Tasks for Plan`)));
-    else
-      return this.http.get<Task[]>(this.url + "task").pipe(
-        catchError(this.handleError<Task[]>(`get Tasks`)));
+    }
+    return this.http.get<Task[]>(this.url + 'task').pipe(
+      catchError(this.handleError<Task[]>(`get Tasks`)));
   }
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
   }
   updateTask(task: Task): Observable<any> {
-    let link = `${this.url}task/${task.Id}`;
+    const link = `${this.url}task/${task.Id}`;
     return this.http.put<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`updating task id=${task.Id}`)));
   }
   deleteTask(task: Task): Observable<any> {
-    let link = `${this.url}task/${task.Id}`;
+    const link = `${this.url}task/${task.Id}`;
     return this.http.delete<Task>(link, httpOptions).pipe(
       catchError(this.handleError<Task>(`deleting task id=${task.Id}`)));
   }
   createTask(task: Task): Observable<any> {
-    let link = `${this.url}task`;
+   const link = `${this.url}task`;
     return this.http.post<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`creating task`)));
   }
