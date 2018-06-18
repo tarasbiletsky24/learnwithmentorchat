@@ -5,6 +5,8 @@ import { Task } from '../models/task';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { PlanService } from './plan.service';
+import { Plan } from '../models/plan';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,25 +18,34 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
   // private url = '../assets/tasks.json';
-  private url = `${environment.apiUrl}task`;
+  private url = `${environment.apiUrl}`;
 
-  getTasks() {
-    return this.http.get(this.url).pipe(
-      catchError(this.handleError<Task[]>(`getTasks`)));
+  getTasks(planId?: number): Observable<Task[]> {
+    if (planId)
+      return this.http.get<Task[]>(`${this.url}/plan/${planId}/tasks`).pipe(
+        catchError(this.handleError<Task[]>(`get Tasks for Plan`)));
+    else
+      return this.http.get<Task[]>(this.url + "task").pipe(
+        catchError(this.handleError<Task[]>(`get Tasks`)));
   }
-  getTask(id: number) {
-    return this.http.get(`${this.url}/${id}`).pipe(
+  getTask(id: number): Observable<Task> {
+    return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
   }
-  updateTask(task: Task): Observable<any> {        
-    let link = `${this.url}/${task.Id}`;
+  updateTask(task: Task): Observable<any> {
+    let link = `${this.url}task/${task.Id}`;
     return this.http.put<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`updating task id=${task.Id}`)));
   }
-  deleteTask(task: Task): Observable<any> {    
-    let link = `${this.url}/${task.Id}`;
+  deleteTask(task: Task): Observable<any> {
+    let link = `${this.url}task/${task.Id}`;
     return this.http.delete<Task>(link, httpOptions).pipe(
       catchError(this.handleError<Task>(`deleting task id=${task.Id}`)));
+  }
+  createTask(task: Task): Observable<any> {
+    let link = `${this.url}task`;
+    return this.http.post<Task>(link, task, httpOptions).pipe(
+      catchError(this.handleError<Task>(`creating task`)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

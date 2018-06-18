@@ -1,39 +1,4 @@
-<!-- <h2>Plan Tasks</h2>
-<ul class="Tasks">
-    <li *ngFor="let task of tasks"
-    [class.selected]="task === selectedTask"
-    (click)="onSelect(task)"> 
-      <span class="badge">{{task.Name}}</span> {{task.Description}}    
-    </li>
-  </ul>
-  <app-task-detail [task]="selectedTask"></app-task-detail> -->
-
-<!-- <mat-selection-list #task>
-    <mat-list-option *ngFor="let task of tasks">
-      {{task.Name}}
-    </mat-list-option>
-  </mat-selection-list>
-  <app-task-detail [task]="selectedTask"></app-task-detail> -->
-
-<!-- <mat-list *ngFor="let task of tasks"
-[class.selected]="task === selectedTask"
-    (click)="onSelect(task)">>
-  <mat-list-item>{{task.Name}}</mat-list-item>
-</mat-list> -->
-
-
-
-<!-- <mat-list dense>
-  <h3 mat-subheader>Tasks</h3>
-  <mat-list-item *ngFor="let task of tasks">
-    <mat-card [class.selected]="task === selectedTask" (click)="onSelect(task)">
-      {{task.Name}}
-      <app-task-detail [task]="selectedTask"></app-task-detail>
-      <mat-checkbox></mat-checkbox>
-    </mat-card>
-  </mat-list-item>
-</mat-list> -->
-
+<h2 *ngIf="planId">{{plan.Name}}</h2>
 <mat-accordion>
     <mat-expansion-panel *ngFor="let task of tasks">
       <mat-expansion-panel-header>

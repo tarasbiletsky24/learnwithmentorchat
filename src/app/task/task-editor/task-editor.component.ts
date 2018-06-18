@@ -10,7 +10,6 @@ import { TaskService } from '../../common/services/task.service';
 })
 export class TaskEditorComponent implements OnInit {
 
-  //private taskService : TaskService
   @Input()
   task: Task;
   constructor(public dialogRef: MatDialogRef<TaskEditorComponent>,
@@ -20,7 +19,7 @@ export class TaskEditorComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSaveClick(description:string) {       
+  onSaveClick(description: string) {
     this.task.Description = description;
     /// you need to change to real user Id
     this.task.ModifierId = 0; //here

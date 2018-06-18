@@ -24,7 +24,7 @@ export class PlanService {
     );
   }
 
-  getPlan(id: number): Observable<Plan> {
+  getPlan(id: number): Observable<Plan> {       
     return this.http.get<Plan>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Plan>(`getPlan id=${id}`))
     );
