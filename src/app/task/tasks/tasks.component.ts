@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { TaskService } from '../../common/services/task.service';
 import { Task } from '../../common/models/task';
+import { Plan } from '../../common/models/plan';
+import { PlanService } from '../../common/services/plan.service';
 
 @Component({
   selector: 'app-tasks',
@@ -10,12 +12,18 @@ import { Task } from '../../common/models/task';
 export class TasksComponent implements OnInit {
   tasks: Task[];
   selectedTask: Task;
-  constructor(private taskService: TaskService) {
-    this.taskService.getTasks().subscribe((data: Task[]) => {
-      this.tasks = data;
-    });
+  plan: Plan;
+  constructor(private taskService: TaskService, private planService: PlanService, @Optional() public planId: number) {
+    if (planId != null) {
+      this.planService.getPlan(planId).subscribe((u: Plan) => this.plan = u);
+      this.taskService.getTasks(planId).subscribe((data: Task[]) => this.tasks = data);
+    }
+    else {
+      this.taskService.getTasks().subscribe((data: Task[]) => {
+        this.tasks = data;
+      });
+    }
   }
-
   ngOnInit() {
   }
   onSelect(task: Task): void {
