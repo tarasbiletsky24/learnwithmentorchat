@@ -9,7 +9,7 @@
       <div (click)="getType(null)" (click)="getByRole(-1)" [class.selected]="r === selectedType" (click)="onSelect(r)">
         All
       </div>
-      <div *ngFor="let r of roles" (click)="getType(r.Name)" [class.selected]="r === selectedType" (click)="onSelect(r)">
+      <div *ngFor="let r of roles" (click)="getType(r.Name)" [class.selected]="r === selectedType" (click)="onSelect(r.Id)">
         {{r.Name}}
       </div>
     </div>

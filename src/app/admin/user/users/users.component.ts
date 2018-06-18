@@ -40,6 +40,11 @@ export class UsersComponent implements OnInit {
     this.name = name;
     return this.id = id;
   }
+  onSelect(r:number){
+    this.userService.getUserByRole_id(r).subscribe(
+      u => this.users = u
+    );
+  }
 
 
   constructor(private userService: UserService) {
