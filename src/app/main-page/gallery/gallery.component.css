@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 .grid-container {
+  padding-top: 30px;
   position: relative;
   left: 15%;
   width: 70%;

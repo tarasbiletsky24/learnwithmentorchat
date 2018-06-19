@@ -8,6 +8,7 @@
     display: grid;
     background-color: #3f51b5;
     margin: auto;
+    padding-bottom: 10px;
     width: 70%;
     height: 500px;    
     grid-template-columns: repeat(3, 1fr);
