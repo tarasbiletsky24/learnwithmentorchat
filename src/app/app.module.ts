@@ -36,6 +36,8 @@ import {BenefitsComponent} from './main-page/benefits/benefits.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
+import { PlansComponent } from './plan/plans/plans.component';
+import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
 
 
 @NgModule({
@@ -52,8 +54,8 @@ import { MaterialModule } from './material.module';
     FooterComponent,
     SliderComponent,
     GalleryComponent,
-    BenefitsComponent
-
+    BenefitsComponent,
+    PlansComponent, PlanDetailsComponent
   ],
   imports: [
     AppRoutingModule,

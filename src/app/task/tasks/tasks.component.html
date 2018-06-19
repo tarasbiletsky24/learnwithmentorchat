@@ -1,16 +1,14 @@
-<h2 *ngIf="planId">{{plan.Name}}</h2>
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let task of tasks">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            {{task.Name}}
-        </mat-panel-title>
-        <mat-panel-description>
-            {{task.Description}}
-        </mat-panel-description>
-        <mat-checkbox></mat-checkbox>
-      </mat-expansion-panel-header>
-      <app-task-detail [task]="task"></app-task-detail>      
-    </mat-expansion-panel>    
-  </mat-accordion>
-
+  <mat-expansion-panel *ngFor="let task of tasks">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{task.Name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{task.Description}}
+      </mat-panel-description>
+      <mat-checkbox></mat-checkbox>
+    </mat-expansion-panel-header>
+    <app-task-detail [task]="task"></app-task-detail>
+  </mat-expansion-panel>
+</mat-accordion>
