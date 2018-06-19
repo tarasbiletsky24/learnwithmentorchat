@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../common/models/task';
 import { MatDialog } from '@angular/material';
 import { TaskEditorComponent } from '../task-editor/task-editor.component';
+import { TaskSubmitorComponent } from '../task-submitor/task-submitor.component';
 
 @Component({
   selector: 'app-task-detail',
@@ -14,7 +15,6 @@ export class TaskDetailComponent implements OnInit {
   task: Task;
   constructor(public dialog: MatDialog) {     
   }
-
 
   ngOnInit() {
   }
@@ -31,4 +31,12 @@ export class TaskDetailComponent implements OnInit {
     });
   }
 
+  openSubmitDialog(): void {
+    const dialogRef = this.dialog.open(TaskSubmitorComponent, {
+      data: this.task
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

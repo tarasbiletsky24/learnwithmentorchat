@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService, private planService: PlanService) { 
   }
   ngOnInit() {
-    if (this.planId != null) {      
+    if (this.planId != null) {    
       this.planService.getPlan(this.planId).subscribe((u: Plan) => this.plan = u);
       this.taskService.getTasks(this.planId).subscribe((data: Task[]) => this.tasks = data);
     }

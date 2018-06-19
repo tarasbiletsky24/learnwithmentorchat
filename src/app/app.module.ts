@@ -38,7 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
 import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
-
+import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +55,9 @@ import { PlanDetailsComponent } from './plan/plan-details/plan-details.component
     SliderComponent,
     GalleryComponent,
     BenefitsComponent,
-    PlansComponent, PlanDetailsComponent
+    PlansComponent,
+    PlanDetailsComponent,
+    TaskSubmitorComponent
   ],
   imports: [
     AppRoutingModule,
@@ -77,7 +79,7 @@ import { PlanDetailsComponent } from './plan/plan-details/plan-details.component
     MatTableModule,
     MaterialModule
   ],
-  entryComponents: [TaskEditorComponent],
+  entryComponents: [TaskEditorComponent, TaskSubmitorComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
