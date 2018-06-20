@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { PlanService } from './plan.service';
 import { Plan } from '../models/plan';
 import { UserTask } from '../models/userTask';
+import { Message } from '../models/message';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,12 +23,13 @@ export class TaskService {
   private url = `${environment.apiUrl}`;
 
   getTasks(planId?: number): Observable<Task[]> {
-    if (planId != null)
+    if (planId != null) {
       return this.http.get<Task[]>(`${this.url}plan/${planId}/tasks`).pipe(
         catchError(this.handleError<Task[]>(`get Tasks for Plan`)));
-    else
-      return this.http.get<Task[]>(this.url + "task").pipe(
+    } else {
+      return this.http.get<Task[]>(this.url + 'task').pipe(
         catchError(this.handleError<Task[]>(`get Tasks`)));
+    }
   }
 
   getTask(id: number): Observable<Task> {
@@ -56,7 +58,19 @@ export class TaskService {
   getUserTask(planTaskId: number, userId: number): Observable<HttpResponse<UserTask>> {
     const link = `${this.url}task/usertask?planTaskId=${planTaskId}&userId=${userId}`;
     return this.http.get<UserTask>(link, {observe: 'response'}).pipe(
-      catchError(val => of(val)));;
+      catchError(val => of(val)));
+  }
+
+  getMessages(userTaskId: number): Observable<HttpResponse<Message[]>> {
+    const link = `${this.url}task/userTask/${userTaskId}/messages`;
+    return this.http.get<Message[]>(link, {observe: 'response'}).pipe(
+      catchError(val => of(val)));
+  }
+
+  sendMessage(userTaskId: number, message: Message): Observable<any> {
+    const link = `${this.url}task/userTask/${userTaskId}/messages`;
+    return this.http.post<Message>(link, message, httpOptions).pipe(
+      catchError(this.handleError<Task>(`creating message`)));
   }
 
   updateUserTaskResult(userTask: UserTask): Observable<any> {

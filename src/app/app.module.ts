@@ -38,8 +38,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
 import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
-import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component'
+import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component';
 import { FormsModule } from '@angular/forms';
+import { ConversationComponent } from './task/conversation/conversation.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { FormsModule } from '@angular/forms';
     BenefitsComponent,
     PlansComponent,
     PlanDetailsComponent,
-    TaskSubmitorComponent
+    TaskSubmitorComponent,
+    ConversationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -81,7 +83,9 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule
   ],
-  entryComponents: [TaskEditorComponent, TaskSubmitorComponent],
+  entryComponents: [TaskEditorComponent,
+    TaskSubmitorComponent,
+    ConversationComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

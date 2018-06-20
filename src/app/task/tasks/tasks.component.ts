@@ -14,14 +14,13 @@ export class TasksComponent implements OnInit {
   selectedTask: Task;
   plan: Plan;
   @Input() planId: number;
-  constructor(private taskService: TaskService, private planService: PlanService) { 
+  constructor(private taskService: TaskService, private planService: PlanService) {
   }
   ngOnInit() {
-    if (this.planId != null) {    
+    if (this.planId != null) {
       this.planService.getPlan(this.planId).subscribe((u: Plan) => this.plan = u);
       this.taskService.getTasks(this.planId).subscribe((data: Task[]) => this.tasks = data);
-    }
-    else {      
+    } else {
       this.taskService.getTasks().subscribe((data: Task[]) => {
         this.tasks = data;
       });

@@ -15,6 +15,11 @@ import {
 })
 
 export class UsersComponent implements OnInit {
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(private userService: UserService) {
+  }
+
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
@@ -36,12 +41,6 @@ export class UsersComponent implements OnInit {
     return id;
   }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private userService: UserService) {
-
-
-  }
-
   search(term: string, roleName: string): void {
     this.searchTerms.next(term);
   }
@@ -58,8 +57,7 @@ export class UsersComponent implements OnInit {
   getByRole(id: number) {
     if (id === -1) {
       this.userService.getUsers().subscribe(u => this.users = u);
-    }
-    else {
+    } else {
       this.userService.getUserByRole_id(id).subscribe(u => this.users = u);
     }
   }
