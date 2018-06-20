@@ -15,6 +15,11 @@ import {
 })
 
 export class UsersComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(private userService: UserService) {
+  }
+
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
@@ -43,8 +48,6 @@ export class UsersComponent implements OnInit {
     this.userService.getUserByRole_id(roleId).subscribe(
       u => this.users = u
     );
-  }
-  constructor(private userService: UserService) {
   }
 
   search(term: string, roleName: string): void {

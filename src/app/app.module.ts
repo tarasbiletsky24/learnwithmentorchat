@@ -36,6 +36,11 @@ import { BenefitsComponent } from './main-page/benefits/benefits.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
+import { PlansComponent } from './plan/plans/plans.component';
+import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
+import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component';
+import { FormsModule } from '@angular/forms';
+import { ConversationComponent } from './task/conversation/conversation.component';
 import { SearchingFormComponent } from './searching-form/searching-form.component';
 
 
@@ -54,8 +59,11 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
     SliderComponent,
     GalleryComponent,
     BenefitsComponent,
+    PlansComponent,
+    PlanDetailsComponent,
+    TaskSubmitorComponent,
+    ConversationComponent,
     SearchingFormComponent
-
   ],
   imports: [
     AppRoutingModule,
@@ -76,11 +84,16 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
     MatSidenavModule,
     MatTableModule,
     MaterialModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule
   ],
+  entryComponents: [TaskEditorComponent,
+    TaskSubmitorComponent,
+    ConversationComponent,
+    SigninComponent,
+    SignupComponent],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [TaskEditorComponent, SigninComponent, SignupComponent]
 
 })
 
