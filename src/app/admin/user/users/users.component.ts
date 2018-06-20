@@ -16,7 +16,6 @@ import {
 
 export class UsersComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private userService: UserService) {
   }
 
@@ -34,9 +33,6 @@ export class UsersComponent implements OnInit {
   roleName: string = null;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
-
-  constructor(private userService: UserService) {
-  }
 
   getType(roleName: string, type: Role): string {
     this.selectedType = type;
