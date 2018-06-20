@@ -1,5 +1,7 @@
-.cardImage{   
+.cardImage{
     height: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
     float: right;
     width: auto;
 }
@@ -11,11 +13,11 @@
 }
 
 .cardUpdate{
-    position: relative;
-    left: 12.5%;
+    justify-content: center;
     width: 70%;
     height: auto;
-    margin: 15px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-

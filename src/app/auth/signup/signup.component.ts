@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-signup',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(public thisDialogRef: MatDialogRef<SignupComponent>) { }
 
+  closeSignupComponent(): void {
+    this.thisDialogRef.close();
+  }
   ngOnInit() {
   }
 

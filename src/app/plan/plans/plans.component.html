@@ -1,0 +1,11 @@
+<h2 *ngIf="planId">Plans</h2>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let plan of plans">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{plan.Name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-plan-details [plan]="plan"></app-plan-details>      
+    </mat-expansion-panel>    
+  </mat-accordion>

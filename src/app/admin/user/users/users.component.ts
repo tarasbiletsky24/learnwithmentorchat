@@ -15,6 +15,11 @@ import {
 })
 
 export class UsersComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(private userService: UserService) {
+  }
+
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];

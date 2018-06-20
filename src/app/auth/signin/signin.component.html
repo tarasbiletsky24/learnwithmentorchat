@@ -1,15 +1,22 @@
-<h1>Who are you?</h1>
+
 <form class="example-form">
+  <h1>Who are you?</h1>
   <mat-form-field class="example-full-width containerUpdate">
     <input matInput type="email" placeholder="Your email">
   </mat-form-field>
-  <br>
-
   <mat-form-field class="example-full-width containerUpdate">
     <input matInput type="password" placeholder="Enter Password">
   </mat-form-field>
+  <div>
+    <span >
+      <button mat-raised-button color="primary"  (click)="closeSigninComponent()">
+        Cancel
+      </button>
+    </span>
+    <span class="button-right">
+      <button mat-raised-button color="primary" >
+        Submit
+      </button>
+    </span>
+  </div>
 </form>
-<br>
-<button mat-raised-button color="primary">
-  Submit
-</button>
