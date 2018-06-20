@@ -1,23 +1,30 @@
-<h1>Welcome! Tell us who you are...</h1>
 <form class="example-form">
-  <mat-form-field class="example-full-width containerUpdate">
-    <input matInput type="text" placeholder="Your name">
+  <h1>Introduce yourself</h1>
+  <mat-form-field class="example-full-width container-update">
+    <input matInput type="text" placeholder="Your firstname">
   </mat-form-field>
-  <br>
-  <mat-form-field class="example-full-width containerUpdate">
+  <mat-form-field class="example-full-width container-update">
+    <input matInput type="text" placeholder="Your lastname">
+  </mat-form-field>
+  <mat-form-field class="example-full-width container-update">
     <input matInput type="email" placeholder="Your email">
   </mat-form-field>
-  <br>
-  <mat-form-field class="example-full-width containerUpdate">
+  <mat-form-field class="example-full-width container-update">
     <input matInput type="password" placeholder="Enter Password">
   </mat-form-field>
-  <br>
-  <mat-form-field class="example-full-width containerUpdate">
+  <mat-form-field class="example-full-width container-update">
     <input matInput type="password" placeholder="Confirm your Password">
   </mat-form-field>
-  <br>
-  <button mat-raised-button color="primary">
-    Create Profile
-  </button>
-  <br>
+  <div>
+    <span>
+      <button mat-raised-button color="primary" (click)="closeSignupComponent()">
+        Cancel
+      </button>
+    </span>
+    <span class="button-right">
+       <button mat-raised-button color="primary">
+      Create Profile
+    </button>
+  </span>
+  </div>
 </form>
