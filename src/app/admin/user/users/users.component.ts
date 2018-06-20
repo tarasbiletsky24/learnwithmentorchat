@@ -64,7 +64,9 @@ export class UsersComponent implements OnInit {
     if (newState) {
       this.forMessage = ' block ';
     }
-    this.forMessage = ' unblock ';
+    if (!newState) {
+      this.forMessage = ' unblock ';
+    }
     if (this.state === newState) {
       window.alert('User ' + this.name + ' ' + this.surname + ' already' + this.forMessage);
       return false;
@@ -99,6 +101,7 @@ export class UsersComponent implements OnInit {
   getByRole(id: number) {
     if (id === -1) {
       this.userService.getUsers().subscribe(user => this.users = user);
+      return true;
     }
     this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
   }
