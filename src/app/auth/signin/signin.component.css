@@ -1,20 +1,17 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .example-container > * {
-    width: calc(100%/3);
-  }
+.example-form {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-  .containerUpdate{
-    width: 100%;    
-  }
+.example-container>* {
+  width: calc(100%/3);
+}
 
-  .cardUpdate{
-    position: relative;
-    left: 25%;
-    width: 50%;
-    height: auto;
-    margin: 10px;
+.containerUpdate {
+  width: 100%;
+}
+
+.button-right{
+  float: right;
 }
