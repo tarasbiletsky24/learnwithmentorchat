@@ -18,48 +18,75 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
-  user: User;
   name: string;
   surname: string;
   role: string;
-  blocked: boolean;
+  state: boolean;
+  newState: boolean;
   id: number;
+  forMessage: string;
   selectedType: Role;
   roleName: string = null;
-  isMarked = false;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
 
-  getType(roleName: string): string {
-    return this.roleName = roleName;
-  }
-
-  chooseUser(id: number, role: string, name: string, surname: string): number {
-    this.surname = surname;
-    this.name = name;
-    return this.id = id;
-  }
-  onSelect(roleId: number) {
-    this.userService.getUserByRole_id(roleId).subscribe(
-      u => this.users = u
-    );
-  }
   constructor(private userService: UserService) {
   }
 
+  getType(roleName: string, type: Role): string {
+    this.selectedType = type;
+    return this.roleName = roleName;
+  }
+
+  // choose specific user
+  chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
+    this.surname = surname;
+    this.name = name;
+    this.state = state;
+    this.id = id;
+  }
+
+  // search by role
   search(term: string, roleName: string): void {
     this.searchTerms.next(term);
   }
 
   getRole(role: string) {
-    console.log(role);
     return this.role = role;
   }
 
+  // changeState:blocked and active
+  changeState(id: number, state: boolean, newState) {
+    if (this.id == null || state == null) {
+      window.alert('Choose user');
+      return false;
+    }
+    if (newState) {
+      this.forMessage = ' block ';
+    }
+    this.forMessage = ' unblock ';
+    if (this.state === newState) {
+      window.alert('User ' + this.name + ' ' + this.surname + ' already' + this.forMessage);
+      return false;
+    }
+    const user = { Blocked: newState, Id: this.id };
+    if (window.confirm('Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')) {
+      this.userService.updateUser(user as User).subscribe();
+      this.users.forEach(element => {
+        if (element.Id === id) {
+          element.Blocked = newState;
+        }
+      });
+      this.state = newState;
+      return true;
+    }
+  }
+
+  // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
     if (window.confirm('Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')) {
-      const u = { Role: role, Id: id };
-      this.userService.updateUser(u as User).subscribe();
+      const user = { Role: role, Id: id };
+      this.userService.updateUser(user as User).subscribe();
       this.users.forEach(element => {
         if (element.Id === id) {
           element.Role = role;
@@ -68,48 +95,25 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  blockUser(id: number, name: string, surname: string) {
-    if (window.confirm('Are sure you want to block ' + name + ' ' + surname + ' ?')) {
-      this.userService.blockUserById(id).subscribe();
-      this.users.forEach(element => {
-        if (element.Id === id) {
-          element.Blocked = true;
-        }
-      });
-    }
-  }
-
-  unblockUser(id: number, name: string, surname: string) {
-    this.blocked = false;
-    if (window.confirm('Are sure you want to unblock  user : ' + name + ' ' + surname + ' ?')) {
-      const u = { Blocked: false, Id: id };
-      this.userService.updateUser(u as User).subscribe();
-      this.users.forEach(element => {
-        if (element.Id === id) {
-          element.Blocked = false;
-        }
-      });
-    }
-  }
-
+  // filtering by role
   getByRole(id: number) {
     if (id === -1) {
-      this.userService.getUsers().subscribe(u => this.users = u);
+      this.userService.getUsers().subscribe(user => this.users = user);
     }
-    this.userService.getUserByRole_id(id).subscribe(u => this.users = u);
+    this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
   }
 
   ngOnInit() {
     this.userService.getRoles().subscribe(
-      r => this.roles = r);
+      role => this.roles = role);
 
     this.userService.getUsers().subscribe(
-      u => this.users = u
+      user => this.users = user
     );
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.userService.search(term, this.roleName))
-    ).subscribe(u => this.users = u);
+    ).subscribe(user => this.users = user);
   }
 }

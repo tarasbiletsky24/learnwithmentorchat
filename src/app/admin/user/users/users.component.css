@@ -13,19 +13,14 @@
 .list-users{
     width: 80%;
 }
-.container {
+.container  {
     display: flex;
     justify-content: center;
   }
  .search-input{
       width: 100%;
   }
-  .no-result-error{  
-      font-size: 40px;
-      color: lightgray;
-      text-align: center;
-  }
-
+ 
   table {
     width: 100%;
   }
@@ -49,6 +44,13 @@
  .selected {  
     color :#3d50b7 !important;
   }
+  .roles li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
 .roles > div{
     cursor: pointer;
 }
+
+
