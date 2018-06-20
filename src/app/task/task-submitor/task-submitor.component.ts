@@ -14,6 +14,8 @@ export class TaskSubmitorComponent implements OnInit {
   @Input()
   task: Task;
   private userTask: UserTask;
+  private previousResult: string;
+  private exists: boolean;
 
   constructor(public dialogRef: MatDialogRef<TaskSubmitorComponent>,
     private taskService: TaskService,
@@ -22,14 +24,40 @@ export class TaskSubmitorComponent implements OnInit {
     }
   
   onCancelClick() {
+    if(this.previousResult != this.userTask.Result){
+      if(window.confirm('You have unsaved changes in your result. Do you want to save it?')){
+        this.saveChanges();
+      }
+    }
+    this.dialogRef.close();
+  }
 
+  onSubmitClick(){
+    this.saveChanges();
+  }
+
+  saveChanges() {
+    const utask = {Id: this.userTask.Id, Result: this.userTask.Result};
+    this.taskService.updateUserTaskResult(utask as UserTask).subscribe(ut => ut.headers);
+  }
+
+  notExisting() {
+    this.dialogRef.close();
+    window.alert('sorry');
   }
 
   ngOnInit() {
     const userId = 3;
     //todo: add logic for getting user id from local storage if authorized
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
-      ut => this.userTask = ut
+      ut => {
+        if(!ut.ok) {
+          this.notExisting();
+        } else {
+          this.userTask = ut.body;
+          this.previousResult = ut.body.Result;
+        }
+      }
     );
   }
 

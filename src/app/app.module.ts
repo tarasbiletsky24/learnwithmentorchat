@@ -39,6 +39,7 @@ import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
 import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
 import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.compon
     MatDialogModule,
     MatSidenavModule,
     MatTableModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   entryComponents: [TaskEditorComponent, TaskSubmitorComponent],
   providers: [],
