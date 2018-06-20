@@ -37,6 +37,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 import { SearchingFormComponent } from './searching-form/searching-form.component';
+import { AboutPageComponent } from './main-page/about-page/about-page.component';
+import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
     SliderComponent,
     GalleryComponent,
     BenefitsComponent,
-    SearchingFormComponent
+    SearchingFormComponent,
+    AboutPageComponent,
+    ContactPageComponent
 
   ],
   imports: [

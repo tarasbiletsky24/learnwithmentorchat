@@ -18,25 +18,31 @@
   font-size: 16px;
 }
 
-.item1 {
+.cell1 {
   grid-column-start: 2;
   grid-column-end: 6;
   padding: 5px;
 }
 
-.item8 {
+.cell8 {
   grid-column-start: 8;
   grid-column-end: 8;
   padding: 5px;
 }
 
-.item15 {
+.cell14 {
+  grid-column-start: 14;
+  grid-column-end: 14;
+  padding: 5px;
+}
+
+.cell15 {
   grid-column-start: 15;
   grid-column-end: 15;
   padding: 5px;
 }
 
-.item16 {
+.cell16 {
   grid-column-start: 16;
   grid-column-end: 16;
   padding: 5px;
