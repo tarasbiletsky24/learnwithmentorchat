@@ -33,6 +33,7 @@ export class TaskDetailComponent implements OnInit {
 
   openSubmitDialog(): void {
     const dialogRef = this.dialog.open(TaskSubmitorComponent, {
+      width: '600px',
       data: this.task
     });
     dialogRef.afterClosed().subscribe(result => {
