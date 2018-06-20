@@ -33,7 +33,7 @@ import {FooterComponent} from './footer/footer.component';
 import {SliderComponent} from './main-page/slider/slider.component';
 import {GalleryComponent} from './main-page/gallery/gallery.component';
 import {BenefitsComponent} from './main-page/benefits/benefits.component';
-
+import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
@@ -81,13 +81,17 @@ import { ConversationComponent } from './task/conversation/conversation.componen
     MatSidenavModule,
     MatTableModule,
     MaterialModule,
+    MatRadioModule,
     FormsModule
   ],
   entryComponents: [TaskEditorComponent,
     TaskSubmitorComponent,
-    ConversationComponent],
+    ConversationComponent,
+    SigninComponent,
+    SignupComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 
 export class AppModule { }
