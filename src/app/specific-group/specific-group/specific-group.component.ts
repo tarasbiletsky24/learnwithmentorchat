@@ -4,7 +4,8 @@ import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-specific-group',
@@ -16,7 +17,8 @@ export class SpecificGroupComponent implements OnInit {
   group: Group;
   mentor: User;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+    public dialog: MatDialog) {
 
   }
 
@@ -30,5 +32,17 @@ export class SpecificGroupComponent implements OnInit {
       this.mentor = data;
     });
   }
+
+  /* openAddDialog(): void {
+    const dialogRef = this.dialog.open(TaskEditorComponent, {
+      data: this.task
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.task = result;
+      // send to API
+    });
+  } */
 
 }
