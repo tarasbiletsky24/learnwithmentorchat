@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './admin/user/users/users.component';
 import { CommentComponent } from './task/comment/comment.component';
+import { ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -18,7 +20,7 @@ const routes: Routes = [
 {path : 'comment', component : CommentComponent},
 {path : 'tasks', component: TasksComponent },
 {path : 'plans', component: PlansComponent},
-{path : 'group', component: SpecificGroupComponent}
+{path : 'group/:id', component: SpecificGroupComponent}
 ];
 
 @NgModule({

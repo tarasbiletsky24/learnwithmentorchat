@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
@@ -16,15 +18,19 @@ import { MatDialog } from '@angular/material';
 export class SpecificGroupComponent implements OnInit {
   group: Group;
   mentor: User;
+  id: number;
+  //todo should be private, but does not work
+  /*private*/ subscription: Subscription;
 
   constructor(private userService: UserService,
-    public dialog: MatDialog) {
-
+    public dialog: MatDialog,
+    private activateRoute: ActivatedRoute) {
+    this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
   }
 
   ngOnInit() {
     this.group = {
-      Id: 1,
+      Id: this.id,
       Name: 'LV319.NET',
       MentorId: 1
     };
