@@ -9,6 +9,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { PlansComponent } from './plan/plans/plans.component';
+import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 
 const routes: Routes = [
 {path : '', redirectTo: 'main-page', pathMatch : 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
 {path : 'users', component : UsersComponent},
 {path : 'comment', component : CommentComponent},
 {path : 'tasks', component: TasksComponent },
-{path : 'plans', component: PlansComponent}
+{path : 'plans', component: PlansComponent},
+{path : 'group', component: SpecificGroupComponent}
 ];
 
 @NgModule({

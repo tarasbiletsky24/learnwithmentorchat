@@ -43,6 +43,8 @@ import { FormsModule } from '@angular/forms';
 import { ConversationComponent } from './task/conversation/conversation.component';
 import { SearchingFormComponent } from './searching-form/searching-form.component';
 
+import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
     PlanDetailsComponent,
     TaskSubmitorComponent,
     ConversationComponent,
-    SearchingFormComponent
+    SearchingFormComponent,
+    SpecificGroupComponent
   ],
   imports: [
     AppRoutingModule,
