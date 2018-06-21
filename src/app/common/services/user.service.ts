@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Register } from '../models/register';
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +46,14 @@ export class UserService {
     );
   }
 
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
-      catchError(this.handleError<User>('addUser'))
-    );
+  registerUser(register : Register){
+    const body: Register = {
+      Password: register.Password,
+      Email: register.Email,
+      FirstName: register.FirstName,
+      LastName: register.LastName
+    }
+    return this.http.post(this.url, body);
   }
 
   blockUserById(id: number) {
