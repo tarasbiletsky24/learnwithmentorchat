@@ -13,6 +13,10 @@ import { Message } from '../models/message';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+const httpOptionsObserve = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  observe: "response"
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -69,8 +73,8 @@ export class TaskService {
 
   sendMessage(userTaskId: number, message: Message): Observable<any> {
     const link = `${this.url}task/userTask/${userTaskId}/messages`;
-    return this.http.post<Message>(link, message, httpOptions).pipe(
-      catchError(this.handleError<Task>(`creating message`)));
+    return this.http.post<Message>(link, message, {observe: 'response'}).pipe(
+      catchError(val => of(val)));
   }
 
   updateUserTaskResult(userTask: UserTask): Observable<any> {
@@ -81,7 +85,7 @@ export class TaskService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      // console.error(error);
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
