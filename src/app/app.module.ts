@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { UserService } from './common/services/user.service';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './admin/user/users/users.component';
 import { CommentComponent } from './task/comment/comment.component';
@@ -92,7 +92,7 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
     ConversationComponent,
     SigninComponent,
     SignupComponent],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent],
 
 })

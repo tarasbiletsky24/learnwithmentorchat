@@ -13,6 +13,8 @@ import { PlansComponent } from './plan/plans/plans.component';
 const routes: Routes = [
 {path : '', redirectTo: 'main-page', pathMatch : 'full'},
 {path : 'main-page', component : MainPageComponent},
+{path : 'signin', component: MainPageComponent, children:[{path:'', component: SigninComponent}]},
+{path : 'signup', component: MainPageComponent, children:[{path:'', component: SignupComponent}]},
 {path : 'users', component : UsersComponent},
 {path : 'comment', component : CommentComponent},
 {path : 'tasks', component: TasksComponent },
