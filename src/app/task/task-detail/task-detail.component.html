@@ -5,22 +5,25 @@
       <p>
         <h3>{{task.Description}}</h3>
     </mat-card-content>
-    <mat-card-content>
-      <p>
-        Creator: {{task.CreatorName}}
-      </p>
-      <p>
-        Create date: {{task.CreateDate}}
-      </p>
-      <div *ngIf="task.ModifierName">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Show details</mat-expansion-panel-header>
+      <mat-card-content>
         <p>
-          Modifier name: {{task.ModifierName}}
+          Creator: {{task.CreatorName}}
         </p>
         <p>
-          Modify date: {{task.ModDate}}
+          Create date: {{task.CreateDate}}
         </p>
-      </div>
-    </mat-card-content>
+        <div *ngIf="task.ModifierName">
+          <p>
+            Modifier name: {{task.ModifierName}}
+          </p>
+          <p>
+            Modify date: {{task.ModDate}}
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-expansion-panel>    
     <div>
       <mat-card-actions>
         <button mat-button (click)="openEditDialog()">
