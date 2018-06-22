@@ -46,6 +46,7 @@ import { AboutPageComponent } from './main-page/about-page/about-page.component'
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
+import { SearchingFromComponent } from './specific-group/searching-from/searching-from.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { SpecificGroupComponent } from './specific-group/specific-group/specific
     TaskSubmitorComponent,
     ConversationComponent,
     SearchingFormComponent,
-    SpecificGroupComponent
+    SpecificGroupComponent,
+    SearchingFromComponent
   ],
   imports: [
     AppRoutingModule,
