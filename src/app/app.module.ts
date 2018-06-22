@@ -4,8 +4,8 @@ import { UserService } from './common/services/user.service';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './admin/user/users/users.component';
 import { CommentComponent } from './task/comment/comment.component';
-
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -102,7 +102,12 @@ import { SearchingFromComponent } from './specific-group/searching-from/searchin
     ConversationComponent,
     SigninComponent,
     SignupComponent],
-  providers: [UserService],
+  providers: [UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
 
 })
