@@ -68,14 +68,14 @@ export class UserService {
       catchError(this.handleError<Role[]>('getRole'))
     );
   }
-  //change content type!!!
+
   userAuthentication(login: Login) {
     const body: Login = {
       Password: login.Password,
       Email: login.Email
     }
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.post(`${environment.apiUrl}` + 'token', body, this.httpOptions);
+    return this.http.post(`${environment.apiUrl}` + 'token', body, {headers: reqHeader});
   }
 
   search(param: string, roleName: string): Observable<User[]> {

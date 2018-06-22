@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
   }
  
   OnSubmit(form: NgForm) {
+    debugger
     this.userService.registerUser(form.value).subscribe();
   }
 }
