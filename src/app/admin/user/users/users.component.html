@@ -6,11 +6,14 @@
     </mat-form-field>
     <!-- for sort -->
     <div class="flex-container roles">
-      <div (click)="getType(null,role)" (click)="getByRole(-1)" [class.selected]="role === selectedType">
+      <div (click)="getType(null,role)" (click)="getByRole(-2)" [class.selected]="role === selectedType">
         All
       </div>
       <div *ngFor="let role of roles" (click)="getByRole(role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
         {{role.Name}}
+      </div>
+      <div  (click)="getByRole(-1)" [class.selected]="role === selectedType">
+       Blocked
       </div>
     </div>
 

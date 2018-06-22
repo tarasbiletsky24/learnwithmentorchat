@@ -4,8 +4,9 @@ import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+//import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +40,9 @@ export class UserService {
     );
   }
 
-  updateUser(user: User) {
+  updateUser(user: User): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${user.Id}`, user).pipe(
-      catchError(this.handleError<any>('updateUser'))
+      catchError(r => of(r))
     );
   }
 
