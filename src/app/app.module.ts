@@ -45,6 +45,8 @@ import { SearchingFormComponent } from './searching-form/searching-form.componen
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
+import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { ContactPageComponent } from './main-page/contact-page/contact-page.comp
     PlanDetailsComponent,
     TaskSubmitorComponent,
     ConversationComponent,
-    SearchingFormComponent
+    SearchingFormComponent,
+    SpecificGroupComponent
   ],
   imports: [
     AppRoutingModule,
