@@ -1,19 +1,21 @@
-<form class="example-form">
+<form class="example-form" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
   <h1>Introduce yourself</h1>
+  <div class="row">
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="text" placeholder="Your firstname">
+    <input matInput type="text" name="FirstName" placeholder="Your firstname" #FirstName="ngModel" [(ngModel)]="register.FirstName" required>
+  </mat-form-field>
+  </div>
+  <mat-form-field class="example-full-width container-update">
+    <input matInput type="text" name="LastName" placeholder="Your lastname" #LastName="ngModel" [(ngModel)]="register.LastName" required>
   </mat-form-field>
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="text" placeholder="Your lastname">
+    <input matInput type="email" name="Email" placeholder="Your email" #Email="ngModel" [(ngModel)]="register.Email" required>
   </mat-form-field>
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="email" placeholder="Your email">
+    <input matInput type="password" name="Password" placeholder="Enter Password" #Password="ngModel" [(ngModel)]="register.Password" required>
   </mat-form-field>
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="password" placeholder="Enter Password">
-  </mat-form-field>
-  <mat-form-field class="example-full-width container-update">
-    <input matInput type="password" placeholder="Confirm your Password">
+    <input matInput type="password" name="ConfirmPassword" placeholder="Confirm your Password">
   </mat-form-field>
   <div>
     <span>
@@ -22,7 +24,7 @@
       </button>
     </span>
     <span class="button-right">
-       <button mat-raised-button color="primary">
+       <button mat-raised-button color="primary" type="submit">
       Create Profile
     </button>
   </span>

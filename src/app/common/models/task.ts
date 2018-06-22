@@ -11,4 +11,5 @@ export class Task {
     ModDate: Date;
     Priority: number;
     SectionId: number;
+    PlanTaskId: number;
 }

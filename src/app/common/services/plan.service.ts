@@ -42,13 +42,13 @@ export class PlanService {
     );
   }
 
-  deletePlanById (id: number): Observable<Plan> {
+  deletePlanById(id: number): Observable<Plan> {
     return this.http.delete<Plan>(`${this.url}/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<Plan>('deletePlan'))
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       // Let the app keep running by returning an empty result.

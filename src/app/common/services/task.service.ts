@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Task } from '../models/task';
 import { Observable } from 'rxjs/internal/Observable';
@@ -7,6 +7,8 @@ import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PlanService } from './plan.service';
 import { Plan } from '../models/plan';
+import { UserTask } from '../models/userTask';
+import { Message } from '../models/message';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,31 +23,60 @@ export class TaskService {
   private url = `${environment.apiUrl}`;
 
   getTasks(planId?: number): Observable<Task[]> {
-    if (planId) {
-      return this.http.get<Task[]>(`${this.url}/plan/${planId}/tasks`).pipe(
+    if (planId != null) {
+      return this.http.get<Task[]>(`${this.url}plan/${planId}/tasks`).pipe(
         catchError(this.handleError<Task[]>(`get Tasks for Plan`)));
+    } else {
+      return this.http.get<Task[]>(this.url + 'task').pipe(
+        catchError(this.handleError<Task[]>(`get Tasks`)));
     }
-    return this.http.get<Task[]>(this.url + 'task').pipe(
-      catchError(this.handleError<Task[]>(`get Tasks`)));
   }
+
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
   }
+
   updateTask(task: Task): Observable<any> {
     const link = `${this.url}task/${task.Id}`;
     return this.http.put<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`updating task id=${task.Id}`)));
   }
+
   deleteTask(task: Task): Observable<any> {
     const link = `${this.url}task/${task.Id}`;
     return this.http.delete<Task>(link, httpOptions).pipe(
       catchError(this.handleError<Task>(`deleting task id=${task.Id}`)));
   }
+
   createTask(task: Task): Observable<any> {
-   const link = `${this.url}task`;
+    const link = `${this.url}task`;
     return this.http.post<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`creating task`)));
+  }
+
+  getUserTask(planTaskId: number, userId: number): Observable<HttpResponse<UserTask>> {
+    const link = `${this.url}task/usertask?planTaskId=${planTaskId}&userId=${userId}`;
+    return this.http.get<UserTask>(link, {observe: 'response'}).pipe(
+      catchError(val => of(val)));
+  }
+
+  getMessages(userTaskId: number): Observable<HttpResponse<Message[]>> {
+    const link = `${this.url}task/userTask/${userTaskId}/messages`;
+    return this.http.get<Message[]>(link, {observe: 'response'}).pipe(
+      catchError(val => of(val)));
+  }
+
+  sendMessage(userTaskId: number, message: Message): Observable<any> {
+    const link = `${this.url}task/userTask/${userTaskId}/messages`;
+    return this.http.post<Message>(link, message, httpOptions).pipe(
+      catchError(this.handleError<Task>(`creating message`)));
+  }
+
+  updateUserTaskResult(userTask: UserTask): Observable<any> {
+    const link = `${this.url}task/usertask?userTaskId=${userTask.Id}&newResult=${userTask.Result}`;
+    return this.http.put<UserTask>(link, null, httpOptions).pipe(
+      catchError(val => of(val)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

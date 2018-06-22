@@ -6,31 +6,30 @@
     </mat-form-field>
     <!-- for sort -->
     <div class="flex-container roles">
-      <div (click)="getType(null)" (click)="getByRole(-1)" [class.selected]="r === selectedType" (click)="onSelect(r)">
+      <div (click)="getType(null,role)" (click)="getByRole(-1)" [class.selected]="role === selectedType">
         All
       </div>
-      <div *ngFor="let r of roles" (click)="getType(r.Name)" [class.selected]="r === selectedType" (click)="onSelect(r.Id)">
-        {{r.Name}}
+      <div *ngFor="let role of roles" (click)="getByRole(role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
+        {{role.Name}}
       </div>
     </div>
 
     <!-- for select -->
     <div>
-
       <mat-form-field>
         <mat-select placeholder="Roles">
-          <mat-option *ngFor="let r of roles" [value]="r.Name" (click)="getRole(r.Name)">
-            {{ r.Name }}
+          <mat-option *ngFor="let role of roles" [value]="role.Name" (click)="getRole(role.Name)">
+            {{ role.Name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <div class="flex-button">
-        <button mat-raised-button class="button-change" (click)=" updateRole(id,role,name,surname)">Change</button>
+        <button mat-raised-button class="button-change" (click)="updateRole(id,role,name,surname)">Change</button>
         <div>
-          <button mat-raised-button color="primary" (click)="unblockUser(id,name,surname)">
+          <button mat-raised-button color="primary" (click)="changeState(id,state,false)">
             Unblock </button>
-          <button mat-raised-button color="primary" (click)="blockUser(id,name,surname)">
+          <button mat-raised-button color="primary" (click)="changeState(id,state,true)">
             Block </button>
         </div>
       </div>
@@ -38,14 +37,14 @@
 
     <!-- for table for users -->
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="users">     
-      
+      <table mat-table [dataSource]="users">
+
 
         <!-- check column -->
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <mat-radio-button (click)="chooseUser(element.Id,element.Role,element.FirstName,element.LastName)"></mat-radio-button>
+            <mat-radio-button (click)="chooseUser(element.Id,element.Role,element.FirstName,element.LastName,element.Blocked)"></mat-radio-button>
 
           </td>
         </ng-container>

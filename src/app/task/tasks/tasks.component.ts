@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional, Input } from '@angular/core';
 import { TaskService } from '../../common/services/task.service';
 import { Task } from '../../common/models/task';
 import { Plan } from '../../common/models/plan';
@@ -13,16 +13,18 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   selectedTask: Task;
   plan: Plan;
-  constructor(private taskService: TaskService, private planService: PlanService, @Optional() public planId: number) {
-    if (planId != null) {
-      this.planService.getPlan(planId).subscribe((u: Plan) => this.plan = u);
-      this.taskService.getTasks(planId).subscribe((data: Task[]) => this.tasks = data);
-    }
-    this.taskService.getTasks().subscribe((data: Task[]) => {
-      this.tasks = data;
-    });
+  @Input() planId: number;
+  constructor(private taskService: TaskService, private planService: PlanService) {
   }
   ngOnInit() {
+    if (this.planId != null) {
+      this.planService.getPlan(this.planId).subscribe((u: Plan) => this.plan = u);
+      this.taskService.getTasks(this.planId).subscribe((data: Task[]) => this.tasks = data);
+    } else {
+      this.taskService.getTasks().subscribe((data: Task[]) => {
+        this.tasks = data;
+      });
+    }
   }
   onSelect(task: Task): void {
     this.selectedTask = task;
