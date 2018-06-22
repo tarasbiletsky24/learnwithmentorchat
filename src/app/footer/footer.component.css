@@ -9,7 +9,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  position: fixed;
+  position: relative;
   height: 40px;
   display: grid;
   grid-template-columns: repeat(16, 1fr);
