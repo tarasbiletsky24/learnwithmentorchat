@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
+import { Login } from '../models/login';
 
 @Injectable({
   providedIn: 'root'
@@ -67,11 +68,14 @@ export class UserService {
       catchError(this.handleError<Role[]>('getRole'))
     );
   }
-
-  userAuthentication(email, password) {
-    const data = 'email=' + email + '&password=' + password + '&grant_type=password';
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
-    return this.http.post(this.url + '/token', data, { headers: reqHeader });
+  //change content type!!!
+  userAuthentication(login: Login) {
+    const body: Login = {
+      Password: login.Password,
+      Email: login.Email
+    }
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
+    return this.http.post(`${environment.apiUrl}` + 'token', body, this.httpOptions);
   }
 
   search(param: string, roleName: string): Observable<User[]> {
