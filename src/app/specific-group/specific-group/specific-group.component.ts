@@ -9,6 +9,7 @@ import { UserService } from '../../common/services/user.service';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
+import { TasksComponent } from '../../task/tasks/tasks.component';
 
 @Component({
   selector: 'app-specific-group',
@@ -40,16 +41,16 @@ export class SpecificGroupComponent implements OnInit {
     };
   }
 
-  /* openAddDialog(): void {
-    const dialogRef = this.dialog.open(TaskEditorComponent, {
-      data: this.task
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(TasksComponent, {
+      width: '800px',
+      data: this.group
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.task = result;
-      // send to API
+      //todo reinit tables
     });
-  } */
+  }
 
 }
