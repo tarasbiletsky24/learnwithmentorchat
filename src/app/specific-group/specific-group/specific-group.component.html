@@ -1,0 +1,22 @@
+<mat-card>
+    <h1>
+        {{ group.Name }}
+        ID: {{ group.Id }}
+    </h1>
+    <h2>
+        <p>Mentor: {{ mentor.FirstName }} {{mentor.LastName}}</p>
+    </h2>
+</mat-card>
+
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+    <mat-tab label="Plans">
+        <button class="big-button" mat-raised-button (click)="openPlanAddDialog()">
+            Add plan
+        </button>
+    </mat-tab>
+    <mat-tab label="Users">
+        <button class="big-button" mat-raised-button (click)="openUserAddDialog()">
+            Add user
+        </button>
+    </mat-tab>
+</mat-tab-group>

@@ -21,7 +21,7 @@
 }
 
 .card-update {
-  height: 20%;
+  max-height: 100%;
   width: 20%;
   margin: 20px;
 }
