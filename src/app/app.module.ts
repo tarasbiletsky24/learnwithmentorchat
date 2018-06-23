@@ -7,7 +7,7 @@ import { CommentComponent } from './task/comment/comment.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
-
+import { AuthGuard } from './auth/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -96,13 +96,13 @@ import { SearchingFromComponent } from './specific-group/searching-from/searchin
     MaterialModule,
     MatRadioModule,
     FormsModule
-  ],
+    ],
   entryComponents: [TaskEditorComponent,
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
     SignupComponent],
-  providers: [UserService,
+  providers: [UserService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

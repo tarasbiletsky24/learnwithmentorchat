@@ -54,7 +54,8 @@ export class UserService {
       FirstName: register.FirstName,
       LastName: register.LastName
     }
-    return this.http.post(this.url, body);
+    var reqHeader = new HttpHeaders({'No-Auth':'True'});
+    return this.http.post(this.url, body, {headers : reqHeader});
   }
 
   blockUserById(id: number) {

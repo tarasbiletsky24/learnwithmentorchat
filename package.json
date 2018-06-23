@@ -15,7 +15,7 @@
     "@angular/cdk": "^6.3.0",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.4",
-    "@angular/core": "^6.0.5",
+    "@angular/core": "^6.0.3",
     "@angular/forms": "^6.0.4",
     "@angular/http": "^6.0.4",
     "@angular/material": "^6.3.0",
@@ -23,8 +23,10 @@
     "@angular/platform-browser-dynamic": "^6.0.4",
     "@angular/router": "^6.0.4",
     "core-js": "^2.5.4",
+    "ngx-toastr": "^8.8.0",
     "npm": "^6.1.0",
     "rxjs": "^6.0.0",
+    "toastr": "^2.1.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
