@@ -27,6 +27,18 @@ export class GroupService {
     );
   }
 
+  getGroupUsers(id: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/${id}/users`).pipe(
+      catchError(this.handleError<User[]>(`getGroupUsers`))
+    );
+  }
+
+  getGroupPlans(id: number): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`${this.url}/${id}/plans`).pipe(
+      catchError(this.handleError<Plan[]>(`getGroupPlans`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

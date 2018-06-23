@@ -9,7 +9,8 @@ import { UserService } from '../../common/services/user.service';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
-import { TasksComponent } from '../../task/tasks/tasks.component';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { Plan } from '../../common/models/plan';
 
 @Component({
   selector: 'app-specific-group',
@@ -21,6 +22,8 @@ export class SpecificGroupComponent implements OnInit {
   group: Group;
   mentor: User;
   linkId: number;
+  users: User[];
+  plans: Plan[];
   //todo should be private, but does not work
   /*private*/ subscription: Subscription;
 
@@ -34,22 +37,37 @@ export class SpecificGroupComponent implements OnInit {
 
   ngOnInit() {
     if (this.linkId != null) {
+      //mb move to constructor
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
+      this.groupService.getGroupUsers(this.linkId).subscribe(data => this.users = data);
+      this.groupService.getGroupPlans(this.linkId).subscribe(data => this.plans = data);
     } else {
       this.router.navigate(['/main-page']);
     };
   }
 
-  openAddDialog(): void {
-    const dialogRef = this.dialog.open(TasksComponent, {
+  openPlanAddDialog(): void {
+    const dialogRef = this.dialog.open(/*AddPlanComponent*/AddUserComponent, {
       width: '800px',
-      data: this.group
+      data: this.group.Id
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //todo reinit tables
+      //todo reinit table plans
+    });
+  }
+
+  openUserAddDialog(): void {
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      width: '800px',
+      data: this.group.Id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //todo reinit table users
     });
   }
 

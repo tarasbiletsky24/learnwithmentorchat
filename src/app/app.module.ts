@@ -4,8 +4,8 @@ import { UserService } from './common/services/user.service';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './admin/user/users/users.component';
 import { CommentComponent } from './task/comment/comment.component';
-
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,12 +41,11 @@ import { PlanDetailsComponent } from './plan/plan-details/plan-details.component
 import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component';
 import { FormsModule } from '@angular/forms';
 import { ConversationComponent } from './task/conversation/conversation.component';
-import { SearchingFormComponent } from './searching-form/searching-form.component';
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
-import { SearchingFromComponent } from './specific-group/searching-from/searching-from.component';
+import { AddUserComponent } from './specific-group/add-user/add-user.component';
 
 
 @NgModule({
@@ -64,16 +63,14 @@ import { SearchingFromComponent } from './specific-group/searching-from/searchin
     SliderComponent,
     GalleryComponent,
     BenefitsComponent,
-    SearchingFormComponent,
     AboutPageComponent,
     ContactPageComponent,
     PlansComponent,
     PlanDetailsComponent,
     TaskSubmitorComponent,
     ConversationComponent,
-    SearchingFormComponent,
     SpecificGroupComponent,
-    SearchingFromComponent
+    AddUserComponent
   ],
   imports: [
     AppRoutingModule,
@@ -102,7 +99,12 @@ import { SearchingFromComponent } from './specific-group/searching-from/searchin
     ConversationComponent,
     SigninComponent,
     SignupComponent],
-  providers: [UserService],
+  providers: [UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
 
 })
