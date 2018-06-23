@@ -5,18 +5,21 @@
     <input matInput type="text" name="FirstName" placeholder="Your firstname" #FirstName="ngModel" [(ngModel)]="register.FirstName" required>
   </mat-form-field>
   </div>
+  <div class="row">
   <mat-form-field class="example-full-width container-update">
     <input matInput type="text" name="LastName" placeholder="Your lastname" #LastName="ngModel" [(ngModel)]="register.LastName" required>
   </mat-form-field>
+</div>
+<div class="row">
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="email" name="Email" placeholder="Your email" #Email="ngModel" [(ngModel)]="register.Email" required>
+    <input matInput type="email" name="Email" placeholder="Your email" #Email="ngModel" [(ngModel)]="register.Email" [pattern]="emailPattern" required>
   </mat-form-field>
+</div>
+<div class="row">
   <mat-form-field class="example-full-width container-update">
-    <input matInput type="password" name="Password" placeholder="Enter Password" #Password="ngModel" [(ngModel)]="register.Password" required>
+    <input matInput type="password" name="Password" placeholder="Enter Password" #Password="ngModel" [(ngModel)]="register.Password" required minlength="3">
   </mat-form-field>
-  <mat-form-field class="example-full-width container-update">
-    <input matInput type="password" name="ConfirmPassword" placeholder="Confirm your Password">
-  </mat-form-field>
+</div>
   <div>
     <span>
       <button mat-raised-button color="primary" (click)="closeSignupComponent()">
@@ -24,7 +27,7 @@
       </button>
     </span>
     <span class="button-right">
-       <button mat-raised-button color="primary" type="submit">
+       <button [disabled]="!userRegistrationForm.valid" mat-raised-button color="primary" type="submit">
       Create Profile
     </button>
   </span>
