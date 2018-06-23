@@ -1,4 +1,6 @@
-
+<div *ngIf="isLoginError" class="red-text center error-message">
+  <i class="material-icons">error</i> Incorrect username or password
+</div>
 <form class="example-form" #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
   <h1>Who are you?</h1>
   <mat-form-field class="example-full-width containerUpdate">
@@ -14,7 +16,7 @@
       </button>
     </span>
     <span class="button-right">
-      <button mat-raised-button color="primary" type="submit">
+      <button [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit">
         Submit
       </button>
     </span>
