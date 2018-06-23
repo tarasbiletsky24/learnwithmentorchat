@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   closeSignupComponent(): void {
   this.thisDialogRef.close();
   }
- 
+
   ngOnInit() {
     this.resetForm();
   }
@@ -35,7 +35,12 @@ export class SignupComponent implements OnInit {
     }
   }
  
+  //TODO make animations
   OnSubmit(form: NgForm) {
-    this.userService.registerUser(form.value).subscribe();
+    this.userService.registerUser(form.value).subscribe((data: string) => {
+      if (data.startsWith('Succesfully')) {
+        this.closeSignupComponent();
+      }
+    });
   }
 }
