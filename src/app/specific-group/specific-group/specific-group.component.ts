@@ -22,7 +22,7 @@ import { TasksComponent } from '../../task/tasks/tasks.component';
 })
 
 export class SpecificGroupComponent implements OnInit {
-  
+
   group?: Group;
   mentor: User;
   linkId: number;
@@ -30,13 +30,13 @@ export class SpecificGroupComponent implements OnInit {
 
   constructor(private userService: UserService,
     private groupService: GroupService,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private router: Router,
     private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.subscription = this.activateRoute.params.subscribe(params => this.linkId = params['id'])
+    this.subscription = this.activateRoute.params.subscribe(params => this.linkId = params['id']);
     if (this.linkId != null) {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);

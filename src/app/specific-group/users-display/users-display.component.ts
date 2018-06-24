@@ -30,7 +30,7 @@ export class UsersDisplayComponent implements OnInit {
       this.groupService.getGroupUsers(this.group.Id).subscribe(data => this.users = data);
     } else {
       this.groupService.getGroupUsers(1).subscribe(data => this.users = data);
-      console.log("No group provided");
+      console.log('No group provided');
     }
   }
 

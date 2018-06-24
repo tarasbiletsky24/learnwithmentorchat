@@ -3,12 +3,12 @@
     margin-bottom: 8px;
 }
 mat-tab-group{
-    min-height: 600px;
+    min-height: 800px;
 }
 .container{
     display: flex;
     justify-content: center;
   }
 .content{
-    width: 80%;
+    width: 100%;
 }

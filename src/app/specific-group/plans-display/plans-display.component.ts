@@ -29,7 +29,7 @@ export class PlansDisplayComponent implements OnInit {
       this.groupService.getGroupPlans(this.group.Id).subscribe(data => this.plans = data);
     } else {
       this.groupService.getGroupPlans(1).subscribe(data => this.plans = data);
-      console.log("No group provided");
+      console.log('No group provided');
     }
   }
 
@@ -38,7 +38,7 @@ export class PlansDisplayComponent implements OnInit {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-  
+
   openPlanAddDialog(): void {
     const dialogRef = this.dialog.open(/*AddPlanComponent */TasksComponent, {
       width: '600px',

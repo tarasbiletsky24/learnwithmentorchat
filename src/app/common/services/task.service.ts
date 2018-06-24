@@ -15,7 +15,7 @@ const httpOptions = {
 };
 const httpOptionsObserve = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  observe: "response"
+  observe: 'response'
 };
 @Injectable({
   providedIn: 'root'
