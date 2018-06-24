@@ -1,0 +1,36 @@
+<button class="big-button" color="primary" mat-raised-button (click)="openUserAddDialog()">
+  <h3>Add user</h3>
+</button>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="LastName">
+    <th mat-header-cell *matHeaderCellDef> LastName. </th>
+    <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="FirstName">
+    <th mat-header-cell *matHeaderCellDef> FirstName </th>
+    <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Role">
+    <th mat-header-cell *matHeaderCellDef> Role </th>
+    <td mat-cell *matCellDef="let element"> {{element.Role}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Blocked">
+    <th mat-header-cell *matHeaderCellDef> State </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.Blocked"> blocked </div>
+      <div *ngIf="!element.Blocked"> active</div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

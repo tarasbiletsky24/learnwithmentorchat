@@ -1,0 +1,21 @@
+.big-button {
+  width: 100%;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 18px;
+  width: 100%;
+}
+
+table{
+  font-size: 16px;
+}
+mat-header-cell{
+  font-size: 18px;
+}
