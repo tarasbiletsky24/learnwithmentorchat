@@ -6,6 +6,8 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Register } from '../models/register';
+import { Login } from '../models/login';
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +53,15 @@ export class UserService {
     );
   }
 
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
-      catchError(this.handleError<User>('addUser'))
-    );
+  registerUser(register : Register){
+    const body: Register = {
+      Password: register.Password,
+      Email: register.Email,
+      FirstName: register.FirstName,
+      LastName: register.LastName
+    }
+    var reqHeader = new HttpHeaders({'No-Auth':'True'});
+    return this.http.post(this.url, body, {headers : reqHeader});
   }
 
   blockUserById(id: number) {
@@ -69,10 +76,13 @@ export class UserService {
     );
   }
 
-  userAuthentication(email, password) {
-    const data = 'email=' + email + '&password=' + password + '&grant_type=password';
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
-    return this.http.post(this.url + '/token', data, { headers: reqHeader });
+  userAuthentication(login: Login) {
+    const body: Login = {
+      Password: login.Password,
+      Email: login.Email
+    }
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
+    return this.http.post(`${environment.apiUrl}` + 'token', body, {headers: reqHeader});
   }
 
   search(param: string, roleName: string): Observable<User[]> {

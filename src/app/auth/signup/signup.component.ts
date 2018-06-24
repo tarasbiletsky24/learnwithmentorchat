@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { Register } from '../../common/models/register';
+import { NgForm } from '@angular/forms';
+import { UserService } from '../../common/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,12 +11,36 @@ import { MatDialogRef } from '@angular/material';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public thisDialogRef: MatDialogRef<SignupComponent>) { }
-
+  register: Register;
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+ 
+  constructor(private userService: UserService, public thisDialogRef:  MatDialogRef<SignupComponent>) { }
+  
   closeSignupComponent(): void {
-    this.thisDialogRef.close();
-  }
-  ngOnInit() {
+  this.thisDialogRef.close();
   }
 
+  ngOnInit() {
+    this.resetForm();
+  }
+ 
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.reset();
+    this.register = {
+      Password: '',
+      Email: '',
+      FirstName: '',
+      LastName: ''
+    }
+  }
+ 
+  //TODO make animations
+  OnSubmit(form: NgForm) {
+    this.userService.registerUser(form.value).subscribe((data: string) => {
+      if (data.startsWith('Succesfully')) {
+        this.closeSignupComponent();
+      }
+    });
+  }
 }
