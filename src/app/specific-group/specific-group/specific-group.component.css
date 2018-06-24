@@ -5,3 +5,10 @@
 mat-tab-group{
     min-height: 600px;
 }
+.container{
+    display: flex;
+    justify-content: center;
+  }
+.content{
+    width: 80%;
+}
