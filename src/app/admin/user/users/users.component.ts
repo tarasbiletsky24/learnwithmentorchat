@@ -39,12 +39,18 @@ export class UsersComponent implements OnInit {
     return this.roleName = roleName;
   }
 
+
   // choose specific user
   chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
     this.surname = surname;
     this.name = name;
     this.state = state;
     this.id = id;
+  }
+
+  // filter by state
+  getUsersByState(state: boolean) {
+    this.userService.getUserByState(state).subscribe(user => this.users = user);
   }
 
   // search by role
@@ -74,10 +80,7 @@ export class UsersComponent implements OnInit {
     }
     const user = { Blocked: newState, Id: this.id };
     if (window.confirm('Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')) {
-      this.userService.updateUser(user as User).subscribe( resp => {
-        if(!resp.ok)
-        window.alert(`${resp.statusText}`);
-      });
+      this.userService.updateUser(user as User).subscribe();
       this.users.forEach(element => {
         if (element.Id === id) {
           element.Blocked = newState;
@@ -103,12 +106,8 @@ export class UsersComponent implements OnInit {
 
   // filtering by role
   getByRole(id: number) {
-    if (id === -2) {
-      this.userService.getUsers().subscribe(user => this.users = user);
-      return true;
-    }    
     if (id === -1) {
-      this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
+      this.userService.getUsers().subscribe(user => this.users = user);
       return true;
     }
     this.userService.getUserByRole_id(id).subscribe(user => this.users = user);

@@ -6,7 +6,6 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-//import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +36,12 @@ export class UserService {
   getUserByRole_id(id: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/inrole/${id}`).pipe(
       catchError(this.handleError<User[]>(`getUserbyrole`))
+    );
+  }
+
+  getUserByState(state: boolean): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/instate/${state}`).pipe(
+      catchError(this.handleError<User[]>(`getUserbystate`))
     );
   }
 
