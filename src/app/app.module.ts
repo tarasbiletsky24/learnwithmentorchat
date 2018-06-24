@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from "@angular/material";
 
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
@@ -44,8 +45,11 @@ import { ConversationComponent } from './task/conversation/conversation.componen
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
+
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { AddUserComponent } from './specific-group/add-user/add-user.component';
+import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
+import { ConfirnDialogComponent , DialogOverviewExampleDialog } from './components/confirn-dialog/confirn-dialog.component';
 
 
 @NgModule({
@@ -70,7 +74,10 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     TaskSubmitorComponent,
     ConversationComponent,
     SpecificGroupComponent,
-    AddUserComponent
+    AddUserComponent,
+    AlertWindowsComponent,
+    ConfirnDialogComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
     AppRoutingModule,
@@ -92,12 +99,15 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     MatTableModule,
     MaterialModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
     ],
   entryComponents: [TaskEditorComponent,
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
+    ConfirnDialogComponent, 
+    DialogOverviewExampleDialog,
     SignupComponent],
   providers: [UserService, AuthGuard,
     {
