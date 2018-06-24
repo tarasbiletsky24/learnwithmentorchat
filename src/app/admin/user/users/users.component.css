@@ -19,10 +19,8 @@
   }
   .flex-container {
     display: flex;
-    justify-content: space-between;
-	
+    justify-content: space-between;	
   }
-
   .flex-button {
     display: flex;
     justify-content: space-between;
@@ -32,7 +30,6 @@
     margin: 0.5%;
     color: #a2a2a2;
       }
-
  .selected {  
     color :#3d50b7 !important;
   }
@@ -49,7 +46,6 @@
     flex-direction: row;
     margin: 1%;
 }
-
 .state>div{
 padding-right: 5%;
 cursor: pointer;
