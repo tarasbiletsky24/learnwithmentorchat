@@ -4,7 +4,7 @@ import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
 import { Login } from '../models/login';
@@ -41,9 +41,15 @@ export class UserService {
     );
   }
 
-  updateUser(user: User) {
+  getUserByState(state: boolean): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/instate/${state}`).pipe(
+      catchError(this.handleError<User[]>(`getUserbystate`))
+    );
+  }
+
+  updateUser(user: User): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${user.Id}`, user).pipe(
-      catchError(this.handleError<any>('updateUser'))
+      catchError(r => of(r))
     );
   }
 

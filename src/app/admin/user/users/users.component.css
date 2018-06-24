@@ -1,32 +1,25 @@
-*{
+* {    
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.main{
+.main {   
     padding-top: 2%;
 }
-.user{    
-    height: 50px;
-}
-.search{
-    width: 80%;
-}
-.list-users{
+.search {
     width: 80%;
 }
 .container  {
     display: flex;
     justify-content: center;
   }
- .search-input{
+ .search-input {
       width: 100%;
-  }
- 
+  } 
   table {
     width: 100%;
   }
   .flex-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;	
   }
   .flex-button {
     display: flex;
@@ -35,22 +28,27 @@
   }
   .flex-container > div {
     margin: 0.5%;
-    text-decoration: none;
     color: #a2a2a2;
       }
-  .choice{
-      font-style:oblique;
-  }  
  .selected {  
     color :#3d50b7 !important;
   }
   .roles li:hover {
     color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
+
   }
-.roles > div{
+.roles> div{
     cursor: pointer;
+    padding-right: 5%;
+}
+.roles,.state{
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+}
+.state>div{
+padding-right: 5%;
+cursor: pointer;
 }
 
 
