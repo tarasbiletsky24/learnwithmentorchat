@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   constructor(private userService: UserService, public thisDialogRef:  MatDialogRef<SignupComponent>) { }
 
   closeSignupComponent(): void {
-  this.thisDialogRef.close();
+    this.thisDialogRef.close();
   }
 
   ngOnInit() {
@@ -25,8 +25,9 @@ export class SignupComponent implements OnInit {
   }
 
   resetForm(form?: NgForm) {
-    if (form != null)
+    if (form != null) {
       form.reset();
+    }
     this.register = {
       Password: '',
       Email: '',

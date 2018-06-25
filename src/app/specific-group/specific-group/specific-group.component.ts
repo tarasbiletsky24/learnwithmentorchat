@@ -22,28 +22,27 @@ import { TasksComponent } from '../../task/tasks/tasks.component';
 })
 
 export class SpecificGroupComponent implements OnInit {
-
-  group?: Group;
+  group: Group;
   mentor: User;
   linkId: number;
-  private subscription: Subscription;
+  // todo should be private, but does not work
+  /*private*/ subscription: Subscription;
 
   constructor(private userService: UserService,
     private groupService: GroupService,
     public dialog: MatDialog,
     private router: Router,
     private activateRoute: ActivatedRoute) {
+    this.subscription = activateRoute.params.subscribe(params => this.linkId = params['id']);
   }
 
+  
   ngOnInit() {
-    this.subscription = this.activateRoute.params.subscribe(params => this.linkId = params['id']);
     if (this.linkId != null) {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
     } else {
-      // todo does it work?
-      this.router.navigate(['main-page']);
+      this.router.navigate(['/main-page']);
     }
   }
-
 }
