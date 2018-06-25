@@ -42,12 +42,18 @@ export class UsersComponent implements OnInit {
     return this.roleName = roleName;
   }
 
+
   // choose specific user
   chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
     this.surname = surname;
     this.name = name;
     this.state = state;
     this.id = id;
+  }
+
+  // filter by state
+  getUsersByState(state: boolean) {
+    this.userService.getUserByState(state).subscribe(user => this.users = user);
   }
 
   // search by role
@@ -118,6 +124,7 @@ export class UsersComponent implements OnInit {
       return true;
     }
     this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
+
   }
 
   ngOnInit() {

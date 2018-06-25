@@ -50,6 +50,8 @@ import { SpecificGroupComponent } from './specific-group/specific-group/specific
 import { AddUserComponent } from './specific-group/add-user/add-user.component';
 import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
+import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 
 
 
@@ -77,7 +79,9 @@ import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/conf
     SpecificGroupComponent,
     AddUserComponent,
     AlertWindowsComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UsersDisplayComponent,
+    PlansDisplayComponent
 
   ],
   imports: [
@@ -103,12 +107,16 @@ import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/conf
     FormsModule,
     MatSnackBarModule
     ],
+
   entryComponents: [TaskEditorComponent,
     ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
-    SignupComponent],
+    SignupComponent,
+    AboutPageComponent,
+    ContactPageComponent
+  ],
   providers: [UserService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
