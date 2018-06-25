@@ -3,7 +3,7 @@ import { Component, OnInit, Injectable , Inject} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 
 @Component({
-  selector: 'alert-windows.component',
+  selector: 'app-alert-windows.component',
   templateUrl: 'alert-windows.component.html',
   styleUrls: ['./alert-windows.component.css']
 })

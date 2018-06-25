@@ -15,7 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from "@angular/material";
+import { MatSnackBarModule } from '@angular/material';
 
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
@@ -49,7 +49,8 @@ import { ContactPageComponent } from './main-page/contact-page/contact-page.comp
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { AddUserComponent } from './specific-group/add-user/add-user.component';
 import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
-import { ConfirnDialogComponent , DialogOverviewExampleDialog } from './components/confirn-dialog/confirn-dialog.component';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+
 
 
 @NgModule({
@@ -76,8 +77,8 @@ import { ConfirnDialogComponent , DialogOverviewExampleDialog } from './componen
     SpecificGroupComponent,
     AddUserComponent,
     AlertWindowsComponent,
-    ConfirnDialogComponent,
-    DialogOverviewExampleDialog
+    ConfirmDialogComponent
+
   ],
   imports: [
     AppRoutingModule,
@@ -103,11 +104,10 @@ import { ConfirnDialogComponent , DialogOverviewExampleDialog } from './componen
     MatSnackBarModule
     ],
   entryComponents: [TaskEditorComponent,
+    ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
-    ConfirnDialogComponent, 
-    DialogOverviewExampleDialog,
     SignupComponent],
   providers: [UserService, AuthGuard,
     {
