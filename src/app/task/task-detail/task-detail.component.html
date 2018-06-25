@@ -9,14 +9,14 @@
       <mat-expansion-panel-header>Show details</mat-expansion-panel-header>
       <mat-card-content>
         <p>
-          Creator: {{task.CreatorName}}
+          Create by: {{task.CreatorName}}
         </p>
         <p>
           Create date: {{task.CreateDate}}
         </p>
         <div *ngIf="task.ModifierName">
           <p>
-            Modifier name: {{task.ModifierName}}
+            Modify by: {{task.ModifierName}}
           </p>
           <p>
             Modify date: {{task.ModDate}}
