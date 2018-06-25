@@ -1,21 +1,17 @@
 <footer>
   <div class="grid-container">
-    <div class="cell1">© 2018 Learn with mentor</div>
-    <div class="cell8"> {{mainTag}} </div>
-    <div class="cell14">
+    <div class="cell cell1">© 2018 Learn with mentor</div>
+    <div class="cell cell8"> {{mainTag}} </div>
+    <div class="cell cell14">
       <a href="http://localhost:34736/swagger/ui/index" target="_blank">
         <button mat-button>API</button>
       </a>
     </div>
-    <div class="cell15">
-      <button mat-button>
-          Contact
-        </button>
+    <div class="cell cell15">       
+        <button mat-button (click)="openContactDialog()">Contact </button>      
     </div>
-    <div class="cell16">
-      <button mat-button>
-          About
-        </button>
+    <div class="cell cell16">      
+        <button mat-button (click)="openAboutDialog()">About</button>      
     </div>
   </div>
 </footer>

@@ -33,7 +33,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   openConversationDialog(): void {
-    const dialogRef = this.dialog.open(ConversationComponent, {
+    const dialogRef = this.dialog.open(TaskDetailComponent, {
       width: '600px',
       data: this.task
     });

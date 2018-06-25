@@ -12,10 +12,10 @@ import { UserService } from '../../common/services/user.service';
 export class SignupComponent implements OnInit {
 
   register: Register;
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
- 
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+
   constructor(private userService: UserService, public thisDialogRef:  MatDialogRef<SignupComponent>) { }
-  
+
   closeSignupComponent(): void {
   this.thisDialogRef.close();
   }
@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
   }
- 
+
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
@@ -32,10 +32,10 @@ export class SignupComponent implements OnInit {
       Email: '',
       FirstName: '',
       LastName: ''
-    }
+    };
   }
- 
-  //TODO make animations
+
+  // TODO make animations
   OnSubmit(form: NgForm) {
     this.userService.registerUser(form.value).subscribe((data: string) => {
       if (data.startsWith('Succesfully')) {

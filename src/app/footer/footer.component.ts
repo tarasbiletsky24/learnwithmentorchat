@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import {AboutPageComponent} from '../main-page/about-page/about-page.component';
+import {ContactPageComponent} from '../main-page/contact-page/contact-page.component';
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
   mainTag = '</>';
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  openAboutDialog() {
+    const dialogRef = this.dialog.open(AboutPageComponent, {});
+  }
+
+  openContactDialog() {
+    const dialogRef = this.dialog.open(ContactPageComponent, {});
   }
 
 }
