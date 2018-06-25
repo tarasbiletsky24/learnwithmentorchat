@@ -9,7 +9,7 @@ import {
 } from 'rxjs/operators';
 import {AlertWindowsComponent} from '../../../components/alert-windows/alert-windows.component';
 import {DialogsService} from '../../../components/dialogs/dialogs.service';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',

@@ -4,8 +4,7 @@ import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-alert-windows.component',
-  templateUrl: 'alert-windows.component.html',
-  styleUrls: ['./alert-windows.component.css']
+  templateUrl: 'app.html'
 })
 @Injectable({
   providedIn: 'root'
