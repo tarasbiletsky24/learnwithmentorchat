@@ -16,8 +16,9 @@ export class PlanDetailsComponent implements OnInit {
 
   ngOnInit() {
   }
-  openEditDialog(): void {
+  openEditDialog(): void {    
     const dialogRef = this.dialog.open(PlanEditorComponent, {
+      width: '900px',
       data: this.plan
     });
   }

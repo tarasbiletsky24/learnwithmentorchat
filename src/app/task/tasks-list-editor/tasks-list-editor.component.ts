@@ -14,11 +14,11 @@ export class TasksListEditorComponent implements OnInit {
   @Output() taskChange = new EventEmitter<Task>();
   constructor(private taskService: TaskService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
   }
   onChange(task: Task): void {
-    //this.deleteFromArrey(task);
     this.taskChange.emit(task);
+    this.deleteFromArrey(task);
   }
   public addToArray(task: Task){
     this.tasks.push(task);

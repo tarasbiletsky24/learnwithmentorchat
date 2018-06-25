@@ -4,14 +4,27 @@
     <mat-form-field class="search-input">
       <input matInput #searchBox (keyup)="search(searchBox.value,roleName)" placeholder="Enter user name or surname" />
     </mat-form-field>
+
+
     <!-- for sort -->
-    <div class="flex-container roles">
-      <div (click)="getType(null,role)" (click)="getByRole(-1)" [class.selected]="role === selectedType">
-        All
+    <div class="flex-container " >
+      <div class=" roles">
+        <div (click)="getType(null,role)" (click)="getByRole(-1)" [class.selected]="role === selectedType">
+          All
+        </div>
+        <div *ngFor="let role of roles" (click)="getByRole(role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
+          {{role.Name}}
+        </div>
       </div>
-      <div *ngFor="let role of roles" (click)="getByRole(role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
-        {{role.Name}}
+      <div class="state" >
+        <div (click)="getUsersByState(true)">
+          Blocked
+        </div>
+        <div (click)="getUsersByState(false)" >
+          Active
+        </div>
       </div>
+    
     </div>
 
     <!-- for select -->
@@ -26,7 +39,8 @@
 
       <div class="flex-button">
         <button mat-raised-button class="button-change" (click)="updateRole(id,role,name,surname)">Change</button>
-        <div>
+       
+        <div>            
           <button mat-raised-button color="primary" (click)="changeState(id,state,false)">
             Unblock </button>
           <button mat-raised-button color="primary" (click)="changeState(id,state,true)">

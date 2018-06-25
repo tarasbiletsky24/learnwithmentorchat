@@ -20,7 +20,7 @@ export class TaskDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  openEditDialog(): void {
+  openEditDialog(): void {    
     const dialogRef = this.dialog.open(TaskEditorComponent, {
       data: this.task
     });

@@ -20,17 +20,20 @@ export class PlanEditorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Plan) { this.plan = data; }
 
   ngOnInit() {
+    this.taskService.getTasks(this.plan.Id).subscribe(data => this.tasksInPlan = data);
+    this.taskService.getTasks(this.plan.Id).subscribe(data => this.tasksNotInPlan = data);
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
   onTaskChange(tasksInPlan: boolean, task: Task) {
+    debugger
     if (tasksInPlan) {
-      this.tasksInPlan.push(task);
-      this.deleteFromArrey(task, this.tasksNotInPlan);
-    } else {
       this.tasksNotInPlan.push(task);
       this.deleteFromArrey(task, this.tasksInPlan);
+    } else {
+      this.tasksInPlan.push(task);
+      this.deleteFromArrey(task, this.tasksNotInPlan);
     }
   }
   deleteFromArrey(task: Task, tasks: Task[]) {

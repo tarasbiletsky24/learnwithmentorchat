@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactPageComponent } from './contact-page.component';
+import { AlertWindowsComponent } from './alert-windows.component';
 
-describe('ContactPageComponent', () => {
-  let component: ContactPageComponent;
-  let fixture: ComponentFixture<ContactPageComponent>;
+describe('AlertWindowsComponent', () => {
+  let component: AlertWindowsComponent;
+  let fixture: ComponentFixture<AlertWindowsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactPageComponent ]
+      declarations: [ AlertWindowsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContactPageComponent);
+    fixture = TestBed.createComponent(AlertWindowsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

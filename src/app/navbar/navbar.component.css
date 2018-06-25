@@ -1,33 +1,33 @@
-*{
-    margin: 0;
-    padding: 0;    
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.ordItem{
+.ordItem {
   color: aliceblue;
 }
 
 .grid-container {
-    display: grid;    
-    grid-template-columns: repeat(16, 1fr);  
-  }
-  
-  .cell1 {
-    grid-column-start: 1;
-    grid-column-end: 1;
-  }
-  .cell2 {
-    grid-column-start: 2;
-    grid-column-end: 2;
-  }
-  
-  .cell15 {
-    grid-column-start: 15;
-    grid-column-end: 15;
-  }
-  .cell16 {
-    grid-column-start: 16;
-    grid-column-end: 16;
-  }
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+}
 
+.cell1 {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
 
+.cell2 {
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+.cell15 {
+  grid-column-start: 15;
+  grid-column-end: 15;
+}
+
+.cell16 {
+  grid-column-start: 16;
+  grid-column-end: 16;
+}

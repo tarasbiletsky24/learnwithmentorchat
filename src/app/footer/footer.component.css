@@ -1,9 +1,9 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 .grid-container {
   left: 0;
@@ -19,38 +19,39 @@
   font-size: 16px;
 }
 
+.cell{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.cell a{
+  color: #ffffff;
+  text-decoration: none;
+
+}
+
 .cell1 {
   grid-column-start: 2;
   grid-column-end: 6;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .cell8 {
   grid-column-start: 8;
   grid-column-end: 8;
   padding: 5px;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .cell14 {
   grid-column-start: 14;
   grid-column-end: 14;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .cell15 {
   grid-column-start: 15;
   grid-column-end: 15;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .cell16 {
   grid-column-start: 16;
   grid-column-end: 16;
-  margin-top: auto;
-  margin-bottom: auto;
 }

@@ -1,19 +1,18 @@
-<h2 mat-dialog-title>Edit {{plan.Name}} 
-  <button class="deleteButton" mat-button mat-dialog-close (click)="onDeleteClick()">Delete</button>
-</h2>
+<h2 mat-dialog-title>Edit {{plan.Name}} </h2>
 <mat-dialog-content>
     <h3>Plan name:</h3>
     <textarea matInput placeholder="Plan name"
-    #nameTbx>{{plan.Description}}</textarea>
+    #nameTbx>{{plan.Name}}</textarea>
   <h3>Plan description:</h3>
   <textarea matInput placeholder="Plan description"
   #descriptionTbx>{{plan.Description}}</textarea>
 <app-tasks-list-editor [tasks]="tasksInPlan"
   [tasksInPlan]="true"
-  (onChange)="onTaskChange(true,$event)"></app-tasks-list-editor>
+  (taskChange)="onTaskChange(true,$event)"></app-tasks-list-editor>
 <app-tasks-list-editor [tasks]="tasksNotInPlan"
-  [tasksInPlan]="false"
-  (onChange)="onTaskChange(false,$event)"></app-tasks-list-editor>
+  (taskChange)="onTaskChange(false,$event)"
+  [tasksInPlan]="false">
+</app-tasks-list-editor>
     
 </mat-dialog-content>
 <mat-dialog-actions>

@@ -7,7 +7,7 @@ import { CommentComponent } from './task/comment/comment.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
-
+import { AuthGuard } from './auth/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material';
 
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
@@ -44,8 +45,16 @@ import { ConversationComponent } from './task/conversation/conversation.componen
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
+
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { AddUserComponent } from './specific-group/add-user/add-user.component';
+import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
+import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
+import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
+import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
+
 
 
 @NgModule({
@@ -53,7 +62,7 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     AppComponent,
     UsersComponent,
     NavbarComponent,
-    TasksComponent, TaskDetailComponent, TaskEditorComponent,
+    TasksComponent, TaskDetailComponent, TaskEditorComponent, TasksListEditorComponent,
     CommentComponent,
     MainPageComponent,
     SigninComponent,
@@ -70,7 +79,12 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     TaskSubmitorComponent,
     ConversationComponent,
     SpecificGroupComponent,
-    AddUserComponent
+    AddUserComponent,
+    AlertWindowsComponent,
+    ConfirmDialogComponent,
+    UsersDisplayComponent,
+    PlansDisplayComponent, PlanEditorComponent
+
   ],
   imports: [
     AppRoutingModule,
@@ -92,14 +106,22 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     MatTableModule,
     MaterialModule,
     MatRadioModule,
-    FormsModule
-  ],
+    FormsModule,
+    MatSnackBarModule,
+    MatButtonModule
+    ],
+
   entryComponents: [TaskEditorComponent,
+    ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
-    SignupComponent],
-  providers: [UserService,
+    SignupComponent,
+    AboutPageComponent,
+    ContactPageComponent,
+    PlanEditorComponent
+  ],
+  providers: [UserService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -1,7 +1,10 @@
+<div *ngIf="tasksInPlan; else elseBlock"><h3>Tasks in plan</h3></div>
+<ng-template #elseBlock><h3>Tasks not in plan</h3></ng-template>
 <mat-list>
-  <mat-card *ngFor="let task of tasks">
-    <mat-card-title> {{task.Name}}</mat-card-title>
-    <mat-card-subtitle>{{task.Description}}</mat-card-subtitle>
-    <mat-fab></mat-fab>
-  </mat-card>
+  <mat-list-item *ngFor="let task of tasks">
+    {{task.Name}} {{task.Description}}
+    <button mat-button (click)="onChange(task)">
+      Delete
+    </button>
+  </mat-list-item>
 </mat-list>

@@ -4,7 +4,7 @@ import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
 import { Login } from '../models/login';
@@ -41,21 +41,29 @@ export class UserService {
     );
   }
 
-  updateUser(user: User) {
-    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
-      catchError(this.handleError<any>('updateUser'))
+  getUserByState(state: boolean): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/instate/${state}`).pipe(
+      catchError(this.handleError<User[]>(`getUserbystate`))
     );
   }
 
-  registerUser(register : Register){
+  updateUser(user: User): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
+      catchError(r => of(r))
+    );
+  }
+
+  registerUser(register: Register) {
     const body: Register = {
       Password: register.Password,
       Email: register.Email,
       FirstName: register.FirstName,
       LastName: register.LastName
-    }
-    return this.http.post(this.url, body);
+    };
+  const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.url, body, { headers: reqHeader });
   }
+
 
   blockUserById(id: number) {
     return this.http.delete(`${this.url}/${id}`).pipe(
@@ -68,14 +76,14 @@ export class UserService {
       catchError(this.handleError<Role[]>('getRole'))
     );
   }
-  //change content type!!!
+
   userAuthentication(login: Login) {
     const body: Login = {
       Password: login.Password,
       Email: login.Email
-    }
+    };
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.post(`${environment.apiUrl}` + 'token', body, this.httpOptions);
+    return this.http.post(`${environment.apiUrl}` + 'token', body, { headers: reqHeader });
   }
 
   search(param: string, roleName: string): Observable<User[]> {
