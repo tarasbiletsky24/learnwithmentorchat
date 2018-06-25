@@ -104,7 +104,7 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     SigninComponent,
     SignupComponent,
     AboutPageComponent,
-    ContactPageComponent 
+    ContactPageComponent
   ],
   providers: [UserService, AuthGuard,
     {
