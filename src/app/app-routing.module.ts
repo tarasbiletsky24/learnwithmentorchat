@@ -27,7 +27,8 @@ const routes: Routes = [
   { path: 'contact-page', component: ContactPageComponent },
   { path: 'tasks', component: TasksComponent },
   { path: 'plans', component: PlansComponent },
-  { path: 'group/:id', component: SpecificGroupComponent }
+  { path: 'group/:id', component: SpecificGroupComponent },
+  { path: 'plan/:id/edit', component: SpecificGroupComponent }
 ];
 
 @NgModule({
