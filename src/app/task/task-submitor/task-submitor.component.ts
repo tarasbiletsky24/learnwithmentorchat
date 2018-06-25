@@ -3,6 +3,8 @@ import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
+import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
+import {DialogsService} from '../../components/dialogs/dialogs.service';
 
 @Component({
   selector: 'app-task-submitor',
@@ -18,6 +20,8 @@ export class TaskSubmitorComponent implements OnInit {
   private exists: boolean;
 
   constructor(public dialogRef: MatDialogRef<TaskSubmitorComponent>,
+    private  alertwindow: AlertWindowsComponent,
+    private dialogsService: DialogsService,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
@@ -25,9 +29,14 @@ export class TaskSubmitorComponent implements OnInit {
 
   onCancelClick() {
     if (this.previousResult !== this.userTask.Result) {
-      if (window.confirm('You have unsaved changes in your result. Do you want to save it?')) {
-        this.saveChanges();
-      }
+      this.dialogsService
+      .confirm('Confirm Dialog', 'You have unsaved changes. Do you want to save them?')
+      .subscribe(res => {
+        if (res) {
+          this.saveChanges();
+          this.alertwindow.openSnackBar('Your changes are saved!' , 'Ok');
+        }
+      });
     }
     this.dialogRef.close();
   }
@@ -43,7 +52,7 @@ export class TaskSubmitorComponent implements OnInit {
 
   notExisting() {
     this.dialogRef.close();
-    window.alert('sorry, you are not assigned to this plan');
+    this.alertwindow.openSnackBar('You are not asigned to this plan!' , 'Ok');
   }
 
   ngOnInit() {
