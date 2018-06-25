@@ -102,7 +102,10 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
-    SignupComponent],
+    SignupComponent,
+    AboutPageComponent,
+    ContactPageComponent 
+  ],
   providers: [UserService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
