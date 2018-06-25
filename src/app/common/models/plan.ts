@@ -1,5 +1,14 @@
 export class Plan {
     Id: number;
     Name: string;
-    // add properties from dto
+    Description: string;
+    Published: boolean;
+    CreatorId: number;
+    CreatorFirstName: string;
+    CreatorLastName: string;
+    ModifierId: number;
+    ModifierFirstName: string;
+    ModifierLstName: string;
+    CreateDate: Date;
+    ModDate: Date;
 }

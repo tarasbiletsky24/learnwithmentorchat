@@ -26,13 +26,12 @@ export class UsersDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.groupService.getGroupUsers(this.group.Id).subscribe(data => this.users = data);
-    /*if (this.group != null) {
+    if (this.group != null) {
       this.groupService.getGroupUsers(this.group.Id).subscribe(data => this.users = data);
-      alert("Downloaded ok");
     } else {
-      //alert("No group provided");
-    }*/
+      this.groupService.getGroupUsers(1).subscribe(data => this.users = data);
+      console.log('No group provided');
+    }
   }
 
   applyFilter(filterValue: string) {

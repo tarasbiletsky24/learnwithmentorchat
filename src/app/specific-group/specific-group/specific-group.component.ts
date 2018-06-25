@@ -13,6 +13,7 @@ import { GroupService } from '../../common/services/group.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { PlansDisplayComponent } from '../plans-display/plans-display.component';
 import { UsersDisplayComponent } from '../users-display/users-display.component';
+import { TasksComponent } from '../../task/tasks/tasks.component';
 
 @Component({
   selector: 'app-specific-group',
@@ -21,24 +22,22 @@ import { UsersDisplayComponent } from '../users-display/users-display.component'
 })
 
 export class SpecificGroupComponent implements OnInit {
-  group: Group;
+
+  group?: Group;
   mentor: User;
   linkId: number;
-
-  //todo should be private, but does not work
-  /*private*/ subscription: Subscription;
+  private subscription: Subscription;
 
   constructor(private userService: UserService,
     private groupService: GroupService,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private router: Router,
     private activateRoute: ActivatedRoute) {
-    this.subscription = activateRoute.params.subscribe(params => this.linkId = params['id']);
   }
 
   ngOnInit() {
-    if (this.linkId !== null) {
-      //mb move to constructor
+    this.subscription = this.activateRoute.params.subscribe(params => this.linkId = params['id']);
+    if (this.linkId != null) {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
     } else {

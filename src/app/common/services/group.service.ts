@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
@@ -28,7 +28,7 @@ export class GroupService {
   }
 
   getGroupUsers(id: number): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/${id}/users`).pipe(
+     return this.http.get<User[]>(`${this.url}/${id}/users`).pipe(
       catchError(this.handleError<User[]>(`getGroupUsers`))
     );
   }
@@ -42,8 +42,6 @@ export class GroupService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      // todo put into sharable service
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

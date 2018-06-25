@@ -53,7 +53,7 @@ export class ConversationComponent implements OnInit {
       this.taskService.sendMessage(this.userTask.Id, mes as Message).subscribe(
         resp => {
           resp.ok ? this.recentMessages.push(mes as Message) : window.alert(`${resp.error.Message}`);
-        });}
+        }); }
     this.userMessage = '';
   }
 

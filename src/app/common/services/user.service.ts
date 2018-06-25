@@ -53,14 +53,14 @@ export class UserService {
     );
   }
 
-  registerUser(register : Register){
+  registerUser(register: Register) {
     const body: Register = {
       Password: register.Password,
       Email: register.Email,
       FirstName: register.FirstName,
       LastName: register.LastName
-    }
-    var reqHeader = new HttpHeaders({'No-Auth':'True'});
+    };
+    let reqHeader = new HttpHeaders({ 'No-Auth' : 'True' });
     return this.http.post(this.url, body, {headers : reqHeader});
   }
 
@@ -80,7 +80,7 @@ export class UserService {
     const body: Login = {
       Password: login.Password,
       Email: login.Email
-    }
+    };
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
     return this.http.post(`${environment.apiUrl}` + 'token', body, {headers: reqHeader});
   }
