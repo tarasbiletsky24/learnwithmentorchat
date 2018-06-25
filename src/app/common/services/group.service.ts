@@ -30,7 +30,7 @@ export class GroupService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      //todo put into sharable service
+      // todo put into sharable service
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

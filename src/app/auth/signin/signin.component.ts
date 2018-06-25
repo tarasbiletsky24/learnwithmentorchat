@@ -13,9 +13,9 @@ import { NgForm } from '@angular/forms';
 })
 export class SigninComponent implements OnInit {
 
-  isLoginError : boolean = false;
+  isLoginError = false;
 
-  constructor(public thisDialogRef: MatDialogRef<SigninComponent>, private userService : UserService, private router : Router) { }
+  constructor(public thisDialogRef: MatDialogRef<SigninComponent>, private userService: UserService, private router: Router) { }
 
   closeSigninComponent(): void {
     this.thisDialogRef.close();
@@ -23,15 +23,15 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-  OnSubmit(form: NgForm){
-    this.userService.userAuthentication(form.value).subscribe((data : any)=>{
-     localStorage.setItem('userToken',data.Message);
-     this.router.navigate(['/users']);
-   },
-   (err : HttpErrorResponse)=>{
-     this.isLoginError = true;
-   });
- }
+
+  OnSubmit(form: NgForm) {
+    this.userService.userAuthentication(form.value).subscribe((data: any) => {
+      localStorage.setItem('userToken', data.Message);
+      this.router.navigate(['/users']);
+    },
+      (err: HttpErrorResponse) => {
+        this.isLoginError = true;
+      });
+  }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
@@ -20,7 +20,7 @@ export class SpecificGroupComponent implements OnInit {
   group: Group;
   mentor: User;
   linkId: number;
-  //todo should be private, but does not work
+  // todo should be private, but does not work
   /*private*/ subscription: Subscription;
 
   constructor(private userService: UserService,
@@ -37,7 +37,7 @@ export class SpecificGroupComponent implements OnInit {
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
     } else {
       this.router.navigate(['/main-page']);
-    };
+    }
   }
 
   /* openAddDialog(): void {

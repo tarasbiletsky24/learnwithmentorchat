@@ -48,13 +48,13 @@ export class ConversationComponent implements OnInit {
   }
 
   onSendClick() {
-    if (this.userMessage != '' && this.userMessage) {
+    if (this.userMessage !== '' && this.userMessage) {
       const mes = { Text: this.userMessage, SenderId: this.userId };
       this.taskService.sendMessage(this.userTask.Id, mes as Message).subscribe(
         resp => {
           resp.ok ? this.recentMessages.push(mes as Message) : window.alert(`${resp.error.Message}`);
         }
-      );   
+      );
     }
     this.userMessage = '';
   }
