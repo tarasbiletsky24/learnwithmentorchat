@@ -60,9 +60,10 @@ export class UserService {
       FirstName: register.FirstName,
       LastName: register.LastName
     };
-    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+  const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
     return this.http.post(this.url, body, { headers: reqHeader });
   }
+
 
   blockUserById(id: number) {
     return this.http.delete(`${this.url}/${id}`).pipe(

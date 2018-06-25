@@ -47,7 +47,7 @@ export class ConversationComponent implements OnInit {
     );
   }
 
-  onSendClick() {
+   onSendClick() {
     if (this.userMessage !== '' && this.userMessage) {
       const mes = { Text: this.userMessage, SenderId: this.userId };
       this.taskService.sendMessage(this.userTask.Id, mes as Message).subscribe(
@@ -65,6 +65,7 @@ export class ConversationComponent implements OnInit {
       this.userMessage = '';
     }
   }
+
 
   ngOnInit() {
 

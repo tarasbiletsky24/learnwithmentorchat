@@ -46,6 +46,8 @@ import { ContactPageComponent } from './main-page/contact-page/contact-page.comp
 
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { AddUserComponent } from './specific-group/add-user/add-user.component';
+import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
+import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     TaskSubmitorComponent,
     ConversationComponent,
     SpecificGroupComponent,
-    AddUserComponent
+    AddUserComponent,
+    UsersDisplayComponent,
+    PlansDisplayComponent
   ],
   imports: [
     AppRoutingModule,
@@ -98,7 +102,10 @@ import { AddUserComponent } from './specific-group/add-user/add-user.component';
     TaskSubmitorComponent,
     ConversationComponent,
     SigninComponent,
-    SignupComponent],
+    SignupComponent,
+    AboutPageComponent,
+    ContactPageComponent 
+  ],
   providers: [UserService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -6,9 +6,14 @@ import { Router } from '@angular/router';
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
+import { Plan } from '../../common/models/plan';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { PlansDisplayComponent } from '../plans-display/plans-display.component';
+import { UsersDisplayComponent } from '../users-display/users-display.component';
+import { TasksComponent } from '../../task/tasks/tasks.component';
 
 @Component({
   selector: 'app-specific-group',
@@ -31,6 +36,7 @@ export class SpecificGroupComponent implements OnInit {
     this.subscription = activateRoute.params.subscribe(params => this.linkId = params['id']);
   }
 
+  
   ngOnInit() {
     if (this.linkId != null) {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
@@ -39,17 +45,4 @@ export class SpecificGroupComponent implements OnInit {
       this.router.navigate(['/main-page']);
     }
   }
-
-  /* openAddDialog(): void {
-    const dialogRef = this.dialog.open(TaskEditorComponent, {
-      data: this.task
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.task = result;
-      // send to API
-    });
-  } */
-
 }
