@@ -13,7 +13,9 @@ import {AlertWindowsComponent} from '../../components/alert-windows/alert-window
 })
 export class SigninComponent implements OnInit {
 
-  constructor(public thisDialogRef: MatDialogRef<SigninComponent>, private userService: UserService, private router: Router,  private  alertwindow: AlertWindowsComponent) { }
+  constructor(public thisDialogRef: MatDialogRef<SigninComponent>,
+    private userService: UserService, private router: Router,
+    private  alertwindow: AlertWindowsComponent) { }
 
   closeSigninComponent(): void {
     this.thisDialogRef.close();
