@@ -22,7 +22,7 @@ export class ConversationComponent implements OnInit {
   private userMessage: string;
   private recentMessages: Message[] = [];
   // todo: add logic for getting user id from local storage if authorized
-  private userId = 4;
+  private userId = 5;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
@@ -39,8 +39,8 @@ export class ConversationComponent implements OnInit {
     this.taskService.getMessages(userTaskId).subscribe(
       mes => {
         if (mes.body.length === 0) {
-          this.notExistingMessage = 'Your conversation with mentor is empty.' +
-            'Ask some question, if you have any.';
+          this.notExistingMessage = 'Your conversation with mentor is empty. ' +
+            'Ask some questions, if you have any.';
         } else {
           this.messages = mes.body;
         }

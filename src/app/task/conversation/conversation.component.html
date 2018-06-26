@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Your conversation about {{task.Name}}</h2>
 <mat-dialog-content>
   <div>
-    <h3 *ngIf="notExistingMessage">{{notExistingMessage}}</h3>
+    <h3 class="not-existing" *ngIf="notExistingMessage">{{notExistingMessage}}</h3>
     <mat-card *ngFor="let message of messages">
       <mat-card-header>
         <mat-card-title>Written by {{message.SenderName}} at {{message.SendTime | date:'yyyy-MM-dd'}}</mat-card-title>
