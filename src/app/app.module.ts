@@ -97,7 +97,7 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     MaterialModule,
     MatRadioModule,
     FormsModule
-    ],
+  ],
   entryComponents: [TaskEditorComponent,
     TaskSubmitorComponent,
     ConversationComponent,

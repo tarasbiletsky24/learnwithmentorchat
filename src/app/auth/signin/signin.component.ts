@@ -24,14 +24,14 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  OnSubmit(form: NgForm) {
+    OnSubmit(form: NgForm) {
     this.userService.userAuthentication(form.value).subscribe((data: any) => {
-     localStorage.setItem('userToken', data.Message);
-     this.router.navigate(['/users']);
-   },
-   (err: HttpErrorResponse) => {
-     this.isLoginError = true;
-   });
- }
+      localStorage.setItem('userToken', data.Message);
+      this.router.navigate(['/users']);
+    },
+      (err: HttpErrorResponse) => {
+        this.isLoginError = true;
+      });
+  }
 
 }
