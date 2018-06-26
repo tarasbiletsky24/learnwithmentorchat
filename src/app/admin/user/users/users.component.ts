@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../common/models/user';
 import { Role } from '../../../common/models/role';
 import { UserService } from '../../../common/services/user.service';
@@ -7,8 +7,8 @@ import { Observable, Subject, of } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
-import {AlertWindowsComponent} from '../../../components/alert-windows/alert-windows.component';
-import {DialogsService} from '../../../components/dialogs/dialogs.service';
+import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
+import { DialogsService } from '../../../components/dialogs/dialogs.service';
 
 @Component({
   selector: 'app-users',
@@ -18,7 +18,7 @@ import {DialogsService} from '../../../components/dialogs/dialogs.service';
 
 export class UsersComponent implements OnInit {
 
-  constructor( private userService: UserService,  private  alertwindow: AlertWindowsComponent, private dialogsService: DialogsService  ) {
+  constructor(private userService: UserService, private alertwindow: AlertWindowsComponent, private dialogsService: DialogsService) {
   }
 
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
@@ -32,6 +32,7 @@ export class UsersComponent implements OnInit {
   id: number;
   forMessage: string;
   selectedType: Role;
+  selectedState: boolean;
   roleName: string = null;
   public result: any;
   dataSource = new MatTableDataSource<User>(this.users);
@@ -39,6 +40,7 @@ export class UsersComponent implements OnInit {
 
   getType(roleName: string, type: Role): string {
     this.selectedType = type;
+    this.selectedState = null;
     return this.roleName = roleName;
   }
 
@@ -53,6 +55,8 @@ export class UsersComponent implements OnInit {
 
   // filter by state
   getUsersByState(state: boolean) {
+    this.selectedState = state;
+    this.selectedType = null;
     this.userService.getUserByState(state).subscribe(user => this.users = user);
   }
 
@@ -68,7 +72,7 @@ export class UsersComponent implements OnInit {
   // changeState:blocked and active
   changeState(id: number, state: boolean, newState) {
     if (this.id == null || state == null) {
-    this.alertwindow.openSnackBar('Choose user!' , 'Ok'); // window.alert('Choose user');
+      this.alertwindow.openSnackBar('Choose user!', 'Ok'); // window.alert('Choose user');
       return false;
     }
     if (newState) {
@@ -83,33 +87,39 @@ export class UsersComponent implements OnInit {
     }
     const user = { Blocked: newState, Id: this.id };
     this.dialogsService
-    .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
-    .subscribe(res => { this.result = res;
+      .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
+      .subscribe(res => {
+      this.result = res;
 
-    if (this.result) {
-      this.userService.updateUser(user as User).subscribe();
-      this.users.forEach(element => {
-        if (element.Id === id) {
-          element.Blocked = newState;
+        if (this.result) {
+          this.userService.updateUser(user as User).subscribe();
+          this.users.forEach(element => {
+            if (element.Id === id) {
+              element.Blocked = newState;
+            }
+          });
+          this.state = newState;
+          return true;
         }
       });
-      this.state = newState;
-      return true;
-    }
-  });
   }
 
   // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
+<<<<<<< HEAD
     if (role == null || id == null ) {
       this.alertwindow.openSnackBar('Choose role!' , 'Ok');
+=======
+    if (role == null || id == null || name == null || surname == null) {
+      this.alertwindow.openSnackBar('Choose role!', 'Ok');
+>>>>>>> 99514c3e05381146a6c03a01db3148c92ac48822
       return false;
     }
     this.dialogsService
-    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')
-    .subscribe(res => {
-      this.result = res;
-      if (this.result) {
+      .confirm('Confirm Dialog', 'Are sure you want to update role for user  ' + name + ' ' + surname + ' on role "' + role + '" ?')
+      .subscribe(res => {
+        this.result = res;
+        if (this.result) {
           const user = { Role: role, Id: id };
           this.userService.updateUser(user as User).subscribe();
           this.users.forEach(element => {
@@ -117,8 +127,8 @@ export class UsersComponent implements OnInit {
               element.Role = role;
             }
           });
-      }
-    });
+        }
+      });
   }
 
   // filtering by role
