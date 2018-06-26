@@ -101,20 +101,19 @@ export class UsersComponent implements OnInit {
 
   // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
-    this.dialogsService
-    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')
-    .subscribe(res => {
-      this.result = res;
-      if (this.result) {
-          const user = { Role: role, Id: id };
-          this.userService.updateUser(user as User).subscribe();
-          this.users.forEach(element => {
-            if (element.Id === id) {
-              element.Role = role;
-            }
-          });
-      }
-    });
+    if (role == null || id == null || name == null || surname == null) {
+      this.alertwindow.openSnackBar('Choose role!' , 'Ok');
+      return false;
+    }
+    if (window.confirm('Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')) {
+      const user = { Role: role, Id: id };
+      this.userService.updateUser(user as User).subscribe();
+      this.users.forEach(element => {
+        if (element.Id === id) {
+          element.Role = role;
+        }
+      });
+    }
   }
 
   // filtering by role
