@@ -55,6 +55,6 @@ export class PlanEditorComponent implements OnInit {
     this.plan.Name = name;
     this.plan.Description = description;
     this.planService.updatePlan(this.plan);
-    //todo: add tasks to plan
+    // todo: add tasks to plan
   }
 }
