@@ -38,7 +38,7 @@ table {
 .flex-container>div {
   margin: 0.5%;
   color: #a2a2a2;
-=======
+
     width: 80%;
 }
 .container  {
@@ -47,13 +47,13 @@ table {
   }
  .search-input {
       width: 100%;
-  } 
+  }
   table {
     width: 100%;
   }
   .flex-container {
     display: flex;
-    justify-content: space-between;	
+    justify-content: space-between;
   }
   .flex-button {
     display: flex;
@@ -64,13 +64,13 @@ table {
     margin: 0.5%;
     color: #a2a2a2;
       }
- .selected {  
+ .selected {
     color :#3d50b7 !important;
   }
   .roles li:hover {
     color: #607D8B;
-
   }
+
 .roles> div{
     cursor: pointer;
     margin: 2%;
@@ -78,12 +78,11 @@ table {
 .roles,.state{
     display: flex;
     flex-direction: row;
-  
+
 }
 .state>div{
 cursor: pointer;
 margin: 2%;
->>>>>>> 236a19be9830be5aa5f47573585da61e0af71f94
 }
 
 .selected {
