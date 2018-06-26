@@ -15,7 +15,9 @@ export class SignupComponent implements OnInit {
   register: Register;
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$';
 
-  constructor(private userService: UserService, public thisDialogRef:  MatDialogRef<SignupComponent>,  private  alertwindow: AlertWindowsComponent) { }
+  constructor(private userService: UserService,
+    public thisDialogRef:  MatDialogRef<SignupComponent>,
+    private  alertwindow: AlertWindowsComponent) { }
 
   closeSignupComponent(): void {
     this.thisDialogRef.close();
@@ -41,11 +43,10 @@ export class SignupComponent implements OnInit {
   OnSubmit(form: NgForm) {
     this.userService.registerUser(form.value).subscribe((data: string) => {
       if (data.startsWith('Succesfully')) {
-        this.alertwindow.openSnackBar('You are succesfully registered','');
+        this.alertwindow.openSnackBar('You are succesfully registered' , '');
         this.closeSignupComponent();
-      }
-      else{
-        this.alertwindow.openSnackBar('This email already exist','');
+      } else {
+        this.alertwindow.openSnackBar('This email already exist' , '');
       }
     });
   }
