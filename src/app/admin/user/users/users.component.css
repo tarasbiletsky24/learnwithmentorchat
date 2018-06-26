@@ -1,109 +1,53 @@
-* {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+* {    
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-
-.main {
+.main {   
   padding-top: 2%;
 }
 
 .search {
-  width: 80vw;
+  width: 80%;
 }
-
-.container {
+.container  {
   display: flex;
   justify-content: center;
 }
-
 .search-input {
-  width: 100%;
-}
-
+    width: 100%;
+} 
 table {
   width: 100%;
 }
-
 .flex-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;	
 }
-
 .flex-button {
   display: flex;
   justify-content: space-between;
   padding-bottom: 3%;
 }
-
-.flex-container>div {
+.flex-container > div {
   margin: 0.5%;
   color: #a2a2a2;
-
-    width: 80%;
+    }
+.selected {  
+  color :#3d50b7 !important;
 }
-.container  {
-    display: flex;
-    justify-content: center;
-  }
- .search-input {
-      width: 100%;
-  }
-  table {
-    width: 100%;
-  }
-  .flex-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  .flex-button {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 3%;
-  }
-  .flex-container > div {
-    margin: 0.5%;
-    color: #a2a2a2;
-      }
- .selected {
-    color :#3d50b7 !important;
-  }
-  .roles li:hover {
-    color: #607D8B;
-  }
+.roles li:hover {
+  color: #607D8B;
 
+}
 .roles> div{
-    cursor: pointer;
-    margin: 2%;
+  cursor: pointer;
+  margin: 2%;
 }
 .roles,.state{
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
 }
 .state>div{
 cursor: pointer;
 margin: 2%;
-}
-
-.selected {
-  color: #3d50b7 !important;
-}
-
-.roles li:hover {
-  color: #607D8B;
-}
-
-.roles > div {
-  cursor: pointer;
-  padding-right: 5%;
-}
-
-.roles, .state {
-  display: flex;
-  flex-direction: row;
-  margin: 5vw;
-}
-
-.state>div {
-  padding-right: 5%;
-  cursor: pointer;
 }
