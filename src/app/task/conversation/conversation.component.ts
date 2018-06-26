@@ -22,7 +22,7 @@ export class ConversationComponent implements OnInit {
   private userMessage: string;
   private recentMessages: Message[] = [];
   // todo: add logic for getting user id from local storage if authorized
-  private userId = 3;
+  private userId = 4;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
@@ -77,7 +77,7 @@ export class ConversationComponent implements OnInit {
 
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
-        if (!ut.ok) {
+        if (ut.status !== 200) {
           this.notExistingUserTask();
         } else {
           this.userTask = ut.body;
