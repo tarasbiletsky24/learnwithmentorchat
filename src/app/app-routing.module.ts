@@ -25,10 +25,11 @@ const routes: Routes = [
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-page', component: ContactPageComponent },
+  { path: 'plan/:id/edit', component: SpecificGroupComponent },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'main-page' }
+  { path: '**', redirectTo: 'main-page' } 
 ];
 
 @NgModule({

@@ -52,6 +52,8 @@ import { AlertWindowsComponent } from './components/alert-windows/alert-windows.
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
 import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
+import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
+import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
 
 
 
@@ -60,7 +62,7 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     AppComponent,
     UsersComponent,
     NavbarComponent,
-    TasksComponent, TaskDetailComponent, TaskEditorComponent,
+    TasksComponent, TaskDetailComponent, TaskEditorComponent, TasksListEditorComponent,
     CommentComponent,
     MainPageComponent,
     SigninComponent,
@@ -81,7 +83,7 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     AlertWindowsComponent,
     ConfirmDialogComponent,
     UsersDisplayComponent,
-    PlansDisplayComponent
+    PlansDisplayComponent, PlanEditorComponent
 
   ],
   imports: [
@@ -105,7 +107,8 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     MaterialModule,
     MatRadioModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule
     ],
 
   entryComponents: [TaskEditorComponent,
@@ -115,7 +118,8 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
     SigninComponent,
     SignupComponent,
     AboutPageComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    PlanEditorComponent
   ],
   providers: [UserService, AuthGuard,
     {
