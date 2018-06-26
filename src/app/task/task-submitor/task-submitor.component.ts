@@ -60,7 +60,7 @@ export class TaskSubmitorComponent implements OnInit {
     // todo: add logic for getting user id from local storage if authorized
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
-        if (!ut.ok) {
+        if (ut.status !== 200) {
           this.notExisting();
         } else {
           this.userTask = ut.body;
