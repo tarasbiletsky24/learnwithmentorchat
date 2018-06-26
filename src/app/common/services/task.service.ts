@@ -77,7 +77,7 @@ export class TaskService {
   }
 
   updateUserTaskResult(userTask: UserTask): Observable<any> {
-    const link = `${this.url}task/usertask?userTaskId=${userTask.Id}&newResult=${userTask.Result}`;
+    const link = `${this.url}task/usertask/result?userTaskId=${userTask.Id}&newResult=${userTask.Result}`;
     return this.http.put<UserTask>(link, null, httpOptions).pipe(
       catchError(val => of(val)));
   }

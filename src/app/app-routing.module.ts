@@ -28,8 +28,8 @@ const routes: Routes = [
   { path: 'plan/:id/edit', component: SpecificGroupComponent },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
-  { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] }
-
+  { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'main-page' } 
 ];
 
 @NgModule({
