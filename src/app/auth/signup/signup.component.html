@@ -1,5 +1,5 @@
 <form class="example-form" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
-  <h1>Introduce yourself</h1>
+  <h1>Sign Up</h1>
   <div class="row">
   <mat-form-field class="example-full-width container-update">
     <input matInput type="text" name="FirstName" placeholder="Your firstname" #FirstName="ngModel" [(ngModel)]="register.FirstName" required>
@@ -22,7 +22,7 @@
 </div>
   <div>
     <span>
-      <button mat-raised-button color="primary" (click)="closeSignupComponent()">
+      <button mat-raised-button color="primary" mat-dialog-close>
         Cancel
       </button>
     </span>

@@ -1,8 +1,5 @@
-<div *ngIf="isLoginError" class="red-text center error-message">
-  <i class="material-icons">error</i> Incorrect username or password
-</div>
 <form class="example-form" #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
-  <h1>Who are you?</h1>
+  <h1>Sign In</h1>
   <mat-form-field class="example-full-width containerUpdate">
     <input matInput type="email" placeholder="Your email" #Email ngModel name="Email" placeholder="Email" required>
   </mat-form-field>
@@ -11,7 +8,7 @@
   </mat-form-field>
   <div>
     <span >
-      <button mat-raised-button color="primary"  (click)="closeSigninComponent()">
+      <button mat-raised-button color="primary" mat-dialog-close>
         Cancel
       </button>
     </span>
