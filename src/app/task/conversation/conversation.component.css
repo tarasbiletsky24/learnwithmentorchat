@@ -4,3 +4,7 @@
 .input-height {
     height: 100px;
 }
+.not-existing {
+    text-align: center;
+    font-family: Roboto, Arial, sans-serif
+}

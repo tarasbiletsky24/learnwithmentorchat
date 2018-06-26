@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatDividerModule} from '@angular/material/divider';
 
+
 @NgModule({
     imports: [
         MatCardModule,
