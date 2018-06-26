@@ -24,12 +24,6 @@ export class TaskDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskEditorComponent, {
       data: this.task
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.task = result;
-      // send to API
-    });
   }
 
   openConversationDialog(): void {
@@ -37,19 +31,12 @@ export class TaskDetailComponent implements OnInit {
       width: '600px',
       data: this.task
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   openSubmitDialog(): void {
     const dialogRef = this.dialog.open(TaskSubmitorComponent, {
       width: '600px',
       data: this.task
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 }
