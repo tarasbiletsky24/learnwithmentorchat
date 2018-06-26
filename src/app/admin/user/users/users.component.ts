@@ -87,16 +87,6 @@ export class UsersComponent implements OnInit {
     }
     const user = { Blocked: newState, Id: this.id };
     this.dialogsService
-<<<<<<< HEAD
-    .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user  ' + this.name + ' ' + this.surname + '  ?')
-    .subscribe(res => { this.result = res;
-
-    if (this.result) {
-      this.userService.updateUser(user as User).subscribe();
-      this.users.forEach(element => {
-        if (element.Id === id) {
-          element.Blocked = newState;
-=======
       .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
       .subscribe(res => {
       this.result = res;
@@ -110,7 +100,6 @@ export class UsersComponent implements OnInit {
           });
           this.state = newState;
           return true;
->>>>>>> 556dd8a40071f83d468e99b8c5a177894c1dbe69
         }
       });
   }
@@ -122,17 +111,10 @@ export class UsersComponent implements OnInit {
       return false;
     }
     this.dialogsService
-<<<<<<< HEAD
-    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role "' + role + '" ?')
-    .subscribe(res => {
-      this.result = res;
-      if (this.result) {
-=======
       .confirm('Confirm Dialog', 'Are sure you want to update role for user  ' + name + ' ' + surname + ' on role "' + role + '" ?')
       .subscribe(res => {
         this.result = res;
         if (this.result) {
->>>>>>> 556dd8a40071f83d468e99b8c5a177894c1dbe69
           const user = { Role: role, Id: id };
           this.userService.updateUser(user as User).subscribe();
           this.users.forEach(element => {
