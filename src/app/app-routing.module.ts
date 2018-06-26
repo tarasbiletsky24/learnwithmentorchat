@@ -20,14 +20,16 @@ const routes: Routes = [
   { path: 'main-page', component: MainPageComponent },
   { path: 'signin', component: MainPageComponent, children: [{ path: '', component: SigninComponent }] },
   { path: 'signup', component: MainPageComponent, children: [{ path: '', component: SignupComponent }] },
-  { path: 'users', component: UsersComponent, canActivate:[AuthGuard] },
-  { path: 'comment', component: CommentComponent, canActivate:[AuthGuard] },
-  { path: 'tasks', component: TasksComponent, canActivate:[AuthGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'comment', component: CommentComponent, canActivate: [AuthGuard] },
+  { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-page', component: ContactPageComponent },
-  { path: 'tasks', component: TasksComponent, canActivate:[AuthGuard] },
-  { path: 'plans', component: PlansComponent, canActivate:[AuthGuard] },
-  { path: 'group/:id', component: SpecificGroupComponent, canActivate:[AuthGuard] }
+  { path: 'plan/:id/edit', component: SpecificGroupComponent },
+  { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
+  { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'main-page' }
 ];
 
 @NgModule({

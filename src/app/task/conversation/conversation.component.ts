@@ -5,6 +5,7 @@ import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
 import { Message } from '../../common/models/message';
 import { Observable, of } from 'rxjs';
+import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
 
 @Component({
   selector: 'app-conversation',
@@ -21,9 +22,9 @@ export class ConversationComponent implements OnInit {
   private userMessage: string;
   private recentMessages: Message[] = [];
   // todo: add logic for getting user id from local storage if authorized
-  private userId = 3;
+  private userId = 5;
 
-  constructor(public dialogRef: MatDialogRef<ConversationComponent>,
+  constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
@@ -31,15 +32,15 @@ export class ConversationComponent implements OnInit {
 
   notExistingUserTask() {
     this.dialogRef.close();
-    window.alert('sorry,  you are not assigned to this plan');
+    this.alertwindow.openSnackBar('You are not asigned to this plan!' , 'Ok');
   }
 
   getUTMessages(userTaskId: number) {
     this.taskService.getMessages(userTaskId).subscribe(
       mes => {
-        if (!mes.ok) {
-          this.notExistingMessage = 'Your conversation with mentor is empty.' +
-            'Ask some question, if you have any.';
+        if (mes.body.length === 0) {
+          this.notExistingMessage = 'Your conversation with mentor is empty. ' +
+            'Ask some questions, if you have any.';
         } else {
           this.messages = mes.body;
         }
@@ -47,14 +48,19 @@ export class ConversationComponent implements OnInit {
     );
   }
 
-  onSendClick() {
-    if (this.userMessage != '' && this.userMessage) {
+   onSendClick() {
+    if (this.userMessage !== '' && this.userMessage) {
       const mes = { Text: this.userMessage, SenderId: this.userId };
       this.taskService.sendMessage(this.userTask.Id, mes as Message).subscribe(
         resp => {
-          resp.ok ? this.recentMessages.push(mes as Message) : window.alert(`${resp.error.Message}`);
+          if (resp.ok) {
+            this.recentMessages.push(mes as Message);
+            this.notExistingMessage = '';
+          } else {
+            this.alertwindow.openSnackBar('Your message is too long!' , 'Ok');
+          }
         }
-      );   
+      );
     }
     this.userMessage = '';
   }
@@ -66,11 +72,12 @@ export class ConversationComponent implements OnInit {
     }
   }
 
+
   ngOnInit() {
 
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
-        if (!ut.ok) {
+        if (ut.status !== 200) {
           this.notExistingUserTask();
         } else {
           this.userTask = ut.body;

@@ -8,8 +8,8 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import {AlertWindowsComponent} from '../../../components/alert-windows/alert-windows.component';
-import {ConfirnDialogComponent} from '../../../components/confirn-dialog/confirn-dialog.component';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DialogsService} from '../../../components/dialogs/dialogs.service';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -18,7 +18,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export class UsersComponent implements OnInit {
 
-  constructor( private userService: UserService,  private  alertwindow: AlertWindowsComponent , private confirDialog: ConfirnDialogComponent) {
+  constructor( private userService: UserService,  private  alertwindow: AlertWindowsComponent, private dialogsService: DialogsService  ) {
   }
 
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
@@ -33,6 +33,7 @@ export class UsersComponent implements OnInit {
   forMessage: string;
   selectedType: Role;
   roleName: string = null;
+  public result: any;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
 
@@ -67,7 +68,7 @@ export class UsersComponent implements OnInit {
   // changeState:blocked and active
   changeState(id: number, state: boolean, newState) {
     if (this.id == null || state == null) {
-    this.alertwindow.openSnackBar('Choose user!','Ok'); // window.alert('Choose user');
+    this.alertwindow.openSnackBar('Choose user!' , 'Ok'); // window.alert('Choose user');
       return false;
     }
     if (newState) {
@@ -77,11 +78,15 @@ export class UsersComponent implements OnInit {
       this.forMessage = ' unblock ';
     }
     if (this.state === newState) {
-      window.alert('User ' + this.name + ' ' + this.surname + ' already' + this.forMessage);
+      this.alertwindow.openSnackBar('User ' + this.name + ' ' + this.surname + ' already' + this.forMessage, 'Ok');
       return false;
     }
     const user = { Blocked: newState, Id: this.id };
-    if (this.confirDialog.getconfirm('Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')) {
+    this.dialogsService
+    .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
+    .subscribe(res => { this.result = res;
+
+    if (this.result) {
       this.userService.updateUser(user as User).subscribe();
       this.users.forEach(element => {
         if (element.Id === id) {
@@ -91,19 +96,29 @@ export class UsersComponent implements OnInit {
       this.state = newState;
       return true;
     }
+  });
   }
 
   // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
-    if (this.confirDialog.getconfirm('Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')) {
-      const user = { Role: role, Id: id };
-      this.userService.updateUser(user as User).subscribe();
-      this.users.forEach(element => {
-        if (element.Id === id) {
-          element.Role = role;
-        }
-      });
+    if (role == null || id == null || name == null || surname == null) {
+      this.alertwindow.openSnackBar('Choose role!' , 'Ok');
+      return false;
     }
+    this.dialogsService
+    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')
+    .subscribe(res => {
+      this.result = res;
+      if (this.result) {
+          const user = { Role: role, Id: id };
+          this.userService.updateUser(user as User).subscribe();
+          this.users.forEach(element => {
+            if (element.Id === id) {
+              element.Role = role;
+            }
+          });
+      }
+    });
   }
 
   // filtering by role
@@ -119,7 +134,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.userService.getRoles().subscribe(
       role => this.roles = role);
-
     this.userService.getUsers().subscribe(
       user => this.users = user
     );

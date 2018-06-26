@@ -53,16 +53,17 @@ export class UserService {
     );
   }
 
-  registerUser(register : Register){
+  registerUser(register: Register) {
     const body: Register = {
       Password: register.Password,
       Email: register.Email,
       FirstName: register.FirstName,
       LastName: register.LastName
-    }
-    var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.url, body, {headers : reqHeader});
+    };
+  const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.url, body, { headers: reqHeader });
   }
+
 
   blockUserById(id: number) {
     return this.http.delete(`${this.url}/${id}`).pipe(
@@ -80,9 +81,9 @@ export class UserService {
     const body: Login = {
       Password: login.Password,
       Email: login.Email
-    }
+    };
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.post(`${environment.apiUrl}` + 'token', body, {headers: reqHeader});
+    return this.http.post(`${environment.apiUrl}` + 'token', body, { headers: reqHeader });
   }
 
   search(param: string, roleName: string): Observable<User[]> {
