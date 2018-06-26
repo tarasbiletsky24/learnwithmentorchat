@@ -102,7 +102,7 @@ export class UsersComponent implements OnInit {
   // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
     if (role == null || id == null || name == null || surname == null) {
-      window.alert('Choose role');
+      this.alertwindow.openSnackBar('Choose role!' , 'Ok');
       return false;
     }
     if (window.confirm('Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')) {
