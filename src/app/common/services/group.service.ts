@@ -28,7 +28,7 @@ export class GroupService {
   }
 
   getGroupUsers(id: number): Observable<User[]> {
-     return this.http.get<User[]>(`${this.url}/${id}/users`).pipe(
+    return this.http.get<User[]>(`${this.url}/${id}/users`).pipe(
       catchError(this.handleError<User[]>(`getGroupUsers`))
     );
   }

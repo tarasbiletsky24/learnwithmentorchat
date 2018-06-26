@@ -7,7 +7,7 @@ import { GroupService } from '../../common/services/group.service';
 import { TasksComponent } from '../../task/tasks/tasks.component';
 
 import { MatDialog } from '@angular/material';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-plans-display',

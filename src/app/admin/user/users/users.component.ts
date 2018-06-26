@@ -111,7 +111,7 @@ export class UsersComponent implements OnInit {
       return false;
     }
     this.dialogsService
-      .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')
+      .confirm('Confirm Dialog', 'Are sure you want to update role for user  ' + name + ' ' + surname + ' on role "' + role + '" ?')
       .subscribe(res => {
         this.result = res;
         if (this.result) {
