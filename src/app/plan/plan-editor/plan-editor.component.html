@@ -6,16 +6,21 @@
   <h3>Plan description:</h3>
   <textarea matInput placeholder="Plan description"
   #descriptionTbx>{{plan.Description}}</textarea>
-<app-tasks-list-editor [tasks]="tasksInPlan"
-  [tasksInPlan]="true"
-  (taskChange)="onTaskChange(true,$event)"></app-tasks-list-editor>
-<app-tasks-list-editor [tasks]="tasksNotInPlan"
-  (taskChange)="onTaskChange(false,$event)"
-  [tasksInPlan]="false">
-</app-tasks-list-editor>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <app-tasks-list-editor [tasks]="tasksInPlan"
+    [tasksInPlan]="true"
+    (taskChange)="onTaskChange(true,$event)"></app-tasks-list-editor>
+  </mat-grid-tile>
+  <mat-grid-tile><app-tasks-list-editor [tasks]="tasksNotInPlan"
+    (taskChange)="onTaskChange(false,$event)"
+    [tasksInPlan]="false">
+  </app-tasks-list-editor>
+</mat-grid-tile>
+</mat-grid-list>
     
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close (click)="onSaveClick(descriptionTbx.value)">Save</button>
+  <button mat-button mat-dialog-close (click)="onSaveClick(nameTbx.value, descriptionTbx.value)">Save</button>
 </mat-dialog-actions>

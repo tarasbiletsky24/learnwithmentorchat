@@ -20,14 +20,18 @@ export class PlanEditorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Plan) { this.plan = data; }
 
   ngOnInit() {
-    this.taskService.getTasks(this.plan.Id).subscribe(data => this.tasksInPlan = data);
-    this.taskService.getTasks(this.plan.Id).subscribe(data => this.tasksNotInPlan = data);
+    this.taskService.getTasks(this.plan.Id).subscribe(data => {
+      this.tasksInPlan = data;
+      this.taskService.getTasks().subscribe(allTasks => {
+        this.tasksInPlan.forEach(task => this.deleteFromArrey(task, allTasks));
+        this.tasksNotInPlan = allTasks;
+      });
+    });
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
   onTaskChange(tasksInPlan: boolean, task: Task) {
-    debugger
     if (tasksInPlan) {
       this.tasksNotInPlan.push(task);
       this.deleteFromArrey(task, this.tasksInPlan);
@@ -37,15 +41,20 @@ export class PlanEditorComponent implements OnInit {
     }
   }
   deleteFromArrey(task: Task, tasks: Task[]) {
-    const index: number = tasks.indexOf(task);
-    if (index !== -1) {
-      tasks.splice(index, 1);
-    }
+    let index = -1;
+    tasks.forEach(element => {
+      if (element.Id === task.Id) {
+        ++index;
+        tasks.splice(index, 1);
+        return;
+      }
+      ++index;
+    });
   }
-  onSaveClick(description: string) {
-    //todo: 
-  }
-  onDeleteClick() {
-    //todo:   
+  onSaveClick(name: string, description: string) {
+    this.plan.Name = name;
+    this.plan.Description = description;
+    this.planService.updatePlan(this.plan);
+    //todo: add tasks to plan
   }
 }
