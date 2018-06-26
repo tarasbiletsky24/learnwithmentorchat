@@ -70,40 +70,20 @@ table {
     color: #607D8B;
   }
 
-.roles> div{
-    cursor: pointer;
-    margin: 2%;
-}
-.roles,.state{
-    display: flex;
-    flex-direction: row;
 
-}
-.state>div{
-cursor: pointer;
-margin: 2%;
-}
-
-.selected {
-  color: #3d50b7 !important;
-}
-
-.roles li:hover {
-  color: #607D8B;
-}
 
 .roles > div {
   cursor: pointer;
-  padding-right: 5%;
+  margin: 2%;
 }
 
 .roles, .state {
   display: flex;
   flex-direction: row;
-  margin: 5vw;
+
 }
 
 .state>div {
-  padding-right: 5%;
   cursor: pointer;
+  margin: 2%;
 }

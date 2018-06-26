@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
     }
     const user = { Blocked: newState, Id: this.id };
     this.dialogsService
-    .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
+    .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user  ' + this.name + ' ' + this.surname + '  ?')
     .subscribe(res => { this.result = res;
 
     if (this.result) {
@@ -106,7 +106,7 @@ export class UsersComponent implements OnInit {
       return false;
     }
     this.dialogsService
-    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role: "' + role + '" ?')
+    .confirm('Confirm Dialog', 'Are sure you want to update role for user : ' + name + ' ' + surname + ' on role "' + role + '" ?')
     .subscribe(res => {
       this.result = res;
       if (this.result) {

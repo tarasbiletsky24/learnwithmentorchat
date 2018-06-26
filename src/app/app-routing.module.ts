@@ -16,7 +16,7 @@ import { PlansComponent } from './plan/plans/plans.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'main-page', pathMatch: 'full' },
+  // { path: '', redirectTo: 'main-page', pathMatch: 'full' },
   { path: 'main-page', component: MainPageComponent },
   { path: 'signin', component: MainPageComponent, children: [{ path: '', component: SigninComponent }] },
   { path: 'signup', component: MainPageComponent, children: [{ path: '', component: SignupComponent }] },
