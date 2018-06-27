@@ -1,54 +1,53 @@
 * {    
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 .main {   
-    padding-top: 2%;
+  padding-top: 2%;
 }
+
 .search {
-    width: 80%;
+  width: 80%;
 }
 .container  {
-    display: flex;
-    justify-content: center;
-  }
- .search-input {
-      width: 100%;
-  } 
-  table {
+  display: flex;
+  justify-content: center;
+}
+.search-input {
     width: 100%;
-  }
-  .flex-container {
-    display: flex;
-    justify-content: space-between;	
-  }
-  .flex-button {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 3%;
-  }
-  .flex-container > div {
-    margin: 0.5%;
-    color: #a2a2a2;
-      }
- .selected {  
-    color :#3d50b7 !important;
-  }
-  .roles li:hover {
-    color: #607D8B;
+} 
+table {
+  width: 100%;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;	
+}
+.flex-button {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3%;
+}
+.flex-container > div {
+  margin: 0.5%;
+  color: #a2a2a2;
+    }
+.selected {  
+  color :#3d50b7 !important;
+}
+.roles li:hover {
+  color: #607D8B;
 
-  }
+}
 .roles> div{
-    cursor: pointer;
-    margin: 2%;
+  cursor: pointer;
+  margin: 2%;
 }
 .roles,.state{
-    display: flex;
-    flex-direction: row;
-  
+  display: flex;
+  flex-direction: row;
+
 }
 .state>div{
 cursor: pointer;
 margin: 2%;
 }
-
-

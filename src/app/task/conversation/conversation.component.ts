@@ -22,7 +22,7 @@ export class ConversationComponent implements OnInit {
   private userMessage: string;
   private recentMessages: Message[] = [];
   // todo: add logic for getting user id from local storage if authorized
-  private userId = 5;
+  private userId = 4;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,

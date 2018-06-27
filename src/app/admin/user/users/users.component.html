@@ -17,10 +17,10 @@
         </div>
       </div>
       <div class="state" >
-        <div (click)="getUsersByState(true)">
+        <div (click)="getUsersByState(true)" [class.selected]="true === selectedState" >
           Blocked
         </div>
-        <div (click)="getUsersByState(false)" >
+        <div (click)="getUsersByState(false)" [class.selected]="false === selectedState" >
           Active
         </div>
       </div>
