@@ -6,6 +6,13 @@
   <h3>Plan description:</h3>
   <textarea matInput placeholder="Plan description"
   #descriptionTbx>{{plan.Description}}</textarea>
+  <input class="fileInput" 
+  type="file" (change)="onFileSelected($event)" 
+  accept="image/jpeg, image/png"
+  #fileInput/>
+  <h4 *ngIf="selectedFile">Plan image selected!</h4>
+  <br/>
+  <button mat-button (click)="fileInput.click()">Select plan image</button>
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile>
     <app-tasks-list-editor [tasks]="tasksInPlan"

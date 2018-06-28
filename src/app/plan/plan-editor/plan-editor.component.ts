@@ -4,6 +4,7 @@ import { PlanService } from '../../common/services/plan.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from '../../common/models/task';
 import { TaskService } from '../../common/services/task.service';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 
 @Component({
   selector: 'app-plan-editor',
@@ -11,11 +12,15 @@ import { TaskService } from '../../common/services/task.service';
   styleUrls: ['./plan-editor.component.css']
 })
 export class PlanEditorComponent implements OnInit {
+  selectedFile: File = null;
+  private maxImageSize: number = 1024*1024;
+
   tasksInPlan: Task[];
   tasksNotInPlan: Task[];
   @Input()
   plan: Plan;
   constructor(public dialogRef: MatDialogRef<PlanEditorComponent>,
+    private alertWindow: AlertWindowsComponent,
     private planService: PlanService, private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: Plan) { this.plan = data; }
 
@@ -55,6 +60,15 @@ export class PlanEditorComponent implements OnInit {
     this.plan.Name = name;
     this.plan.Description = description;
     this.planService.updatePlan(this.plan);
+    //send image
     // todo: add tasks to plan
+  }
+
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+    if(this.selectedFile.size > this.maxImageSize) {
+      this.alertWindow.openSnackBar(`Image size must be less then ${this.maxImageSize/(1024*1024)} mb, please select another`, 'Ok');
+      this.selectedFile = null;
+    }
   }
 }
