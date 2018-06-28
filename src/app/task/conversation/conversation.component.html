@@ -23,10 +23,10 @@
   <mat-form-field class="input-full-width">
       <textarea class="input-height" matInput placeholder="Your message"
       #descriptionTbx [(ngModel)]="userMessage" (keydown)="onKeyPress($event)" maxlength="999"></textarea>
+      <button class="fab" mat-fab (click)="onSendClick()">Send</button>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="onSendClick()">Send</button>
-  <button mat-button mat-dialog-close>Close</button>
+  <button class="close-button" mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

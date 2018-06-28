@@ -73,6 +73,5 @@ export class PlanEditorComponent implements OnInit {
       this.alertWindow.openSnackBar(`Image size must be less then ${this.maxImageSize/(1024*1024)} mb, please select another`, 'Ok');
       this.selectedFile = null;
     }
-    console.log(this.selectedFile);
   }
 }

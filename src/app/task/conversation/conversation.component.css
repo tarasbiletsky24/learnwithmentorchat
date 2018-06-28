@@ -1,5 +1,7 @@
 .input-full-width {
-    width: 100%;
+    width:90%;
+    margin-left: 0px;
+    margin-right: 10%;
 }
 .input-height {
     height: 100px;
@@ -7,4 +9,11 @@
 .not-existing {
     text-align: center;
     font-family: Roboto, Arial, sans-serif
+}
+.fab{
+    position: absolute; top: 40px; right: -60 px;
+    display: inline-block;
+}
+.close-button{
+    margin-left: auto;
 }
