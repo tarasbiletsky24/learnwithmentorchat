@@ -48,6 +48,13 @@ export class PlanService {
     );
   }
 
+  updateImage(id: number, file: File) {
+    const fd = new FormData;
+    fd.append('image', file, file.name);
+    return this.http.post(`${this.url}/${id}/image`, fd, {observe: 'response'}).pipe(
+      catchError(val => of(val)));;
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
