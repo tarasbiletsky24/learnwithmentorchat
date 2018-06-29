@@ -16,7 +16,7 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class PlansDisplayComponent implements OnInit {
 
-  @Input() group: Group;
+  @Input() linkId: number;
   plans: Plan[];
   displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
@@ -25,8 +25,15 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (this.group != null) {
-      this.groupService.getGroupPlans(this.group.Id).subscribe(data => this.plans = data);
+    if (this.linkId != null) {
+      this.groupService.getGroupPlans(this.linkId).subscribe(
+        data => this.plans = data,
+        err => console.log(err),
+        () => {
+        this.dataSource = new MatTableDataSource<Plan>(this.plans);
+          console.log('data sorce users initialisated');
+        }
+      );
     } else {
       this.groupService.getGroupPlans(1).subscribe(data => this.plans = data);
       console.log('No group provided');
@@ -42,7 +49,7 @@ export class PlansDisplayComponent implements OnInit {
   openPlanAddDialog(): void {
     const dialogRef = this.dialog.open(/*AddPlanComponent */TasksComponent, {
       width: '600px',
-      data: this.group
+      data: this.linkId
     });
 
     dialogRef.afterClosed().subscribe(result => {
