@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SigninComponent } from '../auth/signin/signin.component';
 import { SignupComponent } from '../auth/signup/signup.component';
-import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -15,7 +14,7 @@ export class NavbarComponent implements OnInit {
   mainTag = '</>';
   isLogin: boolean = false;
   fullName: string;
-  constructor(private dialog: MatDialog, private router: Router, private auth: AuthService) {
+  constructor(private dialog: MatDialog, private router: Router) {
 
   }
 
