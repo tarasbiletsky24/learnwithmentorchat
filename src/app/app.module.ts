@@ -55,8 +55,6 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

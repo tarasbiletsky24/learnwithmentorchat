@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { AuthService } from '../../common/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
