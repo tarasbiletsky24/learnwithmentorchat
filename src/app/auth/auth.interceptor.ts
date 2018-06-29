@@ -19,6 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
             const clonedreq = req.clone ({
                 headers: req.headers.set('Authorization', `Bearer ${localStorage.getItem('userToken')}`)
             });
+
             return next.handle(clonedreq)
                 .pipe(tap(
                     succ => { },
@@ -29,6 +30,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
                 ));
         }
-        this.router.navigateByUrl('/signin');
+        this.router.navigateByUrl('/main-page');
     }
 }
