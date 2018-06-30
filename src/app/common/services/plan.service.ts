@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Plan } from '../models/plan';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Image } from '../models/image';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,12 @@ export class PlanService {
     const fd = new FormData;
     fd.append('image', file, file.name);
     return this.http.post(`${this.url}/${id}/image`, fd, {observe: 'response'}).pipe(
-      catchError(val => of(val)));;
+      catchError(val => of(val)));
+  }
+
+  getImage(id: number): Observable<HttpResponse<Image>>{
+    return this.http.get(`${this.url}/${id}/image`, {observe: 'response'}).pipe(
+      catchError(val => of(val)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

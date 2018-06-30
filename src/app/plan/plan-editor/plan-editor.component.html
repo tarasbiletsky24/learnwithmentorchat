@@ -10,6 +10,7 @@
   type="file" (change)="onFileSelected($event)" 
   accept="image/jpeg, image/jpg, image/png"
   #fileInput/>
+  <img class="pic" *ngIf="imageData" [src]="imageData" alt="aaaa">
   <h4 *ngIf="selectedFile">Plan image selected!</h4>
   <br/>
   <button mat-button (click)="fileInput.click()">Select plan image</button>

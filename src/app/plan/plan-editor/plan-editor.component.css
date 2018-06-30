@@ -1,3 +1,7 @@
 .fileInput {
     display: none;
 }
+.pic{
+    display:block;
+    width: 600px;
+}
