@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../common/models/user';
 import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
-import { AddUserComponent } from '../add-user/add-user.component';
 // todo remove moq object
 import { TasksComponent } from '../../task/tasks/tasks.component';
 
@@ -25,7 +24,7 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() linkId: number;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName', 'Role', 'Blocked'];
+  displayedColumns = ['FirstName', 'LastName', 'Role', 'Blocked','Button'];
   //dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
   dataSource = new MatTableDataSource<User>(this.users);
 

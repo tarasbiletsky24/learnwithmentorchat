@@ -10,10 +10,10 @@ import { Plan } from '../../common/models/plan';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
-import { AddUserComponent } from '../add-user/add-user.component';
 import { PlansDisplayComponent } from '../plans-display/plans-display.component';
 import { UsersDisplayComponent } from '../users-display/users-display.component';
 import { TasksComponent } from '../../task/tasks/tasks.component';
+import { AddUsersComponent } from '../add-users/add-users.component';
 
 @Component({
   selector: 'app-specific-group',
@@ -45,5 +45,27 @@ export class SpecificGroupComponent implements OnInit {
     } else {
       this.router.navigate(['/main-page']);
     }
+  }
+  openUserAddDialog(): void {
+    const dialogRef = this.dialog.open(AddUsersComponent, {
+      width: '1000px'/*,
+      data: this.linkId*/
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // todo reinit table users
+    });
+  }
+  openPlanAddDialog(): void {
+    const dialogRef = this.dialog.open(/*AddPlanComponent */TasksComponent, {
+      width: '600px',
+      data: this.linkId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // todo reinit table plans
+    });
   }
 }
