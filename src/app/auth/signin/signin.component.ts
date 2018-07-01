@@ -4,7 +4,8 @@ import { MatDialogRef } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +14,7 @@ import {AlertWindowsComponent} from '../../components/alert-windows/alert-window
 })
 export class SigninComponent implements OnInit {
 
-  constructor(public thisDialogRef: MatDialogRef<SigninComponent>,
+  constructor(public thisDialogRef: MatDialogRef<SigninComponent>, private auth: AuthService,
     private userService: UserService, private router: Router,
     private  alertwindow: AlertWindowsComponent) { }
 
@@ -24,15 +25,14 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-    OnSubmit(form: NgForm) {
+  OnSubmit(form: NgForm) {
     this.userService.userAuthentication(form.value).subscribe((data: any) => {
-      localStorage.setItem('userToken', data);
+      this.auth.setUserData(data);
       this.closeSigninComponent();
-      this.router.navigate(['/users']);
+      this.router.navigate(['/plans']);
     },
-      (err: HttpErrorResponse) => {
-       this.alertwindow.openSnackBar('Incorrect username or password', '');
-      });
+    (err: HttpErrorResponse) => {
+      this.alertwindow.openSnackBar('Incorrect email or password', '');
+    });
   }
-
 }
