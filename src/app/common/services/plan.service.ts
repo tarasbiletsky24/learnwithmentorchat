@@ -25,6 +25,12 @@ export class PlanService {
     );
   }
 
+  getSomePlans(previousAmount: number, amount: number): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`).pipe(
+      catchError(this.handleError<Plan[]>(`getPlans`))
+    );
+  }
+
   getPlan(id: number): Observable<Plan> {
     return this.http.get<Plan>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Plan>(`getPlan id=${id}`))

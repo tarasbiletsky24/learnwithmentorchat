@@ -1,27 +1,16 @@
-<h1>Learning Technologies</h1>
-<div class="grid-container">
-  <div class="cell cell1_1">
-    <img class="card-image" src='./assets/images/forMainPage/%D1%81sharp.png' alt="csharp">
-  </div>
-  <div class="cell cell2_1">
-    <img class="card-image" src='./assets/images/forMainPage/javascript.png' alt="javascript">
-  </div>
-  <div class="cell cell3_1">
-    <img class="card-image" src='./assets/images/forMainPage/angular.png' alt="angular">
-  </div>
-  <div class="cell cell4_1">
-    <img class="card-image" src='./assets/images/forMainPage/python.png' alt="python">
-  </div>
-  <div class="cell cell1_2">
-    <img class="card-image" src='./assets/images/forMainPage/redux.png' alt="redux">
-  </div>
-  <div class="cell cell2_2">
-    <img class="card-image" src='./assets/images/forMainPage/node.png' alt="node">
-  </div>
-  <div class="cell cell3_2">
-    <img class="card-image" src='./assets/images/forMainPage/sql.png' alt="sql">
-  </div>
-  <div class="cell cell4_2">
-    <img class="card-image" src='./assets/images/forMainPage/java.png' alt="java">
-  </div>
+<h1>Learning plans</h1>
+<div class="grid grid-pad">
+  <a *ngFor="let p of plans" class="col-1-4">
+    <mat-card>
+      <mat-card-header>
+        <h3>{{p.plan.Name}}</h3>
+        <img mat-card-image *ngIf="p.imageData" [src]="p.imageData" alt="Plan image">
+        <img mat-card-image *ngIf="!p.imageData" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{p.plan.Description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </a>
 </div>
+<div class="clear"></div>
