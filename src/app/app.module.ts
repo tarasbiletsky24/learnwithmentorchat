@@ -54,6 +54,7 @@ import { PlansDisplayComponent } from './specific-group/plans-display/plans-disp
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
 import { AddUsersComponent } from './specific-group/add-users/add-users.component';
+import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 
 
 
@@ -84,7 +85,8 @@ import { AddUsersComponent } from './specific-group/add-users/add-users.componen
     UsersDisplayComponent,
     PlansDisplayComponent, 
     PlanEditorComponent, 
-    AddUsersComponent
+    AddUsersComponent, 
+    AddPlansComponent
 
   ],
   imports: [
@@ -121,7 +123,8 @@ import { AddUsersComponent } from './specific-group/add-users/add-users.componen
     AboutPageComponent,
     ContactPageComponent,
     PlanEditorComponent,
-    AddUsersComponent
+    AddUsersComponent,
+    AddPlansComponent
   ],
   providers: [UserService, AuthGuard,
     {

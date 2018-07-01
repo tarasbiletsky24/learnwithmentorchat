@@ -39,13 +39,13 @@ export class GroupService {
     );
   }
 
-  searchUsers(param: string, groupId: number): Observable<User[]> {
+  searchNotUsers(param: string, groupId: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/searchinNotInvolvedUser?searchKey=${param}&groupId=${groupId}`).pipe(
       catchError(this.handleError<User[]>(`searchUsersNotInGroup`))
     );
   }
 
-  searchPlans(param: string, groupId: number): Observable<Plan[]> {
+  searchNotPlans(param: string, groupId: number): Observable<Plan[]> {
     return this.http.get<Plan[]>(`${this.url}/searchinNotUsedPlan?searchKey=${param}&groupId=${groupId}`).pipe(
       catchError(this.handleError<Plan[]>(`searchPlansNotInGroup`))
     );

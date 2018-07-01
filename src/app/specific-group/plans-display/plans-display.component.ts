@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Plan } from '../../common/models/plan';
-import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
-// todo remove moq object
-import { TasksComponent } from '../../task/tasks/tasks.component';
 
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
+import { AddPlansComponent } from '../add-plans/add-plans.component';
 
 @Component({
   selector: 'app-plans-display',
@@ -30,8 +28,7 @@ export class PlansDisplayComponent implements OnInit {
         data => this.plans = data,
         err => console.log(err),
         () => {
-        this.dataSource = new MatTableDataSource<Plan>(this.plans);
-          console.log('data sorce users initialisated');
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
         }
       );
     } else {
@@ -47,14 +44,11 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   openPlanAddDialog(): void {
-    const dialogRef = this.dialog.open(/*AddPlanComponent */TasksComponent, {
-      width: '600px',
+    const dialogRef = this.dialog.open(AddPlansComponent, {
+      width: '1000px',
       data: this.linkId
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // todo reinit table plans
     });
   }
 }

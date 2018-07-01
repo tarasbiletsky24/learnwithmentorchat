@@ -1,19 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { User } from '../../common/models/user';
-import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
-// todo remove moq object
-import { TasksComponent } from '../../task/tasks/tasks.component';
 
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
-
-/*const ELEMENT_DATA: User[] = [
-  {FirstName: 'Terry', LastName: 'Patcher',Id: 1,Email:'123@gmail.com', Role: 'Admin', Blocked: false},
-  {FirstName: 'John', LastName: 'Patcher',Id: 1,Email:'123@gmail.com', Role: 'Admin', Blocked: false},
-  {FirstName: 'Ben', LastName: 'Patcher',Id: 1,Email:'123@gmail.com', Role: 'Admin', Blocked: false}
-];*/
+import { AddUsersComponent } from '../add-users/add-users.component';
 
 @Component({
   selector: 'app-users-display',
@@ -24,21 +16,20 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() linkId: number;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName', 'Role', 'Blocked','Button'];
-  //dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
+  displayedColumns = ['FirstName', 'LastName', 'Role', 'Blocked'];
   dataSource = new MatTableDataSource<User>(this.users);
 
   constructor(private groupService: GroupService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    //debugger
     if (this.linkId != null) {
       this.groupService.getGroupUsers(this.linkId).subscribe(
         data => this.users = data,
         err => console.log(err),
-        () => { this.dataSource = new MatTableDataSource<User>(this.users);
-          console.log('data sorce users initialisated'); }
+        () => {
+        this.dataSource = new MatTableDataSource<User>(this.users);
+        }
       );
     } else {
       this.groupService.getGroupUsers(1).subscribe(data => this.users = data);
@@ -53,14 +44,11 @@ export class UsersDisplayComponent implements OnInit {
   }
 
   openUserAddDialog(): void {
-    const dialogRef = this.dialog.open(/*AddUserComponent*/TasksComponent, {
-      width: '600px',
+    const dialogRef = this.dialog.open(AddUsersComponent, {
+      width: '1000px',
       data: this.linkId
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // todo reinit table users
     });
   }
 

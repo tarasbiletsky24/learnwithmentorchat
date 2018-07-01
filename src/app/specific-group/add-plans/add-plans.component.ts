@@ -4,16 +4,16 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
-import { User } from '../../common/models/user';
+import { Plan } from '../../common/models/plan';
 import { GroupService } from '../../common/services/group.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 
 @Component({
-  selector: 'app-add-users',
-  templateUrl: './add-users.component.html',
-  styleUrls: ['./add-users.component.css']
+  selector: 'app-add-plans',
+  templateUrl: './add-plans.component.html',
+  styleUrls: ['./add-plans.component.css']
 })
-export class AddUsersComponent implements OnInit {
+export class AddPlansComponent implements OnInit {
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
@@ -21,29 +21,29 @@ export class AddUsersComponent implements OnInit {
     this.groupId = data;
   }
 
-  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Check'];
-  users: User[];
-  dataSource = new MatTableDataSource<User>(this.users);
+  displayedColumns = ['Name', 'Description', 'Creator', 'CreateDate', 'Published', 'Check'];
+  plans: Plan[];
+  dataSource = new MatTableDataSource<Plan>(this.plans);
   private searchTerms = new Subject<string>();
   groupId: number;
 
-  addChoosenUser(choosenOne: User) {
-    this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe();
-    this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
+  addChoosenPlan(choosenOne: Plan) {
+    this.groupService.addPlanToGroup(choosenOne.Id, this.groupId).subscribe();
+    this.alertwindow.openSnackBar(choosenOne.Name + ' added', 'Ok');
   }
-  
+
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
   ngOnInit() {
-    this.groupService.searchNotUsers("", this.groupId).subscribe(
-      user => this.users = user
+    this.groupService.searchNotPlans("", this.groupId).subscribe(
+      plan => this.plans = plan
     );
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.groupService.searchNotUsers(term, this.groupId))
-    ).subscribe(user => this.users = user);
+      switchMap((term: string) => this.groupService.searchNotPlans(term, this.groupId))
+    ).subscribe(plan => this.plans = plan);
   }
 }
