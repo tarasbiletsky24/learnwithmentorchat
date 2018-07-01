@@ -4,21 +4,6 @@
     box-sizing: border-box;
 }
 
-.grid-container {
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 30px;
-    width: 75vw;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 25px;
-    grid-row-gap: 25px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 h1{
   margin-bottom: 0;
   margin-top: 10px;
@@ -28,73 +13,45 @@ h1{
   justify-content: center;
 }
 
-.card-image {
-    height: auto;
-    width: 60%;
+h3{
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.cell {
-    border: 1px solid #ccc;
-    width: calc((80vw-40px)/4);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+p{
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.cell1_1 {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 1;
+img{
+    margin-right: 1px;
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
 }
 
-.cell2_1 {
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 1;
+[class*='col-'] {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+[class*='col-']:last-of-type {
+padding-right: 0;
+}
+a {
+text-decoration: none;
+}
+  
+.grid {
+margin-top: 10px;
+margin-left: 20px;
+}
+.col-1-4 {
+width: 25%;
+}
+.grid-pad > [class*='col-']:last-of-type {
+padding-right: 20px;
 }
 
-.cell3_1 {
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
-}
-
-.cell4_1 {
-    grid-column-start: 4;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 1;
-}
-
-.cell1_2 {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
-
-.cell2_2 {
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
-
-.cell3_2 {
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
-
-.cell4_2 {
-    grid-column-start: 4;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 2;
+.clear{
+clear: both;
 }
