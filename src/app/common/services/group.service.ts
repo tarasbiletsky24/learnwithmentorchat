@@ -39,6 +39,30 @@ export class GroupService {
     );
   }
 
+  searchUsers(param: string, groupId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/searchinNotInvolvedUser?searchKey=${param}&groupId=${groupId}`).pipe(
+      catchError(this.handleError<User[]>(`searchUsersNotInGroup`))
+    );
+  }
+
+  searchPlans(param: string, groupId: number): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`${this.url}/searchinNotUsedPlan?searchKey=${param}&groupId=${groupId}`).pipe(
+      catchError(this.handleError<Plan[]>(`searchPlansNotInGroup`))
+    );
+  }
+
+  addUserToGroup(userId: number,groupId: number): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/${groupId}/user`, [userId]).pipe(
+      catchError(r => of(r))
+    );
+  }
+
+  addPlanToGroup(planId: number,groupId: number): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/${groupId}/plan`, [planId]).pipe(
+      catchError(r => of(r))
+    );
+  }
+
    private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
