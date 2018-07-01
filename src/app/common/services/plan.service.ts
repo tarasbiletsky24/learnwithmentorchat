@@ -58,12 +58,12 @@ export class PlanService {
   updateImage(id: number, file: File) {
     const fd = new FormData;
     fd.append('image', file, file.name);
-    return this.http.post(`${this.url}/${id}/image`, fd, {observe: 'response'}).pipe(
+    return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 
-  getImage(id: number): Observable<HttpResponse<Image>>{
-    return this.http.get(`${this.url}/${id}/image`, {observe: 'response'}).pipe(
+  getImage(id: number): Observable<HttpResponse<Image>> {
+    return this.http.get(`${this.url}/${id}/image`, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 

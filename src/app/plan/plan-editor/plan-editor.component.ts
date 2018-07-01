@@ -16,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PlanEditorComponent implements OnInit {
   selectedFile: File = null;
-  private maxImageSize: number = 1024*1024;
+  private maxImageSize: number = 1024 * 1024;
   imageData = null;
   selectedImage = null;
   tasksInPlan: Task[];
@@ -33,7 +33,7 @@ export class PlanEditorComponent implements OnInit {
     this.taskService.getTasks(this.plan.Id).subscribe(data => {
       this.tasksInPlan = data;
       this.getImage();
-      if(this.imageData == null) {
+      if (this.imageData == null) {
         this.imageData = '../../../assets/images/LWMTagBlack.png';
       }
       this.taskService.getTasks().subscribe(allTasks => {
@@ -69,24 +69,24 @@ export class PlanEditorComponent implements OnInit {
     this.plan.Name = name;
     this.plan.Description = description;
     this.planService.updatePlan(this.plan);
-    //send image
+    // send image
     this.planService.updateImage(this.plan.Id, this.selectedFile).subscribe(
       resp => console.log(resp)
-    )
+    );
     // todo: add tasks to plan
   }
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
-    if(this.selectedFile.size > this.maxImageSize) {
-      this.alertWindow.openSnackBar(`Image size must be less then ${this.maxImageSize/(1024*1024)} mb, please select another`, 'Ok');
+    if (this.selectedFile.size > this.maxImageSize) {
+      this.alertWindow.openSnackBar(`Image size must be less then ${this.maxImageSize / (1024 * 1024)} mb, please select another`, 'Ok');
       this.selectedFile = null;
     } else {
-      var preview = document.getElementById('newImage') as HTMLImageElement;
-      var reader  = new FileReader();
+      const preview = document.getElementById('newImage') as HTMLImageElement;
+      const reader = new FileReader();
       reader.onloadend = function () {
         preview.src = reader.result;
-      }
+      };
       reader.readAsDataURL(this.selectedFile);
     }
   }
@@ -94,7 +94,7 @@ export class PlanEditorComponent implements OnInit {
   getImage() {
     this.planService.getImage(this.plan.Id).subscribe(
       resp => {
-        if(resp.status === 200) {
+        if (resp.status === 200) {
           const extension = resp.body.Name.split('.').pop().toLowerCase();
           const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
