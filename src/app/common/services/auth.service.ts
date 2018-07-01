@@ -8,9 +8,10 @@ export class AuthService {
 
   constructor() { }
 
+  jwt = new JwtHelperService();
+
   isValid(token: string): boolean{
-    const jwt = new JwtHelperService();
-    return !jwt.isTokenExpired(token);
+    return !this.jwt.isTokenExpired(token);
   }
 
   setUserData(token: string): void{
