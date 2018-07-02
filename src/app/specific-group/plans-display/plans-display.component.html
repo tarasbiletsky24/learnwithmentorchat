@@ -18,12 +18,12 @@
 
       <ng-container matColumnDef="Create by">
         <th mat-header-cell *matHeaderCellDef> Create by </th>
-        <td mat-cell *matCellDef="let element"> {{element.CreatorFirstName}}+{{element.CreatorLastName}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.CreatorFirstName}} {{element.CreatorLastName}} </td>
       </ng-container>
 
       <ng-container matColumnDef="Date">
         <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.CreateDate}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.CreateDate | date:'dd-MM-yyyy'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="Is published">

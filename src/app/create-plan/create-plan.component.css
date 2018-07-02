@@ -1,0 +1,27 @@
+
+.header{
+text-align: center;
+
+}
+.add-new-plan>{   
+    display: flex;    
+flex-direction: row;
+justify-content: center;
+}
+.main{
+    display: flex;    
+flex-direction: row;
+justify-content: center;
+width: 40%;
+}
+.main>div{
+    text-align: center;
+}
+.input,.plan-icon{
+    width: 40%;
+    height: 40%;
+}
+.button-add-tasks{
+    text-align: center;
+}
+

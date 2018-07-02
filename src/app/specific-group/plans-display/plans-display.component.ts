@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Plan } from '../../common/models/plan';
-import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
-// todo remove moq object
-import { TasksComponent } from '../../task/tasks/tasks.component';
 
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
+import { AddPlansComponent } from '../add-plans/add-plans.component';
 
 @Component({
   selector: 'app-plans-display',
@@ -16,7 +14,7 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class PlansDisplayComponent implements OnInit {
 
-  @Input() group: Group;
+  @Input() linkId: number;
   plans: Plan[];
   displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
@@ -25,8 +23,14 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (this.group != null) {
-      this.groupService.getGroupPlans(this.group.Id).subscribe(data => this.plans = data);
+    if (this.linkId != null) {
+      this.groupService.getGroupPlans(this.linkId).subscribe(
+        data => this.plans = data,
+        err => console.log(err),
+        () => {
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+      );
     } else {
       this.groupService.getGroupPlans(1).subscribe(data => this.plans = data);
       console.log('No group provided');
@@ -40,14 +44,11 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   openPlanAddDialog(): void {
-    const dialogRef = this.dialog.open(/*AddPlanComponent */TasksComponent, {
-      width: '600px',
-      data: this.group
+    const dialogRef = this.dialog.open(AddPlansComponent, {
+      width: '1000px',
+      data: this.linkId
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // todo reinit table plans
     });
   }
 }

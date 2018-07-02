@@ -54,11 +54,12 @@ export class TaskService {
   }
 
   createTask(task: Task, planId?: number): Observable<any> {
-    let link = " ";
-    if (planId == null)
+    let link = '';
+    if (planId == null) {
       link = `${this.url}task`;
-    else
+    } else {
       link = `${this.url}plan/${planId}/newTask`;
+    }
     return this.http.post<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`creating task`)));
   }

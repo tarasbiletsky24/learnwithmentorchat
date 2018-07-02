@@ -1,0 +1,20 @@
+* {    
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.main {   
+  padding-top: 2%;
+}
+
+.search {
+  width: 90%;
+}
+.container  {
+  display: flex;
+  justify-content: center;
+}
+.search-input {
+    width: 100%;
+} 
+table {
+  width: 100%;
+}

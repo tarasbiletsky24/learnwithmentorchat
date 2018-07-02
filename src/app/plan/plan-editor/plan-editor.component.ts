@@ -103,7 +103,7 @@ export class PlanEditorComponent implements OnInit {
       }
     );
   }
-  onAddClick(){
+  onAddClick() {
     const dialogRef = this.dialog.open(TaskCreatorComponent, {
       data: this.plan.Id
     });

@@ -15,28 +15,22 @@ export class TaskCreatorComponent implements OnInit {
   planId: number;
   @Input()
   tasks: Task[];
-  // constructor(public dialogRef: MatDialogRef<TaskCreatorComponent>,
-  //   private taskService: TaskService,
-  //   @Inject(MAT_DIALOG_DATA) public data: number) { this.planId = data; }
   constructor(private taskService: TaskService) { }
 
-  // onNoClick(): void {    
-  //   this.dialogRef.close();
-  // }
   onSaveClick(name: string, description: string) {
     this.task = new Task();
     this.task.Description = description;
     this.task.Name = name;
     // todo:
     // you need to change to real user Id
-    this.task.CreatorId = 0; // here    
-    if (this.planId == null)
+    this.task.CreatorId = 0; // here
+    if (this.planId == null) {
       this.taskService.createTask(this.task).subscribe();
-    else {
+    } else {
       this.taskService.createTask(this.task, this.planId).subscribe();
       this.tasks.push(this.task);
     }
   }
-  ngOnInit() {    
+  ngOnInit() {
   }
 }

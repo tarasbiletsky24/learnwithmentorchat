@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit {
     this.dialogsService
       .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
       .subscribe(res => {
-      this.result = res;
+        this.result = res;
 
         if (this.result) {
           this.userService.updateUser(user as User).subscribe();
@@ -106,8 +106,8 @@ export class UsersComponent implements OnInit {
 
   // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
-    if (role == null || id == null ) {
-      this.alertwindow.openSnackBar('Choose role!' , 'Ok');
+    if (role == null || id == null) {
+      this.alertwindow.openSnackBar('Choose role!', 'Ok');
       return false;
     }
     this.dialogsService
