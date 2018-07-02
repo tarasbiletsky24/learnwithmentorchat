@@ -13,6 +13,9 @@ import { TasksComponent } from './task/tasks/tasks.component';
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 import { PlansComponent } from './plan/plans/plans.component';
+
+import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 
 const routes: Routes = [
@@ -27,7 +30,9 @@ const routes: Routes = [
   { path: 'contact-page', component: ContactPageComponent },
   { path: 'plan/:id/edit', component: SpecificGroupComponent },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'listTasks', component: AddTasksComponent, canActivate: [AuthGuard] },
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
+  { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'main-page' }
 ];
