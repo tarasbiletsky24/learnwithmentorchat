@@ -19,16 +19,13 @@ import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'main-page', pathMatch: 'full' },
   { path: 'main-page', component: MainPageComponent },
-  { path: 'signin', component: MainPageComponent, children: [{ path: '', component: SigninComponent }] },
-  { path: 'signup', component: MainPageComponent, children: [{ path: '', component: SignupComponent }] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-page', component: ContactPageComponent },
-  { path: 'plan/:id/edit', component: SpecificGroupComponent },
+  { path: 'plan/:id/edit', component: SpecificGroupComponent, canActivate: [AuthGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'listTasks', component: AddTasksComponent, canActivate: [AuthGuard] },
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },

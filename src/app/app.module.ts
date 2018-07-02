@@ -57,8 +57,6 @@ import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-ed
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
