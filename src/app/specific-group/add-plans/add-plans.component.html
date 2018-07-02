@@ -40,7 +40,7 @@
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="primary" (click)="addChoosenPlan(element)">
+            <button mat-mini-fab color="primary" (click)="addChoosenPlan($event,element)">
               +
             </button>
           </td>
