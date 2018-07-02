@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(SignupComponent, {});
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
     this.isLogin = false;
     this.router.navigate(['/main-page']);

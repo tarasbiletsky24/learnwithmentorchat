@@ -6,14 +6,9 @@ import { Router } from '@angular/router';
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
-import { Plan } from '../../common/models/plan';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
-import { AddUserComponent } from '../add-user/add-user.component';
-import { PlansDisplayComponent } from '../plans-display/plans-display.component';
-import { UsersDisplayComponent } from '../users-display/users-display.component';
-import { TasksComponent } from '../../task/tasks/tasks.component';
 
 @Component({
   selector: 'app-specific-group',
@@ -25,8 +20,7 @@ export class SpecificGroupComponent implements OnInit {
   group: Group;
   mentor: User;
   linkId: number;
-  // todo should be private, but does not work
-  /*private*/ subscription: Subscription;
+  subscription: Subscription;
 
   constructor(private userService: UserService,
     private groupService: GroupService,

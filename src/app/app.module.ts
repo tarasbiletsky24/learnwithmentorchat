@@ -47,13 +47,14 @@ import { ContactPageComponent } from './main-page/contact-page/contact-page.comp
 
 
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
-import { AddUserComponent } from './specific-group/add-user/add-user.component';
 import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
 import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
+import { AddUsersComponent } from './specific-group/add-users/add-users.component';
+import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 
@@ -79,12 +80,16 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     TaskSubmitorComponent,
     ConversationComponent,
     SpecificGroupComponent,
-    AddUserComponent,
     AlertWindowsComponent,
     ConfirmDialogComponent,
     UsersDisplayComponent,
-    PlansDisplayComponent, PlanEditorComponent, CreatePlanComponent, AddTasksComponent
-
+    PlansDisplayComponent,
+    PlanEditorComponent,
+    AddUsersComponent,
+    AddPlansComponent,
+    PlanEditorComponent,
+    CreatePlanComponent,
+    AddTasksComponent
   ],
   imports: [
     AppRoutingModule,
@@ -120,6 +125,8 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AboutPageComponent,
     ContactPageComponent,
     PlanEditorComponent,
+    AddUsersComponent,
+    AddPlansComponent,
     AddTasksComponent
   ],
   providers: [UserService, AuthGuard,

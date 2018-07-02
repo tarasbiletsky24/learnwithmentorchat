@@ -10,11 +10,11 @@ export class AuthService {
 
   jwt = new JwtHelperService();
 
-  isValid(token: string): boolean{
+  isValid(token: string): boolean {
     return !this.jwt.isTokenExpired(token);
   }
 
-  setUserData(token: string): void{
+  setUserData(token: string): void {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
     localStorage.setItem('userToken', token);
