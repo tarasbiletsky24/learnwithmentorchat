@@ -81,11 +81,10 @@ import { AddPlansComponent } from './specific-group/add-plans/add-plans.componen
     AlertWindowsComponent,
     ConfirmDialogComponent,
     UsersDisplayComponent,
-    PlansDisplayComponent, 
-    PlanEditorComponent, 
-    AddUsersComponent, 
+    PlansDisplayComponent,
+    PlanEditorComponent,
+    AddUsersComponent,
     AddPlansComponent
-
   ],
   imports: [
     AppRoutingModule,

@@ -31,13 +31,13 @@ export class AddUsersComponent implements OnInit {
     this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe();
     this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
   }
-  
+
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
   ngOnInit() {
-    this.groupService.searchNotUsers("", this.groupId).subscribe(
+    this.groupService.searchNotUsers('', this.groupId).subscribe(
       user => this.users = user
     );
     this.searchTerms.pipe(

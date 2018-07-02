@@ -51,13 +51,13 @@ export class GroupService {
     );
   }
 
-  addUserToGroup(userId: number,groupId: number): Observable<HttpResponse<any>> {
+  addUserToGroup(userId: number, groupId: number): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${groupId}/user`, [userId]).pipe(
       catchError(r => of(r))
     );
   }
 
-  addPlanToGroup(planId: number,groupId: number): Observable<HttpResponse<any>> {
+  addPlanToGroup(planId: number, groupId: number): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${groupId}/plan`, [planId]).pipe(
       catchError(r => of(r))
     );

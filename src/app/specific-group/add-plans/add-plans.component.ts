@@ -37,7 +37,7 @@ export class AddPlansComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupService.searchNotPlans("", this.groupId).subscribe(
+    this.groupService.searchNotPlans('', this.groupId).subscribe(
       plan => this.plans = plan
     );
     this.searchTerms.pipe(
