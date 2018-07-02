@@ -54,13 +54,15 @@ import { UsersDisplayComponent } from './specific-group/users-display/users-disp
 import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
+import { TaskCreatorComponent } from './task/task-creator/task-creator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     NavbarComponent,
-    TasksComponent, TaskDetailComponent, TaskEditorComponent, TasksListEditorComponent,
+    TasksComponent, TaskDetailComponent, TaskEditorComponent,
+    TasksListEditorComponent, TaskCreatorComponent,
     CommentComponent,
     MainPageComponent,
     SigninComponent,
@@ -110,6 +112,7 @@ import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-ed
     ],
 
   entryComponents: [TaskEditorComponent,
+    TaskCreatorComponent,
     ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
