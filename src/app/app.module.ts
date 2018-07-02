@@ -53,6 +53,7 @@ import { UsersDisplayComponent } from './specific-group/users-display/users-disp
 import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
+import { TaskCreatorComponent } from './task/task-creator/task-creator.component';
 import { AddUsersComponent } from './specific-group/add-users/add-users.component';
 import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
@@ -63,7 +64,8 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AppComponent,
     UsersComponent,
     NavbarComponent,
-    TasksComponent, TaskDetailComponent, TaskEditorComponent, TasksListEditorComponent,
+    TasksComponent, TaskDetailComponent, TaskEditorComponent,
+    TasksListEditorComponent, TaskCreatorComponent,
     CommentComponent,
     MainPageComponent,
     SigninComponent,
@@ -117,6 +119,7 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     ],
 
   entryComponents: [TaskEditorComponent,
+    TaskCreatorComponent,
     ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,

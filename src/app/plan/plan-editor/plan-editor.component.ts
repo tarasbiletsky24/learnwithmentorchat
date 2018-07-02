@@ -1,13 +1,14 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Plan } from '../../common/models/plan';
 import { PlanService } from '../../common/services/plan.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Task } from '../../common/models/task';
 import { TaskService } from '../../common/services/task.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Observable, of } from 'rxjs';
 import { Image } from '../../common/models/image';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TaskCreatorComponent } from '../../task/task-creator/task-creator.component';
 
 @Component({
   selector: 'app-plan-editor',
@@ -24,6 +25,7 @@ export class PlanEditorComponent implements OnInit {
   @Input()
   plan: Plan;
   constructor(private sanitizer: DomSanitizer,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<PlanEditorComponent>,
     private alertWindow: AlertWindowsComponent,
     private planService: PlanService, private taskService: TaskService,
@@ -90,7 +92,6 @@ export class PlanEditorComponent implements OnInit {
       reader.readAsDataURL(this.selectedFile);
     }
   }
-
   getImage() {
     this.planService.getImage(this.plan.Id).subscribe(
       resp => {
@@ -101,5 +102,10 @@ export class PlanEditorComponent implements OnInit {
         }
       }
     );
+  }
+  onAddClick() {
+    const dialogRef = this.dialog.open(TaskCreatorComponent, {
+      data: this.plan.Id
+    });
   }
 }

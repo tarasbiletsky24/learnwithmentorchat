@@ -9,6 +9,7 @@ import { PlanService } from './plan.service';
 import { Plan } from '../models/plan';
 import { UserTask } from '../models/userTask';
 import { Message } from '../models/message';
+import { text } from '@angular/core/src/render3/instructions';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -52,27 +53,32 @@ export class TaskService {
       catchError(this.handleError<Task>(`deleting task id=${task.Id}`)));
   }
 
-  createTask(task: Task): Observable<any> {
-    const link = `${this.url}task`;
+  createTask(task: Task, planId?: number): Observable<any> {
+    let link = '';
+    if (planId == null) {
+      link = `${this.url}task`;
+    } else {
+      link = `${this.url}plan/${planId}/newTask`;
+    }
     return this.http.post<Task>(link, task, httpOptions).pipe(
       catchError(this.handleError<Task>(`creating task`)));
   }
 
   getUserTask(planTaskId: number, userId: number): Observable<HttpResponse<UserTask>> {
     const link = `${this.url}task/usertask?planTaskId=${planTaskId}&userId=${userId}`;
-    return this.http.get<UserTask>(link, {observe: 'response'}).pipe(
+    return this.http.get<UserTask>(link, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 
   getMessages(userTaskId: number): Observable<HttpResponse<Message[]>> {
     const link = `${this.url}task/userTask/${userTaskId}/messages`;
-    return this.http.get<Message[]>(link, {observe: 'response'}).pipe(
+    return this.http.get<Message[]>(link, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 
   sendMessage(userTaskId: number, message: Message): Observable<any> {
     const link = `${this.url}task/userTask/${userTaskId}/messages`;
-    return this.http.post<Message>(link, message, {observe: 'response'}).pipe(
+    return this.http.post<Message>(link, message, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 

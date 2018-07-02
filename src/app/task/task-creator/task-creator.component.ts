@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Task } from '../../common/models/task';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
 
 @Component({
@@ -11,23 +11,26 @@ import { TaskService } from '../../common/services/task.service';
 export class TaskCreatorComponent implements OnInit {
 
   task: Task;
-  constructor(public dialogRef: MatDialogRef<TaskCreatorComponent>,
-    private taskService: TaskService) { }
+  @Input()
+  planId: number;
+  @Input()
+  tasks: Task[];
+  constructor(private taskService: TaskService) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  onSaveClick(description: string) {
+  onSaveClick(name: string, description: string) {
+    this.task = new Task();
     this.task.Description = description;
-    /// you need to change to real user Id
+    this.task.Name = name;
+    // todo:
+    // you need to change to real user Id
     this.task.CreatorId = 0; // here
-    this.taskService.updateTask(this.task).subscribe();
-  }
-  onDeleteClick() {
-    this.taskService.deleteTask(this.task).subscribe();
+    if (this.planId == null) {
+      this.taskService.createTask(this.task).subscribe();
+    } else {
+      this.taskService.createTask(this.task, this.planId).subscribe();
+      this.tasks.push(this.task);
+    }
   }
   ngOnInit() {
   }
-
-
 }
