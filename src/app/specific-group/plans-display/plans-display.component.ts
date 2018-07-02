@@ -48,7 +48,16 @@ export class PlansDisplayComponent implements OnInit {
       width: '1000px',
       data: this.linkId
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.groupService.getGroupPlans(this.linkId).subscribe(
+        data => this.plans = data,
+        err => console.log(err),
+        () => {
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+      );
+    }  
+    );
+    //dialogRef.afterClosed().subscribe(result => {});
   }
 }

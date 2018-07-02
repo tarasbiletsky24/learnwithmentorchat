@@ -49,6 +49,13 @@ export class UsersDisplayComponent implements OnInit {
       data: this.linkId
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.groupService.getGroupUsers(this.linkId).subscribe(
+        data => this.users = data,
+        err => console.log(err),
+        () => {
+        this.dataSource = new MatTableDataSource<User>(this.users);
+        }
+      );
     });
   }
 
