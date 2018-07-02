@@ -17,6 +17,10 @@ export class PlanService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  private httpOptionsNoAuth = {
+    headers: new HttpHeaders({ 'No-Auth': 'True' })
+  };
+
   private url = `${environment.apiUrl}plan`;
 
   getPlans(): Observable<Plan[]> {
@@ -26,7 +30,7 @@ export class PlanService {
   }
 
   getSomePlans(previousAmount: number, amount: number): Observable<Plan[]> {
-    return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`).pipe(
+    return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`, { headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
       catchError(this.handleError<Plan[]>(`getPlans`))
     );
   }
@@ -63,7 +67,10 @@ export class PlanService {
   }
 
   getImage(id: number): Observable<HttpResponse<Image>> {
-    return this.http.get(`${this.url}/${id}/image`, { observe: 'response' }).pipe(
+    return this.http.get(`${this.url}/${id}/image`, {
+      observe: 'response',
+      headers: new HttpHeaders({ 'No-Auth': 'True' })
+    }).pipe(
       catchError(val => of(val)));
   }
 
