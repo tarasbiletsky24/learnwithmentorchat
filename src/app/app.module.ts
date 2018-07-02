@@ -55,6 +55,8 @@ import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
 import { AddUsersComponent } from './specific-group/add-users/add-users.component';
 import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
+import { CreatePlanComponent } from './create-plan/create-plan.component';
+import { AddTasksComponent } from './add-tasks/add-tasks.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,10 @@ import { AddPlansComponent } from './specific-group/add-plans/add-plans.componen
     PlansDisplayComponent,
     PlanEditorComponent,
     AddUsersComponent,
-    AddPlansComponent
+    AddPlansComponent,
+    PlanEditorComponent,
+    CreatePlanComponent,
+    AddTasksComponent
   ],
   imports: [
     AppRoutingModule,
@@ -121,7 +126,8 @@ import { AddPlansComponent } from './specific-group/add-plans/add-plans.componen
     ContactPageComponent,
     PlanEditorComponent,
     AddUsersComponent,
-    AddPlansComponent
+    AddPlansComponent,
+    AddTasksComponent
   ],
   providers: [UserService, AuthGuard,
     {
