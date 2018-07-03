@@ -21,8 +21,7 @@ export class ConversationComponent implements OnInit {
   private notExistingMessage: string;
   private userMessage: string;
   private recentMessages: Message[] = [];
-  // todo: add logic for getting user id from local storage if authorized
-  private userId = 3;
+  private userId: number;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
@@ -74,7 +73,7 @@ export class ConversationComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.userId = +localStorage.getItem('id');
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
         if (ut.status !== 200) {

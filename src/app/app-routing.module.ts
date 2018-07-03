@@ -17,6 +17,7 @@ import { PlansComponent } from './plan/plans/plans.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
+import { UserPageComponent } from './user/user-page/user-page.component';
 
 const routes: Routes = [
   { path: 'main-page', component: MainPageComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'main-page' }
 ];
 

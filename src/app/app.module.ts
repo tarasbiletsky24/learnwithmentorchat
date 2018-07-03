@@ -58,6 +58,7 @@ import { AddUsersComponent } from './specific-group/add-users/add-users.componen
 import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { UserPageComponent } from './user/user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AddPlansComponent,
     PlanEditorComponent,
     CreatePlanComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    UserPageComponent
   ],
   imports: [
     AppRoutingModule,
