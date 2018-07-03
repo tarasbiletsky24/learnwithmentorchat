@@ -12,7 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class NavbarComponent implements OnInit {
   mainTag = '</>';
-  isLogin: boolean = false;
+  isLogin = false;
   fullName: string;
   constructor(private dialog: MatDialog, private router: Router) {
 
