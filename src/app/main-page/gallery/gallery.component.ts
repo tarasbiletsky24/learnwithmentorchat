@@ -4,6 +4,12 @@ import { Image } from '../../common/models/image';
 import { PlanService } from '../../common/services/plan.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
+class PlanInfo {
+  plan: Plan;
+  imageData: any;
+}
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -42,7 +48,3 @@ export class GalleryComponent implements OnInit {
 
 }
 
-class PlanInfo {
-  plan: Plan;
-  imageData: any;
-}

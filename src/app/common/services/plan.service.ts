@@ -30,7 +30,8 @@ export class PlanService {
   }
 
   getSomePlans(previousAmount: number, amount: number): Observable<Plan[]> {
-    return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`, { headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
+    return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`,
+    { headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
       catchError(this.handleError<Plan[]>(`getPlans`))
     );
   }
