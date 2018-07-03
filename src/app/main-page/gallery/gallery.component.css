@@ -35,12 +35,17 @@ p{
 }
 
 mat-card{
-    height:150px;
+    height:152px;
+    padding: 0px;
 }
 
-img{
+.imgdiv{
+    margin-left:1px;
+    margin-top:1px;
     margin-right: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 1px;    
+}
+.imgdiv img{
     width: 150px;
     height: 150px;
 }
@@ -57,7 +62,8 @@ text-decoration: none;
 }
 
 .textdiv{
-    width:100%
+    width:100%;
+    margin-top:10px;
 }
   
 .grid {
