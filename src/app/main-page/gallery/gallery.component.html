@@ -2,14 +2,16 @@
 <div class="grid grid-pad">
   <a *ngFor="let p of plans" class="col-1-4">
     <mat-card>
-      <mat-card-header>
-        <h3>{{p.plan.Name}}</h3>
-        <img mat-card-image *ngIf="p.imageData" [src]="p.imageData" alt="Plan image">
-        <img mat-card-image *ngIf="!p.imageData" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{p.plan.Description}}</p>
-      </mat-card-content>
+        <div class="card">
+          <div class="imgdiv">
+            <img  *ngIf="p.imageData" [src]="p.imageData" alt="Plan image">
+            <img  *ngIf="!p.imageData" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">
+          </div>
+          <div class="textdiv">
+            <h3>{{p.plan.Name}}</h3>
+            <p>{{p.plan.Description}}</p>
+          </div>
+      </div>
     </mat-card>
   </a>
 </div>
