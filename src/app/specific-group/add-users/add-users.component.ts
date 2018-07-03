@@ -27,9 +27,10 @@ export class AddUsersComponent implements OnInit {
   private searchTerms = new Subject<string>();
   groupId: number;
 
-  addChoosenUser(choosenOne: User) {
+  addChoosenUser(event: any, choosenOne: User) {
     this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe();
     this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
+    event.currentTarget.setAttribute('disabled', 'disabled');
   }
 
   search(term: string): void {

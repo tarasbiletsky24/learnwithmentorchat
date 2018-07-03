@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, Inject, Attribute } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatButton } from '@angular/material';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -7,6 +7,8 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { Plan } from '../../common/models/plan';
 import { GroupService } from '../../common/services/group.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { DISABLED } from '@angular/forms/src/model';
+import { IButton } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-add-plans',
@@ -27,9 +29,10 @@ export class AddPlansComponent implements OnInit {
   private searchTerms = new Subject<string>();
   groupId: number;
 
-  addChoosenPlan(choosenOne: Plan) {
+  addChoosenPlan(event: any, choosenOne: Plan) {
     this.groupService.addPlanToGroup(choosenOne.Id, this.groupId).subscribe();
     this.alertwindow.openSnackBar(choosenOne.Name + ' added', 'Ok');
+    event.currentTarget.setAttribute('disabled', 'disabled');
   }
 
   search(term: string): void {

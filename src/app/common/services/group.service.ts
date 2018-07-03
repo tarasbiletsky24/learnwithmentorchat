@@ -40,7 +40,7 @@ export class GroupService {
   }
 
   searchNotUsers(param: string, groupId: number): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/searchinNotInvolvedUser?searchKey=${param}&groupId=${groupId}`).pipe(
+    return this.http.get<User[]>(`${this.url}/searchinNotInvolvedUsers?searchKey=${param}&groupId=${groupId}`).pipe(
       catchError(this.handleError<User[]>(`searchUsersNotInGroup`))
     );
   }
