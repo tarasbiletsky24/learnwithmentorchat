@@ -28,16 +28,19 @@ export class AddUsersComponent implements OnInit {
   groupId: number;
 
   addChoosenUser(event: any, choosenOne: User) {
+    debugger
     this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe();
     this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
     event.currentTarget.setAttribute('disabled', 'disabled');
   }
 
   search(term: string): void {
+    debugger
     this.searchTerms.next(term);
   }
 
   ngOnInit() {
+    debugger
     this.groupService.searchNotUsers('', this.groupId).subscribe(
       user => this.users = user
     );
