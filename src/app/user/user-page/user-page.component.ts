@@ -23,7 +23,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private userService: UserService,
     private sanitizer: DomSanitizer,
-    private alertWindow: AlertWindowsComponent) {  }
+    private alertWindow: AlertWindowsComponent) { }
 
   ngOnInit() {
     this.userId = +localStorage.getItem('id');
@@ -32,7 +32,7 @@ export class UserPageComponent implements OnInit {
         this.userData = resp;
         this.userService.getImage(this.userId).subscribe(
           response => {
-            if(response.status === 200){
+            if (response.status === 200) {
               this.setUserPic(response.body);
             } else {
               this.imageData = '../../../assets/images/user-default.png';
@@ -41,18 +41,18 @@ export class UserPageComponent implements OnInit {
         );
         this.userService.getStatistics(this.userId).subscribe(
           r => {
-            if(r.status === 200){
+            if (r.status === 200) {
               this.userStats = r.body;
             }
           }
-        )
+        );
       }
-    )
+    );
   }
 
   onFileSelected(event) {
     const selected: File = event.target.files[0];
-    if(selected == null){
+    if (selected == null) {
       return null;
     }
     if (selected.size > this.maxImageSize) {
