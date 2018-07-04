@@ -3,8 +3,10 @@ import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 import { Image } from '../../common/models/image';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Statistics } from '../../common/models/statistics';
+import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user-page',
@@ -23,7 +25,8 @@ export class UserPageComponent implements OnInit {
 
   constructor(private userService: UserService,
     private sanitizer: DomSanitizer,
-    private alertWindow: AlertWindowsComponent) { }
+    private alertWindow: AlertWindowsComponent,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.userId = +localStorage.getItem('id');
@@ -78,6 +81,13 @@ export class UserPageComponent implements OnInit {
     this.userService.updateImage(this.userData.Id, this.selectedFile).subscribe(
       this.selectedFile = null
     );
+  }
+
+  onEditClick(): void {
+
+    const dialofRef = this.dialog.open(UserEditComponent, {
+      data: this.userData
+    });
   }
 
 }
