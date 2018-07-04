@@ -72,9 +72,7 @@ export class PlanEditorComponent implements OnInit {
     this.plan.Description = description;
     this.planService.updatePlan(this.plan);
     // send image
-    this.planService.updateImage(this.plan.Id, this.selectedFile).subscribe(
-      resp => console.log(resp)
-    );
+    this.planService.updateImage(this.plan.Id, this.selectedFile).subscribe();
     // todo: add tasks to plan
   }
 

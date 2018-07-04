@@ -56,8 +56,7 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = 3;
-    // todo: add logic for getting user id from local storage if authorized
+    const userId = +localStorage.getItem('id');
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
         if (ut.status !== 200) {
