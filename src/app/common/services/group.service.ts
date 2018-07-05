@@ -33,6 +33,12 @@ export class GroupService {
     );
   }
 
+  getUserGroups(id: number): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe(
+      catchError(this.handleError<Group[]>(`getUserGroups`))
+    );
+  }
+
   getGroupPlans(id: number): Observable<Plan[]> {
     return this.http.get<Plan[]>(`${this.url}/${id}/plans`).pipe(
       catchError(this.handleError<Plan[]>(`getGroupPlans`))

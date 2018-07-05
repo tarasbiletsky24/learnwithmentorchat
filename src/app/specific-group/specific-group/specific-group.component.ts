@@ -30,7 +30,6 @@ export class SpecificGroupComponent implements OnInit {
     this.subscription = activateRoute.params.subscribe(params => this.linkId = params['id']);
   }
 
-
   ngOnInit() {
     if (this.linkId != null) {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
