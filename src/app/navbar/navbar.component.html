@@ -5,6 +5,9 @@
       <a routerLink="main-page" class="ordItem">
         <button mat-button>Start Learning</button>
       </a>
+      <a routerLink="mygroups" class="ordItem">
+        <button mat-button>My groups</button>
+      </a>
     </div>
     <div *ngIf="!isLogin" class="cell15">
       <a routerLink="signin" class="ordItem" (click)="openSignInDialog()">

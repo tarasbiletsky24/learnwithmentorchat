@@ -12,7 +12,7 @@
 
         <ng-container matColumnDef="MentorId">
           <th mat-header-cell *matHeaderCellDef>Mentor</th>
-          <td mat-cell *matCellDef="let element"> {{element.MentorId}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.MentorName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Link">
@@ -28,5 +28,23 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let group of groups">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{group.Name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Mentor: {{group.MentorName}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-plans-display [linkId]="group.Id"></app-plans-display>
+        <mat-action-row >
+          <button mat-raised-button color="primary" (click)="openPlanAddDialog(group)">Add plan</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
 </div>

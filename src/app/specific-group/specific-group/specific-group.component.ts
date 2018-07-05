@@ -32,8 +32,10 @@ export class SpecificGroupComponent implements OnInit {
 
   ngOnInit() {
     if (this.linkId != null) {
-      this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
-      this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
+      this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data,
+      err => console.log(err),
+        () => { this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data); }
+    );
     } else {
       this.router.navigate(['/main-page']);
     }

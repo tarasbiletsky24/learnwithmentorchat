@@ -6,6 +6,7 @@ import { GroupService } from '../../common/services/group.service';
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddPlansComponent } from '../add-plans/add-plans.component';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 
 @Component({
   selector: 'app-plans-display',
@@ -16,10 +17,11 @@ export class PlansDisplayComponent implements OnInit {
 
   @Input() linkId: number;
   plans: Plan[];
-  displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
+  displayedColumns = ['Description', 'Create by', 'Date', 'Is published','Delete'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
 
   constructor(private groupService: GroupService,
+    private alertwindow: AlertWindowsComponent,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -59,4 +61,12 @@ export class PlansDisplayComponent implements OnInit {
     }
     );
   }
+
+  delChoosenPlan(currentPlan: Plan) {
+    //todo method to delete plan from group
+    //this.groupService.addPlanToGroup(choosenOne.Id, this.groupId).subscribe();
+    this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
+    //todo refresh plans
+  }
+
 }
