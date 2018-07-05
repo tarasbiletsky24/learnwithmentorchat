@@ -85,7 +85,6 @@ export class UserPageComponent implements OnInit {
   }
 
   onEditClick(): void {
-
     const dialofRef = this.dialog.open(UserEditComponent, {
       data: this.userData
     });
