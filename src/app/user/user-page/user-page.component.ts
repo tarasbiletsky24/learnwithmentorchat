@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Statistics } from '../../common/models/statistics';
 import { UserEditComponent } from '../user-edit/user-edit.component';
-import * as httpStatus from 'http-status-codes';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-user-page',
@@ -27,6 +27,7 @@ export class UserPageComponent implements OnInit {
   constructor(private userService: UserService,
     private sanitizer: DomSanitizer,
     private alertWindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -36,7 +37,7 @@ export class UserPageComponent implements OnInit {
         this.userData = resp;
         this.userService.getImage(this.userId).subscribe(
           response => {
-            if (response.status === httpStatus.OK) {
+            if (this.httpStatusCodeService.isOk(response.status)) {
               this.setUserPic(response.body);
             } else {
               this.imageData = '../../../assets/images/user-default.png';
@@ -45,7 +46,7 @@ export class UserPageComponent implements OnInit {
         );
         this.userService.getStatistics(this.userId).subscribe(
           r => {
-            if (r.status === httpStatus.OK) {
+            if (this.httpStatusCodeService.isOk(r.status)) {
               this.userStats = r.body;
             }
           }

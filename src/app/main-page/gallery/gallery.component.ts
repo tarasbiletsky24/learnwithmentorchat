@@ -3,7 +3,7 @@ import { Plan } from '../../common/models/plan';
 import { Image } from '../../common/models/image';
 import { PlanService } from '../../common/services/plan.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as httpStatus from 'http-status-codes';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 class PlanInfo {
   plan: Plan;
@@ -20,6 +20,7 @@ export class GalleryComponent implements OnInit {
   plans: PlanInfo[] = new Array;
 
   constructor(private planService: PlanService,
+    private httpStatusCodeService: HttpStatusCodeService,
     private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class GalleryComponent implements OnInit {
           planInfo.plan = p;
           this.planService.getImage(p.Id).subscribe(
             resp => {
-              if (resp.status === httpStatus.OK) {
+              if (this.httpStatusCodeService.isOk(resp.status)) {
                 const extension = resp.body.Name.split('.').pop().toLowerCase();
                 const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
                 planInfo.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
