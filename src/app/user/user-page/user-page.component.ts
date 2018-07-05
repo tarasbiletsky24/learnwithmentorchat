@@ -90,5 +90,4 @@ export class UserPageComponent implements OnInit {
       data: this.userData
     });
   }
-
 }
