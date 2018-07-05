@@ -3,8 +3,9 @@ import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
-import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
-import {DialogsService} from '../../components/dialogs/dialogs.service';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { DialogsService } from '../../components/dialogs/dialogs.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-task-submitor',
@@ -56,10 +57,10 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = +localStorage.getItem('id');
+    const userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
-        if (ut.status !== 200) {
+        if (ut.status !== environment.httpStatusCodes.ok) {
           this.notExisting();
         } else {
           this.userTask = ut.body;

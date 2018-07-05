@@ -3,7 +3,7 @@ import { Plan } from '../../common/models/plan';
 import { Image } from '../../common/models/image';
 import { PlanService } from '../../common/services/plan.service';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { environment } from '../../../environments/environment';
 
 class PlanInfo {
   plan: Plan;
@@ -31,7 +31,7 @@ export class GalleryComponent implements OnInit {
           planInfo.plan = p;
           this.planService.getImage(p.Id).subscribe(
             resp => {
-              if (resp.status === 200) {
+              if (resp.status === environment.httpStatusCodes.ok) {
                 const extension = resp.body.Name.split('.').pop().toLowerCase();
                 const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
                 planInfo.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);

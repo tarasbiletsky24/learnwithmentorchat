@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,7 +15,7 @@ export class UserEditComponent implements OnInit {
   @Input()
   newData = new User;
   userData: User;
-  password: string;
+  password = '';
   editPass = false;
   namePattern = '[A-Z][a-zA-Z0-9]{1,20}$';
 
@@ -41,7 +42,7 @@ export class UserEditComponent implements OnInit {
     if (this.userData.FirstName !== this.newData.FirstName || this.userData.LastName !== this.newData.LastName) {
       this.userService.updateUser(this.newData).subscribe(
         resp => {
-          if (resp.status === 200) {
+          if (resp.status === environment.httpStatusCodes.ok) {
             this.dialogRef.close();
             this.data.FirstName = this.newData.FirstName;
             this.data.LastName = this.newData.LastName;
@@ -54,10 +55,10 @@ export class UserEditComponent implements OnInit {
         }
       );
     }
-    if (this.editPass && this.password !== null && this.password !== '') {
+    if (this.editPass && this.password) {
       this.userService.updatePassword(this.userData.Id, this.password).subscribe(
         resp => {
-          if (resp.status === 200) {
+          if (resp.status === environment.httpStatusCodes.ok) {
             this.alertwindow.openSnackBar(`Password ${message}successfully updated`, 'Ok');
           } else {
             this.alertwindow.openSnackBar('Some error occured, please try again later', 'Ok');
@@ -65,7 +66,11 @@ export class UserEditComponent implements OnInit {
         }
       );
     }
-    this.dialogRef.close();
+    if (this.editPass && this.password === '') {
+      this.alertwindow.openSnackBar('Password can not be empty', 'Ok');
+    } else {
+      this.dialogRef.close();
+    }
   }
 
 }

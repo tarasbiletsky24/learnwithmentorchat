@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:34736/api/'
+  apiUrl: 'http://localhost:34736/api/',
+  httpStatusCodes: {
+    ok: 200,
+    noContent: 204,
+    badRequest: 400,
+    unauthorized: 401
+  },
+  maxImageSize: 1024 * 1024
 };
 
 /*

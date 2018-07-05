@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Statistics } from '../../common/models/statistics';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-page',
@@ -20,7 +21,7 @@ export class UserPageComponent implements OnInit {
   userData: User;
   userStats = null;
   selectedFile: File = null;
-  private maxImageSize: number = 1024 * 1024;
+  private maxImageSize = environment.maxImageSize;
   imageData = null;
 
   constructor(private userService: UserService,
@@ -29,13 +30,13 @@ export class UserPageComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userId = +localStorage.getItem('id');
+    this.userId = parseInt(localStorage.getItem('id'), 10);
     this.userService.getUser(this.userId).subscribe(
       resp => {
         this.userData = resp;
         this.userService.getImage(this.userId).subscribe(
           response => {
-            if (response.status === 200) {
+            if (response.status === environment.httpStatusCodes.ok) {
               this.setUserPic(response.body);
             } else {
               this.imageData = '../../../assets/images/user-default.png';
@@ -44,7 +45,7 @@ export class UserPageComponent implements OnInit {
         );
         this.userService.getStatistics(this.userId).subscribe(
           r => {
-            if (r.status === 200) {
+            if (r.status === environment.httpStatusCodes.ok) {
               this.userStats = r.body;
             }
           }
