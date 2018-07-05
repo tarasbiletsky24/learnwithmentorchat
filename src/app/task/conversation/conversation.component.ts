@@ -5,7 +5,8 @@ import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
 import { Message } from '../../common/models/message';
 import { Observable, of } from 'rxjs';
-import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-conversation',
@@ -23,8 +24,10 @@ export class ConversationComponent implements OnInit {
   private recentMessages: Message[] = [];
   private userId: number;
 
-  constructor(public dialogRef: MatDialogRef<ConversationComponent>, private  alertwindow: AlertWindowsComponent,
+  constructor(public dialogRef: MatDialogRef<ConversationComponent>,
+    private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
+    private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
   }
@@ -73,10 +76,10 @@ export class ConversationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userId = +localStorage.getItem('id');
+    this.userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
-        if (ut.status !== 200) {
+        if (!this.httpStatusCodeService.isOk(ut.status)) {
           this.notExistingUserTask();
         } else {
           this.userTask = ut.body;
