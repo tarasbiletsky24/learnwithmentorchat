@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { environment } from '../../../environments/environment';
+import * as httpStatus from 'http-status-codes';
 
 @Component({
   selector: 'app-user-edit',
@@ -42,7 +42,7 @@ export class UserEditComponent implements OnInit {
     if (this.userData.FirstName !== this.newData.FirstName || this.userData.LastName !== this.newData.LastName) {
       this.userService.updateUser(this.newData).subscribe(
         resp => {
-          if (resp.status === environment.httpStatusCodes.ok) {
+          if (resp.status === httpStatus.OK) {
             this.dialogRef.close();
             this.data.FirstName = this.newData.FirstName;
             this.data.LastName = this.newData.LastName;
@@ -58,7 +58,7 @@ export class UserEditComponent implements OnInit {
     if (this.editPass && this.password) {
       this.userService.updatePassword(this.userData.Id, this.password).subscribe(
         resp => {
-          if (resp.status === environment.httpStatusCodes.ok) {
+          if (resp.status === httpStatus.OK) {
             this.alertwindow.openSnackBar(`Password ${message}successfully updated`, 'Ok');
           } else {
             this.alertwindow.openSnackBar('Some error occured, please try again later', 'Ok');

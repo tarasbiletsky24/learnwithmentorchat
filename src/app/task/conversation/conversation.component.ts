@@ -6,7 +6,7 @@ import { UserTask } from '../../common/models/userTask';
 import { Message } from '../../common/models/message';
 import { Observable, of } from 'rxjs';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { environment } from '../../../environments/environment';
+import * as httpStatus from 'http-status-codes';
 
 @Component({
   selector: 'app-conversation',
@@ -77,7 +77,7 @@ export class ConversationComponent implements OnInit {
     this.userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
-        if (ut.status !== environment.httpStatusCodes.ok) {
+        if (ut.status !== httpStatus.OK) {
           this.notExistingUserTask();
         } else {
           this.userTask = ut.body;

@@ -5,7 +5,7 @@ import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../components/dialogs/dialogs.service';
-import { environment } from '../../../environments/environment';
+import * as httpStatus from 'http-status-codes';
 
 @Component({
   selector: 'app-task-submitor',
@@ -60,7 +60,7 @@ export class TaskSubmitorComponent implements OnInit {
     const userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
-        if (ut.status !== environment.httpStatusCodes.ok) {
+        if (ut.status !== httpStatus.OK) {
           this.notExisting();
         } else {
           this.userTask = ut.body;

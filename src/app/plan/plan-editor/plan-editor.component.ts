@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 import { Image } from '../../common/models/image';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TaskCreatorComponent } from '../../task/task-creator/task-creator.component';
-import { environment } from '../../../environments/environment';
+import * as httpStatus from 'http-status-codes';
 
 @Component({
   selector: 'app-plan-editor',
@@ -94,7 +94,7 @@ export class PlanEditorComponent implements OnInit {
   getImage() {
     this.planService.getImage(this.plan.Id).subscribe(
       resp => {
-        if (resp.status === environment.httpStatusCodes.ok) {
+        if (resp.status === httpStatus.OK) {
           const extension = resp.body.Name.split('.').pop().toLowerCase();
           const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
