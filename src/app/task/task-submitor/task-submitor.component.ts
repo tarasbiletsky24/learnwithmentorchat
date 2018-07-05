@@ -61,7 +61,7 @@ export class TaskSubmitorComponent implements OnInit {
     const userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
-        if (this.httpStatusCodeService.isOk(ut.status)) {
+        if (!this.httpStatusCodeService.isOk(ut.status)) {
           this.notExisting();
         } else {
           this.userTask = ut.body;
