@@ -21,7 +21,6 @@ import { UserPageComponent } from './user/user-page/user-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  //{ path: 'main-page', component: MainPageComponent },
   { path: '', component: MainPageComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard] },
