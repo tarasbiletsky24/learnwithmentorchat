@@ -60,6 +60,7 @@ import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     CreatePlanComponent,
     AddTasksComponent,
     UserPageComponent,
-    UserEditComponent
+    UserEditComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,
