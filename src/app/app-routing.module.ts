@@ -18,9 +18,10 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'main-page', component: MainPageComponent },
+  { path: '', component: MainPageComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
@@ -33,7 +34,7 @@ const routes: Routes = [
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'main-page' }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

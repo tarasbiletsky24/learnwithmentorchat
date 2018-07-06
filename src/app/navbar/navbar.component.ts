@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.isLogin = false;
-    this.router.navigate(['/main-page']);
+    this.router.navigate(['/']);
   }
 
   ngOnInit() {
