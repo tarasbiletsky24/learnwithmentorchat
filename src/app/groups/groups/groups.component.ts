@@ -9,6 +9,7 @@ import { GroupService } from '../../common/services/group.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Router } from '@angular/router';
 import { AddPlansComponent } from '../../specific-group/add-plans/add-plans.component';
+import { Plan } from '../../common/models/plan';
 
 
 @Component({
@@ -19,12 +20,9 @@ import { AddPlansComponent } from '../../specific-group/add-plans/add-plans.comp
 export class GroupsComponent implements OnInit {
 
   constructor(private groupService: GroupService,
-    private router: Router,
     public dialog: MatDialog) { }
 
-  displayedColumns = ['Name', 'MentorId', 'Link'];
   groups: Group[];
-  dataSource = new MatTableDataSource<Group>(this.groups);
   userId: number;
 
   ngOnInit() { 
@@ -33,27 +31,4 @@ export class GroupsComponent implements OnInit {
       data => this.groups = data
     );
   }
-
-  goToGroup(choosenGroup: Group) {
-    this.router.navigate(['group',choosenGroup.Id]);
-  }
-
-  openPlanAddDialog(group: Group): void {
-    const dialogRef = this.dialog.open(AddPlansComponent, {
-      width: '1000px',
-      data: group.Id
-    });
-    //todo refresh plans for group after close
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.groupService.getGroupPlans(this.linkId).subscribe(
-    //     data => this.plans = data,
-    //     err => console.log(err),
-    //     () => {
-    //       this.dataSource = new MatTableDataSource<Plan>(this.plans);
-    //     }
-    //   );
-    // }
-    // );
-  }
-
 }

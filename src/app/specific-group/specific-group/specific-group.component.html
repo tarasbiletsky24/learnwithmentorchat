@@ -1,19 +1,11 @@
 <div class="container">
     <div class="content">
-        <mat-card class="group-header-margins">
-            <h1>
-                <p>{{ group?.Name }} </p>
-            </h1>
-            <h2>
-                <p>Mentor: {{ mentor?.FirstName }} {{mentor?.LastName}}</p>
-            </h2>
-        </mat-card>
         <mat-tab-group mat-stretch-tabs class="mat-elevation-z4 tabs-min-height">
             <mat-tab label="Plans">
-                <app-plans-display [linkId]="linkId"></app-plans-display>
+                <app-plans-display [group]="group"></app-plans-display>
             </mat-tab>
             <mat-tab label="Users">
-                <app-users-display [linkId]="linkId"></app-users-display>
+                <app-users-display [group]="group"></app-users-display>
             </mat-tab>
         </mat-tab-group>
     </div>
