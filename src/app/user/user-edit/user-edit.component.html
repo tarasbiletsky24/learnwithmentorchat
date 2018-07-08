@@ -1,24 +1,26 @@
 <mat-dialog-content>
-  <div class="editor">
-    <mat-form-field hintLabel="Max 20 characters">
-      <input matInput type="text" name="FirstName" maxlength="20" placeholder="Your first name" [(ngModel)]="newData.FirstName" [pattern]="namePattern" required>
-    </mat-form-field>
-  </div>
-  <div class="editor">
-    <mat-form-field hintLabel="Max 20 characters">
-      <input matInput type="text" name="LastName" maxlength="20" placeholder="Your last name" [(ngModel)]="newData.LastName" [pattern]="namePattern" required>
-    </mat-form-field>
-  </div>
-  <button mat-button *ngIf="!editPass" (click)="onEditPassClick()">Change Password</button>
-  <div *ngIf="editPass">
+  <form class="example-form" #userUpdateForm="ngForm">
     <div class="editor">
-      <mat-form-field hintLabel="Max 20 characters">
-        <input matInput type="text" type="password" name="Password" maxlength="20" placeholder="Your new password" [(ngModel)]="password" required>
+      <mat-form-field hintLabel="1 to 20 characters">
+        <input matInput type="text" name="FirstName" maxlength="20" placeholder="Your first name" [(ngModel)]="newData.FirstName" [pattern]="namePattern" required>
       </mat-form-field>
     </div>
-  </div>
+    <div class="editor">
+      <mat-form-field hintLabel="1 to 20 characters">
+        <input matInput type="text" name="LastName" maxlength="20" placeholder="Your last name" [(ngModel)]="newData.LastName" [pattern]="namePattern" required>
+      </mat-form-field>
+    </div>
+    <button mat-button *ngIf="!editPass" (click)="onEditPassClick()">Change Password</button>
+    <div *ngIf="editPass">
+      <div class="editor">
+        <mat-form-field hintLabel="3 to 20 characters">
+          <input matInput type="text" type="password" name="Password" maxlength="20" placeholder="Your new password" [pattern]="passwordPattern" [(ngModel)]="password" required>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)="onSaveClick()">Save</button>
+  <button [disabled]="!userUpdateForm.valid" mat-raised-button color="primary" (click)="onSaveClick()">Save</button>
 </mat-dialog-actions>
