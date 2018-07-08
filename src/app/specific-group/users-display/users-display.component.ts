@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddUsersComponent } from '../add-users/add-users.component';
 import { Group } from '../../common/models/group';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 
 @Component({
   selector: 'app-users-display',
@@ -17,10 +18,11 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() group: Group;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName','Email', 'Role', 'Blocked'];
+  displayedColumns = ['FirstName', 'LastName','Email', 'Role', 'Blocked','Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
 
   constructor(private groupService: GroupService,
+    private alertwindow: AlertWindowsComponent,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -37,6 +39,18 @@ export class UsersDisplayComponent implements OnInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  delChoosenUser(currentUser: User) {
+    this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
+    this.groupService.getGroupUsers(this.group.Id).subscribe(
+      data => this.users = data,
+      err => console.log(err),
+      () => {
+        this.dataSource = new MatTableDataSource<User>(this.users);
+      }
+    );
+    this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.FirstName + ' deleted', 'Ok');
   }
 
   openUserAddDialog(): void {

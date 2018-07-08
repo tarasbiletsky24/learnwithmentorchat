@@ -1,5 +1,11 @@
 <div class="main container">
   <div class="groups">
+    <div class="name-container">
+      <h2>
+        Hi, {{userName}}
+      </h2>
+      <button mat-raised-button color="primary" (click)="openGroupCreateDialog()">Add group</button>
+    </div>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let group of groups">
         <mat-expansion-panel-header>
@@ -10,7 +16,9 @@
             Mentor: {{group.MentorName}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-specific-group [group]="group" class="no-padding"></app-specific-group>
+        <div class="no-padding">
+          <app-specific-group [group]="group" class="no-padding"></app-specific-group>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

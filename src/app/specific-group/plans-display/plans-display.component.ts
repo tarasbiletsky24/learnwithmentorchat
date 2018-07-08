@@ -9,6 +9,7 @@ import { AddPlansComponent } from '../add-plans/add-plans.component';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Group } from '../../common/models/group';
 import { Router } from '@angular/router';
+import { CreatePlanComponent } from '../../create-plan/create-plan.component';
 
 @Component({
   selector: 'app-plans-display',
@@ -19,7 +20,7 @@ export class PlansDisplayComponent implements OnInit {
 
   @Input() group: Group;
   plans: Plan[];
-  displayedColumns = ['Description', 'Create by', 'Date', 'Is published','Delete'];
+  displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
 
   constructor(private groupService: GroupService,
@@ -28,13 +29,13 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-      this.groupService.getGroupPlans(this.group.Id).subscribe(
-        data => this.plans = data,
-        err => console.log(err),
-        () => {
-          this.dataSource = new MatTableDataSource<Plan>(this.plans);
-        }
-      );
+    this.groupService.getGroupPlans(this.group.Id).subscribe(
+      data => this.plans = data,
+      err => console.log(err),
+      () => {
+        this.dataSource = new MatTableDataSource<Plan>(this.plans);
+      }
+    );
   }
 
   applyFilter(filterValue: string) {
@@ -60,10 +61,25 @@ export class PlansDisplayComponent implements OnInit {
     );
   }
 
+  openPlanCreateAndAddDialog(): void {
+    const dialogRef = this.dialog.open(CreatePlanComponent, {
+      width: '1000px',
+      data: this.group.Id
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.groupService.getGroupPlans(this.group.Id).subscribe(
+        data => this.plans = data,
+        err => console.log(err),
+        () => {
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+      );
+    }
+    );
+  }
+
   delChoosenPlan(currentPlan: Plan) {
-    debugger
     this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe();
-    this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,
       err => console.log(err),
@@ -71,10 +87,11 @@ export class PlansDisplayComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Plan>(this.plans);
       }
     );
+    this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
   }
 
   goToPlan(choosenPlan: Plan) {
-    this.router.navigate(['group',this.group.Id,'plan',choosenPlan.Id]);
+    this.router.navigate(['group', this.group.Id, 'plan', choosenPlan.Id]);
   }
 
 }

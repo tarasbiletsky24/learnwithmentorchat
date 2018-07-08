@@ -60,6 +60,7 @@ import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
 import { GroupsComponent } from './groups/groups/groups.component';
+import { AddGroupComponent } from './groups/add-group/add-group.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { GroupsComponent } from './groups/groups/groups.component';
     CreatePlanComponent,
     AddTasksComponent,
     UserPageComponent,
-    GroupsComponent
+    GroupsComponent,
+    AddGroupComponent
   ],
   imports: [
     AppRoutingModule,
@@ -134,7 +136,8 @@ import { GroupsComponent } from './groups/groups/groups.component';
     PlanEditorComponent,
     AddUsersComponent,
     AddPlansComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    AddGroupComponent
   ],
   providers: [UserService, AuthGuard,
     {

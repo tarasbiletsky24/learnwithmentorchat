@@ -6,11 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
-import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { Router } from '@angular/router';
-import { AddPlansComponent } from '../../specific-group/add-plans/add-plans.component';
-import { Plan } from '../../common/models/plan';
-
+import { AddGroupComponent } from '../add-group/add-group.component';
 
 @Component({
   selector: 'app-groups',
@@ -24,11 +20,27 @@ export class GroupsComponent implements OnInit {
 
   groups: Group[];
   userId: number;
+  userRole: string;
+  userName: string;
 
-  ngOnInit() { 
-    this.userId =parseInt(localStorage.getItem('id')); 
+  ngOnInit() {
+    this.userId = parseInt(localStorage.getItem('id'));
+    this.userRole = localStorage.getItem('role');
+    this.userName = localStorage.getItem('fullName');
     this.groupService.getUserGroups(this.userId).subscribe(
       data => this.groups = data
+    );
+  }
+
+  openGroupCreateDialog(): void {
+    const dialogRef = this.dialog.open(AddGroupComponent, {
+      width: '1000px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.groupService.getUserGroups(this.userId).subscribe(
+        data => this.groups = data
+      );
+    }
     );
   }
 }
