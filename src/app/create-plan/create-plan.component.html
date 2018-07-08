@@ -1,30 +1,34 @@
 <div class="add-new-plan">
   <h1 class="header"> Create plan</h1>
   <div class="main">
-
-    <div class="plan-icon">
-      <img src="data:image/png;base64,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"
-        alt=" your icon for plan">
+    <div>
+      <img  class="plan-icon" class="pic"  [src]="imageData" id="newImage">
+     
       <div>
-        <input type="file">
+        <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
+        <button mat-raised-button color="primary" (click)="fileInput.click()">Select plan image</button>
       </div>
     </div>
     <div class="input">
       <div class="input-name">
-        <mat-form-field>
-            <input matInput placeholder="Enter name of your plan">
+        <mat-form-field class="input-text">
+          <input matInput placeholder="Enter name of your plan">
         </mat-form-field>
       </div>
-      <div class="input-description">
-        <mat-form-field>
-          <textarea matInput placeholder="Enter description of your plan"></textarea>
+      <div>
+        <mat-form-field class="input-text">
+          <textarea matInput placeholder="Enter description of your plan" class=" input-description"></textarea>
         </mat-form-field>
       </div>
+      <div>
+      <mat-checkbox>Published</mat-checkbox>
     </div>
+      
+      </div>
+      </div>
 
-  </div>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="tasks">
+    <table mat-table [dataSource]="result">
 
 
       <!-- Name Column -->
@@ -47,6 +51,9 @@
 
   </div>
   <div class="button-add-tasks">
-    <button mat-raised-button color="primary" >Add tasks</button>
+    <button mat-raised-button color="primary" (click)="openAddTasks()">Add tasks</button>
+  </div>
+  <div class="button-create-plan">
+    <button mat-raised-button color="primary" (click)="createPlan()">Create plan</button>
   </div>
 </div>

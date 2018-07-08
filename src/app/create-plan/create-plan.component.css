@@ -1,27 +1,38 @@
-
+* {    
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+  }
 .header{
 text-align: center;
-
 }
-.add-new-plan>{   
+.plan-icon{
+    width: 150px;
+    height: 150px;
+}
+.input-text{
+    width: 100%;
+}
+.add-new-plan>div {   
     display: flex;    
 flex-direction: row;
 justify-content: center;
 }
-.main{
-    display: flex;    
-flex-direction: row;
-justify-content: center;
-width: 40%;
+.input-description{
+height: 100px;
 }
-.main>div{
-    text-align: center;
-}
-.input,.plan-icon{
-    width: 40%;
-    height: 40%;
+.input{
+    width: 50%;
 }
 .button-add-tasks{
     text-align: center;
 }
-
+.button-create-plan{
+    text-align: center;
+    margin-top: 2%;
+}
+.fileInput {
+    display: none;
+}
+.pic{
+    display:block;
+    width: 50px;
+}

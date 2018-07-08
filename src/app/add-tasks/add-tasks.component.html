@@ -24,9 +24,12 @@
 
       <!-- Add Column -->
       <ng-container matColumnDef="Add">
-        <th mat-header-cell *matHeaderCellDef>Add plan </th>
+        <th mat-header-cell *matHeaderCellDef>Add task</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="primary" (click)="getPlan(element.Id)">Add</button>
+          <button mat-mini-fab color="primary" (click)="getTask($event,element.Id)">
+            +
+          </button>
+          
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -35,7 +38,7 @@
 
   </div>
   <div class="buttons">
-    <button mat-raised-button>Add new task</button>
+    <button mat-raised-button (click)="console()">Add new task</button>
 
     <button mat-raised-button>Cancel</button>
   </div>
