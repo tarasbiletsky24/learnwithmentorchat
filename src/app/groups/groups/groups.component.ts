@@ -24,8 +24,8 @@ export class GroupsComponent implements OnInit {
   isMentor = false;
 
   ngOnInit() {
-    this.userId = parseInt(localStorage.getItem('id'));
-    if (localStorage.getItem('role') == "Mentor") {
+    this.userId = parseInt(localStorage.getItem('id'), 10);
+    if (localStorage.getItem('role') === 'Mentor') {
       this.isMentor = true;
     }
     this.userName = localStorage.getItem('fullName');

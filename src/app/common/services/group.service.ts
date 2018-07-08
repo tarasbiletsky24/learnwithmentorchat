@@ -66,7 +66,7 @@ export class GroupService {
   addPlanToGroup(planId: number, groupId: number): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${groupId}/plan`, [planId]).pipe(
       catchError(r => of(r))
-    )
+    );
   }
 
   removePlanFromGroup(groupId: number, planId: number): Observable<Plan> {
@@ -74,7 +74,7 @@ export class GroupService {
       catchError(this.handleError<Plan>('deleteComment'))
     );
   }
-  
+
   removeUserFromGroup(groupId: number, userId: number): Observable<User> {
     return this.http.delete<User>(`${this.url}/removeUserFromGroup?groupId=${groupId}&userToRemoveId=${userId}`, this.httpOptions).pipe(
       catchError(this.handleError<User>('deleteComment'))

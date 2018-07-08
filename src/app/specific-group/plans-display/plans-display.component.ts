@@ -30,9 +30,9 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (localStorage.getItem('role') == "Mentor") {
+    if (localStorage.getItem('role') === 'Mentor') {
       this.isMentor = true;
-      this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published','Delete'];
+      this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
     }
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,

@@ -26,7 +26,7 @@ export class SpecificGroupComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
-    if (localStorage.getItem('role') == "Mentor") {
+    if (localStorage.getItem('role') === 'Mentor') {
       this.isMentor = true;
     }
   }

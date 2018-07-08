@@ -18,7 +18,7 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() group: Group;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName','Email', 'Role', 'Blocked','Delete'];
+  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
 
   constructor(private groupService: GroupService,
