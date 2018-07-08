@@ -58,6 +58,9 @@ import { AddUsersComponent } from './specific-group/add-users/add-users.componen
 import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { UserPageComponent } from './user/user-page/user-page.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,10 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AddPlansComponent,
     PlanEditorComponent,
     CreatePlanComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    UserPageComponent,
+    UserEditComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,
@@ -130,7 +136,8 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     PlanEditorComponent,
     AddUsersComponent,
     AddPlansComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    UserEditComponent
   ],
   providers: [UserService, AuthGuard,
     {

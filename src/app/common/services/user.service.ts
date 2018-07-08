@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-
+import { Image } from '../models/image';
 import { Role } from '../models/role';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
 import { Login } from '../models/login';
+import { Statistics } from '../models/statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class UserService {
     );
   }
 
-  getUser(id: number) {
-    return this.http.get(`${this.url}/${id}`).pipe(
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
@@ -48,7 +49,7 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<HttpResponse<any>> {
-    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
+    return this.http.put(`${this.url}/${user.Id}`, user, { observe: 'response' }).pipe(
       catchError(r => of(r))
     );
   }
@@ -60,7 +61,7 @@ export class UserService {
       FirstName: register.FirstName,
       LastName: register.LastName
     };
-  const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
     return this.http.post(this.url, body, { headers: reqHeader });
   }
 
@@ -90,6 +91,29 @@ export class UserService {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
+  }
+
+  updateImage(id: number, file: File) {
+    const fd = new FormData;
+    fd.append('image', file, file.name);
+    return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
+      catchError(val => of(val)));
+  }
+
+  getImage(id: number): Observable<HttpResponse<Image>> {
+    return this.http.get(`${this.url}/${id}/image`, { observe: 'response' }).pipe(
+      catchError(val => of(val)));
+  }
+
+  getStatistics(userId: number): Observable<HttpResponse<Statistics>> {
+    return this.http.get(`${this.url}/${userId}/statistics`, { observe: 'response' }).pipe(
+      catchError(val => of(val)));
+  }
+
+  updatePassword(userId: number, newPass: string) {
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<string>(`${this.url}/${userId}/newpassword`, newPass, { observe: 'response', headers: reqHeader }).pipe(
+      catchError(val => of(val)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

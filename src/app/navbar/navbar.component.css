@@ -39,3 +39,12 @@
   margin-right: 10px;
   margin-top: 2px;
 }
+
+.user a:link, .user a:visited{
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.user a:visited{
+  text-decoration: none;
+}

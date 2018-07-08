@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { Image } from '../../common/models/image';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TaskCreatorComponent } from '../../task/task-creator/task-creator.component';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-plan-editor',
@@ -28,6 +29,7 @@ export class PlanEditorComponent implements OnInit {
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<PlanEditorComponent>,
     private alertWindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     private planService: PlanService, private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: Plan) { this.plan = data; }
 
@@ -72,9 +74,7 @@ export class PlanEditorComponent implements OnInit {
     this.plan.Description = description;
     this.planService.updatePlan(this.plan);
     // send image
-    this.planService.updateImage(this.plan.Id, this.selectedFile).subscribe(
-      resp => console.log(resp)
-    );
+    this.planService.updateImage(this.plan.Id, this.selectedFile).subscribe();
     // todo: add tasks to plan
   }
 
@@ -95,7 +95,7 @@ export class PlanEditorComponent implements OnInit {
   getImage() {
     this.planService.getImage(this.plan.Id).subscribe(
       resp => {
-        if (resp.status === 200) {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
           const extension = resp.body.Name.split('.').pop().toLowerCase();
           const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);

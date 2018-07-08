@@ -2,26 +2,30 @@
   <div class="grid-container">
     <div class="cell1"> {{mainTag}} </div>
     <div class="cell2">
-      <a routerLink="main-page" class="ordItem">
+      <a routerLink="/" class="ordItem">
         <button mat-button>Start Learning</button>
       </a>
     </div>
     <div *ngIf="!isLogin" class="cell15">
-      <a routerLink="signin" class="ordItem" (click)="openSignInDialog()">
+      <a class="ordItem" (click)="openSignInDialog()">
         <button mat-button>
           Sign In
         </button>
       </a>
     </div>
     <div *ngIf="!isLogin" class="cell16">
-      <a routerLink="signup" class="ordItem" (click)="openSignUpDialog()">
+      <a class="ordItem" (click)="openSignUpDialog()">
         <button mat-button>
           Sign Up
         </button>
       </a>
     </div>
     <div *ngIf="isLogin" class="user">
-      {{fullName}}
+      <a routerLink="profile">
+        <button mat-button>
+          {{fullName}}
+        </button>
+      </a>
     </div>
     <div *ngIf="isLogin" class="cell16">
       <a routerLink="logout" class="ordItem" (click)="logout()">

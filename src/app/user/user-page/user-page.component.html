@@ -1,0 +1,34 @@
+<div class="profile-info">
+    <div class="image-wrap">
+        <img *ngIf="imageData" [src]="imageData" (click)="fileInput.click()" id="newImage" alt="User image">
+        <span class="upload-hover">Upload new picture</span>
+    </div>
+    <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
+    <h3 *ngIf="userData">{{userData.FirstName}} {{userData.LastName}}</h3>
+    
+    <div class="buttons">
+        <button mat-button (click)="onEditClick()">Edit</button>
+        <div class="save-button">
+            <button *ngIf="selectedFile" mat-button (click)="onSaveClick()">Save new photo</button>
+        </div>
+    </div>
+</div>
+<h2>Tasks statistics</h2>
+<div class="stats" *ngIf="userStats">
+    <div class="states-first">
+        <h3>In progress</h3>
+        <p>{{userStats.InProgressNumber}}</p>
+    </div>
+    <div class=states>
+        <h3>Done</h3>
+        <p>{{userStats.DoneNumber}}</p>
+    </div>
+    <div class=states>
+        <h3>Approved</h3>
+        <p>{{userStats.ApprovedNumber}}</p>
+    </div>
+    <div class=states>
+        <h3>Rejected</h3>
+        <p>{{userStats.RejectedNumber}}</p>
+    </div>
+</div>

@@ -3,8 +3,9 @@ import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
 import { UserTask } from '../../common/models/userTask';
-import {AlertWindowsComponent} from '../../components/alert-windows/alert-windows.component';
-import {DialogsService} from '../../components/dialogs/dialogs.service';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { DialogsService } from '../../components/dialogs/dialogs.service';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-task-submitor',
@@ -23,6 +24,7 @@ export class TaskSubmitorComponent implements OnInit {
     private  alertwindow: AlertWindowsComponent,
     private dialogsService: DialogsService,
     private taskService: TaskService,
+    private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
   }
@@ -56,11 +58,10 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = 3;
-    // todo: add logic for getting user id from local storage if authorized
+    const userId = parseInt(localStorage.getItem('id'), 10);
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
-        if (ut.status !== 200) {
+        if (!this.httpStatusCodeService.isOk(ut.status)) {
           this.notExisting();
         } else {
           this.userTask = ut.body;
