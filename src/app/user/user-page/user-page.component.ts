@@ -3,8 +3,11 @@ import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 import { Image } from '../../common/models/image';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Statistics } from '../../common/models/statistics';
+import { UserEditComponent } from '../user-edit/user-edit.component';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-user-page',
@@ -18,21 +21,23 @@ export class UserPageComponent implements OnInit {
   userData: User;
   userStats = null;
   selectedFile: File = null;
-  private maxImageSize: number = 1024 * 1024;
+  private maxImageSize = 1024 * 1024;
   imageData = null;
 
   constructor(private userService: UserService,
     private sanitizer: DomSanitizer,
-    private alertWindow: AlertWindowsComponent) { }
+    private alertWindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userId = +localStorage.getItem('id');
+    this.userId = parseInt(localStorage.getItem('id'), 10);
     this.userService.getUser(this.userId).subscribe(
       resp => {
         this.userData = resp;
         this.userService.getImage(this.userId).subscribe(
           response => {
-            if (response.status === 200) {
+            if (this.httpStatusCodeService.isOk(response.status)) {
               this.setUserPic(response.body);
             } else {
               this.imageData = '../../../assets/images/user-default.png';
@@ -41,7 +46,7 @@ export class UserPageComponent implements OnInit {
         );
         this.userService.getStatistics(this.userId).subscribe(
           r => {
-            if (r.status === 200) {
+            if (this.httpStatusCodeService.isOk(r.status)) {
               this.userStats = r.body;
             }
           }
@@ -80,4 +85,9 @@ export class UserPageComponent implements OnInit {
     );
   }
 
+  onEditClick(): void {
+    const dialofRef = this.dialog.open(UserEditComponent, {
+      data: this.userData
+    });
+  }
 }

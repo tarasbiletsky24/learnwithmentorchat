@@ -49,7 +49,7 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<HttpResponse<any>> {
-    return this.http.put(`${this.url}/${user.Id}`, user).pipe(
+    return this.http.put(`${this.url}/${user.Id}`, user, { observe: 'response' }).pipe(
       catchError(r => of(r))
     );
   }
@@ -61,7 +61,7 @@ export class UserService {
       FirstName: register.FirstName,
       LastName: register.LastName
     };
-  const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
     return this.http.post(this.url, body, { headers: reqHeader });
   }
 
@@ -107,6 +107,12 @@ export class UserService {
 
   getStatistics(userId: number): Observable<HttpResponse<Statistics>> {
     return this.http.get(`${this.url}/${userId}/statistics`, { observe: 'response' }).pipe(
+      catchError(val => of(val)));
+  }
+
+  updatePassword(userId: number, newPass: string) {
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<string>(`${this.url}/${userId}/newpassword`, newPass, { observe: 'response', headers: reqHeader }).pipe(
       catchError(val => of(val)));
   }
 
