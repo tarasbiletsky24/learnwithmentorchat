@@ -4,7 +4,7 @@
             <mat-tab label="Plans">
                 <app-plans-display [group]="group"></app-plans-display>
             </mat-tab>
-            <mat-tab label="Users">
+            <mat-tab *ngIf="isMentor" label="Users">
                 <app-users-display [group]="group"></app-users-display>
             </mat-tab>
         </mat-tab-group>

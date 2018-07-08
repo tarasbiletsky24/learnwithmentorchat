@@ -70,7 +70,6 @@ export class GroupService {
   }
 
   removePlanFromGroup(groupId: number, planId: number): Observable<Plan> {
-    debugger
     return this.http.delete<Plan>(`${this.url}/removePlanFromGroup?groupId=${groupId}&planToRemoveId=${planId}`, this.httpOptions).pipe(
       catchError(this.handleError<Plan>('deleteComment'))
     );

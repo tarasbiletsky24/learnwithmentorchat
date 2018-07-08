@@ -4,7 +4,7 @@
       <h2>
         Hi, {{userName}}
       </h2>
-      <button mat-raised-button color="primary" (click)="openGroupCreateDialog()">Add group</button>
+      <button *ngIf="isMentor" mat-raised-button color="primary" (click)="openGroupCreateDialog()">Add group</button>
     </div>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let group of groups">

@@ -20,8 +20,9 @@ export class PlansDisplayComponent implements OnInit {
 
   @Input() group: Group;
   plans: Plan[];
-  displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
+  displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
+  isMentor = false;
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
@@ -29,6 +30,10 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
+    if (localStorage.getItem('role') == "Mentor") {
+      this.isMentor = true;
+      this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published','Delete'];
+    }
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,
       err => console.log(err),

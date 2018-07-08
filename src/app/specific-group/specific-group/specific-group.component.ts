@@ -19,11 +19,15 @@ import { GroupService } from '../../common/services/group.service';
 export class SpecificGroupComponent implements OnInit {
   @Input() group: Group;
   mentor: User;
+  isMentor = false;
 
   constructor(private userService: UserService,
     public dialog: MatDialog) {  }
 
   ngOnInit() {
     this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
+    if (localStorage.getItem('role') == "Mentor") {
+      this.isMentor = true;
+    }
   }
 }

@@ -34,8 +34,8 @@ const routes: Routes = [
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard] },
   { path: 'mygroups', component: GroupsComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'main-page' }
+  { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] }/*,
+  //{ path: '**', redirectTo: 'main-page' }*/
 ];
 
 @NgModule({

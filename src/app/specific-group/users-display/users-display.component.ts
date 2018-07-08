@@ -50,7 +50,7 @@ export class UsersDisplayComponent implements OnInit {
         this.dataSource = new MatTableDataSource<User>(this.users);
       }
     );
-    this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.FirstName + ' deleted', 'Ok');
+    this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
   }
 
   openUserAddDialog(): void {

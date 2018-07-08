@@ -20,12 +20,14 @@ export class GroupsComponent implements OnInit {
 
   groups: Group[];
   userId: number;
-  userRole: string;
   userName: string;
+  isMentor = false;
 
   ngOnInit() {
     this.userId = parseInt(localStorage.getItem('id'));
-    this.userRole = localStorage.getItem('role');
+    if (localStorage.getItem('role') == "Mentor") {
+      this.isMentor = true;
+    }
     this.userName = localStorage.getItem('fullName');
     this.groupService.getUserGroups(this.userId).subscribe(
       data => this.groups = data
