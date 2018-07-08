@@ -17,8 +17,8 @@ export class UserEditComponent implements OnInit {
   userData: User;
   password = '';
   editPass = false;
-  namePattern = '[A-Z][a-zA-Z0-9]{1,20}$';
-
+  namePattern = '[a-zA-Z0-9]{1,20}$';
+  passwordPattern = '.{3,20}$';
 
   constructor(private userService: UserService,
     private alertwindow: AlertWindowsComponent,
@@ -48,7 +48,7 @@ export class UserEditComponent implements OnInit {
             this.data.FirstName = this.newData.FirstName;
             this.data.LastName = this.newData.LastName;
             localStorage.setItem('fullName', `${this.newData.FirstName} ${this.newData.LastName}`);
-            this.alertwindow.openSnackBar('Your data successfully updayed!', 'Ok');
+            this.alertwindow.openSnackBar('Your data successfully updated!', 'Ok');
             message = 'and data ';
           } else {
             this.alertwindow.openSnackBar('Some error occured, please try again later', 'Ok');
