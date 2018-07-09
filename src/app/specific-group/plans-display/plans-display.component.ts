@@ -10,6 +10,7 @@ import { AlertWindowsComponent } from '../../components/alert-windows/alert-wind
 import { Group } from '../../common/models/group';
 import { Router } from '@angular/router';
 import { CreatePlanComponent } from '../../create-plan/create-plan.component';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-plans-display',
@@ -27,10 +28,11 @@ export class PlansDisplayComponent implements OnInit {
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
     private router: Router,
+    private authService: AuthService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (localStorage.getItem('role') === 'Mentor') {
+    if (this.authService.getUserRole() === 'Mentor') {
       this.isMentor = true;
       this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
     }

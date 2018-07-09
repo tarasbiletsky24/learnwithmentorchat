@@ -6,6 +6,7 @@ import { UserTask } from '../../common/models/userTask';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../components/dialogs/dialogs.service';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-task-submitor',
@@ -24,6 +25,7 @@ export class TaskSubmitorComponent implements OnInit {
     private  alertwindow: AlertWindowsComponent,
     private dialogsService: DialogsService,
     private taskService: TaskService,
+    private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
@@ -58,7 +60,7 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = parseInt(localStorage.getItem('id'), 10);
+    const userId = this.authService.getUserId();
     this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
       ut => {
         if (!this.httpStatusCodeService.isOk(ut.status)) {

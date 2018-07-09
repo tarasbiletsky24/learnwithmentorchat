@@ -9,6 +9,7 @@ import { UserService } from '../../common/services/user.service';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-specific-group',
@@ -22,11 +23,12 @@ export class SpecificGroupComponent implements OnInit {
   isMentor = false;
 
   constructor(private userService: UserService,
+    private authService: AuthService,
     public dialog: MatDialog) {  }
 
   ngOnInit() {
     this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
-    if (localStorage.getItem('role') === 'Mentor') {
+    if (this.authService.getUserRole() === 'Mentor') {
       this.isMentor = true;
     }
   }
