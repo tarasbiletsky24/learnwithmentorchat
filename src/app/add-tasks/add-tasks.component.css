@@ -14,5 +14,9 @@ table {
     margin-top: 3%;
     display: flex;     
     flex-direction: row;
-    justify-content: space-around;   
+    justify-content: flex-end;   
 }
+.add-new-task>*{
+    margin-right: 16%;
+}
+

@@ -37,9 +37,33 @@
     </table>
 
   </div>
-  <div class="buttons">
-    <button mat-raised-button (click)="console()">Add new task</button>
 
-    <button mat-raised-button>Cancel</button>
+
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Add new task
+            </mat-panel-title>
+           
+          </mat-expansion-panel-header>
+          <div class="add-new-task">
+          
+            <mat-form-field>
+              <input matInput placeholder="Name ">
+            </mat-form-field>
+          
+            <mat-form-field class="input-text">
+                <textarea matInput placeholder="Description " class=" input-description"></textarea>
+              </mat-form-field>
+          
+              <button mat-raised-button>Create task</button>
+          </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+   
+  <div class="buttons">
+
+    <button mat-raised-button (click)="closeAddTask()">Cancel</button>
   </div>
 </div>

@@ -47,6 +47,13 @@ export class PlanService {
       catchError(this.handleError<any>('updatePlan'))
     );
   }
+  createPlan(plan: Plan): Observable<any> {
+    let link = '';
+      link = `${this.url}`;
+    
+    return this.http.post<Plan>(link, plan, this.httpOptions).pipe(
+      catchError(this.handleError<Plan>(`creating plan`)));
+  }
 
   addPlan(plan: Plan): Observable<Plan> {
     return this.http.post<Plan>(this.url, plan, this.httpOptions).pipe(

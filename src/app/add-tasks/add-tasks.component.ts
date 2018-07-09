@@ -27,7 +27,7 @@ export class AddTasksComponent implements OnInit {
   constructor(private taskService: TaskService, public thisDialogRef: MatDialogRef<AddTasksComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CreatePlanComponent
   ) {
-    this.idTasks = new Array;
+    
   }
   getTask(event: any,id: number) {
     this.idTasks.push(id);
@@ -36,10 +36,17 @@ export class AddTasksComponent implements OnInit {
   console(){
     this.idTasks.forEach(element => {
       console.log(element);
-    });
-   
+    }); 
     
   }
+  createTask(){
+    this.taskService.createTask
+  }
+
+  closeAddTask(): void {
+    this.thisDialogRef.close();
+  }
+
   
   ngOnInit() {
     this.taskService.getTasks().subscribe(

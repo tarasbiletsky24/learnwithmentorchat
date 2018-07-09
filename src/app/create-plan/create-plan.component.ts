@@ -4,6 +4,7 @@ import { AddTasksComponent } from '../add-tasks/add-tasks.component';
 import { Observable } from 'rxjs';
 import { Task } from '../../../src/app/common/models/task';
 import { createElementCssSelector } from '@angular/compiler';
+import {Plan} from '../common/models/plan'
 import { Image } from '.././common/models/image';
 
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
@@ -26,14 +27,22 @@ export interface AddTasksComponent{
 export class CreatePlanComponent implements OnInit {
   tasks: Observable<Task>;
   idTasks: number[];
+  name = '';  
+  description='';
+  published:boolean;
+  addTask=false;
+
+
   selectedFile: File = null;
+idCreator:number= +localStorage.getItem('id');
   private maxImageSize: number = 1024 * 1024;
-  imageData = '../../../assets/images/1.png';
+  imageData = '../../../assets/images/LWMTagBlack.png';
   selectedImage = null;
   constructor(private dialog: MatDialog,
     private planService: PlanService,
     private alertWindow: AlertWindowsComponent) {
-      
+        this.idTasks = new Array;
+  
   }
 
   openAddTasks(): void {
@@ -43,17 +52,32 @@ export class CreatePlanComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("!!!!");
-      console.log(result);
+   
       
-      this.idTasks=result;
-    
+      this.idTasks = result;
+
 
     });
   }
   createPlan() {
-    console.log(this.idTasks);
-    
+    if (name == '' || this.description == '') {
+      this.alertWindow.openSnackBar('You must enter data for creating plan!', 'Ok');
+      this.addTask = false;
+    }
+    else {
+      this.published = false;
+      const plan = {
+        Name: this.name, Description: this.description, Published: this.published, CreatorId: this.idCreator
+      }
+      this.planService.createPlan(plan as Plan).subscribe(res => {
+
+        this.addTask = true
+      })
+      if (!this.addTask) {
+        console.log(" create plan !");
+
+      }
+    }
   }
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
