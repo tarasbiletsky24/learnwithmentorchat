@@ -18,9 +18,42 @@ export class AuthService {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
     localStorage.setItem('userToken', token);
-    localStorage.setItem('id', user.Id);
-    localStorage.setItem('email', user.email);
-    localStorage.setItem('fullName', user.unique_name);
-    localStorage.setItem('role', user.role);
+  }
+
+  private getUser() {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+      return null;
+    }
+    const helper = new JwtHelperService();
+    return helper.decodeToken(token);
+  }
+
+  getUserId(): number {
+    if (!this.getUser()) {
+      return null;
+    }
+    return parseInt(this.getUser().Id, 10);
+  }
+
+  getUserFullName(): string {
+    if (!this.getUser()) {
+      return null;
+    }
+    return this.getUser().unique_name;
+  }
+
+  getUserRole(): string {
+    if (!this.getUser()) {
+      return null;
+    }
+    return this.getUser().role;
+  }
+
+  getUserEmail(): string {
+    if (!this.getUser()) {
+      return null;
+    }
+    return this.getUser().email;
   }
 }

@@ -36,7 +36,7 @@ export class SpecificGroupComponent implements OnInit {
       this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
       this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
     } else {
-      this.router.navigate(['/main-page']);
+      this.router.navigate(['/']);
     }
   }
 }

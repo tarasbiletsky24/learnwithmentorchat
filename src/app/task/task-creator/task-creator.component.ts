@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-task-creator',
@@ -15,7 +16,7 @@ export class TaskCreatorComponent implements OnInit {
   planId: number;
   @Input()
   tasks: Task[];
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private authService: AuthService) { }
 
   onSaveClick(name: string, description: string) {
     this.task = new Task();
@@ -23,7 +24,7 @@ export class TaskCreatorComponent implements OnInit {
     this.task.Name = name;
     // todo:
     // you need to change to real user Id
-    this.task.CreatorId = 0; // here
+    this.task.CreatorId = this.authService.getUserId(); // here
     if (this.planId == null) {
       this.taskService.createTask(this.task).subscribe();
     } else {

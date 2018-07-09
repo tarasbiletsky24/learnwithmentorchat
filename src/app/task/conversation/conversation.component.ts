@@ -7,6 +7,7 @@ import { Message } from '../../common/models/message';
 import { Observable, of } from 'rxjs';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-conversation',
@@ -27,6 +28,7 @@ export class ConversationComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private  alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
+    private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: Task) {
     this.task = data;
@@ -76,7 +78,7 @@ export class ConversationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userId = parseInt(localStorage.getItem('id'), 10);
+    this.userId = this.authService.getUserId();
     this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
       ut => {
         if (!this.httpStatusCodeService.isOk(ut.status)) {

@@ -4,6 +4,7 @@ import { SigninComponent } from '../auth/signin/signin.component';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from '../common/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,9 @@ export class NavbarComponent implements OnInit {
   mainTag = '</>';
   isLogin = false;
   fullName: string;
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private dialog: MatDialog,
+    private router: Router,
+    private authService: AuthService) {
 
   }
 
@@ -34,7 +37,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     const jwt = new JwtHelperService();
-    this.fullName = localStorage.getItem('fullName');
+    this.fullName = this.authService.getUserFullName();
     this.isLogin = !jwt.isTokenExpired(localStorage.getItem('userToken'));
     }
   }
