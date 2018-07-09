@@ -16,6 +16,7 @@ export class UserEditComponent implements OnInit {
   newData = new User;
   userData: User;
   password = '';
+  passwordRepeat = '';
   editPass = false;
   namePattern = '[a-zA-Z0-9]{1,20}$';
   passwordPattern = '.{3,20}$';
@@ -56,7 +57,7 @@ export class UserEditComponent implements OnInit {
         }
       );
     }
-    if (this.editPass && this.password) {
+    if (this.editPass && this.password && this.password === this.passwordRepeat) {
       this.userService.updatePassword(this.userData.Id, this.password).subscribe(
         resp => {
           if (this.httpStatusCodeService.isOk(resp.status)) {
@@ -69,6 +70,8 @@ export class UserEditComponent implements OnInit {
     }
     if (this.editPass && this.password === '') {
       this.alertwindow.openSnackBar('Password can not be empty', 'Ok');
+    } else if (this.password !== this.passwordRepeat) {
+      this.alertwindow.openSnackBar('Passwords does not match. Please reenter new passwords.', 'Ok');
     } else {
       this.dialogRef.close();
     }

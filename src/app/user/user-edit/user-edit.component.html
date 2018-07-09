@@ -18,6 +18,13 @@
         </mat-form-field>
       </div>
     </div>
+    <div *ngIf="editPass">
+        <div class="editor">
+          <mat-form-field hintLabel="3 to 20 characters">
+            <input matInput type="text" type="password" name="PasswordRepeat" maxlength="20" placeholder="Repeat your password" [pattern]="passwordPattern" [(ngModel)]="passwordRepeat" required>
+          </mat-form-field>
+        </div>
+      </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
