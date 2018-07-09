@@ -60,7 +60,7 @@ idCreator:number= +localStorage.getItem('id');
     });
   }
   createPlan() {
-    if (name == '' || this.description == '') {
+    if (this.name == '' || this.description == '') {
       this.alertWindow.openSnackBar('You must enter data for creating plan!', 'Ok');
       this.addTask = false;
     }
@@ -72,7 +72,8 @@ idCreator:number= +localStorage.getItem('id');
       this.planService.createPlan(plan as Plan).subscribe(res => {
 
         this.addTask = true
-      })
+      })     
+      this.alertWindow.openSnackBar('You create plan " '+this.name+'"', 'Ok');
       if (!this.addTask) {
         console.log(" create plan !");
 
