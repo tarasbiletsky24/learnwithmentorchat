@@ -21,6 +21,7 @@ import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
 import { TaskDetailComponent } from './task/task-detail/task-detail.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule, MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import { TaskEditorComponent } from './task/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -121,7 +122,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatRadioModule,
     FormsModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
     ],
 
   entryComponents: [TaskEditorComponent,
