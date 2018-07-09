@@ -7,7 +7,6 @@ import { MatDialogModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModul } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
@@ -21,9 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatTabsModule,
         MatDividerModule,
         MatMenuModule,
-        MatIconModule,
         MatTooltipModule
-
     ],
     exports: [
         MatCardModule,
@@ -34,9 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatTabsModule,
         MatDividerModule,
         MatMenuModule,
-        MatIconModule,
         MatTooltipModule
-
     ]
 })
 export class MaterialModule {
