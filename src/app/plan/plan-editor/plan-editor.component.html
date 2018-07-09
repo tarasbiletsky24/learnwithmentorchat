@@ -17,7 +17,7 @@
       <app-task-creator [planId]="plan.Id" [tasks]="tasksInPlan"> </app-task-creator>
     </mat-grid-tile>
   </mat-grid-list>
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
+  <mat-dialog-actions>    
     <button mat-button mat-dialog-close (click)="onSaveClick(nameTbx.value, descriptionTbx.value)">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
   </mat-dialog-actions>
