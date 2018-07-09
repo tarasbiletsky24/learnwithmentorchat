@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { UserService } from '../../common/services/user.service';
 
 import { MatDialog } from '@angular/material';
 import { GroupService } from '../../common/services/group.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-specific-group',
@@ -17,26 +18,18 @@ import { GroupService } from '../../common/services/group.service';
 })
 
 export class SpecificGroupComponent implements OnInit {
-  group: Group;
+  @Input() group: Group;
   mentor: User;
-  linkId: number;
-  subscription: Subscription;
+  isMentor = false;
 
   constructor(private userService: UserService,
-    private groupService: GroupService,
-    public dialog: MatDialog,
-    private router: Router,
-    private activateRoute: ActivatedRoute) {
-    this.subscription = activateRoute.params.subscribe(params => this.linkId = params['id']);
-  }
-
+    private authService: AuthService,
+    public dialog: MatDialog) {  }
 
   ngOnInit() {
-    if (this.linkId != null) {
-      this.groupService.getGroup(this.linkId).subscribe((data: Group) => this.group = data);
-      this.userService.getUser(this.linkId).subscribe((data: User) => this.mentor = data);
-    } else {
-      this.router.navigate(['/']);
+    this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
+    if (this.authService.getUserRole() === 'Mentor') {
+      this.isMentor = true;
     }
   }
 }

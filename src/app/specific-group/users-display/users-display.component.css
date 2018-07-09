@@ -1,5 +1,4 @@
 .big-button {
-  width: 100%;
   margin-bottom: 8px;
   margin-top: 8px;
 }
@@ -24,5 +23,5 @@ mat-header-cell{
   justify-content: center;
 }
 .content{
-  width: 95%;
+  width: 100%;
 }
