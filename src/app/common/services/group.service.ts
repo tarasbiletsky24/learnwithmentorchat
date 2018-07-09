@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
@@ -78,6 +78,13 @@ export class GroupService {
   removeUserFromGroup(groupId: number, userId: number): Observable<User> {
     return this.http.delete<User>(`${this.url}/removeUserFromGroup?groupId=${groupId}&userToRemoveId=${userId}`, this.httpOptions).pipe(
       catchError(this.handleError<User>('deleteComment'))
+    );
+  }
+
+  createGroup(group: Group): Observable<HttpResponse<any>> {
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.url}`, group, { observe: 'response', headers: reqHeader }).pipe(
+      catchError(r => of(r))
     );
   }
 

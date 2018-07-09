@@ -1,3 +1,18 @@
-<p>
-  add-group works!
-</p>
+<form class="group-create-form" #groupCreateForm="ngForm" (ngSubmit)="createGroup(groupCreateForm)">
+  <h2>Create group</h2>
+  <mat-form-field class="container">
+    <input matInput ngModel type="text" name="Name" placeholder="Name" required maxlength="50">
+  </mat-form-field>
+  <div>
+    <span>
+      <button mat-raised-button color="primary" mat-dialog-close>
+        Close
+      </button>
+    </span>
+    <span class="button-right">
+      <button [disabled]="!groupCreateForm.valid" mat-raised-button color="primary" type="submit">
+        Create
+      </button>
+    </span>
+  </div>
+</form>

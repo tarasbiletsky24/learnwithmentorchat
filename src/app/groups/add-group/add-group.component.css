@@ -1,0 +1,14 @@
+.group-create-form {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container {
+    width: 100%;
+  }
+  
+  .button-right{
+    float: right;
+  }
+  

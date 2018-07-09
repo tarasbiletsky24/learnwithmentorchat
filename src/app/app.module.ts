@@ -10,6 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ReactiveFormsModule }   from '@angular/forms';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -127,7 +128,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     MatSnackBarModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ReactiveFormsModule
     ],
 
   entryComponents: [TaskEditorComponent,
