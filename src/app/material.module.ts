@@ -5,8 +5,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModul } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -18,7 +20,10 @@ import { MatMenuModule } from '@angular/material';
         MatDialogModule,
         MatTabsModule,
         MatDividerModule,
-        MatMenuModule
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule
+
     ],
     exports: [
         MatCardModule,
@@ -28,7 +33,10 @@ import { MatMenuModule } from '@angular/material';
         MatDialogModule,
         MatTabsModule,
         MatDividerModule,
-        MatMenuModule
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule
+
     ]
 })
 export class MaterialModule {
