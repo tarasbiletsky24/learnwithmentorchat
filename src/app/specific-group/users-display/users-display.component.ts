@@ -6,6 +6,8 @@ import { GroupService } from '../../common/services/group.service';
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddUsersComponent } from '../add-users/add-users.component';
+import { Group } from '../../common/models/group';
+import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 
 @Component({
   selector: 'app-users-display',
@@ -14,27 +16,23 @@ import { AddUsersComponent } from '../add-users/add-users.component';
 })
 export class UsersDisplayComponent implements OnInit {
 
-  @Input() linkId: number;
+  @Input() group: Group;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName', 'Role', 'Blocked'];
+  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
 
   constructor(private groupService: GroupService,
+    private alertwindow: AlertWindowsComponent,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (this.linkId != null) {
-      this.groupService.getGroupUsers(this.linkId).subscribe(
+      this.groupService.getGroupUsers(this.group.Id).subscribe(
         data => this.users = data,
         err => console.log(err),
         () => {
         this.dataSource = new MatTableDataSource<User>(this.users);
         }
       );
-    } else {
-      this.groupService.getGroupUsers(1).subscribe(data => this.users = data);
-      console.log('No group provided');
-    }
   }
 
   applyFilter(filterValue: string) {
@@ -43,13 +41,25 @@ export class UsersDisplayComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
+  delChoosenUser(currentUser: User) {
+    this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
+    this.groupService.getGroupUsers(this.group.Id).subscribe(
+      data => this.users = data,
+      err => console.log(err),
+      () => {
+        this.dataSource = new MatTableDataSource<User>(this.users);
+      }
+    );
+    this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
+  }
+
   openUserAddDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponent, {
       width: '1000px',
-      data: this.linkId
+      data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.getGroupUsers(this.linkId).subscribe(
+      this.groupService.getGroupUsers(this.group.Id).subscribe(
         data => this.users = data,
         err => console.log(err),
         () => {

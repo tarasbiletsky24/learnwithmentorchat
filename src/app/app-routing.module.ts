@@ -18,6 +18,7 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { GroupsComponent } from './groups/groups/groups.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   { path: 'listTasks', component: AddTasksComponent, canActivate: [AuthGuard] },
   { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard] },
-  { path: 'group/:id', component: SpecificGroupComponent, canActivate: [AuthGuard] },
+  { path: 'mygroups', component: GroupsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

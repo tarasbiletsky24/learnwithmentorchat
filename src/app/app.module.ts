@@ -59,6 +59,8 @@ import { AddPlansComponent } from './specific-group/add-plans/add-plans.componen
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { GroupsComponent } from './groups/groups/groups.component';
+import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -96,6 +98,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CreatePlanComponent,
     AddTasksComponent,
     UserPageComponent,
+    GroupsComponent,
+    AddGroupComponent,
     UserEditComponent,
     PageNotFoundComponent
   ],
@@ -137,6 +141,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AddUsersComponent,
     AddPlansComponent,
     AddTasksComponent,
+    AddGroupComponent,
     UserEditComponent
   ],
   providers: [UserService, AuthGuard,
