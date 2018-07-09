@@ -20,19 +20,22 @@
         </button>
       </a>
     </div>
-    <div *ngIf="isLogin" class="user">
-      <a routerLink="profile">
-        <button mat-button>
-          {{fullName}}
-        </button>
-      </a>
+    <div class="cell15-16 ordItem">
+      <button mat-button *ngIf="isLogin" [matMenuTriggerFor]="menu">
+        {{fullName}}
+      </button>
     </div>
-    <div *ngIf="isLogin" class="cell16">
-      <a routerLink="logout" class="ordItem" (click)="logout()">
-        <button mat-button>
+    <mat-menu #menu="matMenu">      
+      <button mat-menu-item class="user">
+        <a routerLink="profile">
+          My Profile
+        </a>
+      </button>
+      <button mat-menu-item class="user">
+        <a routerLink="logout" (click)="logout()">
           Logout
-        </button>
-      </a>
-    </div>
+        </a>
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>
