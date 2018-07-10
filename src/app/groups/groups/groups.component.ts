@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Attribute } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatButton, MatDialog } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatButton, MatDialog, MatExpansionPanel, MatExpansionPanelHeader } from '@angular/material';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -46,5 +46,9 @@ export class GroupsComponent implements OnInit {
       );
     }
     );
+  }
+
+  expandPanel(event: any): void {
+    event.currentTarget.setAttribute('background-color', 'gainsboro');
   }
 }

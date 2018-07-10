@@ -3,6 +3,7 @@
   }
   .main {   
     padding-top: 2%;
+    padding-bottom: 5%;
   }
   .groups {
     width: 80%;
@@ -19,4 +20,9 @@
   .name-container{
     margin-bottom: 10px;
   }
-  
+  ::ng-deep .mat-expansion-panel-body{
+    padding: 0 !important;
+  }
+  ::ng-deep .mat-expansion-panel-header{
+    background-color: gainsboro !important;
+  }
