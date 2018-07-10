@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../common/services/auth.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-slider',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SliderComponent implements OnInit {
 
-  constructor() { }
+  isLogin = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.isAuthenticated().subscribe(val =>  this.isLogin = val);
+    this.authService.updateSubject();
   }
 
 }

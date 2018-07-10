@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     if (this.auth.isValid(localStorage.getItem('userToken'))) {
       return true;
     }
-    localStorage.clear();
+    this.auth.removeUserData();
     this.router.navigate(['/']);
     return false;
   }

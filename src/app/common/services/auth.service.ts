@@ -1,23 +1,52 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor() {}
 
   jwt = new JwtHelperService();
 
   isValid(token: string): boolean {
-    return !this.jwt.isTokenExpired(token);
+    if(!this.jwt.isTokenExpired(token)) {
+      this.authenticated.next(true);
+      return true;
+    } else {
+      this.authenticated.next(false);
+      return false;
+    }
   }
+
+  private authenticated = new Subject<boolean>();
 
   setUserData(token: string): void {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
     localStorage.setItem('userToken', token);
+    this.authenticated.next(true);
+  }
+
+  removeUserData(): void {
+    localStorage.clear();
+    this.authenticated.next(false);
+  }
+
+  updateSubject(){
+    this.authenticated.next(false);
+    const token = localStorage.getItem('userToken');
+    if(this.isValid(token)) {
+      this.authenticated.next(true);
+    } else {
+      this.authenticated.next(false);
+    }
+  }
+
+  isAuthenticated(): Subject<boolean> {
+    return this.authenticated;
   }
 
   private getUser() {

@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
+    this.authService.removeUserData();
     this.isLogin = false;
     this.router.navigate(['/']);
   }
@@ -39,7 +39,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     const jwt = new JwtHelperService();
     this.fullName = this.authService.getUserFullName();
-    this.isLogin = !jwt.isTokenExpired(localStorage.getItem('userToken'));
+    this.authService.isAuthenticated().subscribe(val => this.isLogin = val);
+    this.authService.updateSubject();
     this.isAdmin = this.authService.isAdmin();
     }
   }
