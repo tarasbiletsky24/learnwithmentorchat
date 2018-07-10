@@ -15,7 +15,7 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.authService.isAuthenticated().subscribe(val =>  this.isLogin = val);
-    this.authService.updateSubject();
+    this.authService.updateUserState();
   }
 
 }

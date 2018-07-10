@@ -38,9 +38,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     const jwt = new JwtHelperService();
-    this.fullName = this.authService.getUserFullName();
-    this.authService.isAuthenticated().subscribe(val => this.isLogin = val);
-    this.authService.updateSubject();
-    this.isAdmin = this.authService.isAdmin();
+    this.authService.isAuthenticated().subscribe(val => {
+      this.isLogin = val;
+      this.fullName = this.authService.getUserFullName();
+      this.isAdmin = this.authService.isAdmin();
+    });
+    this.authService.updateUserState();
     }
   }

@@ -9,19 +9,18 @@ export class AuthService {
 
   constructor() {}
 
-  jwt = new JwtHelperService();
-
-  isValid(token: string): boolean {
-    if(!this.jwt.isTokenExpired(token)) {
-      this.authenticated.next(true);
-      return true;
-    } else {
-      this.authenticated.next(false);
-      return false;
-    }
-  }
+  private jwt = new JwtHelperService();
 
   private authenticated = new Subject<boolean>();
+
+  isValid(token: string): boolean {
+    if (!this.jwt.isTokenExpired(token)) {
+      this.authenticated.next(true);
+      return true;
+    }
+    this.authenticated.next(false);
+    return false;
+  }
 
   setUserData(token: string): void {
     const helper = new JwtHelperService();
@@ -35,11 +34,10 @@ export class AuthService {
     this.authenticated.next(false);
   }
 
-  updateSubject(){
-    this.authenticated.next(false);
+  updateUserState() {
     const token = localStorage.getItem('userToken');
-    if(this.isValid(token)) {
-      this.authenticated.next(true);
+    if (token) {
+      this.authenticated.next(this.isValid(token));
     } else {
       this.authenticated.next(false);
     }
