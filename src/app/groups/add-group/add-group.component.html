@@ -1,18 +1,18 @@
-<form class="group-create-form" #groupCreateForm="ngForm" (ngSubmit)="createGroup(groupCreateForm)">
+<form class="group-create-form" #groupCreateForm="ngForm" (ngSubmit)="createGroup(groupCreateForm, $event.target)">
   <h2>Create group</h2>
   <mat-form-field class="container">
-    <input matInput ngModel type="text" name="Name" placeholder="Name" required maxlength="50">
+    <input matInput ngModel type="text" name="Name" placeholder="Name" required maxlength="50" (input)="onGroupNameChange()">
   </mat-form-field>
-  <div>
-    <span>
-      <button mat-raised-button color="primary" mat-dialog-close>
-        Close
-      </button>
-    </span>
-    <span class="button-right">
-      <button [disabled]="!groupCreateForm.valid" mat-raised-button color="primary" type="submit">
-        Create
-      </button>
-    </span>
+  <div class="button-row">
+    <button mat-raised-button color="primary" mat-dialog-close>
+      Close
+    </button>
+    <mat-spinner *ngIf="progresSpinerActive" class="example-margin" diameter="35" strokeWidth="4" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    <button [disabled]="!groupCreateForm.valid" name="submit" mat-raised-button color="primary" type="submit">
+      Create
+    </button>
+  </div>
+  <div *ngIf="errorMessageActive" class="error-message">
+    <h4>{{errorMessage}}</h4>
   </div>
 </form>

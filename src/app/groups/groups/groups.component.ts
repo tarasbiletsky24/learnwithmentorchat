@@ -24,16 +24,18 @@ export class GroupsComponent implements OnInit {
   userId: number;
   userName: string;
   isMentor = false;
+  dataLoaded: boolean;
+  errorMessage: string;
+  errorMessageActive: boolean = false;
 
   ngOnInit() {
+    this.dataLoaded = false;
     this.userId = this.authService.getUserId();
     if (this.authService.getUserRole() === 'Mentor') {
       this.isMentor = true;
     }
     this.userName = this.authService.getUserFullName();
-    this.groupService.getUserGroups(this.userId).subscribe(
-      data => this.groups = data
-    );
+    this.loadUserGroups();
   }
 
   openGroupCreateDialog(): void {
@@ -41,14 +43,21 @@ export class GroupsComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.getUserGroups(this.userId).subscribe(
-        data => this.groups = data
-      );
+      this.dataLoaded = false;
+      this.loadUserGroups();
     }
     );
   }
 
-  expandPanel(event: any): void {
-    event.currentTarget.setAttribute('background-color', 'gainsboro');
+  loadUserGroups(): void {
+    this.groupService.getUserGroups(this.userId).subscribe(
+      data => this.groups = data,
+      error => {this.errorMessage = error.message;},
+      () => { this.dataLoaded = true; }
+    );
+  }
+
+  expandPanel(element: any): void {
+    element.setAttribute('background-color', 'gainsboro');
   }
 }

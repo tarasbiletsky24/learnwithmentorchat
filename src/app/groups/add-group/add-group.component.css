@@ -3,11 +3,22 @@
     display: flex;
     flex-direction: column;
   }
-  
   .container {
     width: 100%;
   }
-  
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+  }
   .button-right{
     float: right;
+  }
+  .example-margin {
+    margin: 0 10px;
+  }
+  .error-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin: 5px 5px;
   }

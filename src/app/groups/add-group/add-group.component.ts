@@ -20,26 +20,40 @@ export class AddGroupComponent implements OnInit {
     private alertwindow: AlertWindowsComponent,
     private groupService: GroupService) { }
 
+  progresSpinerActive: boolean;
+  errorMessage: string;
+  errorMessageActive: boolean = false;
+  groupName: string;
+
+  ngOnInit() {
+  }
+
   createGroup(form: NgForm) {
+    this.progresSpinerActive = true;
+    form.form.disable();//is it OK?
     let group: Group = {
       Id: 0,
       Name: form.value.Name,
       MentorId: this.authService.getUserId(),
       MentorName: this.authService.getUserFullName()
     };
-      this.groupService.createGroup(group).subscribe(
-        resp =>{
-          if(this.httpStatusCodeService.isOk(resp.status)){
-            this.alertwindow.openSnackBar(`Group successfully created`, 'Ok');
-            this.thisDialogRef.close();
-          } else {
-            this.alertwindow.openSnackBar(`Group creation error, please try again`, 'Ok');
-          }
+    this.groupService.createGroup(group).subscribe(
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          this.alertwindow.openSnackBar(`Group successfully created`, 'Ok');
+        } else {
+          //this.errorMessage = resp;
+          this.errorMessage = 'Group with this name already exists';//todo get response message
+          this.errorMessageActive = true;
         }
-      )
+        form.form.enable();
+        this.progresSpinerActive = false;
+      }
+    )
   }
 
-  ngOnInit() {
+  onGroupNameChange() {
+    this.errorMessage = null;
+    this.errorMessageActive = false;
   }
-
 }

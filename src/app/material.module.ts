@@ -8,7 +8,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
@@ -20,7 +21,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatTabsModule,
         MatDividerModule,
         MatMenuModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         MatCardModule,
@@ -31,7 +34,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatTabsModule,
         MatDividerModule,
         MatMenuModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule
     ]
 })
 export class MaterialModule {
