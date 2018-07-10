@@ -1,11 +1,9 @@
 <mat-toolbar color="primary">
   <div class="grid-container">
-    <div class="cell1"> {{mainTag}} </div>
-    <div class="cell2">
-      <a routerLink="/" class="ordItem">
-        <button mat-button>Start Learning</button>
-      </a>
-    </div>
+    <a routerLink="/" class="ordItem">
+      <div class="cell1"> {{mainTag}} </div>
+    </a>
+    
     <div *ngIf="!isLogin" class="cell15">
       <a class="ordItem" (click)="openSignInDialog()">
         <button mat-button>
@@ -29,6 +27,16 @@
       <button mat-menu-item class="user">
         <a routerLink="profile">
           My Profile
+        </a>
+      </button>
+      <button *ngIf="isAdmin" mat-menu-item class="user">
+        <a routerLink="users">
+          Manage users
+        </a>
+      </button>
+      <button mat-menu-item class="user">
+        <a routerLink="mygroups">
+          My groups
         </a>
       </button>
       <button mat-menu-item class="user">
