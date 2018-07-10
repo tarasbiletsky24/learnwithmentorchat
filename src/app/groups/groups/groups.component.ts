@@ -27,7 +27,7 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
-    if (this.authService.getUserRole() === 'Mentor') {
+    if (this.authService.isMentor()) {
       this.isMentor = true;
     }
     this.userName = this.authService.getUserFullName();

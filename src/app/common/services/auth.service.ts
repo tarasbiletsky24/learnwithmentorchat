@@ -43,11 +43,23 @@ export class AuthService {
     return this.getUser().unique_name;
   }
 
-  getUserRole(): string {
+  private getUserRole(): string {
     if (!this.getUser()) {
       return null;
     }
     return this.getUser().role;
+  }
+
+  isMentor(): boolean {
+    return this.getUserRole() === 'Mentor';
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'Admin';
+  }
+
+  isStudent(): boolean {
+    return this.getUserRole() === 'Student';
   }
 
   getUserEmail(): string {
