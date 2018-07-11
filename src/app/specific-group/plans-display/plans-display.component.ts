@@ -32,7 +32,7 @@ export class PlansDisplayComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    if (this.authService.getUserRole() === 'Mentor') {
+    if (this.authService.isMentor()) {
       this.isMentor = true;
       this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
     }

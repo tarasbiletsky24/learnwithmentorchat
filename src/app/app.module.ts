@@ -64,6 +64,9 @@ import { GroupsComponent } from './groups/groups/groups.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { MentorGuard } from './auth/mentor.guard';
+import { AdminGuard } from './auth/admin.guard';
 
 @NgModule({
   declarations: [
@@ -102,7 +105,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     GroupsComponent,
     AddGroupComponent,
     UserEditComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     AppRoutingModule,
@@ -146,7 +150,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AddGroupComponent,
     UserEditComponent
   ],
-  providers: [UserService, AuthGuard,
+  providers: [UserService,
+    AuthGuard,
+    MentorGuard,
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

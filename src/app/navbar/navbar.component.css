@@ -5,6 +5,7 @@
 
 .ordItem {
   color: aliceblue;
+  text-decoration: none;
 }
 
 .grid-container {

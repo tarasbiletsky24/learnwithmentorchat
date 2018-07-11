@@ -28,6 +28,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
   <button [disabled]="!userUpdateForm.valid" mat-raised-button color="primary" (click)="onSaveClick()">Save</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>
