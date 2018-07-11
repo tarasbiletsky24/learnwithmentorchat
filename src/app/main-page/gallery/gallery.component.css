@@ -107,6 +107,7 @@ clear: both;
     text-align: center;
     position: relative;
     top: 75px;
+    width: 150px;
     transform: translateY(-50%);
   }
   
@@ -117,7 +118,6 @@ clear: both;
     height: 100px;
     background: url('http://i.imgur.com/oSHLAzp.png') center center;
     background-size: contain;
-    transition-origin: 50% 50%;
     animation: spinner 3s infinite alternate ease-in-out;
   }
   .spinner-center {
