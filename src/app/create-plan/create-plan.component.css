@@ -1,27 +1,44 @@
-
 .header{
 text-align: center;
+}
+table{
+    width:100%;
+}
+.add-new-plan{
+ width: 70%;
+margin-left: auto;
+    margin-right: auto;
+}
+.new-plan{ 
+   display: flex;
+}
+.for-image{
+    width: 30%;
+}
+.for-data{
+    width: 69%;
+}
+.input-text{
+    width: 100%;
+}
+.input-description{
+height: 100px;
+}
+.block{
+    display: flex;
+    justify-content: space-between;
+}
 
-}
-.add-new-plan>{   
-    display: flex;    
-flex-direction: row;
-justify-content: center;
-}
-.main{
-    display: flex;    
-flex-direction: row;
-justify-content: center;
-width: 40%;
-}
-.main>div{
-    text-align: center;
-}
-.input,.plan-icon{
-    width: 40%;
-    height: 40%;
-}
-.button-add-tasks{
-    text-align: center;
-}
 
+.fileInput {
+    display: none;
+}
+.pic{
+    display:block;
+    width: 190px;
+    height: 180px;
+}
+.button-create-plan{
+    display: flex;
+    justify-content: center;
+}
