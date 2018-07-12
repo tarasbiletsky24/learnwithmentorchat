@@ -2,34 +2,34 @@
 
   <h1 class="header"> Create plan</h1>
   <div class="new-plan">
-  <div class="for-image">
-    <img class="plan-icon" class="pic" [src]="imageData" id="newImage">
-    <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>  
-    <button mat-raised-button color="primary" class="center" (click)="fileInput.click()">Select plan image</button>
-  </div>
-  <div class="for-data">
-    
+    <div class="for-image">
+      <img class="plan-icon" class="pic" [src]="imageData" id="newImage">
+      <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
+      <button mat-raised-button color="primary" class="center" (click)="fileInput.click($event)">Select plan image</button>
+    </div>
+    <div class="for-data">
+
       <div class="input-name">
-          <mat-form-field class="input-text">
-            <input matInput placeholder="Enter name of your plan" [(ngModel)]="name">
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="input-text">
-            <textarea matInput placeholder="Enter description of your plan" class=" input-description" [(ngModel)]="description"></textarea>
-          </mat-form-field>
-        </div>
-        <div class=" block">
+        <mat-form-field class="input-text">
+          <input matInput placeholder="Enter name of your plan" [(ngModel)]="name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="input-text">
+          <textarea matInput placeholder="Enter description of your plan" class=" input-description" [(ngModel)]="description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class=" block">
         <!-- <mat-checkbox>Published</mat-checkbox> -->
-        
-    <button mat-raised-button color="primary" (click)="createPlan()" *ngIf="!addTask">Create plan</button>
-        
+
+        <button mat-raised-button color="primary" (click)="createPlan()" *ngIf="!addTask">Create plan</button>
+
       </div>
 
     </div>
   </div>
 
-  <div class="mat-elevation-z8" *ngIf="result">
+  <div class="mat-elevation-z8" *ngIf="tableEmpty">
     <table mat-table [dataSource]="result">
 
 
@@ -52,9 +52,9 @@
     </table>
 
   </div>
- 
+
   <div class="button-create-plan" *ngIf="addTask">
-   
-      <button mat-raised-button color="primary" (click)="openAddTasks()">Add tasks</button>
+
+    <button mat-raised-button color="primary" (click)="openAddTasks()">Add tasks</button>
   </div>
 </div>

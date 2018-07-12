@@ -1,6 +1,9 @@
 .header{
 text-align: center;
 }
+table{
+    width:100%;
+}
 .add-new-plan{
  width: 70%;
 margin-left: auto;
