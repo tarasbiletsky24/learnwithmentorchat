@@ -8,6 +8,7 @@ import { HttpStatusCodeService } from '../../common/services/http-status-code.se
 class PlanInfo {
   plan: Plan;
   imageData: any;
+  loading: boolean;
 }
 
 @Component({
@@ -30,16 +31,19 @@ export class GalleryComponent implements OnInit {
           let planInfo: PlanInfo;
           planInfo = new PlanInfo;
           planInfo.plan = p;
+          planInfo.loading = true;
+          this.plans.push(planInfo);
           this.planService.getImage(p.Id).subscribe(
             resp => {
               if (this.httpStatusCodeService.isOk(resp.status)) {
                 const extension = resp.body.Name.split('.').pop().toLowerCase();
                 const imgUrl = `data:image/${extension};base64,${resp.body.Base64Data}`;
                 planInfo.imageData = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
+                planInfo.loading = false;
               } else {
                 planInfo.imageData = null;
+                planInfo.loading = false;
               }
-              this.plans.push(planInfo);
             }
           );
         });
