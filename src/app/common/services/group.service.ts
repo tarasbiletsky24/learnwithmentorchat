@@ -33,6 +33,12 @@ export class GroupService {
     );
   }
 
+  getUserGroups(id: number): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe(
+      catchError(this.handleError<Group[]>(`getUserGroups`))
+    );
+  }
+
   getGroupPlans(id: number): Observable<Plan[]> {
     return this.http.get<Plan[]>(`${this.url}/${id}/plans`).pipe(
       catchError(this.handleError<Plan[]>(`getGroupPlans`))
@@ -63,7 +69,19 @@ export class GroupService {
     );
   }
 
-   private handleError<T>(operation = 'operation', result?: T) {
+  removePlanFromGroup(groupId: number, planId: number): Observable<Plan> {
+    return this.http.delete<Plan>(`${this.url}/removePlanFromGroup?groupId=${groupId}&planToRemoveId=${planId}`, this.httpOptions).pipe(
+      catchError(this.handleError<Plan>('deleteComment'))
+    );
+  }
+
+  removeUserFromGroup(groupId: number, userId: number): Observable<User> {
+    return this.http.delete<User>(`${this.url}/removeUserFromGroup?groupId=${groupId}&userToRemoveId=${userId}`, this.httpOptions).pipe(
+      catchError(this.handleError<User>('deleteComment'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       // todo put into sharable service

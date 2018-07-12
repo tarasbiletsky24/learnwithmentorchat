@@ -1,0 +1,27 @@
+.wrap {
+    width: 100%;
+    text-align: center;
+}
+.wrap a:link, .user a:visited{
+    text-decoration: none;
+    color: aliceblue;
+  }
+  
+.wrap a:visited{
+text-decoration: none;
+}
+
+.wrap h1 {
+    margin-top: 20vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100px;
+    color: gray;
+}
+
+.line1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+}
+button {
+    margin-top: 30px;
+}

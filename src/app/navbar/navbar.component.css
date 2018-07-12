@@ -5,6 +5,7 @@
 
 .ordItem {
   color: aliceblue;
+  text-decoration: none;
 }
 
 .grid-container {
@@ -32,6 +33,11 @@
   grid-column-end: 16;
 }
 
+.cell15-16{
+  grid-column-start: 15;
+  grid-column-end: 16;
+}
+
 .user {
   font-size: 15px;
   grid-column-start: 15;
@@ -40,11 +46,7 @@
   margin-top: 2px;
 }
 
-.user a:link, .user a:visited{
+.user a{
   text-decoration: none;
-  color: aliceblue;
-}
-
-.user a:visited{
-  text-decoration: none;
+  color:#3f51b5;
 }

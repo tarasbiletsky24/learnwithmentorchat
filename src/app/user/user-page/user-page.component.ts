@@ -8,6 +8,7 @@ import { AlertWindowsComponent } from '../../components/alert-windows/alert-wind
 import { Statistics } from '../../common/models/statistics';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
+import { AuthService } from '../../common/services/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -27,11 +28,12 @@ export class UserPageComponent implements OnInit {
   constructor(private userService: UserService,
     private sanitizer: DomSanitizer,
     private alertWindow: AlertWindowsComponent,
+    private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userId = parseInt(localStorage.getItem('id'), 10);
+    this.userId = this.authService.getUserId();
     this.userService.getUser(this.userId).subscribe(
       resp => {
         this.userData = resp;

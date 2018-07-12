@@ -7,8 +7,6 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { Plan } from '../../common/models/plan';
 import { GroupService } from '../../common/services/group.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { DISABLED } from '@angular/forms/src/model';
-import { IButton } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-add-plans',

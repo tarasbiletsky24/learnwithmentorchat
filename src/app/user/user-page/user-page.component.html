@@ -1,7 +1,12 @@
 <div class="profile-info">
     <div class="image-wrap">
-        <img *ngIf="imageData" [src]="imageData" (click)="fileInput.click()" id="newImage" alt="User image">
-        <span class="upload-hover">Upload new picture</span>
+        <img *ngIf="imageData"
+        [src]="imageData"
+        (click)="fileInput.click()"
+        id="newImage"
+        alt="User image"
+        matTooltip="Upload new picture"
+        matTooltipPosition="after">
     </div>
     <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
     <h3 *ngIf="userData">{{userData.FirstName}} {{userData.LastName}}</h3>

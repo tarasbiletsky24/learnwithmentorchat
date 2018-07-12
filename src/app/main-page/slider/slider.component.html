@@ -6,8 +6,10 @@
     <div>Create own group.<br> Choose specific plans.
       <br> Gives mentor`s support.<br> Improve your knowledge.</div>
   </div>
-  <div class="cell buttonCell">
-    <button mat-raised-button color="warn">Start Learning</button>
+  <div *ngIf="isLogin" class="cell buttonCell">
+    <a routerLink="plans">
+      <button mat-raised-button color="warn">Learning Plans</button>
+    </a>
   </div>
   <div class="cell imageCell">
     <img src='./assets/images/forMainPage/MainPage.png' alt="MainPage" class="slider_image">

@@ -6,15 +6,15 @@
   <mat-form-field class="example-full-width containerUpdate">
     <input matInput type="password" placeholder="Enter Password" #Password ngModel name="Password" placeholder="Password" required>
   </mat-form-field>
-  <div>
+  <div>   
     <span >
-      <button mat-raised-button color="primary" mat-dialog-close>
-        Cancel
+      <button [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit">
+        Submit
       </button>
     </span>
     <span class="button-right">
-      <button [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit">
-        Submit
+      <button mat-raised-button color="primary" mat-dialog-close>
+        Cancel
       </button>
     </span>
   </div>

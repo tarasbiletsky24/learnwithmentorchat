@@ -21,6 +21,7 @@ import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
 import { TaskDetailComponent } from './task/task-detail/task-detail.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule, MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import { TaskEditorComponent } from './task/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -59,8 +60,13 @@ import { AddPlansComponent } from './specific-group/add-plans/add-plans.componen
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { GroupsComponent } from './groups/groups/groups.component';
+import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { MentorGuard } from './auth/mentor.guard';
+import { AdminGuard } from './auth/admin.guard';
 
 @NgModule({
   declarations: [
@@ -96,8 +102,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CreatePlanComponent,
     AddTasksComponent,
     UserPageComponent,
+    GroupsComponent,
+    AddGroupComponent,
     UserEditComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     AppRoutingModule,
@@ -121,7 +130,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatRadioModule,
     FormsModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
     ],
 
   entryComponents: [TaskEditorComponent,
@@ -137,9 +147,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AddUsersComponent,
     AddPlansComponent,
     AddTasksComponent,
+    AddGroupComponent,
     UserEditComponent
   ],
-  providers: [UserService, AuthGuard,
+  providers: [UserService,
+    AuthGuard,
+    MentorGuard,
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
