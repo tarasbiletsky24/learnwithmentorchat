@@ -30,9 +30,9 @@ export class UserService {
     );
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.url}/${id}`).pipe(
-      catchError(this.handleError<User>(`getUser id=${id}`))
+  getUser(): Observable<User> {
+    return this.http.get<User>(`${this.url}info`).pipe(
+      catchError(this.handleError<User>(`getUser`))
     );
   }
 
@@ -110,9 +110,9 @@ export class UserService {
       catchError(val => of(val)));
   }
 
-  updatePassword(userId: number, newPass: string) {
+  updatePassword(newPass: string) {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<string>(`${this.url}/${userId}/newpassword`, newPass, { observe: 'response', headers: reqHeader }).pipe(
+    return this.http.put<string>(`${this.url}/newpassword`, newPass, { observe: 'response', headers: reqHeader }).pipe(
       catchError(val => of(val)));
   }
 
