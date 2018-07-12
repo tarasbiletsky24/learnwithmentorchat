@@ -36,3 +36,9 @@
     margin: 10% 10%;
     height: 40%;
   }
+  .error-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin: 5px 5px;
+  }

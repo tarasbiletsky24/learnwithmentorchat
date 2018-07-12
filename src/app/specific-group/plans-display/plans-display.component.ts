@@ -24,6 +24,7 @@ export class PlansDisplayComponent implements OnInit {
   displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   isMentor = false;
+  isInitialized = false;
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
@@ -31,18 +32,24 @@ export class PlansDisplayComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
-    if (this.authService.getUserRole() === 'Mentor') {
-      this.isMentor = true;
-      this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
-    }
-    this.groupService.getGroupPlans(this.group.Id).subscribe(
-      data => this.plans = data,
-      err => console.log(err),
-      () => {
-        this.dataSource = new MatTableDataSource<Plan>(this.plans);
+  ngOnInit() { 
+  }
+
+  initialize(): void {
+    if (!this.isInitialized) {
+      debugger
+      if (this.authService.getUserRole() === 'Mentor') {
+        this.isMentor = true;
+        this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
       }
-    );
+      this.groupService.getGroupPlans(this.group.Id).subscribe(
+        data => this.plans = data,
+        err => console.log(err),
+        () => {
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+      );
+    }
   }
 
   applyFilter(filterValue: string) {

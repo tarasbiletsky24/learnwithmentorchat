@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject, Attribute } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatButton, MatDialog, MatExpansionPanel, MatExpansionPanelHeader } from '@angular/material';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
 import { AddGroupComponent } from '../add-group/add-group.component';
 import { AuthService } from '../../common/services/auth.service';
+import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import { SpecificGroupComponent } from '../../specific-group/specific-group/specific-group.component';
 
 @Component({
   selector: 'app-groups',
@@ -27,6 +27,9 @@ export class GroupsComponent implements OnInit {
   dataLoaded: boolean;
   errorMessage: string;
   errorMessageActive: boolean = false;
+
+  @ViewChild(SpecificGroupComponent)
+  private specificGroup: SpecificGroupComponent;
 
   ngOnInit() {
     this.dataLoaded = false;
@@ -51,13 +54,27 @@ export class GroupsComponent implements OnInit {
 
   loadUserGroups(): void {
     this.groupService.getUserGroups(this.userId).subscribe(
-      data => this.groups = data,
-      error => {this.errorMessage = error.message;},
-      () => { this.dataLoaded = true; }
+      data => {
+        this.groups = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.Message;
+        this.errorMessageActive = true;
+        this.dataLoaded = true;
+      },
+      () => {
+        this.dataLoaded = true;
+        if (this.groups === null ) {
+          this.errorMessage = 'There are no groups for you';
+          this.errorMessageActive = true;
+        } 
+      }
     );
   }
 
   expandPanel(element: any): void {
     element.setAttribute('background-color', 'gainsboro');
+    //todo if not expanded 
+    this.specificGroup.initialize();
   }
 }

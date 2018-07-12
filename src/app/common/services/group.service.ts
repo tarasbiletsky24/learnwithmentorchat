@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
@@ -34,8 +34,9 @@ export class GroupService {
   }
 
   getUserGroups(id: number): Observable<Group[]> {
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe(
-      catchError(this.handleError<Group[]>(`getUserGroups`))
+      //catchError(this.handleError<Group[]>(`getUserGroups`))
     );
   }
 

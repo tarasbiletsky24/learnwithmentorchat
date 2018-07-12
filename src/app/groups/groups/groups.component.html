@@ -24,5 +24,8 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
+    <div *ngIf="errorMessageActive" class="error-message">
+      <h4>{{errorMessage}}</h4>
+    </div>
   </div>
 </div>

@@ -20,53 +20,61 @@ export class UsersDisplayComponent implements OnInit {
   users: User[];
   displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
+  isInitialized = false;
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
-      this.groupService.getGroupUsers(this.group.Id).subscribe(
-        data => this.users = data,
-        err => console.log(err),
-        () => {
-        this.dataSource = new MatTableDataSource<User>(this.users);
-        }
-      );
+  ngOnInit() { 
+    debugger
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
-
-  delChoosenUser(currentUser: User) {
-    this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
-    this.groupService.getGroupUsers(this.group.Id).subscribe(
-      data => this.users = data,
-      err => console.log(err),
-      () => {
-        this.dataSource = new MatTableDataSource<User>(this.users);
+  initialize(): void {
+      if(!this.isInitialized) {
+        debugger
+        this.groupService.getGroupUsers(this.group.Id).subscribe(
+          data => this.users = data,
+          err => console.log(err),
+          () => {
+            this.dataSource = new MatTableDataSource<User>(this.users);
+          }
+        );
       }
-    );
-    this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
-  }
+    }
 
-  openUserAddDialog(): void {
-    const dialogRef = this.dialog.open(AddUsersComponent, {
-      width: '1000px',
-      data: this.group.Id
-    });
-    dialogRef.afterClosed().subscribe(result => {
+    applyFilter(filterValue: string) {
+      filterValue = filterValue.trim();
+      filterValue = filterValue.toLowerCase();
+      this.dataSource.filter = filterValue;
+    }
+
+    delChoosenUser(currentUser: User) {
+      this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
       this.groupService.getGroupUsers(this.group.Id).subscribe(
         data => this.users = data,
         err => console.log(err),
         () => {
-        this.dataSource = new MatTableDataSource<User>(this.users);
+          this.dataSource = new MatTableDataSource<User>(this.users);
         }
       );
-    });
-  }
+      this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
+    }
 
-}
+    openUserAddDialog(): void {
+      const dialogRef = this.dialog.open(AddUsersComponent, {
+        width: '1000px',
+        data: this.group.Id
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.groupService.getGroupUsers(this.group.Id).subscribe(
+          data => this.users = data,
+          err => console.log(err),
+          () => {
+            this.dataSource = new MatTableDataSource<User>(this.users);
+          }
+        );
+      });
+    }
+
+  }

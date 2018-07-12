@@ -42,7 +42,6 @@ export class AddGroupComponent implements OnInit {
         if (this.httpStatusCodeService.isOk(resp.status)) {
           this.alertwindow.openSnackBar(`Group successfully created`, 'Ok');
         } else {
-          //this.errorMessage = resp;
           this.errorMessage = 'Group with this name already exists';//todo get response message
           this.errorMessageActive = true;
         }
