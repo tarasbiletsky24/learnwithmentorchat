@@ -1,23 +1,50 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor() {}
 
-  jwt = new JwtHelperService();
+  private jwt = new JwtHelperService();
+
+  private authenticated = new Subject<boolean>();
 
   isValid(token: string): boolean {
-    return !this.jwt.isTokenExpired(token);
+    if (!this.jwt.isTokenExpired(token)) {
+      this.authenticated.next(true);
+      return true;
+    }
+    this.authenticated.next(false);
+    return false;
   }
 
   setUserData(token: string): void {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
     localStorage.setItem('userToken', token);
+    this.authenticated.next(true);
+  }
+
+  removeUserData(): void {
+    localStorage.clear();
+    this.authenticated.next(false);
+  }
+
+  updateUserState() {
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      this.authenticated.next(this.isValid(token));
+    } else {
+      this.authenticated.next(false);
+    }
+  }
+
+  isAuthenticated(): Subject<boolean> {
+    return this.authenticated;
   }
 
   private getUser() {
@@ -43,11 +70,23 @@ export class AuthService {
     return this.getUser().unique_name;
   }
 
-  getUserRole(): string {
+  private getUserRole(): string {
     if (!this.getUser()) {
       return null;
     }
     return this.getUser().role;
+  }
+
+  isMentor(): boolean {
+    return this.getUserRole() === 'Mentor';
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'Admin';
+  }
+
+  isStudent(): boolean {
+    return this.getUserRole() === 'Student';
   }
 
   getUserEmail(): string {

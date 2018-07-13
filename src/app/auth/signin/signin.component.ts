@@ -29,7 +29,6 @@ export class SigninComponent implements OnInit {
     this.userService.userAuthentication(form.value).subscribe((data: any) => {
       this.auth.setUserData(data);
       this.closeSigninComponent();
-      this.router.navigate(['/mygroups']);
     },
     (err: HttpErrorResponse) => {
       this.alertwindow.openSnackBar('Incorrect email or password', '');

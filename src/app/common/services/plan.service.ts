@@ -20,7 +20,6 @@ export class PlanService {
   private httpOptionsNoAuth = {
     headers: new HttpHeaders({ 'No-Auth': 'True' })
   };
-
   private url = `${environment.apiUrl}plan`;
 
   getPlans(): Observable<Plan[]> {
@@ -31,11 +30,18 @@ export class PlanService {
 
   getSomePlans(previousAmount: number, amount: number): Observable<Plan[]> {
     return this.http.get<Plan[]>(`${this.url}/some?prevAmount=${previousAmount}&amount=${amount}`,
-    { headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
-      catchError(this.handleError<Plan[]>(`getPlans`))
+      { headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
+        catchError(this.handleError<Plan[]>(`getPlans`))
+      );
+  }
+  addTaskToPlan(planId: number, taskId: number, sectionId: number, priority: number): Observable<HttpResponse<any>> {
+    const section = sectionId > 0 ? sectionId : '';
+    const priorityUrl = priority !== null ? priority : '';
+    const link = `${this.url}/${planId}/task/${taskId}?sectionId=${section}&priority=${priority}`;
+    return this.http.put(link, null, this.httpOptions).pipe(
+      catchError(r => of(r))
     );
   }
-
   getPlan(id: number): Observable<Plan> {
     return this.http.get<Plan>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Plan>(`getPlan id=${id}`))
@@ -46,6 +52,13 @@ export class PlanService {
     return this.http.put<Plan>(`${this.url}/${plan.Id}`, plan, this.httpOptions).pipe(
       catchError(this.handleError<any>('updatePlan'))
     );
+  }
+  createPlan(plan: Plan): Observable<any> {
+
+    const link = `${this.url}/return`;
+    return this.http.post<Plan>(link, plan, this.httpOptions).pipe(
+      catchError(this.handleError<Plan>(`creating plan`)));
+
   }
 
   addPlan(plan: Plan): Observable<Plan> {
@@ -62,9 +75,15 @@ export class PlanService {
 
   updateImage(id: number, file: File) {
     const fd = new FormData;
-    fd.append('image', file, file.name);
-    return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
-      catchError(val => of(val)));
+    if (file) {
+      fd.append('image', file, file.name);
+      return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
+        catchError(val => of(val)));
+    }
+
+
+
+
   }
 
   getImage(id: number): Observable<HttpResponse<Image>> {

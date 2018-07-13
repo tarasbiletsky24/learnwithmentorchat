@@ -83,8 +83,9 @@ export class TaskService {
   }
 
   updateUserTaskResult(userTask: UserTask): Observable<any> {
-    const link = `${this.url}task/usertask/result?userTaskId=${userTask.Id}&newResult=${userTask.Result}`;
-    return this.http.put<UserTask>(link, null, httpOptions).pipe(
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const link = `${this.url}task/usertask/result?userTaskId=${userTask.Id}`;
+    return this.http.put<string>(link, userTask.Result as string, {headers: reqHeader}).pipe(
       catchError(val => of(val)));
   }
 

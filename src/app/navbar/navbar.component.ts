@@ -14,6 +14,7 @@ import { AuthService } from '../common/services/auth.service';
 export class NavbarComponent implements OnInit {
   mainTag = '</>';
   isLogin = false;
+  isAdmin = false;
   fullName: string;
   constructor(private dialog: MatDialog,
     private router: Router,
@@ -30,14 +31,18 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
+    this.authService.removeUserData();
     this.isLogin = false;
     this.router.navigate(['/']);
   }
 
   ngOnInit() {
     const jwt = new JwtHelperService();
-    this.fullName = this.authService.getUserFullName();
-    this.isLogin = !jwt.isTokenExpired(localStorage.getItem('userToken'));
+    this.authService.isAuthenticated().subscribe(val => {
+      this.isLogin = val;
+      this.fullName = this.authService.getUserFullName();
+      this.isAdmin = this.authService.isAdmin();
+    });
+    this.authService.updateUserState();
     }
   }

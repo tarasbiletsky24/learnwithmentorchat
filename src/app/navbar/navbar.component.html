@@ -1,11 +1,9 @@
 <mat-toolbar color="primary">
   <div class="grid-container">
-    <div class="cell1"> {{mainTag}} </div>
-    <div class="cell2">
-      <a routerLink="/" class="ordItem">
-        <button mat-button>Start Learning</button>
-      </a>
-    </div>
+    <a routerLink="/" class="ordItem">
+      <div class="cell1"> {{mainTag}} </div>
+    </a>
+    
     <div *ngIf="!isLogin" class="cell15">
       <a class="ordItem" (click)="openSignInDialog()">
         <button mat-button>
@@ -26,16 +24,26 @@
       </button>
     </div>
     <mat-menu #menu="matMenu">      
-      <button mat-menu-item class="user">
-        <a routerLink="profile">
+      <a class="ordItem" routerLink="profile">
+        <button mat-menu-item class="user">
           My Profile
-        </a>
-      </button>
-      <button mat-menu-item class="user">
-        <a routerLink="logout" (click)="logout()">
+        </button>
+      </a>
+      <a *ngIf="isAdmin" class="ordItem" routerLink="users">
+        <button mat-menu-item class="user"> 
+          Manage users
+        </button>
+      </a>
+      <a class="ordItem" routerLink="mygroups">
+        <button mat-menu-item class="user">
+          My groups
+        </button>
+      </a>
+      <a class="ordItem" routerLink="logout" (click)="logout()">
+        <button mat-menu-item class="user">
           Logout
-        </a>
-      </button>
+        </button>
+      </a>
     </mat-menu>
   </div>
 </mat-toolbar>

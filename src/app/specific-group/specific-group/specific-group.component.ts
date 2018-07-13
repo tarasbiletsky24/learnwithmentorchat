@@ -32,13 +32,12 @@ export class SpecificGroupComponent implements OnInit {
   @ViewChild(PlansDisplayComponent)
   private plansDisplay: PlansDisplayComponent;
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   initialize(): void {
     if (!this.isInitialized) {
       this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
-      if (this.authService.getUserRole() === 'Mentor') {
+      if (this.authService.isMentor()) {
         this.isMentor = true;
       }
       this.plansDisplay.initialize();

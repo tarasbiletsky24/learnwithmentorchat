@@ -4,8 +4,13 @@
     <mat-card>
         <div class="card">
           <div class="imgdiv">
-            <img  *ngIf="p.imageData" [src]="p.imageData" alt="Plan image">
-            <img  *ngIf="!p.imageData" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">
+            <div *ngIf="p.loading" class="loading-container">
+              <div class="spinner"></div>
+              <div class="spinner-center"></div>
+              <div class="loading-text">Loading...</div>
+            </div>
+            <img  *ngIf="p.imageData && !p.loading" [src]="p.imageData" alt="Plan image">
+            <img  *ngIf="!p.imageData && !p.loading" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">
           </div>
           <div class="textdiv">
             <h3>{{p.plan.Name}}</h3>
