@@ -22,7 +22,7 @@ export class AddGroupComponent implements OnInit {
 
   progresSpinerActive: boolean;
   errorMessage: string;
-  errorMessageActive: boolean = false;
+  errorMessageActive = false;
   groupName: string;
 
   ngOnInit() {
@@ -30,8 +30,8 @@ export class AddGroupComponent implements OnInit {
 
   createGroup(form: NgForm) {
     this.progresSpinerActive = true;
-    form.form.disable();//is it OK?
-    let group: Group = {
+    form.form.disable(); // is it OK?
+    const group: Group = {
       Id: 0,
       Name: form.value.Name,
       MentorId: this.authService.getUserId(),
@@ -42,13 +42,13 @@ export class AddGroupComponent implements OnInit {
         if (this.httpStatusCodeService.isOk(resp.status)) {
           this.alertwindow.openSnackBar(`Group successfully created`, 'Ok');
         } else {
-          this.errorMessage = 'Group with this name already exists';//todo get response message
+          this.errorMessage = 'Group with this name already exists'; // todo get response message
           this.errorMessageActive = true;
         }
         form.form.enable();
         this.progresSpinerActive = false;
       }
-    )
+    );
   }
 
   onGroupNameChange() {

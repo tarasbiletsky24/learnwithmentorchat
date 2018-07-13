@@ -36,7 +36,7 @@ export class GroupService {
   getUserGroups(id: number): Observable<Group[]> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe(
-      //catchError(this.handleError<Group[]>(`getUserGroups`))
+      // catchError(this.handleError<Group[]>(`getUserGroups`))
     );
   }
 

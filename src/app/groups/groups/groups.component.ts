@@ -26,12 +26,9 @@ export class GroupsComponent implements OnInit {
   isMentor = false;
   dataLoaded: boolean;
   errorMessage: string;
-  errorMessageActive: boolean = false;
+  errorMessageActive = false;
 
-  //@ViewChild(SpecificGroupComponent)
-  //private specificGroup: SpecificGroupComponent;
-
-  @ViewChildren(SpecificGroupComponent) 
+  @ViewChildren(SpecificGroupComponent)
   specificGroupList: QueryList<SpecificGroupComponent>;
 
   ngOnInit() {
@@ -70,13 +67,13 @@ export class GroupsComponent implements OnInit {
         if (this.groups === null ) {
           this.errorMessage = 'There are no groups for you';
           this.errorMessageActive = true;
-        } 
+        }
       }
     );
   }
 
   expandPanel(element: any, group: Group): void {
     element.setAttribute('background-color', 'gainsboro');
-    this.specificGroupList.find(x => x.group === group).initialize();//fix
+    this.specificGroupList.find(x => x.group === group).initialize(); // fix
   }
 }

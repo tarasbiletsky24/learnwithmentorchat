@@ -4,12 +4,12 @@
     <input matInput ngModel type="text" name="Name" placeholder="Name" required maxlength="50" (input)="onGroupNameChange()">
   </mat-form-field>
   <div class="button-row">
-    <button mat-raised-button color="primary" mat-dialog-close>
-      Close
-    </button>
-    <mat-spinner *ngIf="progresSpinerActive" class="example-margin" diameter="35" strokeWidth="4" [color]="primary" [mode]="indeterminate"></mat-spinner>
     <button [disabled]="!groupCreateForm.valid" name="submit" mat-raised-button color="primary" type="submit">
       Create
+    </button>
+    <mat-spinner *ngIf="progresSpinerActive" class="example-margin" diameter="35" strokeWidth="4" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    <button mat-raised-button color="primary" mat-dialog-close>
+      Close
     </button>
   </div>
   <div *ngIf="errorMessageActive" class="error-message">
