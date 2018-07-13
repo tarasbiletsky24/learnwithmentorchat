@@ -11,7 +11,7 @@
     </div>
     <mat-accordion *ngIf="dataLoaded">
       <mat-expansion-panel *ngFor="let group of groups">
-        <mat-expansion-panel-header (click)="expandPanel($event.target)">
+        <mat-expansion-panel-header (click)="expandPanel($event.target, group)">
           <mat-panel-title>
             {{group.Name}}
           </mat-panel-title>

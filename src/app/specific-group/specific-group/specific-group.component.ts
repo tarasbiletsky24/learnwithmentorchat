@@ -29,9 +29,6 @@ export class SpecificGroupComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog) { }
 
-  @ViewChild(UsersDisplayComponent)
-  private usersDisplay: UsersDisplayComponent;
-
   @ViewChild(PlansDisplayComponent)
   private plansDisplay: PlansDisplayComponent;
 
@@ -40,14 +37,12 @@ export class SpecificGroupComponent implements OnInit {
 
   initialize(): void {
     if (!this.isInitialized) {
-      debugger
       this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
       if (this.authService.getUserRole() === 'Mentor') {
         this.isMentor = true;
       }
-      debugger
       this.plansDisplay.initialize();
-      this.usersDisplay.initialize();
+      this.isInitialized = true;
     }
   }
 

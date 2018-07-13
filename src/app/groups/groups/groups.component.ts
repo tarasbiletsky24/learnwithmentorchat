@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
@@ -28,8 +28,11 @@ export class GroupsComponent implements OnInit {
   errorMessage: string;
   errorMessageActive: boolean = false;
 
-  @ViewChild(SpecificGroupComponent)
-  private specificGroup: SpecificGroupComponent;
+  //@ViewChild(SpecificGroupComponent)
+  //private specificGroup: SpecificGroupComponent;
+
+  @ViewChildren(SpecificGroupComponent) 
+  specificGroupList: QueryList<SpecificGroupComponent>;
 
   ngOnInit() {
     this.dataLoaded = false;
@@ -72,9 +75,8 @@ export class GroupsComponent implements OnInit {
     );
   }
 
-  expandPanel(element: any): void {
+  expandPanel(element: any, group: Group): void {
     element.setAttribute('background-color', 'gainsboro');
-    //todo if not expanded 
-    this.specificGroup.initialize();
+    this.specificGroupList.find(x => x.group === group).initialize();//fix
   }
 }
