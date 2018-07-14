@@ -1,20 +1,16 @@
-.big-button {
+  .big-button {
     margin: 8px 5px;
   }
-    
   table {
     width: 100%;
   }
-  
   .mat-form-field {
     font-size: 18px;
     width: 100%;
   }
-  
   table{
     font-size: 16px;
   }
-
   mat-header-cell{
     font-size: 18px;
   }

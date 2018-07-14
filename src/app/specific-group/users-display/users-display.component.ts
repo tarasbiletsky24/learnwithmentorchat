@@ -48,7 +48,11 @@ export class UsersDisplayComponent implements OnInit {
 
   delChoosenUser(currentUser: User) {
     this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
-    this.loadUsers();
+    let index = this.users.indexOf(currentUser, 0);
+    if (index > -1) {
+      this.users.splice(index, 1);
+      this.dataSource = new MatTableDataSource<User>(this.users);
+    }
     this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
   }
 

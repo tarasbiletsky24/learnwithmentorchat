@@ -87,7 +87,11 @@ export class PlansDisplayComponent implements OnInit {
 
   delChoosenPlan(currentPlan: Plan) {
     this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe();
-    this.loadPlans();
+    let index = this.plans.indexOf(currentPlan, 0);
+    if (index > -1) {
+      this.plans.splice(index, 1);
+      this.dataSource = new MatTableDataSource<Plan>(this.plans);
+    }
     this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
   }
 
