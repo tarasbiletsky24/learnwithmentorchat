@@ -24,6 +24,7 @@ export class PlansDisplayComponent implements OnInit {
   displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   isMentor = false;
+  isInitialized = false;
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
@@ -31,11 +32,20 @@ export class PlansDisplayComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
-    if (this.authService.isMentor()) {
-      this.isMentor = true;
-      this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
+  ngOnInit() { }
+
+  initialize(): void {
+    if (!this.isInitialized) {
+      if (this.authService.isMentor()) {
+        this.isMentor = true;
+        this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
+      }
+      this.loadPlans();
+      this.isInitialized = true;
     }
+  }
+
+  loadPlans(): void {
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,
       err => console.log(err),
@@ -57,13 +67,7 @@ export class PlansDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.getGroupPlans(this.group.Id).subscribe(
-        data => this.plans = data,
-        err => console.log(err),
-        () => {
-          this.dataSource = new MatTableDataSource<Plan>(this.plans);
-        }
-      );
+      this.loadPlans();
     }
     );
   }
@@ -74,26 +78,14 @@ export class PlansDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.getGroupPlans(this.group.Id).subscribe(
-        data => this.plans = data,
-        err => console.log(err),
-        () => {
-          this.dataSource = new MatTableDataSource<Plan>(this.plans);
-        }
-      );
+      this.loadPlans();
     }
     );
   }
 
   delChoosenPlan(currentPlan: Plan) {
     this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe();
-    this.groupService.getGroupPlans(this.group.Id).subscribe(
-      data => this.plans = data,
-      err => console.log(err),
-      () => {
-        this.dataSource = new MatTableDataSource<Plan>(this.plans);
-      }
-    );
+    this.loadPlans();
     this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
   }
 

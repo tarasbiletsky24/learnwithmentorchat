@@ -1,14 +1,17 @@
 <div class="main container">
   <div class="groups">
-    <div class="name-container">
+    <div class="groups-header-row">
       <h2>
         Hi, {{userName}}
       </h2>
       <button *ngIf="isMentor" mat-raised-button color="primary" (click)="openGroupCreateDialog()">Add group</button>
     </div>
-    <mat-accordion>
+    <div class="center-spiner">
+      <mat-spinner *ngIf="!dataLoaded" class="example-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    </div>
+    <mat-accordion *ngIf="dataLoaded">
       <mat-expansion-panel *ngFor="let group of groups">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header (click)="expandPanel($event.target, group)">
           <mat-panel-title>
             {{group.Name}}
           </mat-panel-title>
@@ -21,5 +24,8 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
+    <div *ngIf="errorMessageActive" class="error-message">
+      <h4>{{errorMessage}}</h4>
+    </div>
   </div>
 </div>

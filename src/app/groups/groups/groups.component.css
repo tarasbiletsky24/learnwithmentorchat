@@ -3,9 +3,10 @@
   }
   .main {   
     padding-top: 2%;
+    padding-bottom: 5%;
   }
   .groups {
-    width: 80%;
+    width: 75%;
     padding: 0%;
   }
   .container  {
@@ -16,7 +17,28 @@
     padding-left: 0px;
     padding-right: 0px;
   }
-  .name-container{
+  ::ng-deep .mat-expansion-panel-body{
+    padding: 0 !important;
+  }
+  ::ng-deep .mat-expansion-panel-header{
+    background-color: gainsboro !important;
+  }
+  .groups-header-row {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
   }
-  
+  .center-spiner {
+    display: flex;
+    justify-content: center;
+  }
+  .example-margins {
+    margin: 10% 10%;
+    height: 40%;
+  }
+  .error-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin: 5px 5px;
+  }
