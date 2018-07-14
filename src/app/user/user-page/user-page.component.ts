@@ -34,7 +34,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
-    this.userService.getUser(this.userId).subscribe(
+    this.userService.getUser().subscribe(
       resp => {
         this.userData = resp;
         this.userService.getImage(this.userId).subscribe(
