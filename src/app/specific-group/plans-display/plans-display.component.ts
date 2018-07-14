@@ -67,7 +67,9 @@ export class PlansDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.loadPlans();
+      if (result) {
+        this.loadPlans();
+      }
     }
     );
   }

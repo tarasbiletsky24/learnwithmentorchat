@@ -21,9 +21,8 @@ import { UsersDisplayComponent } from '../users-display/users-display.component'
 
 export class SpecificGroupComponent implements OnInit {
   @Input() group: Group;
-  mentor: User;
-  isMentor = false;
   isInitialized = false;
+  isMentor = false;
 
   constructor(private userService: UserService,
     private authService: AuthService,
@@ -36,7 +35,6 @@ export class SpecificGroupComponent implements OnInit {
 
   initialize(): void {
     if (!this.isInitialized) {
-      this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
       if (this.authService.isMentor()) {
         this.isMentor = true;
       }

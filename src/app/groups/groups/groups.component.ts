@@ -8,6 +8,7 @@ import { AddGroupComponent } from '../add-group/add-group.component';
 import { AuthService } from '../../common/services/auth.service';
 import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 import { SpecificGroupComponent } from '../../specific-group/specific-group/specific-group.component';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-groups',
@@ -21,7 +22,6 @@ export class GroupsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   groups: Group[];
-  userId: number;
   userName: string;
   isMentor = false;
   dataLoaded: boolean;
@@ -33,7 +33,6 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.dataLoaded = false;
-    this.userId = this.authService.getUserId();
     if (this.authService.isMentor()) {
       this.isMentor = true;
     }
@@ -46,30 +45,35 @@ export class GroupsComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.dataLoaded = false;
-      this.loadUserGroups();
+      if (result) {
+        this.dataLoaded = false;
+        this.loadUserGroups();
+      }
     }
     );
   }
 
   loadUserGroups(): void {
-    this.groupService.getUserGroups(this.userId).subscribe(
+    this.groupService.getUserGroups(this.authService.getUserId()).subscribe(
       data => {
         this.groups = data;
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.Message;
-        this.errorMessageActive = true;
+        this.activateErrorMessage(error.error.Message);
         this.dataLoaded = true;
       },
       () => {
         this.dataLoaded = true;
-        if (this.groups === null ) {
-          this.errorMessage = 'There are no groups for you';
-          this.errorMessageActive = true;
+        if (this.groups === null) {
+          this.activateErrorMessage('There are no groups for you');
         }
       }
     );
+  }
+
+  activateErrorMessage(message: string): void {
+    this.errorMessage = message;
+    this.errorMessageActive = true;
   }
 
   expandPanel(element: any, group: Group): void {

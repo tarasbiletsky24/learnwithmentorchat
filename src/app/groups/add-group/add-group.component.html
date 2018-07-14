@@ -1,4 +1,4 @@
-<form class="group-create-form" #groupCreateForm="ngForm" (ngSubmit)="createGroup(groupCreateForm, $event.target)">
+<form class="group-create-form" #groupCreateForm="ngForm" (ngSubmit)="createGroup(groupCreateForm)" (keydown.enter)="createGroup(groupCreateForm)">
   <h2>Create group</h2>
   <mat-form-field class="container">
     <input matInput ngModel type="text" name="Name" placeholder="Name" required maxlength="50" (input)="onGroupNameChange()">
@@ -8,7 +8,7 @@
       Create
     </button>
     <mat-spinner *ngIf="progresSpinerActive" class="example-margin" diameter="35" strokeWidth="4" [color]="primary" [mode]="indeterminate"></mat-spinner>
-    <button mat-raised-button color="primary" mat-dialog-close>
+    <button mat-raised-button color="primary" [mat-dialog-close]="someGroupCreated">
       Close
     </button>
   </div>

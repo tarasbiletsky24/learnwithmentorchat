@@ -58,7 +58,9 @@ export class UsersDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.loadUsers();
+      if (result) {
+        this.loadUsers();
+      }
     });
   }
 
