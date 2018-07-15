@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { Group } from '../../common/models/group';
 import { GroupService } from '../../common/services/group.service';
 import { AddGroupComponent } from '../add-group/add-group.component';
 import { AuthService } from '../../common/services/auth.service';
 import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
-import { SpecificGroupComponent } from '../../specific-group/specific-group/specific-group.component';
-import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
+import { SpecificGroupComponent } from '../specific-group/specific-group/specific-group.component';
 
 @Component({
   selector: 'app-groups',

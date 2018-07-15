@@ -3,10 +3,9 @@ import { MatPaginator, MatTableDataSource, MatButton, MatDialogRef } from '@angu
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
-
-import { Plan } from '../../common/models/plan';
-import { GroupService } from '../../common/services/group.service';
-import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { GroupService } from '../../../common/services/group.service';
+import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
+import { Plan } from '../../../common/models/plan';
 
 @Component({
   selector: 'app-add-plans',

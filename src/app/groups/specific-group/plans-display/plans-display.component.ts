@@ -1,17 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Plan } from '../../common/models/plan';
-import { GroupService } from '../../common/services/group.service';
-
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddPlansComponent } from '../add-plans/add-plans.component';
-import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { Group } from '../../common/models/group';
 import { Router } from '@angular/router';
-import { CreatePlanComponent } from '../../create-plan/create-plan.component';
-import { AuthService } from '../../common/services/auth.service';
-import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import { GroupService } from '../../../common/services/group.service';
+import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
+import { AuthService } from '../../../common/services/auth.service';
+import { Group } from '../../../common/models/group';
+import { Plan } from '../../../common/models/plan';
+import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { CreatePlanComponent } from '../../../create-plan/create-plan.component';
 
 @Component({
   selector: 'app-plans-display',
@@ -28,7 +27,7 @@ export class PlansDisplayComponent implements OnInit {
 
   @Input() group: Group;
   plans: Plan[];
-  displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
+  displayedColumns = ['Name', 'Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   isMentor = false;
   isInitialized = false;
@@ -42,7 +41,7 @@ export class PlansDisplayComponent implements OnInit {
     if (!this.isInitialized) {
       if (this.authService.isMentor()) {
         this.isMentor = true;
-        this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
+        this.displayedColumns = ['Name', 'Description', 'Create by', 'Date', 'Is published', 'Delete'];
       }
       this.dataLoaded = false;
       this.loadPlans();
@@ -76,6 +75,7 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    debugger
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;

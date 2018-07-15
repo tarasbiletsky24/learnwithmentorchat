@@ -3,10 +3,9 @@ import { MatPaginator, MatTableDataSource, MatDialogRef } from '@angular/materia
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
-
-import { User } from '../../common/models/user';
-import { GroupService } from '../../common/services/group.service';
-import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { GroupService } from '../../../common/services/group.service';
+import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
+import { User } from '../../../common/models/user';
 
 @Component({
   selector: 'app-add-users',

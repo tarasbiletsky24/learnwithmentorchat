@@ -1,14 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User } from '../../common/models/user';
-import { GroupService } from '../../common/services/group.service';
-
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddUsersComponent } from '../add-users/add-users.component';
-import { Group } from '../../common/models/group';
-import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
-import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import { GroupService } from '../../../common/services/group.service';
+import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
+import { Group } from '../../../common/models/group';
+import { User } from '../../../common/models/user';
+import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-users-display',

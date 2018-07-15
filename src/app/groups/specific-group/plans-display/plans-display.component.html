@@ -5,10 +5,17 @@
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <ng-container matColumnDef="Description">
-        <th mat-header-cell *matHeaderCellDef> Description. </th>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element">
-          <div class="plan-link" (click)="goToPlan(element)">{{element.Description}}</div>
+          <div class="plan-link" (click)="goToPlan(element)">{{element.Name}}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="plan-link">{{element.Description}}</div>
         </td>
       </ng-container>
 
@@ -45,13 +52,19 @@
     </table>
   </div>
   <div class="center-spiner">
-    <mat-spinner *ngIf="!dataLoaded" class="example-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
   </div>
 </div>
 <div *ngIf="errorMessageActive" class="error-message">
   <h4>{{errorMessage}}</h4>
 </div>
 <mat-action-row *ngIf="isMentor">
-  <button mat-raised-button class="big-button" color="primary" (click)="openPlanCreateAndAddDialog(group)">Add new plan</button>
-  <button mat-raised-button class="big-button" color="primary" (click)="openPlanAddDialog(group)">Add plan</button>
+  <button mat-raised-button class="big-button" color="primary" (click)="openPlanCreateAndAddDialog(group)" matTooltip="Push to create new plan."
+    [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
+    Create new plan
+  </button>
+  <button mat-raised-button class="big-button" color="primary" (click)="openPlanAddDialog(group)" matTooltip="Push to add plans to group"
+    [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
+    Add plan
+  </button>
 </mat-action-row>

@@ -40,7 +40,8 @@
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="primary" (click)="addChoosenUser($event, element)">
+            <button mat-mini-fab color="primary" (click)="addChoosenUser($event, element)" matTooltip="Push to add user to group"
+              [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
               +
             </button>
           </td>
