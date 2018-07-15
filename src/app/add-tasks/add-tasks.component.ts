@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { CreatePlanComponent } from '../create-plan/create-plan.component';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { AuthService } from '../common/services/auth.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AddTasksComponent implements OnInit {
   nameTask = '';
   descriptionTask = '';
   private = false;
-  idCreator: number = +localStorage.getItem('id');
+  idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
   dataSource = new MatTableDataSource<Task>(this.tasks);
@@ -33,6 +34,7 @@ export class AddTasksComponent implements OnInit {
   constructor(private taskService: TaskService,
     private planService: PlanService,
     private alertWindow: AlertWindowsComponent,
+    private authService: AuthService,
     public thisDialogRef: MatDialogRef<AddTasksComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number
   ) {
@@ -41,8 +43,7 @@ export class AddTasksComponent implements OnInit {
   }
   getTask(event: any, id: number) {
 
-    this.planService.addTaskToPlan(this.idTasks, id, null, 1).subscribe(res => {
-    });
+    this.planService.addTaskToPlan(this.idTasks, id, null, 1).subscribe();
     event.currentTarget.setAttribute('disabled', 'disabled');
 
   }
