@@ -6,39 +6,45 @@ table{
 }
 .add-new-plan{
  width: 70%;
+margin-top: 5%;
 margin-left: auto;
-    margin-right: auto;
+margin-right: auto;
 }
 .new-plan{ 
    display: flex;
 }
 .for-image{
     width: 30%;
+     text-align: center;
 }
+
+
 .for-data{
-    width: 69%;
+    width: 70%;
 }
 .input-text{
     width: 100%;
 }
 .input-description{
-height: 100px;
+height: 200px;
 }
-.block{
-    display: flex;
-    justify-content: space-between;
-}
-
 
 .fileInput {
     display: none;
 }
 .pic{
-    display:block;
-    width: 190px;
-    height: 180px;
+    width: 80%;
+    height: 85%;
+    
+    text-align: center;
 }
-.button-create-plan{
-    display: flex;
-    justify-content: center;
+
+.button-data{
+min-width: 25%;
+
+}
+.button-image{
+   width: 40%;
+   min-width: 100px !important;
+   text-align: center;
 }

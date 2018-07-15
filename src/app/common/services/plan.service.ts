@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Image } from '../models/image';
+import { Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,7 @@ export class PlanService {
       catchError(this.handleError<Plan>('addPlan'))
     );
   }
+
 
   deletePlanById(id: number): Observable<Plan> {
     return this.http.delete<Plan>(`${this.url}/${id}`, this.httpOptions).pipe(

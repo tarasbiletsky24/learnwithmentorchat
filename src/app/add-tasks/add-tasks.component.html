@@ -1,6 +1,6 @@
 <div class="main">
   <mat-form-field class="search-input">
-    <input matInput #searchBox placeholder="Enter name of task" />
+    <input matInput #searchBox (keyup)="search(searchBox.value)" placeholder="Enter name of task" />
   </mat-form-field>
 
 

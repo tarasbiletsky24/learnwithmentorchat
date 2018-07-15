@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { Task } from '../models/task';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, catchError } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { Plan } from '../models/plan';
 import { UserTask } from '../models/userTask';
 import { Message } from '../models/message';
 import { text } from '@angular/core/src/render3/instructions';
+import { StringifyOptions } from 'querystring';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -85,8 +86,14 @@ export class TaskService {
   updateUserTaskResult(userTask: UserTask): Observable<any> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     const link = `${this.url}task/usertask/result?userTaskId=${userTask.Id}`;
-    return this.http.put<string>(link, userTask.Result as string, {headers: reqHeader}).pipe(
+    return this.http.put<string>(link, userTask.Result as string, { headers: reqHeader }).pipe(
       catchError(val => of(val)));
+  }
+
+  search(param: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.url}task/search?key=${param}`).pipe(
+      catchError(this.handleError<Task[]>(`searchTasks`))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
