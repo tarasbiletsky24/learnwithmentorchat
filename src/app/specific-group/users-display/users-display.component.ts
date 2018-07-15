@@ -20,19 +20,24 @@ export class UsersDisplayComponent implements OnInit {
   users: User[];
   displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
+  isInitialized = false;
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-      this.groupService.getGroupUsers(this.group.Id).subscribe(
-        data => this.users = data,
-        err => console.log(err),
-        () => {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.groupService.getGroupUsers(this.group.Id).subscribe(
+      data => this.users = data,
+      err => console.log(err),
+      () => {
         this.dataSource = new MatTableDataSource<User>(this.users);
-        }
-      );
+      }
+    );
   }
 
   applyFilter(filterValue: string) {
@@ -43,13 +48,7 @@ export class UsersDisplayComponent implements OnInit {
 
   delChoosenUser(currentUser: User) {
     this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe();
-    this.groupService.getGroupUsers(this.group.Id).subscribe(
-      data => this.users = data,
-      err => console.log(err),
-      () => {
-        this.dataSource = new MatTableDataSource<User>(this.users);
-      }
-    );
+    this.loadUsers();
     this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
   }
 
@@ -59,13 +58,7 @@ export class UsersDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.getGroupUsers(this.group.Id).subscribe(
-        data => this.users = data,
-        err => console.log(err),
-        () => {
-        this.dataSource = new MatTableDataSource<User>(this.users);
-        }
-      );
+      this.loadUsers();
     });
   }
 
