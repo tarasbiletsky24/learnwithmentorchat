@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { AddPlansComponent } from '../add-plans/add-plans.component';
 import { Router } from '@angular/router';
@@ -34,8 +34,11 @@ export class PlansDisplayComponent implements OnInit {
   dataLoaded = false;
   errorMessage: string;
   errorMessageActive = false;
+  @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.dataSource.sort = this.sort;
+  }
 
   initialize(): void {
     if (!this.isInitialized) {
@@ -75,10 +78,7 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    debugger
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openPlanAddDialog(): void {
@@ -118,7 +118,7 @@ export class PlansDisplayComponent implements OnInit {
         this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
       },
       () => {
-        let index = this.plans.indexOf(currentPlan, 0);
+        const index = this.plans.indexOf(currentPlan, 0);
         if (index > -1) {
           this.plans.splice(index, 1);
           this.dataSource = new MatTableDataSource<Plan>(this.plans);

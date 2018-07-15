@@ -71,10 +71,11 @@ export class UsersDisplayComponent implements OnInit {
       data => { },
       error => {
         event.currentTarget.setAttribute('disabled', 'enabled');
-        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentUser.FirstName + ' ' + currentUser.LastName + ' please try again', 'Ok');
+        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentUser.FirstName + ' '
+        + currentUser.LastName + ' please try again', 'Ok');
       },
       () => {
-        let index = this.users.indexOf(currentUser, 0);
+        const index = this.users.indexOf(currentUser, 0);
         if (index > -1) {
           this.users.splice(index, 1);
           this.dataSource = new MatTableDataSource<User>(this.users);

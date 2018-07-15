@@ -32,7 +32,7 @@ export class GroupService {
       catchError(this.handleError<User[]>(`getGroupUsers`))
     );
   }
-  
+
   getUserGroups(id: number): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe( );
   }
@@ -82,7 +82,7 @@ export class GroupService {
   createGroup(group: Group): Observable<HttpResponse<any>> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.url}`, group, { observe: 'response', headers: reqHeader }).pipe(
-      //catchError(r => of(r))
+      // catchError(r => of(r))
     );
   }
 
