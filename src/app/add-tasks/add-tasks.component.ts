@@ -3,13 +3,12 @@ import { TaskService } from '../common/services/task.service';
 import { PlanService } from '../common/services/plan.service';
 import { Router } from '@angular/router';
 import { Task } from '../../../src/app/common/models/task';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CreatePlanComponent } from '../create-plan/create-plan.component';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -27,7 +26,7 @@ export class AddTasksComponent implements OnInit {
   descriptionTask = '';
   private = false;
   idCreator: number = +localStorage.getItem('id');
-
+  private searchTerms = new Subject<string>();
 
   dataSource = new MatTableDataSource<Task>(this.tasks);
   displayedColumns = ['Name', 'Description', 'Add'];
@@ -46,6 +45,11 @@ export class AddTasksComponent implements OnInit {
     });
     event.currentTarget.setAttribute('disabled', 'disabled');
 
+  }
+
+  // search by name
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
 
@@ -75,6 +79,12 @@ export class AddTasksComponent implements OnInit {
     this.taskService.getTasks().subscribe(
       task => this.tasks = task
     );
+
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.taskService.search(term))
+    ).subscribe(task => this.tasks = task);
   }
 
 }

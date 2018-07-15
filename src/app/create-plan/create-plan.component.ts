@@ -12,14 +12,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PlanService } from '.././common/services/plan.service';
 import { TaskService } from '../common/services/task.service';
 import { HttpStatusCodeService } from '.././common/services/http-status-code.service';
+import { isEmpty } from 'rxjs/operators';
+import { DISABLED } from '@angular/forms/src/model';
 
 
 @Component({
   selector: 'app-create-plan',
   templateUrl: './create-plan.component.html',
   styleUrls: ['./create-plan.component.css']
-
-
 
 })
 
@@ -33,10 +33,8 @@ export class CreatePlanComponent implements OnInit {
   published: boolean;
   addTask = false;
   result: Task[];
-  tableEmpty = false;
-  createdPlan = false;
+  created = false;
   displayedColumns = ['Name', 'Description'];
-
 
   selectedFile: File = null;
   idCreator: number = +localStorage.getItem('id');
@@ -52,6 +50,8 @@ export class CreatePlanComponent implements OnInit {
 
   }
 
+
+
   openAddTasks(): void {
     const dialogRef = this.dialog.open(AddTasksComponent, {
       width: '1000px',
@@ -60,44 +60,39 @@ export class CreatePlanComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.idTasks = result;
-      this.tableEmpty = true;
-
       this.taskService.getTasks(this.currentId).subscribe(
-
         task => {
           this.result = task;
           console.log(this.result);
         }
-
-
       );
     });
   }
-  checkSomething() {
-    return this.createdPlan;
-  }
+
   createPlan() {
     if (this.name === '' || this.description === '') {
       this.alertWindow.openSnackBar('You must enter data for creating plan!', 'Ok');
       this.addTask = false;
     }
+    else {
       this.published = false;
       const plan = {
         Name: this.name, Description: this.description, Published: this.published, CreatorId: this.idCreator
       };
       this.planService.createPlan(plan as Plan).subscribe(res => {
-        this.addTask = true;
         this.currentId = res;
-        this.createdPlan = true;
+        this.created = true;
+
         if (this.selectedFile) {
           this.planService.updateImage(this.currentId, this.selectedFile).subscribe(
             this.selectedFile = null
           );
         }
       });
-    this.alertWindow.openSnackBar('You create plan " ' + this.name + '"', 'Ok');
-
+      this.alertWindow.openSnackBar('You create plan " ' + this.name + '"', 'Ok');
+    }
   }
+
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile.size > this.maxImageSize) {
