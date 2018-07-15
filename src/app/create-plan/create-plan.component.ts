@@ -11,6 +11,8 @@ import { AlertWindowsComponent } from '.././components/alert-windows/alert-windo
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlanService } from '.././common/services/plan.service';
 import { TaskService } from '../common/services/task.service';
+
+import { AuthService } from '../common/services/auth.service';
 import { HttpStatusCodeService } from '.././common/services/http-status-code.service';
 import { isEmpty } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
@@ -37,13 +39,14 @@ export class CreatePlanComponent implements OnInit {
   displayedColumns = ['Name', 'Description'];
 
   selectedFile: File = null;
-  idCreator: number = +localStorage.getItem('id');
+  idCreator: number = this.authService.getUserId();
   private maxImageSize: number = 1024 * 1024;
   imageData = '../../../assets/images/LWMTagBlack.png';
   selectedImage = null;
   constructor(private dialog: MatDialog,
     private planService: PlanService,
     private taskService: TaskService,
+    private authService: AuthService,
     private alertWindow: AlertWindowsComponent,
     private httpStatusCodeService: HttpStatusCodeService, ) {
 
