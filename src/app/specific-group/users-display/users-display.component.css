@@ -1,17 +1,14 @@
 .big-button {
   margin: 8px 5px;
 }
-
 table {
   width: 100%;
 }
-
 .mat-form-field {
   font-size: 18px;
   width: 100%;
 }
-
-table{
+table {
   font-size: 16px;
 }
 mat-header-cell{
@@ -23,4 +20,18 @@ mat-header-cell{
 }
 .content{
   width: 100%;
+}
+.error-message {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin: 5px 5px;
+}
+.center-spiner {
+  display: flex;
+  justify-content: center;
+}
+.example-margins {
+  margin: 10% 10%;
+  height: 40%;
 }

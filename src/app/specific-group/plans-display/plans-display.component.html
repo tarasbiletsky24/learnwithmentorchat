@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="content">
+<div class="container" *ngIf="!errorMessageActive">
+  <div class="content" *ngIf="dataLoaded">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
@@ -8,7 +8,7 @@
       <ng-container matColumnDef="Description">
         <th mat-header-cell *matHeaderCellDef> Description. </th>
         <td mat-cell *matCellDef="let element">
-            <div class="plan-link" (click)="goToPlan(element)">{{element.Description}}</div>
+          <div class="plan-link" (click)="goToPlan(element)">{{element.Description}}</div>
         </td>
       </ng-container>
 
@@ -33,8 +33,8 @@
       <ng-container matColumnDef="Delete">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="primary" (click)="delChoosenPlan(element)" matTooltip="Push to delete plan from group" [matTooltipShowDelay]="1000"
-            [matTooltipHideDelay]="500">
+          <button mat-mini-fab color="primary" (click)="delChoosenPlan($event,element)" matTooltip="Push to delete plan from group"
+            [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
             del
           </button>
         </td>
@@ -44,6 +44,12 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+  <div class="center-spiner">
+    <mat-spinner *ngIf="!dataLoaded" class="example-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+  </div>
+</div>
+<div *ngIf="errorMessageActive" class="error-message">
+  <h4>{{errorMessage}}</h4>
 </div>
 <mat-action-row *ngIf="isMentor">
   <button mat-raised-button class="big-button" color="primary" (click)="openPlanCreateAndAddDialog(group)">Add new plan</button>

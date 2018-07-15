@@ -27,3 +27,17 @@
   .plan-link:hover{
     cursor: pointer;
   }
+  .error-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin: 5px 5px;
+  }
+  .center-spiner {
+    display: flex;
+    justify-content: center;
+  }
+  .example-margins {
+    margin: 10% 10%;
+    height: 40%;
+  }

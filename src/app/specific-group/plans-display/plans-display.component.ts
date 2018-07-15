@@ -11,6 +11,7 @@ import { Group } from '../../common/models/group';
 import { Router } from '@angular/router';
 import { CreatePlanComponent } from '../../create-plan/create-plan.component';
 import { AuthService } from '../../common/services/auth.service';
+import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-plans-display',
@@ -19,18 +20,21 @@ import { AuthService } from '../../common/services/auth.service';
 })
 export class PlansDisplayComponent implements OnInit {
 
+  constructor(private groupService: GroupService,
+    private alertwindow: AlertWindowsComponent,
+    private router: Router,
+    private authService: AuthService,
+    public dialog: MatDialog) { }
+
   @Input() group: Group;
   plans: Plan[];
   displayedColumns = ['Description', 'Create by', 'Date', 'Is published'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   isMentor = false;
   isInitialized = false;
-
-  constructor(private groupService: GroupService,
-    private alertwindow: AlertWindowsComponent,
-    private router: Router,
-    private authService: AuthService,
-    public dialog: MatDialog) { }
+  dataLoaded = false;
+  errorMessage: string;
+  errorMessageActive = false;
 
   ngOnInit() { }
 
@@ -40,17 +44,33 @@ export class PlansDisplayComponent implements OnInit {
         this.isMentor = true;
         this.displayedColumns = ['Description', 'Create by', 'Date', 'Is published', 'Delete'];
       }
+      this.dataLoaded = false;
       this.loadPlans();
       this.isInitialized = true;
     }
   }
 
+  activateErrorMessage(message: string): void {
+    this.errorMessage = message;
+    this.errorMessageActive = true;
+  }
+
   loadPlans(): void {
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,
-      err => console.log(err),
+      (error: HttpErrorResponse) => {
+        this.activateErrorMessage(error.error.Message);
+        this.dataLoaded = true;
+      },
       () => {
-        this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        if (this.plans === null || this.plans.length < 1) {
+          this.activateErrorMessage('There are no plans in this group');
+          this.dataSource = new MatTableDataSource<Plan>([]);
+        } else {
+          this.errorMessageActive = false;
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+        this.dataLoaded = true;
       }
     );
   }
@@ -68,6 +88,7 @@ export class PlansDisplayComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.dataLoaded = false;
         this.loadPlans();
       }
     }
@@ -80,19 +101,35 @@ export class PlansDisplayComponent implements OnInit {
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.loadPlans();
+      if (result) {
+        this.dataLoaded = false;
+        this.loadPlans();
+      }
     }
     );
   }
 
-  delChoosenPlan(currentPlan: Plan) {
-    this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe();
-    let index = this.plans.indexOf(currentPlan, 0);
-    if (index > -1) {
-      this.plans.splice(index, 1);
-      this.dataSource = new MatTableDataSource<Plan>(this.plans);
-    }
-    this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
+  delChoosenPlan(event: any, currentPlan: Plan) {
+    event.currentTarget.setAttribute('disabled', 'disabled');
+    this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe(
+      data => { },
+      error => {
+        event.currentTarget.setAttribute('disabled', 'enabled');
+        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
+      },
+      () => {
+        let index = this.plans.indexOf(currentPlan, 0);
+        if (index > -1) {
+          this.plans.splice(index, 1);
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+        }
+        this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
+        if (this.plans === null || this.plans.length < 1) {
+          this.activateErrorMessage('There are no plans in this group');
+          this.dataSource = new MatTableDataSource<Plan>([]);
+        }
+      }
+    );
   }
 
   goToPlan(choosenPlan: Plan) {

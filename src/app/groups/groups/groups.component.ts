@@ -64,7 +64,7 @@ export class GroupsComponent implements OnInit {
       },
       () => {
         this.dataLoaded = true;
-        if (this.groups === null) {
+        if (this.groups === null || this.groups.length < 1 ) {
           this.activateErrorMessage('There are no groups for you');
         }
       }
@@ -78,6 +78,6 @@ export class GroupsComponent implements OnInit {
 
   expandPanel(element: any, group: Group): void {
     element.setAttribute('background-color', 'gainsboro');
-    this.specificGroupList.find(x => x.group === group).initialize(); // fix
+    this.specificGroupList.find(x => x.group === group).initialize();
   }
 }
