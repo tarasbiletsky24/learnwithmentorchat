@@ -66,6 +66,7 @@ import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import {MatPaginatorModule, MatTableDataSource} from '@angular/material';
 import { MentorGuard } from './auth/mentor.guard';
 import { AdminGuard } from './auth/admin.guard';
 
@@ -113,6 +114,7 @@ import { AdminGuard } from './auth/admin.guard';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    MatPaginatorModule,
     MatToolbarModule,
     BrowserAnimationsModule,
     MatCheckboxModule,

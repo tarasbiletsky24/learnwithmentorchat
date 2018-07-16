@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
 import { TaskService } from '../common/services/task.service';
 import { PlanService } from '../common/services/plan.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { CreatePlanComponent } from '../create-plan/create-plan.component';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../common/services/auth.service';
+import { currentId } from 'async_hooks';
+
 
 
 @Component({
@@ -29,7 +31,10 @@ export class AddTasksComponent implements OnInit {
   idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
+
   dataSource = new MatTableDataSource<Task>(this.tasks);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Description', 'Add'];
   constructor(private taskService: TaskService,
     private planService: PlanService,
@@ -40,8 +45,10 @@ export class AddTasksComponent implements OnInit {
   ) {
     this.idTasks = data;
 
+
   }
   getTask(event: any, id: number) {
+
 
     this.planService.addTaskToPlan(this.idTasks, id, null, 1).subscribe();
     event.currentTarget.setAttribute('disabled', 'disabled');
@@ -77,9 +84,12 @@ export class AddTasksComponent implements OnInit {
 
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(
+    this.dataSource.paginator = this.paginator;
+    this.taskService.getTasksNotInPlan(this.idTasks).subscribe(
       task => this.tasks = task
     );
+
+
 
     this.searchTerms.pipe(
       debounceTime(300),
