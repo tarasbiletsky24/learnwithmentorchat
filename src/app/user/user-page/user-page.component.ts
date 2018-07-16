@@ -51,7 +51,7 @@ export class UserPageComponent implements OnInit {
             this.imageLoading = false;
           }
         );
-        this.userService.getStatistics(this.userId).subscribe(
+        this.userService.getStatistics().subscribe(
           r => {
             if (this.httpStatusCodeService.isOk(r.status)) {
               this.userStats = r.body;
