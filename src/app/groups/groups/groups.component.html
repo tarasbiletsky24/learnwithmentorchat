@@ -7,7 +7,7 @@
       <button *ngIf="isMentor" mat-raised-button color="primary" (click)="openGroupCreateDialog()">Add group</button>
     </div>
     <div class="center-spiner">
-      <mat-spinner *ngIf="!dataLoaded" class="example-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+      <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
     </div>
     <mat-accordion *ngIf="dataLoaded">
       <mat-expansion-panel *ngFor="let group of groups">

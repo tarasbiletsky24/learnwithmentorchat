@@ -34,10 +34,8 @@ export class PlansDisplayComponent implements OnInit {
   dataLoaded = false;
   errorMessage: string;
   errorMessageActive = false;
-  @ViewChild(MatSort) sort: MatSort;
-
+  
   ngOnInit() {
-    this.dataSource.sort = this.sort;
   }
 
   initialize(): void {
