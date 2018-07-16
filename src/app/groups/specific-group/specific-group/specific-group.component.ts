@@ -3,15 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { Group } from '../../common/models/group';
-import { User } from '../../common/models/user';
-import { UserService } from '../../common/services/user.service';
-
 import { MatDialog } from '@angular/material';
-import { GroupService } from '../../common/services/group.service';
-import { AuthService } from '../../common/services/auth.service';
 import { PlansDisplayComponent } from '../plans-display/plans-display.component';
 import { UsersDisplayComponent } from '../users-display/users-display.component';
+import { Group } from '../../../common/models/group';
+import { UserService } from '../../../common/services/user.service';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
   selector: 'app-specific-group',
@@ -21,9 +18,8 @@ import { UsersDisplayComponent } from '../users-display/users-display.component'
 
 export class SpecificGroupComponent implements OnInit {
   @Input() group: Group;
-  mentor: User;
-  isMentor = false;
   isInitialized = false;
+  isMentor = false;
 
   constructor(private userService: UserService,
     private authService: AuthService,
@@ -36,7 +32,6 @@ export class SpecificGroupComponent implements OnInit {
 
   initialize(): void {
     if (!this.isInitialized) {
-      this.userService.getUser(this.group.MentorId).subscribe((data: User) => this.mentor = data);
       if (this.authService.isMentor()) {
         this.isMentor = true;
       }

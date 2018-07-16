@@ -47,17 +47,11 @@ import { ConversationComponent } from './task/conversation/conversation.componen
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
 import { ContactPageComponent } from './main-page/contact-page/contact-page.component';
 
-
-import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { AlertWindowsComponent } from './components/alert-windows/alert-windows.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
-import { UsersDisplayComponent } from './specific-group/users-display/users-display.component';
-import { PlansDisplayComponent } from './specific-group/plans-display/plans-display.component';
 import { PlanEditorComponent } from './plan/plan-editor/plan-editor.component';
 import { TasksListEditorComponent } from './task/tasks-list-editor/tasks-list-editor.component';
 import { TaskCreatorComponent } from './task/task-creator/task-creator.component';
-import { AddUsersComponent } from './specific-group/add-users/add-users.component';
-import { AddPlansComponent } from './specific-group/add-plans/add-plans.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
@@ -68,6 +62,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { MentorGuard } from './auth/mentor.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
+import { UsersDisplayComponent } from './groups/specific-group/users-display/users-display.component';
+import { AddUsersComponent } from './groups/specific-group/add-users/add-users.component';
+import { PlansDisplayComponent } from './groups/specific-group/plans-display/plans-display.component';
+import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 
 @NgModule({
   declarations: [

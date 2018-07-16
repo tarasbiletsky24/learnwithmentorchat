@@ -76,8 +76,7 @@ export class CreatePlanComponent implements OnInit {
     if (this.name === '' || this.description === '') {
       this.alertWindow.openSnackBar('You must enter data for creating plan!', 'Ok');
       this.addTask = false;
-    }
-    else {
+    } else {
       this.published = false;
       const plan = {
         Name: this.name, Description: this.description, Published: this.published, CreatorId: this.idCreator
