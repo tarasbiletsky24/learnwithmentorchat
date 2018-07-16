@@ -44,11 +44,8 @@ export class AddTasksComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: number
   ) {
     this.idTasks = data;
-
-
   }
   getTask(event: any, id: number) {
-
 
     this.planService.addTaskToPlan(this.idTasks, id, null, 1).subscribe();
     event.currentTarget.setAttribute('disabled', 'disabled');
@@ -62,7 +59,6 @@ export class AddTasksComponent implements OnInit {
 
 
   createTask() {
-
     if (this.nameTask == null || this.descriptionTask == null) {
       this.alertWindow.openSnackBar('You must enter data for creating task!', 'Ok');
       return false;

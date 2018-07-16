@@ -38,7 +38,6 @@ export class TaskService {
     }
   }
 
-
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
@@ -49,7 +48,6 @@ export class TaskService {
     return this.http.get<Task[]>(`${this.url}plan/${id}/tasks/notinplan`).pipe(
       catchError(this.handleError<Task[]>(`getTasks`)));
   }
-
 
   updateTask(task: Task): Observable<any> {
     const link = `${this.url}task/${task.Id}`;
