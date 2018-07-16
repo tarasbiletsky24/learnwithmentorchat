@@ -33,8 +33,8 @@ export class GroupService {
     );
   }
 
-  getUserGroups(id: number): Observable<Group[]> {
-    return this.http.get<Group[]>(`${this.url}/user/${id}/groups`).pipe( );
+  getUserGroups(): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.url}/mygroups`).pipe( );
   }
 
   getGroupPlans(id: number): Observable<Plan[]> {

@@ -4,10 +4,8 @@
     <mat-card>
         <div class="card">
           <div class="imgdiv">
-            <div *ngIf="p.loading" class="loading-container">
-              <div class="spinner"></div>
-              <div class="spinner-center"></div>
-              <div class="loading-text">Loading...</div>
+            <div *ngIf="p.loading" class="spinner-container">
+              <mat-spinner class="spinner-margins"></mat-spinner>
             </div>
             <img  *ngIf="p.imageData && !p.loading" [src]="p.imageData" alt="Plan image">
             <img  *ngIf="!p.imageData && !p.loading" src="../../../assets/images/LWMTagBlack.png" alt="Plan image">

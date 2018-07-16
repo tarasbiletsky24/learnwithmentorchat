@@ -52,7 +52,7 @@ export class GroupsComponent implements OnInit {
   }
 
   loadUserGroups(): void {
-    this.groupService.getUserGroups(this.authService.getUserId()).subscribe(
+    this.groupService.getUserGroups().subscribe(
       data => {
         this.groups = data;
       },
