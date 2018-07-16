@@ -62,7 +62,7 @@ export class AddPlansComponent implements OnInit {
     });
     this.groupService.searchNotPlans('', this.groupId).subscribe(
       data => {
-        this.plans = data
+        this.plans = data;
       },
       (error: HttpErrorResponse) => {
         this.activateErrorMessage(error.error.Message);

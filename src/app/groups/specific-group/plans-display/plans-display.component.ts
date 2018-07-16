@@ -34,9 +34,8 @@ export class PlansDisplayComponent implements OnInit {
   dataLoaded = false;
   errorMessage: string;
   errorMessageActive = false;
-  
-  ngOnInit() {
-  }
+
+  ngOnInit() { }
 
   initialize(): void {
     if (!this.isInitialized) {
