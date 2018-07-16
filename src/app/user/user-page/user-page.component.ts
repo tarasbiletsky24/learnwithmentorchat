@@ -22,6 +22,8 @@ export class UserPageComponent implements OnInit {
   userData: User;
   userStats = null;
   selectedFile: File = null;
+  imageLoading = false;
+  statisticsLoading = false;
   private maxImageSize = 1024 * 1024;
   imageData = null;
 
@@ -37,6 +39,8 @@ export class UserPageComponent implements OnInit {
     this.userService.getUser().subscribe(
       resp => {
         this.userData = resp;
+        this.imageLoading = true;
+        this.statisticsLoading = true;
         this.userService.getImage(this.userId).subscribe(
           response => {
             if (this.httpStatusCodeService.isOk(response.status)) {
@@ -44,13 +48,15 @@ export class UserPageComponent implements OnInit {
             } else {
               this.imageData = '../../../assets/images/user-default.png';
             }
+            this.imageLoading = false;
           }
         );
-        this.userService.getStatistics(this.userId).subscribe(
+        this.userService.getStatistics().subscribe(
           r => {
             if (this.httpStatusCodeService.isOk(r.status)) {
               this.userStats = r.body;
             }
+            this.statisticsLoading = false;
           }
         );
       }

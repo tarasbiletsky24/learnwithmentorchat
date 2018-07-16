@@ -69,3 +69,16 @@ h2{
     font-size: 20px;
     margin-top:5px;
 }
+
+.spiner-margins {
+    height: 30%;
+}
+
+.spinner-container {
+    padding: 50px 50px;
+}
+
+.tasks-spinner-container {
+    display: flex;
+    justify-content: center;
+}
