@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GroupService } from '../../common/services/group.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
@@ -6,6 +6,7 @@ import { HttpStatusCodeService } from '../../common/services/http-status-code.se
 import { AuthService } from '../../common/services/auth.service';
 import { Group } from '../../common/models/group';
 import { MatDialogRef } from '@angular/material';
+import { HttpResponse, HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-add-group',
@@ -24,13 +25,22 @@ export class AddGroupComponent implements OnInit {
   errorMessage: string;
   errorMessageActive = false;
   groupName: string;
+  someGroupCreated = false;
 
   ngOnInit() {
+    this.thisDialogRef.disableClose = true;
+    this.thisDialogRef.backdropClick().subscribe(result => {
+      this.thisDialogRef.close(this.someGroupCreated);
+  });
+  }
+
+  @HostListener('window:keyup.esc') onKeyUp() {
+    this.thisDialogRef.close(this.someGroupCreated);
   }
 
   createGroup(form: NgForm) {
     this.progresSpinerActive = true;
-    form.form.disable(); // is it OK?
+    form.form.disable();
     const group: Group = {
       Id: 0,
       Name: form.value.Name,
@@ -40,19 +50,31 @@ export class AddGroupComponent implements OnInit {
     this.groupService.createGroup(group).subscribe(
       resp => {
         if (this.httpStatusCodeService.isOk(resp.status)) {
-          this.alertwindow.openSnackBar(`Group successfully created`, 'Ok');
-        } else {
-          this.errorMessage = 'Group with this name already exists'; // todo get response message
-          this.errorMessageActive = true;
+          this.someGroupCreated = true;
+          this.alertwindow.openSnackBar(resp.body, 'Ok');
         }
+      },
+      error => {
+        this.activateErrorMessage(error.error.Message);
+        form.form.enable();
+        this.progresSpinerActive = false;
+      },
+      () => {
         form.form.enable();
         this.progresSpinerActive = false;
       }
     );
   }
 
+  activateErrorMessage(message: string): void {
+    this.errorMessage = message;
+    this.errorMessageActive = true;
+  }
+
   onGroupNameChange() {
-    this.errorMessage = null;
-    this.errorMessageActive = false;
+    if (this.errorMessageActive) {
+      this.errorMessage = null;
+      this.errorMessageActive = false;
+    }
   }
 }

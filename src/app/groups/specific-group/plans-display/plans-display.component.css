@@ -1,20 +1,16 @@
-.big-button {
+  .big-button {
     margin: 8px 5px;
   }
-    
   table {
     width: 100%;
   }
-  
   .mat-form-field {
     font-size: 18px;
     width: 100%;
   }
-  
   table{
     font-size: 16px;
   }
-
   mat-header-cell{
     font-size: 18px;
   }
@@ -31,3 +27,21 @@
   .plan-link:hover{
     cursor: pointer;
   }
+  .error-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin: 5px 5px;
+  }
+  .center-spiner {
+    display: flex;
+    justify-content: center;
+  }
+  .spiner-margins {
+    margin: 10% 10%;
+    height: 40%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  

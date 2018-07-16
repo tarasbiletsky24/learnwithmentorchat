@@ -18,11 +18,11 @@ import { PlansComponent } from './plan/plans/plans.component';
 
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
-import { SpecificGroupComponent } from './specific-group/specific-group/specific-group.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
 import { GroupsComponent } from './groups/groups/groups.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },

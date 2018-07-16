@@ -4,7 +4,6 @@
 .main {   
   padding-top: 2%;
 }
-
 .search {
   width: 90%;
 }
@@ -17,4 +16,8 @@
 } 
 table {
   width: 100%;
+}
+.button-right {
+  display: flex;
+  justify-content: flex-end;
 }
