@@ -37,9 +37,16 @@ export class TaskService {
         catchError(this.handleError<Task[]>(`get Tasks`)));
     }
   }
+
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
+  }
+
+  getTasksNotInPlan(id: number): Observable<Task[]> {
+
+    return this.http.get<Task[]>(`${this.url}plan/${id}/tasks/notinplan`).pipe(
+      catchError(this.handleError<Task[]>(`getTasks`)));
   }
 
   updateTask(task: Task): Observable<any> {

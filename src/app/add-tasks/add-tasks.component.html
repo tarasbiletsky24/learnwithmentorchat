@@ -29,14 +29,11 @@
           <button mat-mini-fab color="primary" (click)="getTask($event, element.Id)">
             +
           </button>
-
-
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
   </div>
 
 
@@ -62,9 +59,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-
   <div class="buttons">
-
     <button mat-raised-button (click)="closeAddTask()">Cancel</button>
   </div>
 </div>

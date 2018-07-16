@@ -66,7 +66,6 @@ export class CreatePlanComponent implements OnInit {
       this.taskService.getTasks(this.currentId).subscribe(
         task => {
           this.result = task;
-          console.log(this.result);
         }
       );
     });
