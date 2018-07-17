@@ -43,9 +43,11 @@
   }
   .description-cell{
     width: 40%;
+    padding: 5px, 2px;
   }
   .name-cell{
     width: 15%;
+    padding-right: 3px;
   }
   .delete-button-cell{
     text-align: center;
@@ -54,4 +56,6 @@
   .date-cell {
     width: 10%;
   }
-  
+  .creator-cell{
+    text-align: center;
+  }

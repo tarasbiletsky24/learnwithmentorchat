@@ -39,6 +39,7 @@
   }
   .description-cell{
     width: 40%;
+    padding: 5px, 2px;
   }
   .date-cell {
     width: 10%;
@@ -49,4 +50,7 @@
   .add-button-cell{
     text-align: center;
     width: 5%;
+  }
+  .creator-cell{
+    text-align: center;
   }

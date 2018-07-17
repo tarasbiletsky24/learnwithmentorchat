@@ -21,8 +21,8 @@
         </ng-container>
 
         <ng-container matColumnDef="Create by">
-          <th mat-header-cell *matHeaderCellDef> Create by </th>
-          <td mat-cell *matCellDef="let element"> {{element.CreatorFirstName}} {{element.CreatorLastName}} </td>
+          <th class="creator-cell" mat-header-cell *matHeaderCellDef> Create by </th>
+          <td class="creator-cell" mat-cell *matCellDef="let element"> {{element.CreatorFirstName}} {{element.CreatorLastName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Date">
