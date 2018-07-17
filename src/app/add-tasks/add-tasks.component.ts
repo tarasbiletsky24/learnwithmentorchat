@@ -28,6 +28,7 @@ export class AddTasksComponent implements OnInit {
   nameTask = '';
   descriptionTask = '';
   private = false;
+  dataLoaded = false;
   idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
@@ -80,12 +81,16 @@ export class AddTasksComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.dataLoaded = false;
     this.dataSource.paginator = this.paginator;
     this.taskService.getTasksNotInPlan(this.idTasks).subscribe(
-      task => this.tasks = task
+      task => {
+      this.tasks = task,
+        this.dataLoaded = true;
+      }
+
     );
-
-
 
     this.searchTerms.pipe(
       debounceTime(300),

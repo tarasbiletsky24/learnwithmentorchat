@@ -27,8 +27,9 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="mat-elevation-z8 scrollit">
-    <table mat-table [dataSource]="tasks">
+  <div class="mat-elevation-z8 scrollit" *ngIf="dataLoaded" >
+    <table mat-table [dataSource]="tasks" >
+
 
 
       <!-- Name Column -->
@@ -58,10 +59,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
     </table>
   </div>
-
+  <div class="center-spiner">
+    <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+  </div>
 
   
   <div class="buttons">
     <button mat-raised-button (click)="closeAddTask()">Cancel</button>
   </div>
-</div>
