@@ -20,3 +20,7 @@ table {
     margin-right: 16%;
 }
 
+.scrollit {
+    height: 450px;
+    overflow: auto;
+  }
