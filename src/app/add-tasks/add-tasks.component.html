@@ -4,7 +4,7 @@
   </mat-form-field>
 
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8 scrollit">
     <table mat-table [dataSource]="tasks">
 
 
@@ -31,8 +31,8 @@
           </button>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
     </table>
   </div>
 
