@@ -3,9 +3,33 @@
     <input matInput #searchBox (keyup)="search(searchBox.value)" placeholder="Enter name of task" />
   </mat-form-field>
 
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Add new task
+        </mat-panel-title>
 
-  <div class="mat-elevation-z8 scrollit">
-    <table mat-table [dataSource]="tasks">
+      </mat-expansion-panel-header>
+      <div class="add-new-task">
+
+        <mat-form-field>
+          <input matInput placeholder="Name " [(ngModel)]="nameTask">
+        </mat-form-field>
+      <div>
+        <mat-form-field >
+          <textarea matInput placeholder="Description "  [(ngModel)]="descriptionTask"></textarea>
+        </mat-form-field>
+        </div>
+
+        <button mat-raised-button (click)="createTask()">Create task</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="mat-elevation-z8 scrollit" *ngIf="dataLoaded" >
+    <table mat-table [dataSource]="tasks" >
+
 
 
       <!-- Name Column -->
@@ -35,31 +59,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
     </table>
   </div>
+  <div class="center-spiner">
+    <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+  </div>
 
-
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Add new task
-        </mat-panel-title>
-
-      </mat-expansion-panel-header>
-      <div class="add-new-task">
-
-        <mat-form-field>
-          <input matInput placeholder="Name " [(ngModel)]="nameTask">
-        </mat-form-field>
-
-        <mat-form-field class="input-text">
-          <textarea matInput placeholder="Description " class=" input-description" [(ngModel)]="descriptionTask"></textarea>
-        </mat-form-field>
-
-        <button mat-raised-button (click)="createTask()">Create task</button>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+  
   <div class="buttons">
     <button mat-raised-button (click)="closeAddTask()">Cancel</button>
   </div>
-</div>

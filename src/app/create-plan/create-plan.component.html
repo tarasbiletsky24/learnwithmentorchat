@@ -6,7 +6,7 @@
     <div class="for-image">
       <img class="pic" [src]="imageData" id="newImage">
       <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
-      <button mat-raised-button class="button-image" (click)="fileInput.click($event) " *ngIf="!created" id="imageSend">Select image</button>
+      <button mat-raised-button class="button-image" (click)="fileInput.click($event) " [disabled]="created" id="imageSend">Select image</button>
     </div>
     <div class="for-data">
 
@@ -21,10 +21,10 @@
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" (click)="createPlan()" class="button-data" *ngIf="!created">Create plan</button>
-      <div *ngIf="created">
-        <button mat-raised-button color="primary" (click)="openAddTasks()" class="button-data">Add tasks</button>
-      </div>
+      <button mat-raised-button color="primary" (click)="createPlan()" class="button-data " [disabled]="created">Create plan</button>
+   
+        <button mat-raised-button color="primary" (click)="openAddTasks()" class="button-data position" *ngIf="created" >Add tasks</button>
+     
 
     </div>
   </div>

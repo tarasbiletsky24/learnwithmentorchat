@@ -48,3 +48,6 @@ min-width: 25%;
    min-width: 100px !important;
    text-align: center;
 }
+.position{
+    margin-left: 25%;
+}
