@@ -1,5 +1,8 @@
 <div class="profile-info">
     <div class="image-wrap">
+        <div *ngIf="imageLoading" class="spinner-container">
+            <mat-spinner class="spinner-margins"></mat-spinner>
+        </div>
         <img *ngIf="imageData"
         [src]="imageData"
         (click)="fileInput.click()"
@@ -19,6 +22,9 @@
     </div>
 </div>
 <h2>Tasks statistics</h2>
+<div *ngIf="statisticsLoading" class="tasks-spinner-container">
+    <mat-spinner class="spinner-margins"></mat-spinner>
+</div>
 <div class="stats" *ngIf="userStats">
     <div class="states-first">
         <h3>In progress</h3>

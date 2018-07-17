@@ -7,11 +7,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input() length: number = 1;
-  @Input() pageSize: number = 5;
-  @Input() range: number = 3;
-  @Input() currentPage: number = 1;
-  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input() length = 1;
+  @Input() pageSize = 5;
+  @Input() range = 3;
+  @Input() currentPage = 1;
+  @Output() pageChange = new EventEmitter<number>();
   pages: number[];
   totalPages: number;
 
@@ -19,7 +19,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit() {
     this.totalPages = this.getTotalPages(this.length, this.pageSize);
-    this.getPages();    
+    this.getPages();
   }
 
   ngOnChanges() {
@@ -34,8 +34,7 @@ export class PaginationComponent implements OnInit {
   isValidPageNumber(page: number, totalPages: number): boolean {
     return page > 0 && page <= totalPages;
   }
-  getPages() {    
-    debugger
+  getPages() {
     this.totalPages = this.getTotalPages(this.length, this.pageSize);
     this.pages = this.getRange(this.currentPage)
       .filter(page => this.isValidPageNumber(page, this.totalPages));
@@ -44,9 +43,10 @@ export class PaginationComponent implements OnInit {
     return Math.ceil(Math.max(limit, 1) / Math.max(size, 1));
   }
   getRange(pageIndex: number): number[] {
-    var range = new Array();
-    for (var i = pageIndex - 3; i <= pageIndex + 3; ++i)
+    let range = new Array();
+    for (let i = pageIndex - 3; i <= pageIndex + 3; ++i) {
       range.push(i);
-    return range
+    }
+    return range;
   }
 }

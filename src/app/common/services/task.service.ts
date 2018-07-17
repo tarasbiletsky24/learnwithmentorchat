@@ -39,6 +39,7 @@ export class TaskService {
         catchError(this.handleError<Task[]>(`get Tasks`)));
     }
   }
+
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
@@ -47,6 +48,13 @@ export class TaskService {
     return this.http.get<Pagination<Task>>(`${this.url}task/pageSize/${pageSize}/pageNumber/${pageNumber}`).pipe(
       catchError(this.handleError<Pagination<Task>>(`getPagedTasks`)));
   }
+
+  getTasksNotInPlan(id: number): Observable<Task[]> {
+
+    return this.http.get<Task[]>(`${this.url}plan/${id}/tasks/notinplan`).pipe(
+      catchError(this.handleError<Task[]>(`getTasks`)));
+  }
+
   updateTask(task: Task): Observable<any> {
     const link = `${this.url}task/${task.Id}`;
     return this.http.put<Task>(link, task, httpOptions).pipe(

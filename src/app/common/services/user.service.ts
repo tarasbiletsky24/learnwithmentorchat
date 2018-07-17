@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getUser(): Observable<User> {
-    return this.http.get<User>(`${this.url}info`).pipe(
+    return this.http.get<User>(`${this.url}/profile`).pipe(
       catchError(this.handleError<User>(`getUser`))
     );
   }
@@ -111,8 +111,8 @@ export class UserService {
       catchError(val => of(val)));
   }
 
-  getStatistics(userId: number): Observable<HttpResponse<Statistics>> {
-    return this.http.get(`${this.url}/${userId}/statistics`, { observe: 'response' }).pipe(
+  getStatistics(): Observable<HttpResponse<Statistics>> {
+    return this.http.get(`${this.url}/statistics`, { observe: 'response' }).pipe(
       catchError(val => of(val)));
   }
 

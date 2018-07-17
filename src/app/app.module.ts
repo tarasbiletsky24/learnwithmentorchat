@@ -60,6 +60,7 @@ import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import {MatPaginatorModule, MatTableDataSource} from '@angular/material';
 import { MentorGuard } from './auth/mentor.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
@@ -114,6 +115,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    MatPaginatorModule,
     MatToolbarModule,
     BrowserAnimationsModule,
     MatCheckboxModule,

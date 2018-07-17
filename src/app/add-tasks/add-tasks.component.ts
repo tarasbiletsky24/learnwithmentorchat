@@ -1,15 +1,14 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { TaskService } from '../common/services/task.service';
 import { PlanService } from '../common/services/plan.service';
-import { Router } from '@angular/router';
 import { Task } from '../../../src/app/common/models/task';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
-import { Observable, Subject } from 'rxjs';
-import { CreatePlanComponent } from '../create-plan/create-plan.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Subject } from 'rxjs';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../common/services/auth.service';
+
 
 
 @Component({
@@ -29,7 +28,10 @@ export class AddTasksComponent implements OnInit {
   idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
+
   dataSource = new MatTableDataSource<Task>(this.tasks);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Description', 'Add'];
   constructor(private taskService: TaskService,
     private planService: PlanService,
@@ -39,7 +41,6 @@ export class AddTasksComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: number
   ) {
     this.idTasks = data;
-
   }
   getTask(event: any, id: number) {
 
@@ -55,7 +56,6 @@ export class AddTasksComponent implements OnInit {
 
 
   createTask() {
-
     if (this.nameTask == null || this.descriptionTask == null) {
       this.alertWindow.openSnackBar('You must enter data for creating task!', 'Ok');
       return false;
@@ -64,9 +64,7 @@ export class AddTasksComponent implements OnInit {
     const newTask = {
       Name: this.nameTask, Description: this.descriptionTask, Private: this.private, CreatorId: this.idCreator
     };
-    this.taskService.createTask(newTask as Task).subscribe(res => (
-      this.taskService.getTasks().subscribe(
-        task => this.tasks = task))
+    this.taskService.createTask(newTask as Task).subscribe(() => (this.taskService.getTasks().subscribe(task => this.tasks = task))
     );
     return true;
   }
@@ -77,9 +75,12 @@ export class AddTasksComponent implements OnInit {
 
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(
+    this.dataSource.paginator = this.paginator;
+    this.taskService.getTasksNotInPlan(this.idTasks).subscribe(
       task => this.tasks = task
     );
+
+
 
     this.searchTerms.pipe(
       debounceTime(300),

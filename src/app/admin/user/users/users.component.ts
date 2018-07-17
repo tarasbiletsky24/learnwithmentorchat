@@ -144,21 +144,21 @@ export class UsersComponent implements OnInit {
     //   user => this.users = user
     // );
     this.userService.getPage(10, 1).subscribe(
-        paginator => {          
-          this.paginator = paginator;          
-          this.users = this.paginator.Items;
-        } );
+      paginator => {
+      this.paginator = paginator;
+        this.users = this.paginator.Items;
+      });
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.userService.search(term, this.roleName))
     ).subscribe(user => this.users = user);
   }
-  onPageChange(event:number){
+  onPageChange(event: number) {
     this.userService.getPage(10, event).subscribe(
-      paginator => {          
-        this.paginator = paginator;          
+      paginator => {
+        this.paginator = paginator;
         this.users = this.paginator.Items;
-      } );
+      });
   }
 }
