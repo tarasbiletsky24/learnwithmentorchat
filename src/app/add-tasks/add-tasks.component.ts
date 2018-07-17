@@ -10,9 +10,6 @@ import { CreatePlanComponent } from '../create-plan/create-plan.component';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../common/services/auth.service';
-import { currentId } from 'async_hooks';
-
-
 
 @Component({
   selector: 'app-add-tasks',
