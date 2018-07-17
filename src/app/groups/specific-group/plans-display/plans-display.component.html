@@ -8,13 +8,13 @@
 
         <ng-container matColumnDef="Name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element">
+          <td class="name-cell" mat-cell *matCellDef="let element">
             <div class="plan-link" (click)="goToPlan(element)">{{element.Name}}</div>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="Description">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <th class="description-cell" mat-header-cell *matHeaderCellDef> Description </th>
           <td mat-cell *matCellDef="let element">
             <div>{{element.Description}}</div>
           </td>
@@ -26,7 +26,7 @@
         </ng-container>
 
         <ng-container matColumnDef="Date">
-          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <th class="date-cell" mat-header-cell *matHeaderCellDef> Date </th>
           <td mat-cell *matCellDef="let element"> {{element.CreateDate | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 
@@ -39,7 +39,7 @@
         </ng-container>
 
         <ng-container matColumnDef="Delete">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th class="delete-button-cell" mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
             <button mat-mini-fab color="primary" (click)="delChoosenPlan($event,element)" matTooltip="Push to delete plan from group"
               [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">

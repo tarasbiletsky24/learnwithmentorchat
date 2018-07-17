@@ -35,3 +35,15 @@ mat-header-cell{
   margin: 10% 10%;
   height: 40%;
 }
+th, td {
+  text-align: left;
+  width: auto;
+}
+th:last-child, td:last-child {
+  text-align: center;
+}
+.button-cell {
+  text-align: center;
+  align-content: center;
+  width: 5%;
+}

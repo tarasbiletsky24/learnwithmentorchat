@@ -72,9 +72,7 @@ export class AddUsersComponent implements OnInit {
       () => {
         this.dataLoaded = true;
         if (this.users === null || this.users.length < 1) {
-          this.activateErrorMessage('There are no more users ');
-          //const searchField = document.getElementById('search'); // todo find why null
-          //searchField.setAttribute('disabled', 'disabled');
+          this.activateErrorMessage('There are no more users');
           this.dataSource = new MatTableDataSource<User>([]);
         } else {
           this.errorMessageActive = false;
@@ -90,7 +88,7 @@ export class AddUsersComponent implements OnInit {
           this.users = data;
           this.searchActive = false;
           if (this.users === null || this.users.length < 1) {
-            this.activateErrorMessage('There are no plans by this key');
+            this.activateErrorMessage('There are no users by this key');
             this.dataSource = new MatTableDataSource<User>([]);
           } else {
             this.errorMessageActive = false;

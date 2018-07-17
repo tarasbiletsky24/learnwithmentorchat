@@ -22,7 +22,7 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() group: Group;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
+  displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
   isInitialized = false;
   dataLoaded = false;

@@ -41,7 +41,17 @@
     margin: 10% 10%;
     height: 40%;
   }
-  th.mat-sort-header-sorted {
-    color: black;
+  .description-cell{
+    width: 40%;
+  }
+  .name-cell{
+    width: 15%;
+  }
+  .delete-button-cell{
+    text-align: center;
+    width: 5%;
+  }
+  .date-cell {
+    width: 10%;
   }
   
