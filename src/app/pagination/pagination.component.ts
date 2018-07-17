@@ -35,9 +35,9 @@ export class PaginationComponent implements OnInit {
     return page > 0 && page <= totalPages;
   }
   getPages() {    
+    debugger
     this.totalPages = this.getTotalPages(this.length, this.pageSize);
     this.pages = this.getRange(this.currentPage)
-      .map(offset => this.currentPage + offset)
       .filter(page => this.isValidPageNumber(page, this.totalPages));
   }
   getTotalPages(limit: number, size: number): number {

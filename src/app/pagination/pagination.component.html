@@ -1,25 +1,25 @@
 <ul class="pagination">
-  <li (click)="selectPage(1, $event)" [class.disabled]="currentPage == 1">
+  <li (click)="selectPage(1, $event)" *ngIf="currentPage > 2">
     <a href="" title="Go to first page">&laquo;</a>
   </li>
-  <li (click)="selectPage(currentPage - 1, $event)" [class.disabled]="currentPage == 1">
+  <li (click)="selectPage(currentPage - 1, $event)" *ngIf="currentPage > 1">
     <a href="" title="Go to previous page">&lsaquo;</a>
   </li>
-  <li class="disabled" (click)="cancelEvent($event)" *ngIf="currentPage > 1">
+  <!-- <li class="disabled" (click)="cancelEvent($event)" *ngIf="currentPage > 1">
     <a href="">...</a>
-  </li>
+  </li> -->
   <li *ngFor="let page of pages" [class.active]="page == currentPage">
     <a href="" (click)="selectPage(page, $event)">
       {{page}}
     </a>
   </li>
-  <li class="disabled" (click)="cancelEvent($event)" *ngIf="currentPage < totalPages">
+  <!-- <li class="disabled" (click)="cancelEvent($event)" *ngIf="currentPage < totalPages">
     <a href="">...</a>
-  </li>
-  <li (click)="selectPage(currentPage + 1, $event)" [class.disabled]="currentPage == totalPages">
+  </li> -->
+  <li (click)="selectPage(currentPage + 1, $event)" *ngIf="currentPage < totalPages">
     <a href="" title="Go to next page">&rsaquo;</a>
   </li>
-  <li (click)="selectPage(totalPages, $event)" [class.disabled]="currentPage == totalPages">
+  <li (click)="selectPage(totalPages, $event)" *ngIf="currentPage < totalPages - 1">
     <a href="" title="Go to last page">&raquo;</a>
   </li>
 </ul>
