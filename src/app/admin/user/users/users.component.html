@@ -98,7 +98,8 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>      
     </div>
-    <app-pagination *ngIf="paginator" [length]="paginator.TotalCount" 
-      [currentPage]="paginator.PageNumber" [pageSize]="paginator.PageSize" 
-      (pageChange)="onPageChange($event)"></app-pagination>
+      <app-pagination *ngIf="paginator" [length]="paginator.TotalCount" 
+      [pageIndex]="paginator.PageNumber" [pageSize]="paginator.PageSize" 
+      (page)="onPageChange($event)"
+      ></app-pagination>
   </div>

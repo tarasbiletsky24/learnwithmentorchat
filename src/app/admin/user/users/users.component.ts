@@ -154,8 +154,8 @@ export class UsersComponent implements OnInit {
       switchMap((term: string) => this.userService.search(term, this.roleName))
     ).subscribe(user => this.users = user);
   }
-  onPageChange(event: number) {
-    this.userService.getPage(10, event).subscribe(
+  onPageChange(event: PageEvent) {
+    this.userService.getPage(event.pageSize, event.pageIndex).subscribe(
       paginator => {
         this.paginator = paginator;
         this.users = this.paginator.Items;
