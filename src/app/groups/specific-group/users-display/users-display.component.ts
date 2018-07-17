@@ -29,6 +29,9 @@ export class UsersDisplayComponent implements OnInit {
   errorMessage: string;
   errorMessageActive = false;
 
+  filterErrorMessage: string;
+  filterErrorMessageActive = false;
+
   ngOnInit() {
     this.dataLoaded = false;
     this.loadUsers();
@@ -38,14 +41,17 @@ export class UsersDisplayComponent implements OnInit {
     this.groupService.getGroupUsers(this.group.Id).subscribe(
       data => this.users = data,
       (error: HttpErrorResponse) => {
+        this.filterErrorMessageActive = false;
         this.activateErrorMessage(error.error.Message);
         this.dataLoaded = true;
       },
       () => {
         if (this.users === null || this.users.length < 1) {
+          this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no users in this group');
           this.dataSource = new MatTableDataSource<User>([]);
         } else {
+          this.filterErrorMessageActive = false;
           this.errorMessageActive = false;
           this.dataSource = new MatTableDataSource<User>(this.users);
         }
@@ -59,10 +65,17 @@ export class UsersDisplayComponent implements OnInit {
     this.errorMessageActive = true;
   }
 
+  activateFilterErrorMessage(message: string): void {
+    this.filterErrorMessage = message;
+    this.filterErrorMessageActive = true;
+  }
+
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+    this.filterErrorMessageActive = false;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.filteredData.length < 1) {
+      this.activateFilterErrorMessage('There are no users by this key');
+    }
   }
 
   delChoosenUser(event: any, currentUser: User) {
@@ -72,7 +85,7 @@ export class UsersDisplayComponent implements OnInit {
       error => {
         event.currentTarget.setAttribute('disabled', 'enabled');
         this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentUser.FirstName + ' '
-        + currentUser.LastName + ' please try again', 'Ok');
+          + currentUser.LastName + ' please try again', 'Ok');
       },
       () => {
         const index = this.users.indexOf(currentUser, 0);

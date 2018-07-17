@@ -22,7 +22,7 @@ export class AddPlansComponent implements OnInit {
     this.groupId = data;
   }
 
-  displayedColumns = ['Name', 'Description', 'Creator', 'CreateDate', 'Published', 'Check'];
+  displayedColumns = ['Name', 'Description', 'Creator', 'CreateDate', 'Button'];
   plans: Plan[];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   private searchTerms = new Subject<string>();

@@ -30,8 +30,10 @@
   .error-message {
     display: flex;
     justify-content: center;
-    color: red;
-    margin: 5px 5px;
+    color: grey;
+  }
+  .error-message-text {
+    margin: 10px 10px;
   }
   .center-spiner {
     display: flex;
@@ -40,9 +42,10 @@
   .spiner-margins {
     margin: 10% 10%;
     height: 40%;
+    width: 40%;
   }
   .description-cell{
-    width: 40%;
+    width: 50%;
     padding: 5px, 2px;
   }
   .name-cell{

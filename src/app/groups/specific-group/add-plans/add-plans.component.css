@@ -29,7 +29,7 @@
   .error-message {
     display: flex;
     justify-content: center;
-    color: red;
+    color: grey;
     margin: 5px 5px;
     height: 450px;
   }
@@ -38,7 +38,7 @@
     overflow: auto;
   }
   .description-cell{
-    width: 40%;
+    width: 50%;
     padding: 5px, 2px;
   }
   .date-cell {

@@ -30,7 +30,7 @@ table {
 .error-message {
   display: flex;
   justify-content: center;
-  color: red;
+  color: grey;
   margin: 5px 5px;
   height: 450px;
 }

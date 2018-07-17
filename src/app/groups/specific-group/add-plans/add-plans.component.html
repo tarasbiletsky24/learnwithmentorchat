@@ -21,8 +21,8 @@
           </ng-container>
 
           <ng-container matColumnDef="Creator">
-            <th class="creator-cell" mat-header-cell *matHeaderCellDef> Created by </th>
-            <td class="creator-cell" mat-cell *matCellDef="let element">{{element.CreatorFirstName}} {{element.LastFirstName}}</td>
+            <th class="creator-cell" mat-header-cell *matHeaderCellDef> Create by </th>
+            <td class="creator-cell" mat-cell *matCellDef="let element"> {{element.CreatorFirstName}} {{element.CreatorLastName}} </td>
           </ng-container>
 
           <ng-container matColumnDef="CreateDate">
@@ -30,15 +30,7 @@
             <td mat-cell *matCellDef="let element">{{element.CreateDate | date:'dd-MM-yyyy'}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="Published">
-            <th mat-header-cell *matHeaderCellDef> State </th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngIf="element.Published"> Published </div>
-              <div *ngIf="!element.Published"> Not published</div>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="Check">
+          <ng-container matColumnDef="Button">
             <th class="add-button-cell" mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let element">
               <button mat-mini-fab color="primary" (click)="addChoosenPlan($event,element)" matTooltip="Push to add plan to group" [matTooltipShowDelay]="1000"

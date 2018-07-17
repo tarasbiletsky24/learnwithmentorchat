@@ -82,15 +82,12 @@ export class GroupService {
   createGroup(group: Group): Observable<HttpResponse<any>> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.url}`, group, { observe: 'response', headers: reqHeader }).pipe(
-      // catchError(r => of(r))
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      // todo put into sharable service
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
