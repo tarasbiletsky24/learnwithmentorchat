@@ -65,7 +65,8 @@ export class AddTasksComponent implements OnInit {
     const newTask = {
       Name: this.nameTask, Description: this.descriptionTask, Private: this.private, CreatorId: this.idCreator
     };
-    this.taskService.createTask(newTask as Task).subscribe(res => (
+    this.taskService.createTaskWithId(newTask as Task).subscribe(res => (
+      this.planService.addTaskToPlan(this.idTasks, res, null, 1).subscribe(),
       this.taskService.getTasks().subscribe(
         task => this.tasks = task))
     );
