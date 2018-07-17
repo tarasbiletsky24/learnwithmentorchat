@@ -57,7 +57,7 @@ export class GroupService {
 
   addUserToGroup(userId: number, groupId: number): Observable<HttpResponse<any>> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.url}/${groupId}/user`, [userId],{ observe: 'response', headers: reqHeader }).pipe(
+    return this.http.put(`${this.url}/${groupId}/user`, [userId], { observe: 'response', headers: reqHeader }).pipe(
     );
   }
 

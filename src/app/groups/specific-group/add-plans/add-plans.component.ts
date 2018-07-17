@@ -75,7 +75,7 @@ export class AddPlansComponent implements OnInit {
         } else {
           this.errorMessageActive = false;
           this.dataSource = new MatTableDataSource<Plan>(this.plans);
-        } 
+        }
       }
     );
     this.searchTerms.pipe(
