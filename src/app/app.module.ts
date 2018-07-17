@@ -69,7 +69,6 @@ import { AddUsersComponent } from './groups/specific-group/add-users/add-users.c
 import { PlansDisplayComponent } from './groups/specific-group/plans-display/plans-display.component';
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { MPaginatorComponent } from './m-paginator/m-paginator.component';
 
 @NgModule({
   declarations: [

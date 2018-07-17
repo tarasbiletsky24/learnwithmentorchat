@@ -38,7 +38,7 @@ export class UserService {
     );
   }
   getPage(pageSize: number, pageNumber: number): Observable<Pagination<User>> {
-    return this.http.get<Pagination<User>>(`${this.url}/pageSize/${pageSize}/pageNumber/${pageNumber}`).pipe(
+    return this.http.get<Pagination<User>>(`${this.url}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
       catchError(this.handleError<Pagination<User>>(`getPagedUsers`)));
   }
 
@@ -47,10 +47,20 @@ export class UserService {
       catchError(this.handleError<User[]>(`getUserbyrole`))
     );
   }
+  getPageByRole_id(id: number, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/inrole/${id}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getUserbyrole`))
+    );
+  }
 
   getUserByState(state: boolean): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/instate/${state}`).pipe(
       catchError(this.handleError<User[]>(`getUserbystate`))
+    );
+  }
+  getPageByState(state: boolean, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/instate/${state}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getUserbystate`))
     );
   }
 
@@ -96,6 +106,11 @@ export class UserService {
   search(param: string, roleName: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
+    );
+  }
+  searchPage(param: string, roleName: string, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/search?q=${param}&role=${roleName}&pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`searchUsers`))
     );
   }
 
