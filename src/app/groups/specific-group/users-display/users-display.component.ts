@@ -22,7 +22,7 @@ export class UsersDisplayComponent implements OnInit {
 
   @Input() group: Group;
   users: User[];
-  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Delete'];
+  displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.users);
   isInitialized = false;
   dataLoaded = false;
@@ -91,7 +91,7 @@ export class UsersDisplayComponent implements OnInit {
 
   openUserAddDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponent, {
-      width: '1000px',
+      width: '75%',
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {

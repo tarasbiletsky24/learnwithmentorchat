@@ -1,15 +1,13 @@
 * {    
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.main {   
-  padding-top: 2%;
-}
 .search {
   width: 90%;
 }
 .container  {
   display: flex;
   justify-content: center;
+  margin: 0px;
 }
 .search-input {
     width: 100%;
@@ -17,7 +15,33 @@
 table {
   width: 100%;
 }
-.button-right {
+.button-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.center-spiner {
+  display: flex;
+  justify-content: center;
+}
+.spiner-margins {
+  margin: 10% 10%;
+  height: 40%;
+}
+.error-message {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin: 5px 5px;
+  height: 450px;
+}
+th:last-child, td:last-child {
+  text-align: center;
+  width: 5%;
+}
+td.button-row {
+  text-align: center;
+}
+.scrollit {
+  height: 450px;
+  overflow: auto;
 }
