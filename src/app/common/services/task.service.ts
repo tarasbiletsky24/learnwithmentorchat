@@ -72,6 +72,13 @@ export class TaskService {
       catchError(this.handleError<Task>(`creating task`)));
   }
 
+  createTaskWithId(task: Task): Observable<any> {
+    const link = `${this.url}task/return`;
+    return this.http.post<Task>(link, task, httpOptions).pipe(
+      catchError(this.handleError<Task>(`creating task`)));
+
+  }
+
   getUserTask(planTaskId: number, userId: number): Observable<HttpResponse<UserTask>> {
     const link = `${this.url}task/usertask?planTaskId=${planTaskId}&userId=${userId}`;
     return this.http.get<UserTask>(link, { observe: 'response' }).pipe(
