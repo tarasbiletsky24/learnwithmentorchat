@@ -67,6 +67,7 @@ import { UsersDisplayComponent } from './groups/specific-group/users-display/use
 import { AddUsersComponent } from './groups/specific-group/add-users/add-users.component';
 import { PlansDisplayComponent } from './groups/specific-group/plans-display/plans-display.component';
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.c
     AddGroupComponent,
     UserEditComponent,
     PageNotFoundComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    PaginationComponent
   ],
   imports: [
     AppRoutingModule,

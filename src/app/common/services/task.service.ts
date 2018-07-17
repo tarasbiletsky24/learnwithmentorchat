@@ -11,6 +11,7 @@ import { UserTask } from '../models/userTask';
 import { Message } from '../models/message';
 import { text } from '@angular/core/src/render3/instructions';
 import { StringifyOptions } from 'querystring';
+import { Pagination } from '../models/pagination';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,6 +29,7 @@ export class TaskService {
   // private url = '../assets/tasks.json';
   private url = `${environment.apiUrl}`;
 
+
   getTasks(planId?: number): Observable<Task[]> {
     if (planId != null) {
       return this.http.get<Task[]>(`${this.url}plan/${planId}/tasks`).pipe(
@@ -41,7 +43,10 @@ export class TaskService {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
       catchError(this.handleError<Task>(`getTask`)));
   }
-
+  getPage(pageSize: number, pageNumber: number): Observable<Pagination<Task>> {
+    return this.http.get<Pagination<Task>>(`${this.url}task/pageSize/${pageSize}/pageNumber/${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<Task>>(`getPagedTasks`)));
+  }
   updateTask(task: Task): Observable<any> {
     const link = `${this.url}task/${task.Id}`;
     return this.http.put<Task>(link, task, httpOptions).pipe(

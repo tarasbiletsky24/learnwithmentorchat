@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../common/models/user';
 import { Role } from '../../../common/models/role';
 import { UserService } from '../../../common/services/user.service';
-import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatRadioButton, PageEvent } from '@angular/material';
 import { Observable, Subject, of } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../../components/dialogs/dialogs.service';
+import { Pagination } from '../../../common/models/pagination';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
+  paginator: Pagination<User>;
   name: string;
   surname: string;
   role: string;
@@ -133,19 +135,30 @@ export class UsersComponent implements OnInit {
       return true;
     }
     this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
-
   }
 
   ngOnInit() {
     this.userService.getRoles().subscribe(
       role => this.roles = role);
-    this.userService.getUsers().subscribe(
-      user => this.users = user
-    );
+    // this.userService.getUsers().subscribe(
+    //   user => this.users = user
+    // );
+    this.userService.getPage(10, 1).subscribe(
+        paginator => {          
+          this.paginator = paginator;          
+          this.users = this.paginator.Items;
+        } );
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.userService.search(term, this.roleName))
     ).subscribe(user => this.users = user);
+  }
+  onPageChange(event:number){
+    this.userService.getPage(10, event).subscribe(
+      paginator => {          
+        this.paginator = paginator;          
+        this.users = this.paginator.Items;
+      } );
   }
 }

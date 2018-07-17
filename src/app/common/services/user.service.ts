@@ -9,6 +9,8 @@ import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
 import { Login } from '../models/login';
 import { Statistics } from '../models/statistics';
+import { Pagination } from '../models/pagination';
+import { PageEvent } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,10 @@ export class UserService {
     return this.http.get<User>(`${this.url}info`).pipe(
       catchError(this.handleError<User>(`getUser`))
     );
+  }
+  getPage(pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/pageSize/${pageSize}/pageNumber/${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getPagedUsers`)));
   }
 
   getUserByRole_id(id: number): Observable<User[]> {

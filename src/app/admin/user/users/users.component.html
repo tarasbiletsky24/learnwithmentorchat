@@ -7,7 +7,7 @@
 
 
     <!-- for sort -->
-    <div class="flex-container " >
+    <div class="flex-container ">
       <div class=" roles">
         <div (click)="getType(null,role)" (click)="getByRole(-1)" [class.selected]="role === selectedType">
           All
@@ -16,15 +16,15 @@
           {{role.Name}}
         </div>
       </div>
-      <div class="state" >
-        <div (click)="getUsersByState(true)" [class.selected]="true === selectedState" >
+      <div class="state">
+        <div (click)="getUsersByState(true)" [class.selected]="true === selectedState">
           Blocked
         </div>
-        <div (click)="getUsersByState(false)" [class.selected]="false === selectedState" >
+        <div (click)="getUsersByState(false)" [class.selected]="false === selectedState">
           Active
         </div>
       </div>
-    
+
     </div>
 
     <!-- for select -->
@@ -39,8 +39,8 @@
 
       <div class="flex-button">
         <button mat-raised-button class="button-change" (click)="updateRole(id,role,name,surname)">Change</button>
-       
-        <div>            
+
+        <div>
           <button mat-raised-button color="primary" (click)="changeState(id,state,false)">
             Unblock </button>
           <button mat-raised-button color="primary" (click)="changeState(id,state,true)">
@@ -96,9 +96,9 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
+      </table>      
     </div>
+    <app-pagination *ngIf="paginator" [length]="paginator.TotalCount" 
+      [currentPage]="paginator.PageNumber" [pageSize]="paginator.PageSize" 
+      (pageChange)="onPageChange($event)"></app-pagination>
   </div>
-
-  
