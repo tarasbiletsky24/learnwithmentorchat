@@ -80,21 +80,7 @@ export class PlansDisplayComponent implements OnInit {
 
   openPlanAddDialog(): void {
     const dialogRef = this.dialog.open(AddPlansComponent, {
-      width: '1000px',
-      data: this.group.Id
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.dataLoaded = false;
-        this.loadPlans();
-      }
-    }
-    );
-  }
-
-  openPlanCreateAndAddDialog(): void {
-    const dialogRef = this.dialog.open(CreatePlanComponent, {
-      width: '1000px',
+      width: '75%',
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {

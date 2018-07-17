@@ -91,7 +91,7 @@ export class UsersDisplayComponent implements OnInit {
 
   openUserAddDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponent, {
-      width: '1000px',
+      width: '75%',
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {

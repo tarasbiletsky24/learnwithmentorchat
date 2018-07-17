@@ -1,15 +1,13 @@
 * {    
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.main {   
-  padding-top: 2%;
-}
 .search {
   width: 90%;
 }
 .container  {
   display: flex;
   justify-content: center;
+  margin: 0px;
 }
 .search-input {
     width: 100%;
@@ -27,11 +25,25 @@ table {
 }
 .spiner-margins {
   margin: 10% 10%;
-  height: 40%;
+  height: 70%;
 }
 .error-message {
   display: flex;
   justify-content: center;
   color: red;
   margin: 5px 5px;
+}
+th, td {
+  text-align: left;
+  width: auto;
+}
+th:last-child, td:last-child {
+  text-align: center;
+}
+td.button-row {
+  text-align: center;
+}
+.scrollit {
+  height: 450px;
+  overflow: auto;
 }

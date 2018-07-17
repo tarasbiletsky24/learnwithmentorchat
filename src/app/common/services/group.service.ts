@@ -56,14 +56,14 @@ export class GroupService {
   }
 
   addUserToGroup(userId: number, groupId: number): Observable<HttpResponse<any>> {
-    return this.http.put(`${this.url}/${groupId}/user`, [userId]).pipe(
-      catchError(r => of(r))
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(`${this.url}/${groupId}/user`, [userId],{ observe: 'response', headers: reqHeader }).pipe(
     );
   }
 
   addPlanToGroup(planId: number, groupId: number): Observable<HttpResponse<any>> {
-    return this.http.put(`${this.url}/${groupId}/plan`, [planId]).pipe(
-      catchError(r => of(r))
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(`${this.url}/${groupId}/plan`, [planId], { observe: 'response', headers: reqHeader }).pipe(
     );
   }
 

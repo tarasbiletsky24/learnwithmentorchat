@@ -60,10 +60,12 @@
   <h4>{{errorMessage}}</h4>
 </div>
 <mat-action-row *ngIf="isMentor">
-  <button mat-raised-button class="big-button" color="primary" (click)="openPlanCreateAndAddDialog(group)" matTooltip="Push to create new plan."
-    [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
-    Create new plan
-  </button>
+  <a routerLink="/create-plan">
+    <button mat-raised-button class="big-button" color="primary" matTooltip="Push to create new plan." [matTooltipShowDelay]="1000"
+      [matTooltipHideDelay]="500">
+      Create new plan
+    </button>
+  </a>
   <button mat-raised-button class="big-button" color="primary" (click)="openPlanAddDialog(group)" matTooltip="Push to add plans to group"
     [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
     Add plan

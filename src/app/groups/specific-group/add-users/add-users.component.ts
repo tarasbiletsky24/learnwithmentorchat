@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatDialogRef } from '@angular/material';
+import { MatTableDataSource, MatDialogRef } from '@angular/material';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -7,6 +7,7 @@ import { GroupService } from '../../../common/services/group.service';
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { User } from '../../../common/models/user';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { HttpStatusCodeService } from '../../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-add-users',
@@ -18,11 +19,12 @@ export class AddUsersComponent implements OnInit {
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
     public thisDialogRef: MatDialogRef<AddUsersComponent>,
+    private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: number) {
     this.groupId = data;
   }
 
-  displayedColumns = ['FirstName', 'LastName', 'Email', 'Role', 'Blocked', 'Check'];
+  displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Check'];
   users: User[];
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
@@ -50,7 +52,6 @@ export class AddUsersComponent implements OnInit {
   }
 
   search(term: string): void {
-    this.errorMessageActive = false;
     this.searchActive = true;
     this.searchTerms.next(term);
   }
@@ -62,7 +63,7 @@ export class AddUsersComponent implements OnInit {
     });
     this.groupService.searchNotUsers('', this.groupId).subscribe(
       data => {
-        this.users = data
+        this.users = data;
       },
       (error: HttpErrorResponse) => {
         this.activateErrorMessage(error.error.Message);
@@ -71,9 +72,13 @@ export class AddUsersComponent implements OnInit {
       () => {
         this.dataLoaded = true;
         if (this.users === null || this.users.length < 1) {
-          this.activateErrorMessage('There are no users anymore');
-          const searchField = document.getElementById('search'); // todo find why null
-          searchField.setAttribute('disabled', 'disabled');
+          this.activateErrorMessage('There are no more users ');
+          //const searchField = document.getElementById('search'); // todo find why null
+          //searchField.setAttribute('disabled', 'disabled');
+          this.dataSource = new MatTableDataSource<User>([]);
+        } else {
+          this.errorMessageActive = false;
+          this.dataSource = new MatTableDataSource<User>(this.users);
         }
       }
     );
@@ -86,6 +91,10 @@ export class AddUsersComponent implements OnInit {
           this.searchActive = false;
           if (this.users === null || this.users.length < 1) {
             this.activateErrorMessage('There are no plans by this key');
+            this.dataSource = new MatTableDataSource<User>([]);
+          } else {
+            this.errorMessageActive = false;
+            this.dataSource = new MatTableDataSource<User>(this.users);
           }
         },
         (error: HttpErrorResponse) => {
