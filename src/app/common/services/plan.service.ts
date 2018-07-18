@@ -49,17 +49,16 @@ export class PlanService {
     );
   }
 
-  updatePlan(plan: Plan): Observable<any> {
-    return this.http.put<Plan>(`${this.url}/${plan.Id}`, plan, this.httpOptions).pipe(
-      catchError(this.handleError<any>('updatePlan'))
+  updatePlan(plan: Plan): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/${plan.Id}`, plan, { observe: 'response' }).pipe(
+      catchError(r => of(r))
     );
   }
-  createPlan(plan: Plan): Observable<any> {
 
+  createPlan(plan: Plan): Observable<any> {
     const link = `${this.url}/return`;
     return this.http.post<Plan>(link, plan, this.httpOptions).pipe(
       catchError(this.handleError<Plan>(`creating plan`)));
-
   }
 
   addPlan(plan: Plan): Observable<Plan> {
@@ -67,7 +66,6 @@ export class PlanService {
       catchError(this.handleError<Plan>('addPlan'))
     );
   }
-
 
   deletePlanById(id: number): Observable<Plan> {
     return this.http.delete<Plan>(`${this.url}/${id}`, this.httpOptions).pipe(
@@ -82,10 +80,6 @@ export class PlanService {
       return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
         catchError(val => of(val)));
     }
-
-
-
-
   }
 
   getImage(id: number): Observable<HttpResponse<Image>> {
