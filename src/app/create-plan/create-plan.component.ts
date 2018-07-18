@@ -25,7 +25,6 @@ import { DISABLED } from '@angular/forms/src/model';
 
 })
 
-
 export class CreatePlanComponent implements OnInit {
   tasks: Observable<Task>;
   currentId: number;
@@ -49,17 +48,12 @@ export class CreatePlanComponent implements OnInit {
     private authService: AuthService,
     private alertWindow: AlertWindowsComponent,
     private httpStatusCodeService: HttpStatusCodeService, ) {
-
-
   }
-
-
 
   openAddTasks(): void {
     const dialogRef = this.dialog.open(AddTasksComponent, {
       width: '1000px',
       data: this.currentId
-
     });
     dialogRef.afterClosed().subscribe(result => {
       this.idTasks = result;
@@ -69,6 +63,20 @@ export class CreatePlanComponent implements OnInit {
         }
       );
     });
+  }
+
+  saveChanges() {
+    if (this.name === '' || this.description === '') {
+      this.alertWindow.openSnackBar('You must enter data for save changing!', 'Ok');
+      this.addTask = false;
+    } else {
+      const plan = {
+        Id: this.currentId, Name: this.name, Description: this.description
+      };
+      this.planService.updatePlan(plan as Plan).subscribe();
+    }
+    this.alertWindow.openSnackBar('You save plan " ' + this.name + '"', 'Ok');
+
   }
 
   createPlan() {
@@ -109,8 +117,6 @@ export class CreatePlanComponent implements OnInit {
     }
   }
 
-
   ngOnInit() {
-
   }
 }

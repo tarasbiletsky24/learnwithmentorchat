@@ -51,3 +51,7 @@ min-width: 25%;
 .position{
     margin-left: 25%;
 }
+.center{
+    display: flex;
+    justify-content: center;
+}
