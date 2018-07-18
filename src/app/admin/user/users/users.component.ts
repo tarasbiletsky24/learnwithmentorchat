@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../common/models/user';
 import { Role } from '../../../common/models/role';
 import { UserService } from '../../../common/services/user.service';
-import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatRadioButton, PageEvent } from '@angular/material';
 import { Observable, Subject, of } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../../components/dialogs/dialogs.service';
+import { Pagination } from '../../../common/models/pagination';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
   roles: Role[];
   users: User[];
+  paginator: Pagination<User>;
   name: string;
   surname: string;
   role: string;
@@ -34,7 +36,10 @@ export class UsersComponent implements OnInit {
   selectedType: Role;
   selectedState: boolean;
   roleName: string = null;
+  lastArgument: any;
   public result: any;
+  lastFunction: (pageSize: number, pageNumber: number, arg: any) => void;
+  term: string;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
 
@@ -44,8 +49,6 @@ export class UsersComponent implements OnInit {
     return this.roleName = roleName;
   }
 
-
-  // choose specific user
   chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
     this.surname = surname;
     this.name = name;
@@ -53,23 +56,29 @@ export class UsersComponent implements OnInit {
     this.id = id;
   }
 
-  // filter by state
-  getUsersByState(state: boolean) {
+  getUsersByState(pageSize: number, pageNumber: number, state: boolean) {
     this.selectedState = state;
     this.selectedType = null;
-    this.userService.getUserByState(state).subscribe(user => this.users = user);
+    this.userService.getPageByState(state, pageSize, pageNumber).subscribe(
+      paginator => {
+        this.paginator = paginator;
+        this.users = this.paginator.Items;
+      });
+    this.lastFunction = this.getUsersByState;
+    this.lastArgument = state;
   }
 
-  // search by role
   search(term: string, roleName: string): void {
+    this.term = term;
     this.searchTerms.next(term);
+    this.lastArgument = roleName;
+    this.lastFunction = null;
   }
 
   getRole(role: string) {
     return this.role = role;
   }
 
-  // changeState:blocked and active
   changeState(id: number, state: boolean, newState) {
     if (this.id == null || state == null) {
       this.alertwindow.openSnackBar('Choose user!', 'Ok'); // window.alert('Choose user');
@@ -104,7 +113,6 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
     if (role == null || id == null) {
       this.alertwindow.openSnackBar('Choose role!', 'Ok');
@@ -126,26 +134,52 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  // filtering by role
-  getByRole(id: number) {
+  getByRole(pageSize: number, pageNumber: number, id: number) {
     if (id === -1) {
-      this.userService.getUsers().subscribe(user => this.users = user);
+      this.setPage(pageSize, pageNumber);
       return true;
+    } else {
+      this.userService.getPageByRole_id(id, pageSize, pageNumber).subscribe(
+        paginator => {
+          this.paginator = paginator;
+          this.users = this.paginator.Items;
+        });
+      this.lastFunction = this.getByRole;
+      this.lastArgument = id;
     }
-    this.userService.getUserByRole_id(id).subscribe(user => this.users = user);
-
+  }
+  setPage(pageSize = 10, pageNumber = 0) {
+    this.userService.getPage(pageSize, pageNumber).subscribe(
+      paginator => {
+        this.paginator = paginator;
+        this.users = this.paginator.Items;
+      });
+    this.lastFunction = this.setPage;
+    this.lastArgument = null;
   }
 
   ngOnInit() {
     this.userService.getRoles().subscribe(
       role => this.roles = role);
-    this.userService.getUsers().subscribe(
-      user => this.users = user
-    );
+    this.setPage();
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.userService.search(term, this.roleName))
-    ).subscribe(user => this.users = user);
+      switchMap((term: string) => this.userService.searchPage(term, this.roleName, this.paginator.PageSize, this.paginator.PageNumber))
+    ).subscribe(paginator => {
+      this.paginator = paginator;
+      this.users = this.paginator.Items;
+    });
+  }
+
+  onPageChange(event: PageEvent) {
+    if (this.lastFunction != null) {
+      this.lastFunction(event.pageSize, event.pageIndex, this.lastArgument);
+    } else {
+      this.userService.searchPage(this.term, this.roleName, event.pageSize, event.pageIndex).subscribe(paginator => {
+        this.paginator = paginator;
+        this.users = this.paginator.Items;
+      });
+    }
   }
 }

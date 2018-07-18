@@ -16,14 +16,12 @@ table {
     flex-direction: row;
     justify-content: flex-end;   
 }
-
-
 .scrollit {
     height: 450px;
     overflow: auto;
   }
-  mat-form-field{
-      width: 100%;
+mat-form-field{
+      width: 90%;
   }
   .center-spiner {
     display: flex;
