@@ -38,10 +38,10 @@ export class UsersComponent implements OnInit {
   roleName: string = null;
   lastArgument: any;
   public result: any;
-  lastFunction: (arg: any, pageSize: number, pageNumber: number) => void;
+  lastFunction: (pageSize: number, pageNumber: number, arg: any) => void;
+  term: string;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
-
 
   getType(roleName: string, type: Role): string {
     this.selectedType = type;
@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
   }
 
   // filter by state
-  getUsersByState(state: boolean, pageSize: number, pageNumber: number) {
+  getUsersByState(pageSize: number, pageNumber: number, state: boolean) {
     this.selectedState = state;
     this.selectedType = null;
     this.userService.getPageByState(state, pageSize, pageNumber).subscribe(
@@ -72,8 +72,10 @@ export class UsersComponent implements OnInit {
   }
 
   // search by role
-  search(term: string, roleName: string): void {
+  search(term: string, roleName: string): void {   
+    this.term = term; 
     this.searchTerms.next(term);
+    this.lastArgument = roleName;
     this.lastFunction = null;
   }
 
@@ -139,7 +141,7 @@ export class UsersComponent implements OnInit {
   }
 
   // filtering by role
-  getByRole(id: number, pageNumber: number, pageSize: number) {
+  getByRole(pageSize: number, pageNumber: number, id: number) {    
     if (id === -1) {
       this.setPage(pageSize, pageNumber)
       return true;
@@ -153,7 +155,7 @@ export class UsersComponent implements OnInit {
       this.lastArgument = id;
     }
   }
-  setPage(pageSize = 10, pageNumber = 1) {
+  setPage(pageSize = 10, pageNumber = 0) {
     this.userService.getPage(pageSize, pageNumber).subscribe(
       paginator => {
         this.paginator = paginator;
@@ -171,12 +173,17 @@ export class UsersComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.userService.searchPage(term, this.roleName, this.paginator.PageSize, this.paginator.PageNumber))
-    ).subscribe();
+    ).subscribe(paginator => {
+      this.paginator = paginator;
+      this.users = this.paginator.Items;
+    });
   }
 
   onPageChange(event: PageEvent) {
     if (this.lastFunction != null) {
-      this.lastFunction(this.lastArgument, event.pageSize, event.pageIndex);
-    }
+      this.lastFunction(event.pageSize, event.pageIndex, this.lastArgument);
+    } else {
+      this.userService.searchPage(this.term, this.roleName, this.paginator.PageSize, this.paginator.PageNumber)
+    }    
   }
 }

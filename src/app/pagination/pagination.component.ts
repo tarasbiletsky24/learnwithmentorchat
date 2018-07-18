@@ -11,7 +11,7 @@ export class PaginationComponent implements OnInit {
   @Input()
   length = 40
   @Input()
-  pageIndex = 1
+  pageIndex = 0
   @Input()
   pageSize = 10
   @Input()
