@@ -7,4 +7,5 @@ export class UserTask {
     Result: string;
     ProposeEndDate: Date;
     MentorId: number;
+    Image: string;
 }

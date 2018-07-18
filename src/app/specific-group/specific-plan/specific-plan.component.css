@@ -1,0 +1,66 @@
+
+.content {
+    margin-top: 100px;
+    justify-content: space-between;
+  
+    display: flex ;
+}
+.sections{
+    width: 65%;
+    margin-top: 20px;
+}
+
+
+.title{
+    padding-left: 15px;
+}
+
+::ng-deep .mat-expansion-panel-body{
+    padding: 0 !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+    height: 17px !important;
+    width: 17px !important;
+}
+
+/* ::ng-deep .sections ng-star-inserted{
+    display: flex !important;
+}
+*/
+.content > div{
+    flex-direction: row;
+} 
+
+::ng-deep .mat-content {
+    overflow: visible !important;
+}
+
+#state{
+    margin: auto;
+    color: green;
+}
+
+#group_name{
+    float: right;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 15px;
+    padding: 20px;
+}
+
+textarea{
+    height: 100px;
+}
+
+mat-form-field{
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%; 
+}
+
+button{
+    margin-bottom: 20px;
+}
+.usersC{
+    width: 35%;
+}

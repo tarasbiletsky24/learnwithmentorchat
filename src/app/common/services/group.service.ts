@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Group } from '../models/group';
 import { Plan } from '../models/plan';
+import { UserWithImage } from '../models/userWithImage';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class GroupService {
     );
   }
 
+  getGroupUsersWithImage(id: number): Observable<UserWithImage[]> {
+    return this.http.get<UserWithImage[]>(`${this.url}/${id}/userimages`).pipe(
+      catchError(this.handleError<UserWithImage[]>(`getGroupUsers`))
+    );
+  }
+  
   getUserGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.url}/mygroups`).pipe();
   }

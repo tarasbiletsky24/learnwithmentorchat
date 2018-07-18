@@ -1,0 +1,25 @@
+.image-wrap{
+    display: flex;
+    flex-direction: row;
+    margin-left: 30%;
+    
+}
+mat-spinner{
+    margin-left: 30%;
+}
+.userstates{
+    display: block;
+    width:40px;
+    height:40px;
+    border-radius: 100%;
+}
+.state{
+    margin-left: 20%;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    border-radius: 0% !important;
+}
+li{
+    list-style-type:none;
+}

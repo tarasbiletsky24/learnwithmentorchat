@@ -55,6 +55,8 @@ import { TaskCreatorComponent } from './task/task-creator/task-creator.component
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { SpecificPlanComponent } from './specific-group/specific-plan/specific-plan.component';
+import { SpecificPlanForMentorComponent } from './specific-group/specific-plan-for-mentor/specific-plan-for-mentor.component';
 import { GroupsComponent } from './groups/groups/groups.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
@@ -104,6 +106,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     CreatePlanComponent,
     AddTasksComponent,
     UserPageComponent,
+    SpecificPlanComponent,
+    SpecificPlanForMentorComponent,
     GroupsComponent,
     AddGroupComponent,
     UserEditComponent,
