@@ -24,7 +24,7 @@ export class AddUsersComponent implements OnInit {
     this.groupId = data;
   }
 
-  displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Check'];
+  displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Button'];
   users: User[];
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();

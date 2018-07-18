@@ -27,7 +27,7 @@ export class PlansDisplayComponent implements OnInit {
 
   @Input() group: Group;
   plans: Plan[];
-  displayedColumns = ['Name', 'Description', 'Create by', 'Date', 'Is published'];
+  displayedColumns = ['Name', 'Description', 'Creator', 'Date'];
   dataSource = new MatTableDataSource<Plan>(this.plans);
   isMentor = false;
   isInitialized = false;
@@ -35,15 +35,18 @@ export class PlansDisplayComponent implements OnInit {
   errorMessage: string;
   errorMessageActive = false;
 
+  filterErrorMessage: string;
+  filterErrorMessageActive = false;
+
   ngOnInit() { }
 
   initialize(): void {
     if (!this.isInitialized) {
       if (this.authService.isMentor()) {
         this.isMentor = true;
-        this.displayedColumns = ['Name', 'Description', 'Create by', 'Date', 'Is published', 'Delete'];
+        this.displayedColumns = ['Name', 'Description', 'Creator', 'Date', 'Delete'];
       }
-      this.dataLoaded = false;
+      //this.dataLoaded = false;
       this.loadPlans();
       this.isInitialized = true;
     }
@@ -54,19 +57,27 @@ export class PlansDisplayComponent implements OnInit {
     this.errorMessageActive = true;
   }
 
+  activateFilterErrorMessage(message: string): void {
+    this.filterErrorMessage = message;
+    this.filterErrorMessageActive = true;
+  }
+
   loadPlans(): void {
     this.groupService.getGroupPlans(this.group.Id).subscribe(
       data => this.plans = data,
       (error: HttpErrorResponse) => {
+        this.filterErrorMessageActive = false;
         this.activateErrorMessage(error.error.Message);
         this.dataLoaded = true;
       },
       () => {
         if (this.plans === null || this.plans.length < 1) {
+          this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no plans in this group');
           this.dataSource = new MatTableDataSource<Plan>([]);
         } else {
           this.errorMessageActive = false;
+          this.filterErrorMessageActive = false;
           this.dataSource = new MatTableDataSource<Plan>(this.plans);
         }
         this.dataLoaded = true;
@@ -75,7 +86,11 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    this.filterErrorMessageActive = false;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.filteredData.length < 1) {
+      this.activateFilterErrorMessage('There are no plans by this key');
+    }
   }
 
   openPlanAddDialog(): void {

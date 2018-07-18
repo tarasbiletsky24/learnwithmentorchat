@@ -24,25 +24,23 @@ mat-header-cell{
 .error-message {
   display: flex;
   justify-content: center;
-  color: red;
-  margin: 5px 5px;
+  color: grey;
+}
+.error-message-text {
+  margin: 10px 10px;
 }
 .center-spiner {
-  display: flex;
+  display: block;
   justify-content: center;
 }
 .spiner-margins {
   margin: 10% 10%;
-  height: 40%;
 }
 th, td {
   text-align: left;
   width: auto;
 }
-th:last-child, td:last-child {
-  text-align: center;
-}
-.button-cell {
+.delete-button-cell {
   text-align: center;
   align-content: center;
   width: 5%;
