@@ -43,6 +43,11 @@ export class PlanService {
       catchError(r => of(r))
     );
   }
+  getPlanTaskids(planid: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.url}/${planid}/plantaskids`).pipe(
+      catchError(this.handleError<number[]>(`getPlanTaskIds`))
+    );
+  }
   getPlan(id: number): Observable<Plan> {
     return this.http.get<Plan>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Plan>(`getPlan id=${id}`))
