@@ -20,9 +20,6 @@
   ::ng-deep .mat-expansion-panel-body{
     padding: 0 !important;
   }
-  ::ng-deep .mat-expansion-panel-header{
-    background-color: gainsboro !important;
-  }
   .groups-header-row {
     display: flex;
     justify-content: space-between;

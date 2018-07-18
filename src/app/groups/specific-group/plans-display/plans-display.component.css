@@ -44,7 +44,9 @@
   }
   .description-cell{
     width: 50%;
-    padding: 5px, 2px;
+  }
+  .cell-padding{
+    padding: 5px 5px;
   }
   .name-cell{
     width: 15%;
