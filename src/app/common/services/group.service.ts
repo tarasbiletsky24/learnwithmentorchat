@@ -34,7 +34,7 @@ export class GroupService {
   }
 
   getUserGroups(): Observable<Group[]> {
-    return this.http.get<Group[]>(`${this.url}/mygroups`).pipe( );
+    return this.http.get<Group[]>(`${this.url}/mygroups`).pipe();
   }
 
   getGroupPlans(id: number): Observable<Plan[]> {
@@ -58,12 +58,14 @@ export class GroupService {
   addUserToGroup(userId: number, groupId: number): Observable<HttpResponse<any>> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(`${this.url}/${groupId}/user`, [userId], { observe: 'response', headers: reqHeader }).pipe(
+      catchError(r => of(r))
     );
   }
 
   addPlanToGroup(planId: number, groupId: number): Observable<HttpResponse<any>> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(`${this.url}/${groupId}/plan`, [planId], { observe: 'response', headers: reqHeader }).pipe(
+      catchError(r => of(r))
     );
   }
 

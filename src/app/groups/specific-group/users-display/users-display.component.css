@@ -30,12 +30,11 @@ mat-header-cell{
   margin: 10px 10px;
 }
 .center-spiner {
-  display: flex;
+  display: block;
   justify-content: center;
 }
 .spiner-margins {
   margin: 10% 10%;
-  height: 40%;
 }
 th, td {
   text-align: left;
