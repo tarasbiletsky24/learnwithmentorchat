@@ -9,16 +9,16 @@ import { PageEvent } from '@angular/material';
 export class PaginationComponent implements OnInit {
 
   @Input()
-  length = 40
+  length = 40;
   @Input()
-  pageIndex = 0
+  pageIndex = 0;
   @Input()
-  pageSize = 10
+  pageSize = 10;
   @Input()
-  pageSizeOptions = [5, 10, 20]
+  pageSizeOptions = [5, 10, 20];
   @Output()
-  page = new EventEmitter<PageEvent>()
-  constructor() { 
+  page = new EventEmitter<PageEvent>();
+  constructor() {
   }
 
   ngOnInit() {

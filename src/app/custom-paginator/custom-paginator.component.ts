@@ -21,7 +21,6 @@ export class CustomPaginatorComponent implements OnInit {
     this.totalPages = this.getTotalPages(this.length, this.pageSize);
     this.getPages();
   }
-
   ngOnChanges() {
     this.getPages();
   }

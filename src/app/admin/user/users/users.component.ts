@@ -72,8 +72,8 @@ export class UsersComponent implements OnInit {
   }
 
   // search by role
-  search(term: string, roleName: string): void {   
-    this.term = term; 
+  search(term: string, roleName: string): void {
+    this.term = term;
     this.searchTerms.next(term);
     this.lastArgument = roleName;
     this.lastFunction = null;
@@ -141,9 +141,9 @@ export class UsersComponent implements OnInit {
   }
 
   // filtering by role
-  getByRole(pageSize: number, pageNumber: number, id: number) {    
+  getByRole(pageSize: number, pageNumber: number, id: number) {
     if (id === -1) {
-      this.setPage(pageSize, pageNumber)
+      this.setPage(pageSize, pageNumber);
       return true;
     } else {
       this.userService.getPageByRole_id(id, pageSize, pageNumber).subscribe(
@@ -183,7 +183,10 @@ export class UsersComponent implements OnInit {
     if (this.lastFunction != null) {
       this.lastFunction(event.pageSize, event.pageIndex, this.lastArgument);
     } else {
-      this.userService.searchPage(this.term, this.roleName, this.paginator.PageSize, this.paginator.PageNumber)
-    }    
+      this.userService.searchPage(this.term, this.roleName, event.pageSize, event.pageIndex).subscribe(paginator => {
+        this.paginator = paginator;
+        this.users = this.paginator.Items;
+      });
+    }
   }
 }

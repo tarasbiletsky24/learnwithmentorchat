@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, Attribute, HostListener } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatButton, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { MatTableDataSource, MatDialogRef } from '@angular/material';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -50,7 +50,6 @@ export class AddPlansComponent implements OnInit {
   }
 
   search(term: string): void {
-    this.errorMessageActive = false;
     this.searchActive = true;
     this.searchTerms.next(term);
   }
@@ -71,9 +70,11 @@ export class AddPlansComponent implements OnInit {
       () => {
         this.dataLoaded = true;
         if (this.plans === null || this.plans.length < 1) {
-          this.activateErrorMessage('There are no plans anymore');
-          const searchField = document.getElementById('search'); // todo find why null
-          searchField.setAttribute('disabled', 'disabled');
+          this.activateErrorMessage('There are no more plans');
+          this.dataSource = new MatTableDataSource<Plan>([]);
+        } else {
+          this.errorMessageActive = false;
+          this.dataSource = new MatTableDataSource<Plan>(this.plans);
         }
       }
     );
@@ -86,6 +87,10 @@ export class AddPlansComponent implements OnInit {
           this.searchActive = false;
           if (this.plans === null || this.plans.length < 1) {
             this.activateErrorMessage('There are no plans by this key');
+            this.dataSource = new MatTableDataSource<Plan>([]);
+          } else {
+            this.errorMessageActive = false;
+            this.dataSource = new MatTableDataSource<Plan>(this.plans);
           }
         },
         (error: HttpErrorResponse) => {

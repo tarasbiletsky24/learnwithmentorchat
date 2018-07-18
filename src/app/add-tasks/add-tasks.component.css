@@ -16,7 +16,16 @@ table {
     flex-direction: row;
     justify-content: flex-end;   
 }
-.add-new-task>*{
-    margin-right: 16%;
-}
 
+
+.scrollit {
+    height: 450px;
+    overflow: auto;
+  }
+  mat-form-field{
+      width: 100%;
+  }
+  .center-spiner {
+    display: flex;
+    justify-content: center;
+  }

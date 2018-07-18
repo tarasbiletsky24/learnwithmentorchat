@@ -9,8 +9,6 @@ import { AlertWindowsComponent } from '.././components/alert-windows/alert-windo
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../common/services/auth.service';
 
-
-
 @Component({
   selector: 'app-add-tasks',
   templateUrl: './add-tasks.component.html',
@@ -25,6 +23,7 @@ export class AddTasksComponent implements OnInit {
   nameTask = '';
   descriptionTask = '';
   private = false;
+  dataLoaded = false;
   idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
@@ -64,7 +63,10 @@ export class AddTasksComponent implements OnInit {
     const newTask = {
       Name: this.nameTask, Description: this.descriptionTask, Private: this.private, CreatorId: this.idCreator
     };
-    this.taskService.createTask(newTask as Task).subscribe(() => (this.taskService.getTasks().subscribe(task => this.tasks = task))
+    this.taskService.createTaskWithId(newTask as Task).subscribe(res => (
+      this.planService.addTaskToPlan(this.idTasks, res, null, 1).subscribe(),
+      this.taskService.getTasks().subscribe(
+        task => this.tasks = task))
     );
     return true;
   }
@@ -75,12 +77,15 @@ export class AddTasksComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.dataLoaded = false;
     this.dataSource.paginator = this.paginator;
     this.taskService.getTasksNotInPlan(this.idTasks).subscribe(
-      task => this.tasks = task
+      task => {
+      this.tasks = task,
+        this.dataLoaded = true;
+      }
     );
-
-
 
     this.searchTerms.pipe(
       debounceTime(300),

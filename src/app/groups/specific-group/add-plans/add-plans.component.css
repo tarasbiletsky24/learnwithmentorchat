@@ -1,9 +1,6 @@
 * {    
     font-family: Roboto,"Helvetica Neue",sans-serif;
   }
-  .main {   
-    padding-top: 2%;
-  }
   .search {
     width: 90%;
   }
@@ -34,5 +31,26 @@
     justify-content: center;
     color: red;
     margin: 5px 5px;
+    height: 450px;
   }
-  
+  .scrollit {
+    height: 450px;
+    overflow: auto;
+  }
+  .description-cell{
+    width: 40%;
+    padding: 5px, 2px;
+  }
+  .date-cell {
+    width: 10%;
+  }
+  .name-cell{
+    width: 15%;
+  }
+  .add-button-cell{
+    text-align: center;
+    width: 5%;
+  }
+  .creator-cell{
+    text-align: center;
+  }
