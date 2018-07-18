@@ -58,19 +58,16 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   sendState(i: number, event: any) {
-    debugger
     if (event.checked) {
-      this.taskService.updateUserTaskState(event.source.id, 'D').subscribe(a =>{
-        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f=>f.Id===event.source.id)].State = 'D';
+      this.taskService.updateUserTaskState(event.source.id, 'D').subscribe(a => {
+        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'D';
         this.setUsertasks();
       });
     } else {
-      this.taskService.updateUserTaskState(event.source.id, 'P').subscribe(a=> {
-        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f=>f.Id===event.source.id)].State = 'P';
-        this.setUsertasks();
-      }
-
-      );
+         this.taskService.updateUserTaskState(event.source.id, 'P').subscribe(a => {
+            this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'P';
+            this.setUsertasks();
+      });
     }
   }
 

@@ -22,7 +22,7 @@ export class AuthService {
     this.authenticated.next(false);
     return false;
   }
-
+  
   setUserData(token: string): void {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
