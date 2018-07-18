@@ -33,7 +33,6 @@ export class UsersDisplayComponent implements OnInit {
   filterErrorMessageActive = false;
 
   ngOnInit() {
-    this.dataLoaded = false;
     this.loadUsers();
   }
 
