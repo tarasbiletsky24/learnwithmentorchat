@@ -49,8 +49,6 @@ export class UsersComponent implements OnInit {
     return this.roleName = roleName;
   }
 
-
-  // choose specific user
   chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
     this.surname = surname;
     this.name = name;
@@ -58,7 +56,6 @@ export class UsersComponent implements OnInit {
     this.id = id;
   }
 
-  // filter by state
   getUsersByState(pageSize: number, pageNumber: number, state: boolean) {
     this.selectedState = state;
     this.selectedType = null;
@@ -71,7 +68,6 @@ export class UsersComponent implements OnInit {
     this.lastArgument = state;
   }
 
-  // search by role
   search(term: string, roleName: string): void {
     this.term = term;
     this.searchTerms.next(term);
@@ -83,7 +79,6 @@ export class UsersComponent implements OnInit {
     return this.role = role;
   }
 
-  // changeState:blocked and active
   changeState(id: number, state: boolean, newState) {
     if (this.id == null || state == null) {
       this.alertwindow.openSnackBar('Choose user!', 'Ok'); // window.alert('Choose user');
@@ -118,7 +113,6 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  // change role for user
   updateRole(id: number, role: string, name: string, surname: string) {
     if (role == null || id == null) {
       this.alertwindow.openSnackBar('Choose role!', 'Ok');
@@ -140,7 +134,6 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  // filtering by role
   getByRole(pageSize: number, pageNumber: number, id: number) {
     if (id === -1) {
       this.setPage(pageSize, pageNumber);

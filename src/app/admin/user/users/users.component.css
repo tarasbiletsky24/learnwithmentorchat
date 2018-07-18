@@ -4,7 +4,6 @@
 .main {   
   padding-top: 2%;
 }
-
 .search {
   width: 80%;
 }
@@ -36,7 +35,6 @@ table {
 }
 .roles li:hover {
   color: #607D8B;
-
 }
 .roles> div{
   cursor: pointer;
