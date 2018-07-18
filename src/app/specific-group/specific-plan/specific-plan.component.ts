@@ -58,7 +58,6 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   sendState(i: number, event: any) {
-    debugger
     if (event.checked) {
       this.taskService.updateUserTaskState(event.source.id, 'D').subscribe();
     } else {
