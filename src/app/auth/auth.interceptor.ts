@@ -4,11 +4,12 @@ import { UserService } from '../common/services/user.service';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpStatusCodeService } from '../common/services/http-status-code.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private statusCodeService: HttpStatusCodeService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.headers.get('No-Auth') === 'True') {
@@ -24,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 .pipe(tap(
                     succ => { },
                     err => {
-                        if (err.status === 401) {
+                        if (this.statusCodeService.isUnauthoized(err.status)) {
                             this.router.navigateByUrl('/');
                         }
                     }

@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-custom-paginator',
   templateUrl: './custom-paginator.component.html',
   styleUrls: ['./custom-paginator.component.css']
 })
-export class CustomPaginatorComponent implements OnInit {
+export class CustomPaginatorComponent implements OnInit, OnChanges {
 
   @Input() length = 1;
   @Input() pageSize = 5;
@@ -42,7 +42,7 @@ export class CustomPaginatorComponent implements OnInit {
     return Math.ceil(Math.max(limit, 1) / Math.max(size, 1));
   }
   getRange(pageIndex: number): number[] {
-    let range = new Array();
+    const range = new Array();
     for (let i = pageIndex - 3; i <= pageIndex + 3; ++i) {
       range.push(i);
     }
