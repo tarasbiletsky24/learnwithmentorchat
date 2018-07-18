@@ -16,7 +16,7 @@ import { AuthService } from '../../common/services/auth.service';
 export class TaskSubmitorComponent implements OnInit {
 
   @Input()
-  task: Task;
+  private task: Task;
   private userTask: UserTask;
   private previousResult: string;
   private exists: boolean;
@@ -27,8 +27,10 @@ export class TaskSubmitorComponent implements OnInit {
     private taskService: TaskService,
     private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
-    @Inject(MAT_DIALOG_DATA) public data: Task) {
-    this.task = data;
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.userTask = data.userTask;
+    this.task = data.task;
+    this.previousResult = data.userTask.Result;
   }
 
   onCancelClick() {
@@ -60,17 +62,5 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.authService.getUserId();
-    this.taskService.getUserTask(this.task.PlanTaskId, userId).subscribe(
-      ut => {
-        if (!this.httpStatusCodeService.isOk(ut.status)) {
-          this.notExisting();
-        } else {
-          this.userTask = ut.body;
-          this.previousResult = ut.body.Result;
-        }
-      }
-    );
   }
-
 }
