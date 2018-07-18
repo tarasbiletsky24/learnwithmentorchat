@@ -23,12 +23,12 @@ export class UsersDisplayComponent implements OnInit {
   @Input() group: Group;
   users: User[];
   displayedColumns = ['Name', 'Email', 'Role', 'Blocked', 'Delete'];
-  dataSource = new MatTableDataSource<User>(this.users);
+  dataSource: MatTableDataSource<User>;
   isInitialized = false;
   dataLoaded = false;
   errorMessage: string;
   errorMessageActive = false;
-
+  dialogSize = '75%';
   filterErrorMessage: string;
   filterErrorMessageActive = false;
 
@@ -48,15 +48,23 @@ export class UsersDisplayComponent implements OnInit {
         if (this.users === null || this.users.length < 1) {
           this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no users in this group');
-          this.dataSource = new MatTableDataSource<User>([]);
+          this.users = [];
         } else {
           this.filterErrorMessageActive = false;
           this.errorMessageActive = false;
-          this.dataSource = new MatTableDataSource<User>(this.users);
+          this.initializeDataSource(this.users);
         }
         this.dataLoaded = true;
       }
     );
+  }
+
+  initializeDataSource(usersList: User[]) {
+    this.dataSource = new MatTableDataSource<User>(usersList);
+    this.dataSource.filterPredicate = (data, filter) => {
+      const dataStr = data.FirstName + ' ' + data.LastName;
+      return dataStr.indexOf(filter) != -1;
+    }
   }
 
   activateErrorMessage(message: string): void {
@@ -71,7 +79,7 @@ export class UsersDisplayComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.filterErrorMessageActive = false;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
     if (this.dataSource.filteredData.length < 1) {
       this.activateFilterErrorMessage('There are no users by this key');
     }
@@ -90,12 +98,12 @@ export class UsersDisplayComponent implements OnInit {
         const index = this.users.indexOf(currentUser, 0);
         if (index > -1) {
           this.users.splice(index, 1);
-          this.dataSource = new MatTableDataSource<User>(this.users);
+          this.initializeDataSource(this.users);
         }
         this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
         if (this.users === null || this.users.length < 1) {
           this.activateErrorMessage('There are no users in this group');
-          this.dataSource = new MatTableDataSource<User>([]);
+          this.users = [];
         }
       }
     );
@@ -103,7 +111,7 @@ export class UsersDisplayComponent implements OnInit {
 
   openUserAddDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponent, {
-      width: '75%',
+      width: this.dialogSize,
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
