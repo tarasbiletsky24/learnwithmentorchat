@@ -48,8 +48,10 @@
       </div>
     </div>
   </div>
-  <div class="center-spiner">
-    <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+  <div class="spiner-container">
+    <div class="center-spiner">
+      <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    </div>
   </div>
 </div>
 <div *ngIf="errorMessageActive" class="error-message">

@@ -46,6 +46,7 @@
   }
   .name-cell{
     width: 15%;
+    padding-right: 10px;
   }
   .add-button-cell{
     text-align: center;

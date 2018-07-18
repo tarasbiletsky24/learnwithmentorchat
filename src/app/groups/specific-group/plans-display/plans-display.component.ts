@@ -46,7 +46,6 @@ export class PlansDisplayComponent implements OnInit {
         this.isMentor = true;
         this.displayedColumns = ['Name', 'Description', 'Creator', 'Date', 'Delete'];
       }
-      //this.dataLoaded = false;
       this.loadPlans();
       this.isInitialized = true;
     }
