@@ -9,6 +9,8 @@ import { catchError } from 'rxjs/operators';
 import { Register } from '../models/register';
 import { Login } from '../models/login';
 import { Statistics } from '../models/statistics';
+import { Pagination } from '../models/pagination';
+import { PageEvent } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -35,16 +37,30 @@ export class UserService {
       catchError(this.handleError<User>(`getUser`))
     );
   }
+  getPage(pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getPagedUsers`)));
+  }
 
   getUserByRole_id(id: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/inrole/${id}`).pipe(
       catchError(this.handleError<User[]>(`getUserbyrole`))
     );
   }
+  getPageByRole_id(id: number, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/inrole/${id}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getUserbyrole`))
+    );
+  }
 
   getUserByState(state: boolean): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/instate/${state}`).pipe(
       catchError(this.handleError<User[]>(`getUserbystate`))
+    );
+  }
+  getPageByState(state: boolean, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/instate/${state}?pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`getUserbystate`))
     );
   }
 
@@ -90,6 +106,12 @@ export class UserService {
   search(param: string, roleName: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
+    );
+  }
+  searchPage(param: string, roleName: string, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.url}/search?q=${param}&role=${roleName}
+    &pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
+      catchError(this.handleError<Pagination<User>>(`searchUsers`))
     );
   }
 

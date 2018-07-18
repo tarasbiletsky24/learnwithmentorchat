@@ -1,12 +1,10 @@
-import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { TaskService } from '../common/services/task.service';
 import { PlanService } from '../common/services/plan.service';
-import { Router } from '@angular/router';
 import { Task } from '../../../src/app/common/models/task';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatPaginator, MatTableDataSource, MatRadioButton } from '@angular/material';
-import { Observable, Subject } from 'rxjs';
-import { CreatePlanComponent } from '../create-plan/create-plan.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Subject } from 'rxjs';
 import { AlertWindowsComponent } from '.././components/alert-windows/alert-windows.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../common/services/auth.service';
@@ -87,7 +85,6 @@ export class AddTasksComponent implements OnInit {
       this.tasks = task,
         this.dataLoaded = true;
       }
-
     );
 
     this.searchTerms.pipe(
