@@ -64,9 +64,9 @@ export class SpecificPlanComponent implements OnInit {
         this.setUsertasks();
       });
     } else {
-         this.taskService.updateUserTaskState(event.source.id, 'P').subscribe(a => {
-            this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'P';
-            this.setUsertasks();
+      this.taskService.updateUserTaskState(event.source.id, 'P').subscribe(a => {
+        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'P';
+        this.setUsertasks();
       });
     }
   }
@@ -75,22 +75,22 @@ export class SpecificPlanComponent implements OnInit {
     this.taskService.updateTaskResult(id, result).subscribe();
   }
 
-  accept(section: number, id: number){
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f=>f.Id===id)].State = 'A';
-        this.setUsertasks();
+  accept(section: number, id: number) {
+    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = 'A';
+    this.setUsertasks();
   }
 
-  reject(section: number, id: number){
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f=>f.Id===id)].State = 'R';
-        this.setUsertasks();
+  reject(section: number, id: number) {
+    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = 'R';
+    this.setUsertasks();
   }
 
   onResultClick(task: Task) {
-    const dialogRef = this.dialog.open(TaskSubmitorComponent, {data: task});
+    const dialogRef = this.dialog.open(TaskSubmitorComponent, { data: task });
   }
 
   onConversationClick(task: Task) {
-    const dialogRef = this.dialog.open(ConversationComponent, {data: task});
+    const dialogRef = this.dialog.open(ConversationComponent, { data: task });
   }
 
   ngOnInit() {
@@ -111,7 +111,7 @@ export class SpecificPlanComponent implements OnInit {
         } else {
           this.is_student = true;
           this.userService.getUser().subscribe(u => {
-            let userWithImage = this.toUserWithImage(u);
+            const userWithImage = this.toUserWithImage(u);
             this.getUserWithPictures(userWithImage);
           });
         }
@@ -131,21 +131,23 @@ export class SpecificPlanComponent implements OnInit {
           } else
             if (userState.State.toLowerCase() === 'r') {
               userState.Image = '../../../assets/images/rejected.png';
-            } else userState.Image = '../../../assets/images/inprogress.png';
+            } else {
+              userState.Image = '../../../assets/images/inprogress.png';
+            }
     }
     return alluserState;
   }
 
   getUsersWithPictures(groupUsers: UserWithImage[]) {
     this.planTasks = this.getPlantasks(this.sections);
-    let userids: number[] = new Array;
-    for (let user of groupUsers) {
+    const userids: number[] = new Array;
+    for (const user of groupUsers) {
       userids.push(user.Id);
     }
     this.getUsersTasks(userids, this.planTasks).subscribe(
       result_allUsertaskState => {
         for (let i = 0; i < groupUsers.length; i++) {
-          let temp = new UsersWithTasks;
+          const temp = new UsersWithTasks;
           temp.user = groupUsers[i];
           temp.image = this.setUserPic(groupUsers[i].Image);
           temp.usertasks = this.getPictureState(result_allUsertaskState[i].UserTasks);
@@ -160,15 +162,14 @@ export class SpecificPlanComponent implements OnInit {
     this.planTasks = this.getPlantasks(this.sections);
     this.taskService.getUserTasks(user.Id, this.planTasks).subscribe(
       ut => {
-        let usersTasks: UsersTasks = new UsersTasks;
+        const usersTasks: UsersTasks = new UsersTasks;
         usersTasks.UserTasks = ut;
-        debugger
         this.setUsertasksToSection(usersTasks);
-        let temp = new UsersWithTasks;
+        const temp = new UsersWithTasks;
         temp.user = user;
         temp.usertasks = this.getPictureState(ut);
         this.user = temp;
- 
+
       }
     );
   }
@@ -178,7 +179,7 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   private getPlantasks(sections: Section[]): number[] {
-    let planTasks = new Array;
+    const planTasks = new Array;
     for (let i = 0; i < sections.length; i++) {
       for (let j = 0; j < sections[i].Content.Tasks.length; j++) {
         planTasks.push(sections[i].Content.Tasks[j].PlanTaskId);
@@ -186,7 +187,7 @@ export class SpecificPlanComponent implements OnInit {
     }
     return planTasks;
   }
-  
+
   selectedUserbyMentor(increased: UserTask[]) {
     this.setUsertasksToSection({ UserTasks: increased });
   }
@@ -196,17 +197,16 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   private isTaskDone(state: string): boolean {
-    return state == 'D';
+    return state === 'D';
   }
 
   setUserPic(img: Image) {
-    let image
-    if (typeof img.Base64Data != 'undefined' && typeof img.Name != 'undefined') {
+    let image;
+    if (typeof img.Base64Data !== 'undefined' && typeof img.Name !== 'undefined') {
       const extension = img.Name.split('.').pop().toLowerCase();
       const imgUrl = `data:image/${extension};base64,${img.Base64Data}`;
       image = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
-    }
-    else {
+    } else {
       image = '../../../assets/images/user-default.png';
     }
     return image;
@@ -221,17 +221,11 @@ export class SpecificPlanComponent implements OnInit {
       }
       index += this.sections[i].Content.Tasks.length;
     }
-    debugger
     this.isLoadedUser = true;
-    //???????????????
-    //this.setUsertasks();
   }
 
   private setUsertasks() {
-    // test
-   // this.sections[0].Content.UserTasks[0].State = 'R';
-    // test
-    let tasks: UserTask[] = new Array;
+    const tasks: UserTask[] = new Array;
     for (let i = 0; i < this.sections.length; i++) {
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
         tasks.push(this.sections[i].Content.UserTasks[j]);
@@ -240,8 +234,8 @@ export class SpecificPlanComponent implements OnInit {
     this.users[this.users.findIndex(k => k.user.Id === tasks[0].UserId)].usertasks = this.getPictureState(tasks);
   }
 
-  private toUserWithImage(user: User): UserWithImage{
-    let userWithImage = new UserWithImage;
+  private toUserWithImage(user: User): UserWithImage {
+    const userWithImage = new UserWithImage;
     userWithImage.Id = user.Id;
     userWithImage.Role = user.Role;
     userWithImage.LastName = user.LastName;

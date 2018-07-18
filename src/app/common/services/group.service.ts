@@ -39,7 +39,7 @@ export class GroupService {
       catchError(this.handleError<UserWithImage[]>(`getGroupUsers`))
     );
   }
-  
+
   getUserGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.url}/mygroups`).pipe();
   }
