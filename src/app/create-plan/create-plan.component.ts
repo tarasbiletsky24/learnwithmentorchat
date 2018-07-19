@@ -28,7 +28,7 @@ import { DISABLED } from '@angular/forms/src/model';
 export class CreatePlanComponent implements OnInit {
   tasks: Observable<Task>;
   currentId: number;
-  idTasks = 5;
+  idTasks: number;
   name = '';
   description = '';
   published: boolean;
@@ -75,7 +75,6 @@ export class CreatePlanComponent implements OnInit {
       };
       this.planService.updatePlan(plan as Plan).subscribe();
     }
-    this.alertWindow.openSnackBar('You save plan " ' + this.name + '"', 'Ok');
 
   }
 

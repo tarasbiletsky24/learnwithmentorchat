@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit {
   }
 
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked'];
+  allUsers = -1;
   roles: Role[];
   users: User[];
   paginator: Pagination<User>;
@@ -81,7 +82,7 @@ export class UsersComponent implements OnInit {
 
   changeState(id: number, state: boolean, newState) {
     if (this.id == null || state == null) {
-      this.alertwindow.openSnackBar('Choose user!', 'Ok'); // window.alert('Choose user');
+      this.alertwindow.openSnackBar('Choose user!', 'Ok');
       return false;
     }
     if (newState) {
@@ -135,7 +136,7 @@ export class UsersComponent implements OnInit {
   }
 
   getByRole(pageSize: number, pageNumber: number, id: number) {
-    if (id === -1) {
+    if (id === this.allUsers) {
       this.setPage(pageSize, pageNumber);
       return true;
     } else {

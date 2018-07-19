@@ -27,7 +27,6 @@ export class AddTasksComponent implements OnInit {
   idCreator: number = this.authService.getUserId();
   private searchTerms = new Subject<string>();
 
-
   dataSource = new MatTableDataSource<Task>(this.tasks);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,11 +47,9 @@ export class AddTasksComponent implements OnInit {
 
   }
 
-  // search by name
   search(term: string): void {
     this.searchTerms.next(term);
   }
-
 
   createTask() {
     if (this.nameTask == null || this.descriptionTask == null) {
@@ -75,18 +72,15 @@ export class AddTasksComponent implements OnInit {
     this.thisDialogRef.close();
   }
 
-
   ngOnInit() {
-
     this.dataLoaded = false;
     this.dataSource.paginator = this.paginator;
     this.taskService.getTasksNotInPlan(this.idTasks).subscribe(
       task => {
-      this.tasks = task,
-        this.dataLoaded = true;
+        this.tasks = task,
+          this.dataLoaded = true;
       }
     );
-
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),

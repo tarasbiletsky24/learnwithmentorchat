@@ -2,51 +2,39 @@
   <mat-form-field class="search-input">
     <input matInput #searchBox (keyup)="search(searchBox.value)" placeholder="Enter name of task" />
   </mat-form-field>
-
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Add new task
         </mat-panel-title>
-
       </mat-expansion-panel-header>
       <div class="add-new-task">
-
         <mat-form-field>
           <input matInput placeholder="Name " [(ngModel)]="nameTask">
         </mat-form-field>
-      <div>
-        <mat-form-field >
-          <textarea matInput placeholder="Description "  [(ngModel)]="descriptionTask"></textarea>
-        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <textarea matInput placeholder="Description " [(ngModel)]="descriptionTask"></textarea>
+          </mat-form-field>
         </div>
-
         <button mat-raised-button (click)="createTask()">Create task</button>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="mat-elevation-z8 scrollit" *ngIf="dataLoaded" >
-    <table mat-table [dataSource]="tasks" >
-
-
-
-      <!-- Name Column -->
+  <div class="mat-elevation-z8 scrollit" *ngIf="dataLoaded">
+    <table mat-table [dataSource]="tasks">
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name </th>
         <td mat-cell *matCellDef="let element">
           <span>{{element.Name}}</span>
         </td>
       </ng-container>
-
-      <!-- Description Column -->
       <ng-container matColumnDef="Description">
         <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
       </ng-container>
-
-      <!-- Add Column -->
       <ng-container matColumnDef="Add">
         <th mat-header-cell *matHeaderCellDef>Add task</th>
         <td mat-cell *matCellDef="let element">
@@ -62,8 +50,6 @@
   <div class="center-spiner">
     <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
   </div>
-
-  
   <div class="buttons">
     <button mat-raised-button (click)="closeAddTask()">Cancel</button>
   </div>
