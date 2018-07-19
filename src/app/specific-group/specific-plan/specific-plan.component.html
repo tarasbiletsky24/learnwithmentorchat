@@ -23,8 +23,8 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="result" *ngIf="isLoadedUser">
-            <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.Tasks[i])">Result</button>
-            <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.Tasks[i])">Conversation</button>
+            <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Result</button>
+            <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Conversation</button>
         </div>
       </mat-expansion-panel>
       </div>

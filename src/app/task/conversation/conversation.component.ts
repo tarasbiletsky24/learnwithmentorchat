@@ -30,8 +30,9 @@ export class ConversationComponent implements OnInit {
     private taskService: TaskService,
     private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
-    @Inject(MAT_DIALOG_DATA) public data: Task) {
-    this.task = data;
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.task = data.task;
+    this.userTask = data.userTask;
   }
 
   notExistingUserTask() {
@@ -76,19 +77,7 @@ export class ConversationComponent implements OnInit {
     }
   }
 
-
   ngOnInit() {
-    this.userId = this.authService.getUserId();
-    this.taskService.getUserTask(this.task.PlanTaskId, this.userId).subscribe(
-      ut => {
-        if (!this.httpStatusCodeService.isOk(ut.status)) {
-          this.notExistingUserTask();
-        } else {
-          this.userTask = ut.body;
-          this.getUTMessages(this.userTask.Id);
-        }
-      }
-    );
+      this.getUTMessages(this.userTask.Id);
   }
-
 }

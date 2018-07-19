@@ -59,15 +59,9 @@ export class SpecificPlanComponent implements OnInit {
 
   sendState(i: number, event: any) {
     if (event.checked) {
-      this.taskService.updateUserTaskState(event.source.id, 'D').subscribe(a => {
-        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'D';
-        this.setUsertasks();
-      });
+      this.taskService.updateUserTaskState(event.source.id, 'D').subscribe();
     } else {
-      this.taskService.updateUserTaskState(event.source.id, 'P').subscribe(a => {
-        this.sections[i].Content.UserTasks[this.sections[i].Content.UserTasks.findIndex(f => f.Id === event.source.id)].State = 'P';
-        this.setUsertasks();
-      });
+      this.taskService.updateUserTaskState(event.source.id, 'P').subscribe();
     }
   }
 
@@ -85,12 +79,14 @@ export class SpecificPlanComponent implements OnInit {
     this.setUsertasks();
   }
 
-  onResultClick(task: Task) {
-    const dialogRef = this.dialog.open(TaskSubmitorComponent, { data: task });
+  onResultClick(userTask: UserTask, task: Task) {
+    const data = { userTask: userTask, task: task };
+    const dialogRef = this.dialog.open(TaskSubmitorComponent, { data: data });
   }
 
-  onConversationClick(task: Task) {
-    const dialogRef = this.dialog.open(ConversationComponent, { data: task });
+  onConversationClick(userTask: UserTask, task: Task) {
+    const data = { userTask: userTask, task: task };
+    const dialogRef = this.dialog.open(ConversationComponent, { data: data });
   }
 
   ngOnInit() {
