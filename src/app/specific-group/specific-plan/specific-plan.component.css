@@ -1,6 +1,6 @@
 .content {
     margin-top: 100px;
-    justify-content: space-between;  
+    justify-content: space-around;  
     flex-direction: row;
     display: flex ;
 }
@@ -8,6 +8,9 @@
 .sections{
     width: 65%;
     margin-top: 20px;
+    justify-content: space-between;  
+    flex-direction: column;
+    display: flex;
 }
 
 .title{
@@ -38,12 +41,6 @@ textarea{
     height: 100px;
 }
 
-mat-form-field{
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%; 
-}
-
 button{
     margin-bottom: 20px;
 }
@@ -55,5 +52,5 @@ button{
 }
 
 .usersC{
-    width: 35%;
+    width: auto;
 }

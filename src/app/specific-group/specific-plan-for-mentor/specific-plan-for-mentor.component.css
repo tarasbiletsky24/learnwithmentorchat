@@ -1,12 +1,9 @@
 .image-wrap{
     display: flex;
     flex-direction: row;
-    margin-left: 30%;
     
 }
-mat-spinner{
-    margin-left: 30%;
-}
+
 .userstates{
     display: block;
     width:40px;

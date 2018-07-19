@@ -1,38 +1,40 @@
 <div class="content">
-  <div class="sections" *ngFor="let section of sections; let j = index">
-    <mat-expansion-panel [expanded]='!isExpanded'>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{section.Name}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="tasks" *ngFor="let t of section.Content.Tasks; let i = index">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <div class="checkbox" *ngIf="is_student">
-                <mat-checkbox [disabled]="isTaskApproved(section.Content.UserTasks[i].State)" *ngIf="isLoadedUser" id="{{section.Content.UserTasks[i].Id}}"
-                  (change)="sendState(j, $event)" [checked]="isChecked(section.Content.UserTasks[i].State)"></mat-checkbox>
+  <div class="sections">
+    <div class="section" *ngFor="let section of sections; let j = index">
+      <mat-expansion-panel [expanded]='!isExpanded'>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{section.Name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="tasks" *ngFor="let t of section.Content.Tasks; let i = index">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div class="checkbox" *ngIf="is_student">
+                  <mat-checkbox [disabled]="isTaskApproved(section.Content.UserTasks[i].State)" *ngIf="isLoadedUser" id="{{section.Content.UserTasks[i].Id}}"
+                    (change)="sendState(j, $event)" [checked]="isChecked(section.Content.UserTasks[i].State)"></mat-checkbox>
+                </div>
+                <span class="title">
+                  {{t.Name}}
+                </span>
+                <span id="end-date" *ngIf="isLoadedUser">{{section.Content.UserTasks[i].EndDate}}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="buttons" *ngIf="isLoadedUser">
+              <div class="result">
+                <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Result</button>
+                <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Conversation</button>
               </div>
-              <span class="title">
-                {{t.Name}}
-              </span>
-              <span id="end-date" *ngIf="isLoadedUser">{{section.Content.UserTasks[i].EndDate}}</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="buttons" *ngIf="isLoadedUser">
-            <div class="result">
-              <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Result</button>
-              <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Conversation</button>
+              <div class="review" *ngIf="!is_student">
+                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="approve(j, section.Content.UserTasks[i].Id)">Approve</button>
+                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="reject(j, section.Content.UserTasks[i].Id)">Reject</button>
+              </div>
             </div>
-            <div class="review" *ngIf="!is_student">
-              <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="approve(j, section.Content.UserTasks[i].Id)">Approve</button>
-              <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="reject(j, section.Content.UserTasks[i].Id)">Reject</button>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </div>
-    </mat-expansion-panel>
+          </mat-expansion-panel>
+        </div>
+      </mat-expansion-panel>
+    </div>
   </div>
   <div class="usersC">
     <app-specific-plan-for-mentor *ngIf="!is_student" [isLoadedUsers]="isLoadedUsers" [users]="users" (selectedUser)="selectedUserbyMentor($event)"></app-specific-plan-for-mentor>
