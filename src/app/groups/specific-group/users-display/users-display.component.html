@@ -1,7 +1,7 @@
 <div class="container" *ngIf="!errorMessageActive">
   <div class="content" *ngIf="dataLoaded">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter user name">
     </mat-form-field>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource">
