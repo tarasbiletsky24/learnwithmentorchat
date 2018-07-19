@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material';
-
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
 import { TaskDetailComponent } from './task/task-detail/task-detail.component';
