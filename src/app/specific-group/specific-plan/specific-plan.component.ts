@@ -87,7 +87,8 @@ export class SpecificPlanComponent implements OnInit {
 
   onConversationClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    const dialogRef = this.dialog.open(ConversationComponent, { data: data });
+    const dialogRef = this.dialog.open(ConversationComponent, { data: data,
+    width: "600px" });
   }
 
   ngOnInit() {
