@@ -10,11 +10,11 @@
   </mat-card>
   <hr/>
   <mat-form-field *ngIf="userTask" class="input-full-width">
-    <textarea class="input-height" matInput placeholder="Your task progress"
+    <textarea class="input-height" [disabled]="isTaskApproved()" matInput placeholder="Your task progress"
     #descriptionTbx *ngIf="userTask" [(ngModel)]="userTask.Result"></textarea>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>  
-  <button mat-raised-button mat-dialog-close (click)="onSubmitClick()">Submit</button>
+  <button mat-raised-button mat-dialog-close [disabled]="isTaskApproved()" (click)="onSubmitClick()">Submit</button>
   <button mat-raised-button (click)="onCancelClick()">Cancel</button>
 </mat-dialog-actions>
