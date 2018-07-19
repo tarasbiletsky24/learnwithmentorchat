@@ -15,6 +15,7 @@ import { AuthService } from '../../common/services/auth.service';
 })
 export class TaskSubmitorComponent implements OnInit {
 
+  approved = 'A';
   @Input()
   private task: Task;
   private userTask: UserTask;
@@ -49,6 +50,10 @@ export class TaskSubmitorComponent implements OnInit {
 
   onSubmitClick() {
     this.saveChanges();
+  }
+
+  isTaskApproved() {
+    return this.userTask.State === this.approved;
   }
 
   saveChanges() {
