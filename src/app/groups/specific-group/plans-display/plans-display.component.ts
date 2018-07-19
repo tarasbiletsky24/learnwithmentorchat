@@ -11,6 +11,7 @@ import { Group } from '../../../common/models/group';
 import { Plan } from '../../../common/models/plan';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 import { CreatePlanComponent } from '../../../create-plan/create-plan.component';
+import { HttpStatusCodeService } from '../../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-plans-display',
@@ -21,6 +22,7 @@ export class PlansDisplayComponent implements OnInit {
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     private router: Router,
     private authService: AuthService,
     public dialog: MatDialog) { }
@@ -28,13 +30,13 @@ export class PlansDisplayComponent implements OnInit {
   @Input() group: Group;
   plans: Plan[];
   displayedColumns = ['Name', 'Description', 'Creator', 'Date'];
-  dataSource = new MatTableDataSource<Plan>(this.plans);
+  dataSource: MatTableDataSource<Plan>;
   isMentor = false;
   isInitialized = false;
   dataLoaded = false;
   errorMessage: string;
   errorMessageActive = false;
-
+  dialogSize = '75%';
   filterErrorMessage: string;
   filterErrorMessageActive = false;
 
@@ -70,23 +72,31 @@ export class PlansDisplayComponent implements OnInit {
         this.dataLoaded = true;
       },
       () => {
-        if (this.plans === null || this.plans.length < 1) {
+        if (this.plans === undefined || this.plans.length < 1) {
           this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no plans in this group');
-          this.dataSource = new MatTableDataSource<Plan>([]);
+          this.plans = [];
         } else {
           this.errorMessageActive = false;
           this.filterErrorMessageActive = false;
-          this.dataSource = new MatTableDataSource<Plan>(this.plans);
+          this.initializeDataSource(this.plans);
         }
         this.dataLoaded = true;
       }
     );
   }
 
+  initializeDataSource(plansList: Plan[]) {
+    this.dataSource = new MatTableDataSource<Plan>(plansList);
+    this.dataSource.filterPredicate = (data, filter) => {
+      const dataStr = data.Name;
+      return dataStr.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    };
+  }
+
   applyFilter(filterValue: string) {
     this.filterErrorMessageActive = false;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
     if (this.dataSource.filteredData.length < 1) {
       this.activateFilterErrorMessage('There are no plans by this key');
     }
@@ -94,7 +104,7 @@ export class PlansDisplayComponent implements OnInit {
 
   openPlanAddDialog(): void {
     const dialogRef = this.dialog.open(AddPlansComponent, {
-      width: '75%',
+      width: this.dialogSize,
       data: this.group.Id
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -107,24 +117,26 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   delChoosenPlan(event: any, currentPlan: Plan) {
-    event.currentTarget.setAttribute('disabled', 'disabled');
+    const target = event.currentTarget;
+    target.disabled = true;
     this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe(
-      data => { },
-      error => {
-        event.currentTarget.setAttribute('disabled', 'enabled');
-        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          const index = this.plans.indexOf(currentPlan, 0);
+          if (index > -1) {
+            this.plans.splice(index, 1);
+            this.initializeDataSource(this.plans);
+          }
+          this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
+          if (this.plans === undefined || this.plans.length < 1) {
+            this.activateErrorMessage('There are no plans in this group');
+            this.plans = [];
+          }
+        }
       },
-      () => {
-        const index = this.plans.indexOf(currentPlan, 0);
-        if (index > -1) {
-          this.plans.splice(index, 1);
-          this.dataSource = new MatTableDataSource<Plan>(this.plans);
-        }
-        this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
-        if (this.plans === null || this.plans.length < 1) {
-          this.activateErrorMessage('There are no plans in this group');
-          this.dataSource = new MatTableDataSource<Plan>([]);
-        }
+      error => {
+        target.disabled = false;
+        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
       }
     );
   }

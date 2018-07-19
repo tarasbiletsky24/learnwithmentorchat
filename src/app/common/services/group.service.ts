@@ -20,6 +20,8 @@ export class GroupService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  private reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   private url = `${environment.apiUrl}group`;
 
   getGroup(id: number) {
@@ -63,35 +65,25 @@ export class GroupService {
   }
 
   addUserToGroup(userId: number, groupId: number): Observable<HttpResponse<any>> {
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.url}/${groupId}/user`, [userId], { observe: 'response', headers: reqHeader }).pipe(
-      catchError(r => of(r))
-    );
+    return this.http.put(`${this.url}/${groupId}/user`, [userId], { observe: 'response', headers: this.reqHeader });
   }
 
   addPlanToGroup(planId: number, groupId: number): Observable<HttpResponse<any>> {
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.url}/${groupId}/plan`, [planId], { observe: 'response', headers: reqHeader }).pipe(
-      catchError(r => of(r))
-    );
+     return this.http.put(`${this.url}/${groupId}/plan`, [planId], { observe: 'response', headers: this.reqHeader });
   }
 
-  removePlanFromGroup(groupId: number, planId: number): Observable<Plan> {
-    return this.http.delete<Plan>(`${this.url}/removePlanFromGroup?groupId=${groupId}&planToRemoveId=${planId}`, this.httpOptions).pipe(
-      catchError(this.handleError<Plan>('deleteComment'))
-    );
+  removePlanFromGroup(groupId: number, planId: number): Observable<HttpResponse<any>> {
+    return this.http.delete<Plan>(`${this.url}/removePlanFromGroup?groupId=${groupId}&planToRemoveId=${planId}`,
+    { observe: 'response', headers: this.reqHeader });
   }
 
-  removeUserFromGroup(groupId: number, userId: number): Observable<User> {
-    return this.http.delete<User>(`${this.url}/removeUserFromGroup?groupId=${groupId}&userToRemoveId=${userId}`, this.httpOptions).pipe(
-      catchError(this.handleError<User>('deleteComment'))
-    );
+  removeUserFromGroup(groupId: number, userId: number): Observable<HttpResponse<any>> {
+    return this.http.delete<User>(`${this.url}/removeUserFromGroup?groupId=${groupId}&userToRemoveId=${userId}`,
+    { observe: 'response', headers: this.reqHeader });
   }
 
   createGroup(group: Group): Observable<HttpResponse<any>> {
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.url}`, group, { observe: 'response', headers: reqHeader }).pipe(
-    );
+    return this.http.post(`${this.url}`, group, { observe: 'response', headers: this.reqHeader });
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -40,10 +40,21 @@ export class AddUsersComponent implements OnInit {
   }
 
   addChoosenUser(event: any, choosenOne: User) {
-    this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe();
-    this.someUserAdded = true;
-    this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
-    event.currentTarget.setAttribute('disabled', 'disabled');
+    const target = event.currentTarget;
+    target.disabled = true;
+    this.groupService.addUserToGroup(choosenOne.Id, this.groupId).subscribe(
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          this.someUserAdded = true;
+          this.alertwindow.openSnackBar(choosenOne.FirstName + ' ' + choosenOne.LastName + ' added', 'Ok');
+        }
+      },
+      error => {
+        target.disabled = false;
+        this.alertwindow.openSnackBar('Error ocurred on adding: ' + choosenOne.LastName + ' '
+        + choosenOne.FirstName + ', please try again', 'Ok');
+      }
+    );
   }
 
   activateErrorMessage(message: string): void {
@@ -71,7 +82,7 @@ export class AddUsersComponent implements OnInit {
       },
       () => {
         this.dataLoaded = true;
-        if (this.users === null || this.users.length < 1) {
+        if (this.users === undefined || this.users.length < 1) {
           this.activateErrorMessage('There are no more users');
           this.dataSource = new MatTableDataSource<User>([]);
         } else {
@@ -87,7 +98,7 @@ export class AddUsersComponent implements OnInit {
         data => {
           this.users = data;
           this.searchActive = false;
-          if (this.users === null || this.users.length < 1) {
+          if (this.users === undefined || this.users.length < 1) {
             this.activateErrorMessage('There are no users by this key');
             this.dataSource = new MatTableDataSource<User>([]);
           } else {
