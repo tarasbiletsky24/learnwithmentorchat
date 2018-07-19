@@ -44,7 +44,7 @@ export class ConversationComponent implements OnInit {
     this.taskService.getMessages(userTaskId).subscribe(
       mes => {
         if (mes.body.length === 0) {
-          this.notExistingMessage = 'Your conversation with mentor is empty. ' +
+          this.notExistingMessage = 'Your conversation with mentor is empty. \n' +
             'Ask some questions, if you have any.';
         } else {
           this.messages = mes.body;

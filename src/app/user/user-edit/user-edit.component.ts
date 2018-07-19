@@ -48,7 +48,6 @@ export class UserEditComponent implements OnInit {
             this.dialogRef.close();
             this.data.FirstName = this.newData.FirstName;
             this.data.LastName = this.newData.LastName;
-            localStorage.setItem('fullName', `${this.newData.FirstName} ${this.newData.LastName}`);
             this.alertwindow.openSnackBar('Your data successfully updated!', 'Ok');
             message = 'and data ';
           } else {

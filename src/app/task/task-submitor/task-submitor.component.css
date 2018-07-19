@@ -4,3 +4,6 @@
 .input-height {
     height: 150px;
 }
+::ng-deep .mat-input-element:disabled{
+    color: black !important;
+}
