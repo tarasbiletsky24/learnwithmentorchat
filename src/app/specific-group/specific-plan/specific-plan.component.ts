@@ -19,7 +19,6 @@ import { UserWithImage } from '../../common/models/userWithImage';
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 
-
 export class UsersWithTasks {
   user: UserWithImage;
   image;
@@ -33,6 +32,10 @@ export class UsersWithTasks {
 })
 
 export class SpecificPlanComponent implements OnInit {
+  done = 'D';
+  inProgress = 'P';
+  approved = 'A';
+  rejected = 'R';
   panelOpenState = false;
   is_student = true;
   sections: Section[];
@@ -58,25 +61,22 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   sendState(i: number, event: any) {
-    debugger
     if (event.checked) {
-      this.taskService.updateUserTaskState(event.source.id, 'D').subscribe();
+      this.taskService.updateUserTaskState(event.source.id, this.done).subscribe();
     } else {
-      this.taskService.updateUserTaskState(event.source.id, 'P').subscribe();
+      this.taskService.updateUserTaskState(event.source.id, this.approved).subscribe();
     }
   }
 
-  sendResult(id: number, result: string) {
-    this.taskService.updateTaskResult(id, result).subscribe();
-  }
-
-  accept(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = 'A';
+  approve(section: number, id: number) {
+    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.approved;
+    this.taskService.updateUserTaskState(id, this.approved).subscribe();
     this.setUsertasks();
   }
 
   reject(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = 'R';
+    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.rejected;
+    this.taskService.updateUserTaskState(id, this.rejected).subscribe();
     this.setUsertasks();
   }
 
@@ -117,16 +117,16 @@ export class SpecificPlanComponent implements OnInit {
 
   getPictureState(alluserState: UserTask[]): UserTask[] {
     for (const userState of alluserState) {
-      if (userState.State.toLowerCase() === 'p') {
+      if (userState.State.toUpperCase() === this.inProgress) {
         userState.Image = '../../../assets/images/inprogress.png';
       } else
-        if (userState.State.toLowerCase() === 'd') {
+        if (userState.State.toUpperCase() === this.done) {
           userState.Image = '../../../assets/images/done.png';
         } else
-          if (userState.State.toLowerCase() === 'a') {
+          if (userState.State.toUpperCase() === this.approved) {
             userState.Image = '../../../assets/images/approved.png';
           } else
-            if (userState.State.toLowerCase() === 'r') {
+            if (userState.State.toUpperCase() === this.rejected) {
               userState.Image = '../../../assets/images/rejected.png';
             } else {
               userState.Image = '../../../assets/images/inprogress.png';
@@ -166,7 +166,6 @@ export class SpecificPlanComponent implements OnInit {
         temp.user = user;
         temp.usertasks = this.getPictureState(ut);
         this.user = temp;
-
       }
     );
   }
@@ -194,7 +193,15 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   private isTaskDone(state: string): boolean {
-    return state === 'D';
+    return state === this.done;
+  }
+
+  private isTaskApproved(state: string): boolean {
+    return state === this.approved;
+  }
+
+  private isChecked(state: string): boolean {
+    return state === this.approved || state === this.done;
   }
 
   setUserPic(img: Image) {
