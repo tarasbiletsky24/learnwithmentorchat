@@ -8,6 +8,7 @@ import { AlertWindowsComponent } from '../../../components/alert-windows/alert-w
 import { Group } from '../../../common/models/group';
 import { User } from '../../../common/models/user';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { HttpStatusCodeService } from '../../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-users-display',
@@ -18,6 +19,7 @@ export class UsersDisplayComponent implements OnInit {
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     public dialog: MatDialog) { }
 
   @Input() group: Group;
@@ -45,7 +47,7 @@ export class UsersDisplayComponent implements OnInit {
         this.dataLoaded = true;
       },
       () => {
-        if (this.users === null || this.users.length < 1) {
+        if (this.users === undefined || this.users.length < 1) {
           this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no users in this group');
           this.users = [];
@@ -63,8 +65,8 @@ export class UsersDisplayComponent implements OnInit {
     this.dataSource = new MatTableDataSource<User>(usersList);
     this.dataSource.filterPredicate = (data, filter) => {
       const dataStr = data.FirstName + ' ' + data.LastName;
-      return dataStr.indexOf(filter) != -1;
-    }
+      return dataStr.indexOf(filter) !== -1;
+    };
   }
 
   activateErrorMessage(message: string): void {
@@ -86,25 +88,27 @@ export class UsersDisplayComponent implements OnInit {
   }
 
   delChoosenUser(event: any, currentUser: User) {
-    event.currentTarget.setAttribute('disabled', 'disabled');
+    const target = event.currentTarget;
+    target.disabled = true;
     this.groupService.removeUserFromGroup(this.group.Id, currentUser.Id).subscribe(
-      data => { },
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          const index = this.users.indexOf(currentUser, 0);
+          if (index > -1) {
+            this.users.splice(index, 1);
+            this.initializeDataSource(this.users);
+          }
+          this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
+          if (this.users === undefined || this.users.length < 1) {
+            this.activateErrorMessage('There are no users in this group');
+            this.users = [];
+          }
+        }
+      },
       error => {
-        event.currentTarget.setAttribute('disabled', 'enabled');
+        target.disabled = false;
         this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentUser.FirstName + ' '
           + currentUser.LastName + ' please try again', 'Ok');
-      },
-      () => {
-        const index = this.users.indexOf(currentUser, 0);
-        if (index > -1) {
-          this.users.splice(index, 1);
-          this.initializeDataSource(this.users);
-        }
-        this.alertwindow.openSnackBar(currentUser.FirstName + ' ' + currentUser.LastName + ' deleted', 'Ok');
-        if (this.users === null || this.users.length < 1) {
-          this.activateErrorMessage('There are no users in this group');
-          this.users = [];
-        }
       }
     );
   }

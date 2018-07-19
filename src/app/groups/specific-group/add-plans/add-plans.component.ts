@@ -7,6 +7,7 @@ import { GroupService } from '../../../common/services/group.service';
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { Plan } from '../../../common/models/plan';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { HttpStatusCodeService } from '../../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-add-plans',
@@ -17,6 +18,7 @@ export class AddPlansComponent implements OnInit {
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     public thisDialogRef: MatDialogRef<AddPlansComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number) {
     this.groupId = data;
@@ -38,10 +40,20 @@ export class AddPlansComponent implements OnInit {
   }
 
   addChoosenPlan(event: any, choosenOne: Plan) {
-    this.groupService.addPlanToGroup(choosenOne.Id, this.groupId).subscribe();
-    this.somePlanAdded = true;
-    this.alertwindow.openSnackBar(choosenOne.Name + ' added', 'Ok');
-    event.currentTarget.setAttribute('disabled', 'disabled');
+    const target = event.currentTarget;
+    target.disabled = true;
+    this.groupService.addPlanToGroup(choosenOne.Id, this.groupId).subscribe(
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          this.somePlanAdded = true;
+          this.alertwindow.openSnackBar(choosenOne.Name + ' added', 'Ok');
+        }
+      },
+      error => {
+        target.disabled = false;
+        this.alertwindow.openSnackBar('Error ocurred on adding: ' + choosenOne.Name + ', please try again', 'Ok');
+      }
+    );
   }
 
   activateErrorMessage(message: string): void {
@@ -69,7 +81,7 @@ export class AddPlansComponent implements OnInit {
       },
       () => {
         this.dataLoaded = true;
-        if (this.plans === null || this.plans.length < 1) {
+        if (this.plans === undefined || this.plans.length < 1) {
           this.activateErrorMessage('There are no more plans');
           this.dataSource = new MatTableDataSource<Plan>([]);
         } else {
@@ -85,7 +97,7 @@ export class AddPlansComponent implements OnInit {
         data => {
           this.plans = data;
           this.searchActive = false;
-          if (this.plans === null || this.plans.length < 1) {
+          if (this.plans === undefined || this.plans.length < 1) {
             this.activateErrorMessage('There are no plans by this key');
             this.dataSource = new MatTableDataSource<Plan>([]);
           } else {

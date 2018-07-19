@@ -11,6 +11,7 @@ import { Group } from '../../../common/models/group';
 import { Plan } from '../../../common/models/plan';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 import { CreatePlanComponent } from '../../../create-plan/create-plan.component';
+import { HttpStatusCodeService } from '../../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-plans-display',
@@ -21,6 +22,7 @@ export class PlansDisplayComponent implements OnInit {
 
   constructor(private groupService: GroupService,
     private alertwindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService,
     private router: Router,
     private authService: AuthService,
     public dialog: MatDialog) { }
@@ -70,7 +72,7 @@ export class PlansDisplayComponent implements OnInit {
         this.dataLoaded = true;
       },
       () => {
-        if (this.plans === null || this.plans.length < 1) {
+        if (this.plans === undefined || this.plans.length < 1) {
           this.filterErrorMessageActive = false;
           this.activateErrorMessage('There are no plans in this group');
           this.plans = [];
@@ -88,8 +90,8 @@ export class PlansDisplayComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Plan>(plansList);
     this.dataSource.filterPredicate = (data, filter) => {
       const dataStr = data.Name;
-      return dataStr.toLowerCase().indexOf(filter.toLowerCase()) != -1;
-    }
+      return dataStr.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    };
   }
 
   applyFilter(filterValue: string) {
@@ -115,24 +117,26 @@ export class PlansDisplayComponent implements OnInit {
   }
 
   delChoosenPlan(event: any, currentPlan: Plan) {
-    event.currentTarget.setAttribute('disabled', 'disabled');
+    const target = event.currentTarget;
+    target.disabled = true;
     this.groupService.removePlanFromGroup(this.group.Id, currentPlan.Id).subscribe(
-      data => { },
-      error => {
-        event.currentTarget.setAttribute('disabled', 'enabled');
-        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          const index = this.plans.indexOf(currentPlan, 0);
+          if (index > -1) {
+            this.plans.splice(index, 1);
+            this.initializeDataSource(this.plans);
+          }
+          this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
+          if (this.plans === undefined || this.plans.length < 1) {
+            this.activateErrorMessage('There are no plans in this group');
+            this.plans = [];
+          }
+        }
       },
-      () => {
-        const index = this.plans.indexOf(currentPlan, 0);
-        if (index > -1) {
-          this.plans.splice(index, 1);
-          this.initializeDataSource(this.plans);
-        }
-        this.alertwindow.openSnackBar(currentPlan.Name + ' deleted', 'Ok');
-        if (this.plans === null || this.plans.length < 1) {
-          this.activateErrorMessage('There are no plans in this group');
-          this.plans = [];
-        }
+      error => {
+        target.disabled = false;
+        this.alertwindow.openSnackBar('Error ocurred on deletion: ' + currentPlan.Name + ' please try again', 'Ok');
       }
     );
   }
