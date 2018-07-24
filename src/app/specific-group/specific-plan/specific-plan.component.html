@@ -18,6 +18,7 @@
                 <span class="title">
                   {{t.Name}}
                 </span>
+                <img *ngIf="isLoadedUser" [src]="section.Content.UserTasks[i].Image" width="20px" height="20px"/> <!--"../../../assets/images/approved.png"-->
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="buttons" *ngIf="isLoadedUser">
