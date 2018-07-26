@@ -18,6 +18,7 @@ import { UsersTasks } from '../../common/models/usersTasks';
 import { UserWithImage } from '../../common/models/userWithImage';
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
+import { DateTime } from 'date-time-js';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -60,23 +61,35 @@ export class SpecificPlanComponent implements OnInit {
     this.user = new UsersWithTasks;
   }
 
-  sendState(i: number, event: any) {
+  isUserTaskExpiration(userTask: UserTask): boolean{
+    const endDate = new DateTime(userTask.EndDate.toString().split('T')[0]);
+    const curentDate = new DateTime();
+    return curentDate.isGreater(endDate);
+  }
+
+  sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
+      this.sections[sectionId].Content.UserTasks[taskId].State = this.done;
       this.taskService.updateUserTaskState(event.source.id, this.done).subscribe();
+      this.setPictureState(sectionId, taskId);
     } else {
-      this.taskService.updateUserTaskState(event.source.id, this.approved).subscribe();
+      this.sections[sectionId].Content.UserTasks[taskId].State = this.inProgress;
+      this.taskService.updateUserTaskState(event.source.id, this.inProgress).subscribe();
+      this.setPictureState(sectionId, taskId);
     }
   }
 
-  approve(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.approved;
-    this.taskService.updateUserTaskState(id, this.approved).subscribe();
+  approve(sectionId, taskId: number) {
+    const userTaskId = this.sections[sectionId].Content.UserTasks[taskId].Id;
+    this.sections[sectionId].Content.UserTasks[taskId].State = this.approved;
+    this.taskService.updateUserTaskState(userTaskId, this.approved).subscribe();
     this.setUsertasks();
   }
 
-  reject(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.rejected;
-    this.taskService.updateUserTaskState(id, this.rejected).subscribe();
+  reject(sectionId, taskId: number) {
+    const userTaskId = this.sections[sectionId].Content.UserTasks[taskId].Id;
+    this.sections[sectionId].Content.UserTasks[taskId].State = this.rejected;
+    this.taskService.updateUserTaskState(userTaskId, this.rejected).subscribe();
     this.setUsertasks();
   }
 
@@ -117,7 +130,7 @@ export class SpecificPlanComponent implements OnInit {
       });
   }
 
-  getPictureState(alluserState: UserTask[]): UserTask[] {
+  getPicturesState(alluserState: UserTask[]): UserTask[] {
     for (const userState of alluserState) {
       if (userState.State.toUpperCase() === this.inProgress) {
         userState.Image = '../../../assets/images/inprogress.png';
@@ -137,6 +150,23 @@ export class SpecificPlanComponent implements OnInit {
     return alluserState;
   }
 
+  setPictureState(section: number, id: number) {
+    if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.inProgress) {
+      this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/inprogress.png';
+    } else
+      if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.done) {
+        this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/done.png';
+      } else
+        if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.approved) {
+          this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/approved.png';
+        } else
+          if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.rejected) {
+            this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/rejected.png';
+          } else {
+            this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/inprogress.png';
+          }
+  }
+
   getUsersWithPictures(groupUsers: UserWithImage[]) {
     this.planTasks = this.getPlantasks(this.sections);
     const userids: number[] = new Array;
@@ -149,7 +179,7 @@ export class SpecificPlanComponent implements OnInit {
           const temp = new UsersWithTasks;
           temp.user = groupUsers[i];
           temp.image = this.setUserPic(groupUsers[i].Image);
-          temp.usertasks = this.getPictureState(result_allUsertaskState[i].UserTasks);
+          temp.usertasks = this.getPicturesState(result_allUsertaskState[i].UserTasks);
           this.users.push(temp);
         }
         this.isLoadedUsers = true;
@@ -166,7 +196,7 @@ export class SpecificPlanComponent implements OnInit {
         this.setUsertasksToSection(usersTasks);
         const temp = new UsersWithTasks;
         temp.user = user;
-        temp.usertasks = this.getPictureState(ut);
+        temp.usertasks = this.getPicturesState(ut);
         this.user = temp;
       }
     );
@@ -237,7 +267,7 @@ export class SpecificPlanComponent implements OnInit {
         tasks.push(this.sections[i].Content.UserTasks[j]);
       }
     }
-    this.users[this.users.findIndex(k => k.user.Id === tasks[0].UserId)].usertasks = this.getPictureState(tasks);
+    this.users[this.users.findIndex(k => k.user.Id === tasks[0].UserId)].usertasks = this.getPicturesState(tasks);
   }
 
   private toUserWithImage(user: User): UserWithImage {
