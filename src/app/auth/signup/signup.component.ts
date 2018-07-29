@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
       Email: email,
       Password: password
     };
-    this.userService.userAuthentication(loginData).subscribe( (data: any) => 
+    this.userService.userAuthentication(loginData).subscribe( (data: any) =>
       this.authService.setUserData(data)
     );
   }
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
     this.userService.registerUser(form.value).subscribe((data: string) => {
       if (data.startsWith('Succesfully')) {
         this.alertwindow.openSnackBar('You are succesfully registered' , '');
-        this.authenticate(form.value.Email, form.value.Password)
+        this.authenticate(form.value.Email, form.value.Password);
         this.closeSignupComponent();
       } else {
         this.alertwindow.openSnackBar('This email already exist' , '');
