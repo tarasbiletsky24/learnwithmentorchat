@@ -82,7 +82,7 @@ export class AddUsersComponent implements OnInit {
       },
       () => {
         this.dataLoaded = true;
-        if (this.users === undefined || this.users.length < 1) {
+        if (!this.users || this.users.length < 1) {
           this.activateErrorMessage('There are no more users');
           this.dataSource = new MatTableDataSource<User>([]);
         } else {
@@ -98,7 +98,9 @@ export class AddUsersComponent implements OnInit {
         data => {
           this.users = data;
           this.searchActive = false;
-          if (this.users === undefined || this.users.length < 1) {
+          debugger
+          if (!this.users || this.users.length < 1) {
+            debugger
             this.activateErrorMessage('There are no users by this key');
             this.dataSource = new MatTableDataSource<User>([]);
           } else {
