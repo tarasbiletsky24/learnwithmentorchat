@@ -81,7 +81,7 @@ export class AddPlansComponent implements OnInit {
       },
       () => {
         this.dataLoaded = true;
-        if (this.plans === undefined || this.plans.length < 1) {
+        if (!this.plans || this.plans.length < 1) {
           this.activateErrorMessage('There are no more plans');
           this.dataSource = new MatTableDataSource<Plan>([]);
         } else {
@@ -97,7 +97,7 @@ export class AddPlansComponent implements OnInit {
         data => {
           this.plans = data;
           this.searchActive = false;
-          if (this.plans === undefined || this.plans.length < 1) {
+          if (!this.plans || this.plans.length < 1) {
             this.activateErrorMessage('There are no plans by this key');
             this.dataSource = new MatTableDataSource<Plan>([]);
           } else {
