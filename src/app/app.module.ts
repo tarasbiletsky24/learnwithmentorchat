@@ -62,7 +62,7 @@ import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
-import {MatPaginatorModule, MatTableDataSource} from '@angular/material';
+import { MatPaginatorModule, MatTableDataSource } from '@angular/material';
 import { MentorGuard } from './auth/mentor.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
@@ -71,6 +71,7 @@ import { AddUsersComponent } from './groups/specific-group/add-users/add-users.c
 import { PlansDisplayComponent } from './groups/specific-group/plans-display/plans-display.component';
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     UserEditComponent,
     PageNotFoundComponent,
     NotAuthorizedComponent,
-    PaginationComponent
+    PaginationComponent,
+    SuggestDeadlineComponent
   ],
   imports: [
     AppRoutingModule,
@@ -150,6 +152,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
+    SuggestDeadlineComponent,
     SigninComponent,
     SignupComponent,
     AboutPageComponent,

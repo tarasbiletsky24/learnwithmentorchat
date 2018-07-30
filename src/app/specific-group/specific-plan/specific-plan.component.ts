@@ -16,6 +16,7 @@ import { TaskSubmitorComponent } from '../../task/task-submitor/task-submitor.co
 import { ConversationComponent } from '../../task/conversation/conversation.component';
 import { UsersTasks } from '../../common/models/usersTasks';
 import { UserWithImage } from '../../common/models/userWithImage';
+import { SuggestDeadlineComponent } from '../suggest-deadline/suggest-deadline.component';
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
@@ -103,6 +104,12 @@ export class SpecificPlanComponent implements OnInit {
     const data = { userTask: userTask, task: task };
     const dialogRef = this.dialog.open(ConversationComponent, { data: data,
     width: '600px' });
+  }
+
+  onSuggestDeadlineClick(taskName: string, userTask: UserTask){
+    const data = { taskName: taskName, userTask: userTask };
+    const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
+    width: '400px' });
   }
 
   ngOnInit() {

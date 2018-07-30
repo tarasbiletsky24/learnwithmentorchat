@@ -58,7 +58,6 @@ export class TaskService {
   }
 
   getTasksNotInPlan(id: number): Observable<Task[]> {
-
     return this.http.get<Task[]>(`${this.url}plan/${id}/tasks/notinplan`).pipe(
       catchError(this.handleError<Task[]>(`getTasks`)));
   }
@@ -149,6 +148,12 @@ export class TaskService {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     const link = `${this.url}task/usertask/result?userTaskId=${userTask.Id}`;
     return this.http.put<string>(link, userTask.Result as string, { headers: reqHeader }).pipe(
+      catchError(val => of(val)));
+  }
+ 
+  updateProposedEndDate(userTaskId: number, date: Date): Observable<any>{
+    const link = `${this.url}task/usertask/proposedEndDate?userTaskId=${userTaskId}&proposeEndDate=${date}`;
+    return this.http.put<Date>(link, date, httpOptions).pipe(
       catchError(val => of(val)));
   }
 

@@ -4,7 +4,9 @@
       <mat-expansion-panel [expanded]='!isExpanded'>
         <mat-expansion-panel-header>
           <mat-panel-title>
+              <h2 mat-dialog-title>
             {{section.Name}}
+            </h2>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="tasks" *ngFor="let t of section.Content.Tasks; let i = index">
@@ -31,12 +33,11 @@
                 <input matInput [min]="section.Content.UserTasks[i].EndDate" [value]="section.Content.UserTasks[i].EndDate" [matDatepicker]="picker" disabled>
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
               </mat-form-field>
-              <button mat-raised-button (click)="picker.open()">Suggest end date</button>
+              <button mat-raised-button (click)="onSuggestDeadlineClick(t.Name, section.Content.UserTasks[i])">Suggest end date</button>
               </div>
               <div class="review" *ngIf="!is_student">
                 <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="approve(j, i)">Approve</button>
-                <button mat-raised-button class="button-change" [disabled]="!isTaskDo
-                ne(section.Content.UserTasks[i].State)" (click)="reject(j, i)">Reject</button>
+                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UserTasks[i].State)" (click)="reject(j, i)">Reject</button>
               </div>
             </div>
           </mat-expansion-panel>
