@@ -104,12 +104,12 @@ export class UserService {
   }
 
   search(param: string, roleName: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/search?q=${param}&role=${roleName}`).pipe(
+    return this.http.get<User[]>(`${this.url}/search?key=${param}&role=${roleName}`).pipe(
       catchError(this.handleError<User[]>(`searchUsers`))
     );
   }
   searchPage(param: string, roleName: string, pageSize: number, pageNumber: number): Observable<Pagination<User>> {
-    return this.http.get<Pagination<User>>(`${this.url}/search?q=${param}&role=${roleName}
+    return this.http.get<Pagination<User>>(`${this.url}/search?key=${param}&role=${roleName}
     &pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
       catchError(this.handleError<Pagination<User>>(`searchUsers`))
     );
