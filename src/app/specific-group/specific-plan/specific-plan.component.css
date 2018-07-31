@@ -2,6 +2,7 @@
     margin-top: 100px;
     justify-content: space-around;  
     flex-direction: row;
+    align-items: flex-start;
     display: flex ;
 }
 
@@ -55,5 +56,9 @@ button{
 }
 
 .usersC{
-    width: auto;
+    /* width: auto; */
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 1px; 
+    padding: 5px;
 }
