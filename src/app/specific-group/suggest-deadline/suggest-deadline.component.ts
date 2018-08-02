@@ -56,16 +56,8 @@ export class SuggestDeadlineComponent implements OnInit {
   onSubmitClick() {
     this.saveChanges();
   }
-
-  parseDate(){
-    this.deadline = this.userTask.EndDate.toString().split('T')[0];
-    if(this.userTask.ProposeEndDate != null){
-      this.suggest = this.userTask.ProposeEndDate.toString().split('T')[0];
-    }
-  }
   
   ngOnInit() {
-    this.parseDate();
   }
 
 }

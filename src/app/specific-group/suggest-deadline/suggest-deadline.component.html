@@ -1,14 +1,14 @@
-<h2 mat-dialog-title>Suggest deadline for {{task}}</h2>
+<h2 mat-dialog-title>Suggest deadline for {{ task }}</h2>
 <mat-dialog-content>
   <mat-card>
     <mat-card-content *ngIf="userTask">
-      <p>Current deadline:    {{deadline}}</p>
+      <p>Current deadline:    {{ userTask.EndDate | date: "dd.MM.yyyy" }}</p>
       <div class="suggestion">
       <span id="title">Suggested deadline:    </span>
       <mat-form-field>
-        <input matInput [min]="userTask.EndDate" [(ngModel)]="userTask.ProposeEndDate" [matDatepicker]="picker" disabled>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <input matInput [min]="userTask.EndDate" [value]="userTask.ProposeEndDate | date: 'dd.MM.yyyy'" [matDatepicker]="picker" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker" date-format="dd.MM.yyyy"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false" date-format="dd.MM.yyyy"></mat-datepicker>
       </mat-form-field>
       </div>
     </mat-card-content>
