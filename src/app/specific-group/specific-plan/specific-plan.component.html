@@ -7,7 +7,7 @@
       <mat-expansion-panel [expanded]='!isExpanded'>
         <mat-expansion-panel-header>
           <mat-panel-title>
-              <h2 mat-dialog-title>
+            <h2 mat-dialog-title>
             {{section.Name}}
             </h2>
           </mat-panel-title>
@@ -23,10 +23,15 @@
                 <span class="title">
                   {{t.Name}}
                 </span>
-                <img *ngIf="isLoadedUser" [src]="section.Content.UserTasks[i].Image" width="20px" height="20px"/> <!--"../../../assets/images/approved.png"-->
+                <div class="stateIcons" *ngIf="isLoadedUser">
+                <div class="states" *ngFor="let s of section.Content.UsersTasks[i].UserTasks">
+                  <img [src]="s.Image" width="20px" height="20px" style="padding-left: 20px"/>
+                  <!--<img *ngIf="isLoadedUser" [src]="s.Image" width="20px" height="20px"/> <!"../../../assets/images/approved.png"-->
+                </div>
+                </div>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="buttons" *ngIf="isLoadedUser">
+            <div class="buttons" *ngIf="isUserSelected">
               <div class="result">
                 <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Result</button>
                 <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UserTasks[i], section.Content.Tasks[i])">Conversation</button>
@@ -48,5 +53,4 @@
       </mat-expansion-panel>
     </div>
   </div>
- 
 </div>

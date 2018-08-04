@@ -63,3 +63,9 @@ button{
     top: 0px; 
     padding: 5px;
 }
+
+.stateIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
