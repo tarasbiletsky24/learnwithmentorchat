@@ -49,7 +49,7 @@ export class SpecificPlanComponent implements OnInit {
   isLoadedUser = false;
   isLoadedUsers = false;
   isUserSelected = false;
-  selectedUser;
+  selectedUser = 0;
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -72,11 +72,11 @@ export class SpecificPlanComponent implements OnInit {
   
   sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
-      this.sections[sectionId].Content.UserTasks[taskId].State = this.done;
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.done;
       this.taskService.updateUserTaskState(event.source.id, this.done).subscribe();
       this.setPictureState(sectionId, taskId);
     } else {
-      this.sections[sectionId].Content.UserTasks[taskId].State = this.inProgress;
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.inProgress;
       this.taskService.updateUserTaskState(event.source.id, this.inProgress).subscribe();
       this.setPictureState(sectionId, taskId);
     }
@@ -160,19 +160,19 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   setPictureState(section: number, id: number) {
-    if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.inProgress) {
-      this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/inprogress.png';
+    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.inProgress) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
     } else
-      if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.done) {
-        this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/done.png';
+      if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.done) {
+        this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/done.png';
       } else
-        if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.approved) {
-          this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/approved.png';
+        if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.approved) {
+          this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/approved.png';
         } else
-          if (this.sections[section].Content.UserTasks[id].State.toUpperCase() === this.rejected) {
-            this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/rejected.png';
+          if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.rejected) {
+            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/rejected.png';
           } else {
-            this.sections[section].Content.UserTasks[id].Image = '../../../assets/images/inprogress.png';
+            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
           }
   }
 
@@ -227,10 +227,8 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   selectedUserbyMentor(index: number) {
-    debugger
     this.selectedUser = index;
     this.isUserSelected = true;
-    //this.setUsertasksToSection({ UserTasks: increased });
   }
 
   private isTaskDone(state: string): boolean {
@@ -259,10 +257,14 @@ export class SpecificPlanComponent implements OnInit {
 
   private setUsertasksToSection(usersTasks: UsersTasks) {
     let index = 0;
+    let allTasks;
     for (let i = 0; i < this.sections.length; i++) {
-      this.sections[i].Content.UserTasks = new Array;
+      this.sections[i].Content.UsersTasks = new Array;
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
-        this.sections[i].Content.UserTasks.push(usersTasks.UserTasks[index + j]);
+        allTasks = new UsersTasks();
+        allTasks.UserTasks = new Array;
+        allTasks.UserTasks.push(usersTasks.UserTasks[index + j]);
+        this.sections[i].Content.UsersTasks.push(allTasks);
       }
       index += this.sections[i].Content.Tasks.length;
     }

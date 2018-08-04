@@ -18,22 +18,21 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <div class="checkbox" *ngIf="is_student">
-                  <mat-checkbox [disabled]="isTaskApproved(section.Content.UserTasks[i].State) || isUserTaskExpiration(section.Content.UserTasks[i])" *ngIf="isLoadedUser" id="{{section.Content.UserTasks[i].Id}}"
-                    (change)="sendState(j, i, $event)" [checked]="isChecked(section.Content.UserTasks[i].State)"></mat-checkbox>
+                <div class="checkbox" *ngIf="is_student && section.Content.UsersTasks">
+                  <mat-checkbox [disabled]="isTaskApproved(section.Content.UsersTasks[i].UserTasks[0].State) || isUserTaskExpiration(section.Content.UsersTasks[i].UserTasks[0])" id="{{section.Content.UsersTasks[i].UserTasks[0].Id}}"
+                    (change)="sendState(j, i, $event)" [checked]="isChecked(section.Content.UsersTasks[i].UserTasks[0].State)"></mat-checkbox>
                 </div>
                 <span class="title">
                   {{t.Name}}
                 </span>
-                <div class="stateIcons" *ngIf="isLoadedUser">
+                <div class="stateIcons" *ngIf="section.Content.UsersTasks">
                 <div class="states" *ngFor="let s of section.Content.UsersTasks[i].UserTasks">
                   <img [src]="s.Image" width="20px" height="20px" style="padding-left: 20px"/>
-                  <!--<img *ngIf="isLoadedUser" [src]="s.Image" width="20px" height="20px"/> <!"../../../assets/images/approved.png"-->
                 </div>
                 </div>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="buttons" *ngIf="isUserSelected">
+            <div class="buttons" *ngIf="section.Content.UsersTasks">
               <div class="result">
                 <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UsersTasks[i].UserTasks[selectedUser], section.Content.Tasks[i])">Result</button>
                 <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UsersTasks[i].UserTasks[selectedUser], section.Content.Tasks[i])">Conversation</button>
