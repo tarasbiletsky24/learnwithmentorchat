@@ -48,6 +48,7 @@ export class SpecificPlanComponent implements OnInit {
   planTasks: number[];
   isLoadedUser = false;
   isLoadedUsers = false;
+  isUserSelected = false;
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -67,7 +68,7 @@ export class SpecificPlanComponent implements OnInit {
     const curentDate = new DateTime();
     return curentDate.isGreater(endDate);
   }
-
+  
   sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
       this.sections[sectionId].Content.UserTasks[taskId].State = this.done;
@@ -189,6 +190,7 @@ export class SpecificPlanComponent implements OnInit {
           temp.usertasks = this.getPicturesState(result_allUsertaskState[i].UserTasks);
           this.users.push(temp);
         }
+        this.setAllUserTasks(result_allUsertaskState);
         this.isLoadedUsers = true;
       }
     );
@@ -227,10 +229,6 @@ export class SpecificPlanComponent implements OnInit {
     this.setUsertasksToSection({ UserTasks: increased });
   }
 
-  getUserTaskId(id: number): number {
-    return this.user.usertasks[id].Id;
-  }
-
   private isTaskDone(state: string): boolean {
     return state === this.done;
   }
@@ -262,6 +260,31 @@ export class SpecificPlanComponent implements OnInit {
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
         this.sections[i].Content.UserTasks.push(usersTasks.UserTasks[index + j]);
       }
+      index += this.sections[i].Content.Tasks.length;
+    }
+    this.isLoadedUser = true;
+  }
+
+  setSection(section: Section, usersTasks: UsersTasks[], index: number): Section{
+    section.Content.UsersTasks = new Array<UsersTasks>();
+    let userTasks = new Array<UserTask>();
+    let allTasks = new UsersTasks();
+    for (let i = 0; i < section.Content.Tasks.length; i++) {
+      for(let j = 0; j < this.users.length; j++) {
+        userTasks.push(usersTasks[j].UserTasks[i + index]);
+      }
+      allTasks.UserTasks = userTasks;
+      section.Content.UsersTasks.push(allTasks);
+      userTasks = new Array<UserTask>();
+      allTasks = new UsersTasks();
+    }
+    return section;
+  }
+
+  setAllUserTasks(usersTasks: UsersTasks[]){
+    let index = 0;
+    for (let i = 0; i < this.sections.length; i++) {
+      this.sections[i] = this.setSection(this.sections[i], usersTasks, index);
       index += this.sections[i].Content.Tasks.length;
     }
     this.isLoadedUser = true;
