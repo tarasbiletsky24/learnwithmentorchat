@@ -1,4 +1,7 @@
 <div class="content">
+    <div class="usersC">
+        <app-specific-plan-for-mentor *ngIf="!is_student" [isLoadedUsers]="isLoadedUsers" [users]="users" (selectedUser)="selectedUserbyMentor($event)"></app-specific-plan-for-mentor>
+      </div>
   <div class="sections">
     <div class="section" *ngFor="let section of sections; let j = index">
       <mat-expansion-panel [expanded]='!isExpanded'>
@@ -45,7 +48,5 @@
       </mat-expansion-panel>
     </div>
   </div>
-  <div class="usersC">
-    <app-specific-plan-for-mentor *ngIf="!is_student" [isLoadedUsers]="isLoadedUsers" [users]="users" (selectedUser)="selectedUserbyMentor($event)"></app-specific-plan-for-mentor>
-  </div>
+ 
 </div>
