@@ -25,6 +25,10 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
+  hideDialog(){
+    this.closeSigninComponent();
+  }
+
   OnSubmit(form: NgForm) {
     this.userService.userAuthentication(form.value).subscribe((data: any) => {
       this.auth.setUserData(data);

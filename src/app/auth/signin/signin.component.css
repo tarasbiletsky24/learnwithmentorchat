@@ -15,3 +15,8 @@
 .button-right{
   float: right;
 }
+
+.forgot-password{
+  margin-bottom: 15px;
+  text-decoration: none;
+}
