@@ -2,7 +2,7 @@
     margin-top: 100px;
     justify-content: space-around;  
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     display: flex ;
 }
 
@@ -11,6 +11,12 @@
     justify-content: space-between;  
     flex-direction: column;
     display: flex;
+}
+
+.panel{
+    width: 65%;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 ::ng-deep .mat-expansion-panel-header-description, .mat-expansion-panel-header-title{

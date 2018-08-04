@@ -49,6 +49,7 @@ export class SpecificPlanComponent implements OnInit {
   isLoadedUser = false;
   isLoadedUsers = false;
   isUserSelected = false;
+  selectedUser;
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -225,8 +226,11 @@ export class SpecificPlanComponent implements OnInit {
     return planTasks;
   }
 
-  selectedUserbyMentor(increased: UserTask[]) {
-    this.setUsertasksToSection({ UserTasks: increased });
+  selectedUserbyMentor(index: number) {
+    debugger
+    this.selectedUser = index;
+    this.isUserSelected = true;
+    //this.setUsertasksToSection({ UserTasks: increased });
   }
 
   private isTaskDone(state: string): boolean {
@@ -267,16 +271,16 @@ export class SpecificPlanComponent implements OnInit {
 
   setSection(section: Section, usersTasks: UsersTasks[], index: number): Section{
     section.Content.UsersTasks = new Array<UsersTasks>();
-    let userTasks = new Array<UserTask>();
-    let allTasks = new UsersTasks();
+    let userTasks;
+    let allTasks;
     for (let i = 0; i < section.Content.Tasks.length; i++) {
+      userTasks = new Array<UserTask>();
+      allTasks = new UsersTasks();
       for(let j = 0; j < this.users.length; j++) {
         userTasks.push(usersTasks[j].UserTasks[i + index]);
       }
       allTasks.UserTasks = userTasks;
       section.Content.UsersTasks.push(allTasks);
-      userTasks = new Array<UserTask>();
-      allTasks = new UsersTasks();
     }
     return section;
   }
