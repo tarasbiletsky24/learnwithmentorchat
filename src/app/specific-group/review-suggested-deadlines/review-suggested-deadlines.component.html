@@ -16,7 +16,7 @@
   <hr/>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close (click)="onApproveClick()">Approve</button>
-  <button mat-raised-button mat-dialog-close (click)="onRejectClick()">Reject</button>
+  <button [disabled]="!userTask.ProposeEndDate" mat-raised-button mat-dialog-close (click)="onApproveClick()">Approve</button>
+  <button [disabled]="!userTask.ProposeEndDate" mat-raised-button mat-dialog-close (click)="onRejectClick()">Reject</button>
   <button mat-raised-button (click)="onCancelClick()">Cancel</button>
 </mat-dialog-actions>
