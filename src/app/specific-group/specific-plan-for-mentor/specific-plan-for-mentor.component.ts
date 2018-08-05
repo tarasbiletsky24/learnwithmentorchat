@@ -10,11 +10,11 @@ import { UserTask } from '../../common/models/userTask';
 export class SpecificPlanForMentorComponent implements OnInit {
 
   @Input() users: UsersWithTasks[];
-  @Output() selectedUser = new EventEmitter<UserTask[]>();
+  @Output() selectedUser = new EventEmitter<number>();
   @Input() isLoadedUsers: boolean;
 
-  selectUser(increased: UserTask[]) {
-    this.selectedUser.emit(increased);
+  selectUser(index: number) {
+    this.selectedUser.emit(index);
   }
 
   getState (state: string) {
