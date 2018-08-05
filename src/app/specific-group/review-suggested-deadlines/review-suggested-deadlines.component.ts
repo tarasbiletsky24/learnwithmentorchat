@@ -9,48 +9,40 @@ import { TaskService } from '../../common/services/task.service';
 import { DateTime } from 'date-time-js';
 
 @Component({
-  selector: 'app-suggest-deadline',
-  templateUrl: './suggest-deadline.component.html',
-  styleUrls: ['./suggest-deadline.component.css']
+  selector: 'app-review-suggested-deadlines',
+  templateUrl: './review-suggested-deadlines.component.html',
+  styleUrls: ['./review-suggested-deadlines.component.css']
 })
-export class SuggestDeadlineComponent implements OnInit {
- 
+export class ReviewSuggestedDeadlinesComponent implements OnInit {
+
   @Input()
   private task: string;
   private userTask: UserTask;
-  private previousProposeEndDate: DateTime;
+  private studentName: string;
 
-  constructor(public dialogRef: MatDialogRef<SuggestDeadlineComponent>,
+  constructor(public dialogRef: MatDialogRef<ReviewSuggestedDeadlinesComponent>,
     private alertwindow: AlertWindowsComponent,
     private dialogsService: DialogsService,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userTask = data.userTask;
       this.task = data.taskName;
-      this.previousProposeEndDate = new DateTime(this.userTask.ProposeEndDate.toString().split('T')[0]);
+      this.studentName = data.studentName;
   }
 
   onCancelClick() {
-    const currentProposeEndDate = this.userTask.ProposeEndDate.toString().split('T')[0];
-    if (!this.previousProposeEndDate.isEqual(currentProposeEndDate)) {
-      this.dialogsService
-      .confirm('Confirm Dialog', 'You have unsaved changes. Do you want to save them?')
-      .subscribe(res => {
-        if (res) {
-          this.saveChanges();
-          this.alertwindow.openSnackBar('Your changes are saved!', 'Ok');
-        }
-      });
-    }
     this.dialogRef.close();
   }
 
-  saveChanges() {
-    this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate.toISOString()).subscribe();
+  onApproveClick() {
+    this.userTask.EndDate = this.userTask.ProposeEndDate;
+    this.userTask.ProposeEndDate = null;
+    this.taskService.updateEndDate(this.userTask.Id).subscribe();
   }
 
-  onSubmitClick() {
-    this.saveChanges();
+  onRejectClick() {
+    this.userTask.ProposeEndDate = null;
+    this.taskService.deleteProposedEndDate(this.userTask.Id).subscribe();
   }
   
   ngOnInit() {

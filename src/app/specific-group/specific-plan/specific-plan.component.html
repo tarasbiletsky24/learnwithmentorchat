@@ -40,9 +40,10 @@
               <div>
               <mat-form-field>
                 <input matInput [min]="section.Content.UsersTasks[i].UserTasks[selectedUser].EndDate" [value]="section.Content.UsersTasks[i].UserTasks[selectedUser].EndDate" [matDatepicker]="picker" disabled>
-                <mat-datepicker #picker disabled="false"></mat-datepicker>
               </mat-form-field>
-              <button mat-raised-button (click)="onSuggestDeadlineClick(t.Name, section.Content.UsersTasks[i].UserTasks[selectedUser])">Suggest end date</button>
+              <button *ngIf="!is_student && section.Content.UsersTasks[i].UserTasks[selectedUser].ProposeEndDate" matBadge="!" matBadgeColor="warn" mat-raised-button (click)="onSuggestedDeadlineClick(t.Name, section.Content.UsersTasks[i].UserTasks[selectedUser], getFullName(selectedUser))">Suggested end date</button>
+              <button *ngIf="!is_student && !section.Content.UsersTasks[i].UserTasks[selectedUser].ProposeEndDate" mat-raised-button (click)="onSuggestedDeadlineClick(t.Name, section.Content.UsersTasks[i].UserTasks[selectedUser], getFullName(selectedUser))">Suggested end date</button>
+              <button *ngIf="is_student" mat-raised-button (click)="onSuggestDeadlineClick(t.Name, section.Content.UsersTasks[i].UserTasks[selectedUser])">Suggest end date</button>
               </div>
               <div class="review" *ngIf="!is_student">
                 <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)" (click)="approve(j, i)">Approve</button>

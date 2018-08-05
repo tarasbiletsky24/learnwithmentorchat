@@ -11,6 +11,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -72,6 +73,7 @@ import { PlansDisplayComponent } from './groups/specific-group/plans-display/pla
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
+import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 
 @NgModule({
   declarations: [
@@ -115,8 +117,9 @@ import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/sugg
     PageNotFoundComponent,
     NotAuthorizedComponent,
     PaginationComponent,
-    SuggestDeadlineComponent
-  ],
+    SuggestDeadlineComponent,
+    ReviewSuggestedDeadlinesComponent
+    ],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -144,7 +147,8 @@ import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/sugg
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatBadgeModule
     ],
 
   entryComponents: [TaskEditorComponent,
@@ -162,7 +166,8 @@ import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/sugg
     AddPlansComponent,
     AddTasksComponent,
     AddGroupComponent,
-    UserEditComponent
+    UserEditComponent,
+    ReviewSuggestedDeadlinesComponent
   ],
   providers: [UserService,
     AuthGuard,
