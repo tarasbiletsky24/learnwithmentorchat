@@ -22,4 +22,8 @@ export class HttpStatusCodeService {
   isNoContent(code: number) {
     return code === httpStatusCodes.NO_CONTENT;
   }
+
+  isForbidden(code: number) {
+    return code === httpStatusCodes.FORBIDDEN;
+  }
 }

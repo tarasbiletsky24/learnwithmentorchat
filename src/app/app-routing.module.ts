@@ -25,6 +25,8 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
 import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
 import { SpecificPlanComponent } from './specific-group/specific-plan/specific-plan.component';
 import { BeginPasswordResetComponent } from './begin-password-reset/begin-password-reset.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -42,6 +44,8 @@ const routes: Routes = [
   { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
   { path: 'not-authorized', component: NotAuthorizedComponent},
   { path: 'begin-password-reset', component: BeginPasswordResetComponent},
+  { path: 'password-reset/:token', component: PasswordResetComponent},
+  { path: 'confirm-email/:token', component: ConfirmEmailComponent},
   { path: 'group/:id/plan/:id', component: SpecificPlanComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

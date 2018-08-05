@@ -71,6 +71,8 @@ import { PlansDisplayComponent } from './groups/specific-group/plans-display/pla
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { BeginPasswordResetComponent } from './begin-password-reset/begin-password-reset.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,9 @@ import { BeginPasswordResetComponent } from './begin-password-reset/begin-passwo
     PageNotFoundComponent,
     NotAuthorizedComponent,
     PaginationComponent,
-    BeginPasswordResetComponent
+    BeginPasswordResetComponent,
+    PasswordResetComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     AppRoutingModule,
