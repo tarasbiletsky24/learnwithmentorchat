@@ -11,7 +11,6 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  //private reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
   private reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
 
   private url = `${environment.apiUrl}user`;
@@ -24,5 +23,17 @@ export class EmailService {
 
   sendEmailConfirmationEmail(email: Email): Observable<HttpResponse<any>> {
     return this.http.post(`${this.url}/confirm-email?emailConfirmLink=${this.emailConfirmPage}`, email, { observe: 'response', headers: this.reqHeader });
+  }
+
+  verifyPasswordResetToken(token: string): Observable<number> {
+    return this.http.get<number>(`${this.url}/verify-token?token=${token}`).pipe();
+  }
+
+  confirmUserEmail(token: string): Observable<string> {
+    return this.http.get<string>(`${this.url}/confirm-email?token=${token}`,{ headers: this.reqHeader }).pipe();
+  }
+
+  resetPassword(id: number, password: string): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/resetpasswotd?id=${id}`, password, { observe: 'response', headers: this.reqHeader });
   }
 }
