@@ -83,16 +83,16 @@ export class SpecificPlanComponent implements OnInit {
     }
   }
 
-  approve(sectionId, taskId: number) {
-    const userTaskId = this.sections[sectionId].Content.UserTasks[taskId].Id;
-    this.sections[sectionId].Content.UserTasks[taskId].State = this.approved;
+  approve(sectionId, taskId, selectedUser: number) {
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.approved;
     this.taskService.updateUserTaskState(userTaskId, this.approved).subscribe();
     this.setUsertasks();
   }
 
-  reject(sectionId, taskId: number) {
-    const userTaskId = this.sections[sectionId].Content.UserTasks[taskId].Id;
-    this.sections[sectionId].Content.UserTasks[taskId].State = this.rejected;
+  reject(sectionId, taskId, selectedUser: number) {
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.rejected;
     this.taskService.updateUserTaskState(userTaskId, this.rejected).subscribe();
     this.setUsertasks();
   }
@@ -311,10 +311,10 @@ export class SpecificPlanComponent implements OnInit {
     const tasks: UserTask[] = new Array;
     for (let i = 0; i < this.sections.length; i++) {
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
-        tasks.push(this.sections[i].Content.UserTasks[j]);
+        tasks.push(this.sections[i].Content.UsersTasks[j].UserTasks[this.selectedUser]);
       }
     }
-    this.users[this.users.findIndex(k => k.user.Id === tasks[0].UserId)].usertasks = this.getPicturesState(tasks);
+    this.users[this.selectedUser].usertasks = this.getPicturesState(tasks);
   }
 
   private toUserWithImage(user: User): UserWithImage {
