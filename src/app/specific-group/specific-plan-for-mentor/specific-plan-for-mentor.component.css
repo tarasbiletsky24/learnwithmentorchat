@@ -10,22 +10,24 @@ input{
     width:40px;
     height:40px;
     border-radius: 100%;
+    margin: 5px 2.5px;
 }
-img{
-    padding: 5px 2.5px;
-}
+
 .state{
-    margin-left: 20%;
+    margin: 5px 2.5px;
+    margin-left: 20% !important;
     display: inline-block;
     width:25px;
     height:25px;
-    border-radius: 0% !important;
+    border-radius: 5px !important;
+    padding: 0px 0px 3px 3px;
 }
 li{
     list-style-type:none;
 }
 .clicked{
-    border: 5px solid blue;
-    padding: 0px;
+    border: 5px solid rgba(0, 0, 255, 0.281);
+
+   margin: 0px ; 
 }
 
