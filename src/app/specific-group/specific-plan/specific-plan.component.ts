@@ -17,6 +17,7 @@ import { ConversationComponent } from '../../task/conversation/conversation.comp
 import { UsersTasks } from '../../common/models/usersTasks';
 import { UserWithImage } from '../../common/models/userWithImage';
 import { SuggestDeadlineComponent } from '../suggest-deadline/suggest-deadline.component';
+import { ReviewSuggestedDeadlinesComponent } from '../review-suggested-deadlines/review-suggested-deadlines.component';
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
@@ -64,7 +65,7 @@ export class SpecificPlanComponent implements OnInit {
     this.user = new UsersWithTasks;
   }
 
-  isUserTaskExpiration(userTask: UserTask): boolean{
+  isUserTaskExpiration(userTask: UserTask): boolean {
     const endDate = new DateTime(userTask.EndDate.toString().split('T')[0]);
     const curentDate = new DateTime();
     return curentDate.isGreater(endDate);
@@ -108,10 +109,16 @@ export class SpecificPlanComponent implements OnInit {
     width: '600px' });
   }
 
-  onSuggestDeadlineClick(taskName: string, userTask: UserTask){
+  onSuggestDeadlineClick(taskName: string, userTask: UserTask) {
     const data = { taskName: taskName, userTask: userTask };
     const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
     width: '400px' });
+  }
+
+  onSuggestedDeadlineClick(taskName: string, userTask: UserTask, studentName: string) {
+    const data = { taskName: taskName, userTask: userTask, studentName};
+    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, { data: data,
+    width: '500px' });
   }
 
   ngOnInit() {
@@ -197,6 +204,10 @@ export class SpecificPlanComponent implements OnInit {
     );
   }
 
+  getFullName(index: number): string {
+    return this.users[index].user.FirstName + ' ' + this.users[index].user.LastName;
+  }
+
   getUserWithPictures(user: UserWithImage) {
     this.planTasks = this.getPlantasks(this.sections);
     this.taskService.getUserTasks(user.Id, this.planTasks).subscribe(
@@ -271,7 +282,7 @@ export class SpecificPlanComponent implements OnInit {
     this.isLoadedUser = true;
   }
 
-  setSection(section: Section, usersTasks: UsersTasks[], index: number): Section{
+  setSection(section: Section, usersTasks: UsersTasks[], index: number): Section {
     section.Content.UsersTasks = new Array<UsersTasks>();
     let userTasks;
     let allTasks;
@@ -287,7 +298,7 @@ export class SpecificPlanComponent implements OnInit {
     return section;
   }
 
-  setAllUserTasks(usersTasks: UsersTasks[]){
+  setAllUserTasks(usersTasks: UsersTasks[]) {
     let index = 0;
     for (let i = 0; i < this.sections.length; i++) {
       this.sections[i] = this.setSection(this.sections[i], usersTasks, index);
