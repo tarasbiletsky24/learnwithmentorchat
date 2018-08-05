@@ -46,8 +46,8 @@
               <button *ngIf="is_student" mat-raised-button (click)="onSuggestDeadlineClick(t.Name, section.Content.UsersTasks[i].UserTasks[selectedUser])">Suggest end date</button>
               </div>
               <div class="review" *ngIf="!is_student">
-                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)" (click)="approve(j, i)">Approve</button>
-                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)" (click)="reject(j, i)">Reject</button>
+                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)" (click)="approve(j, i, selectedUser)">Approve</button>
+                <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)" (click)="reject(j, i, selectedUser)">Reject</button>
               </div>
             </div>
           </mat-expansion-panel>
@@ -56,3 +56,7 @@
     </div>
   </div>
 </div>
+
+,
+
+
