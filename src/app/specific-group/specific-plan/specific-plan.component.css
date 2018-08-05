@@ -70,8 +70,12 @@ button{
     padding: 5px;
 }
 
+/* .states{
+    background: red;
+} */
 .stateIcons{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 0px 2.5px 0px 2.5px;
 }

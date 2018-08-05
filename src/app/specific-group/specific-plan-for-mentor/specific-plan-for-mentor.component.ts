@@ -12,9 +12,13 @@ export class SpecificPlanForMentorComponent implements OnInit {
   @Input() users: UsersWithTasks[];
   @Output() selectedUser = new EventEmitter<number>();
   @Input() isLoadedUsers: boolean;
-
+  ischeck: number;
   selectUser(index: number) {
+    this.ischeck=index;
     this.selectedUser.emit(index);
+  }
+  ischecked(k:number):boolean{
+    return k === this.ischeck ? true : false;
   }
 
   getState (state: string) {
