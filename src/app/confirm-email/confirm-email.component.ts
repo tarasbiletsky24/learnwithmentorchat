@@ -7,6 +7,7 @@ import { trigger } from '../../../node_modules/@angular/animations';
 import { NgForm } from '../../../node_modules/@angular/forms';
 import { Email } from '../common/models/email';
 import { AlertWindowsComponent } from '../components/alert-windows/alert-windows.component';
+import { AuthService } from '../common/services/auth.service';
 
 @Component({
   selector: 'app-confirm-email',
@@ -17,6 +18,7 @@ export class ConfirmEmailComponent implements OnInit {
 
   constructor(public activateRoute: ActivatedRoute,
     private emailService: EmailService,
+    private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     private alertwindow: AlertWindowsComponent) { }
 
@@ -34,6 +36,7 @@ export class ConfirmEmailComponent implements OnInit {
       data => {
         debugger
         this.message = data;
+        this.authService.removeUserData();
       },
       (error: HttpErrorResponse) => {
         debugger

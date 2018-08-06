@@ -5,4 +5,5 @@ export class User {
     Email: string;
     Role: string;
     Blocked: boolean;
+    EmailConfirmed: boolean;
 }

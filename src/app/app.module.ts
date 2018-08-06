@@ -73,6 +73,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { BeginPasswordResetComponent } from './begin-password-reset/begin-password-reset.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-confirmed.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
     PaginationComponent,
     BeginPasswordResetComponent,
     PasswordResetComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    EmailNotConfirmedComponent
   ],
   imports: [
     AppRoutingModule,

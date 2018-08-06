@@ -63,6 +63,13 @@ export class AuthService {
     return parseInt(this.getUser().Id, 10);
   }
 
+  isEmailConfirmed(): boolean {
+    if (!this.getUser()) {
+      return null;
+    }
+    return this.getUser().EmailConfirmed === "True" ;
+  }
+
   getUserFullName(): string {
     if (!this.getUser()) {
       return null;
@@ -95,4 +102,5 @@ export class AuthService {
     }
     return this.getUser().email;
   }
+  
 }
