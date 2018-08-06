@@ -44,7 +44,7 @@ export class ReviewSuggestedDeadlinesComponent implements OnInit {
     this.userTask.ProposeEndDate = null;
     this.taskService.deleteProposedEndDate(this.userTask.Id).subscribe();
   }
-  
+
   ngOnInit() {
   }
 

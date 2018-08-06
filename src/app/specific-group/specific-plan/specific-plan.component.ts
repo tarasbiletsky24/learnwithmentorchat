@@ -13,7 +13,7 @@ import { PlanService } from '../../common/services/plan.service';
 import { UserTask } from '../../common/models/userTask';
 import { Task } from '../../common/models/task';
 import { Plan } from '../../common/models/plan';
-import { Group } from '../../common/models/group'
+import { Group } from '../../common/models/group';
 import { TaskSubmitorComponent } from '../../task/task-submitor/task-submitor.component';
 import { ConversationComponent } from '../../task/conversation/conversation.component';
 import { UsersTasks } from '../../common/models/usersTasks';
@@ -155,7 +155,7 @@ export class SpecificPlanComponent implements OnInit {
     const plan_id = +this.router.url.split('/')[4];
     this.groupservice.getGroup(group_id).subscribe(group => {
       this.planService.getPlan(plan_id).subscribe(plan => {
-        this.info = group.Name + ": " + plan.Name;
+        this.info = group.Name + ': ' + plan.Name;
       });
     });
     this.taskService.getTasksInSections(plan_id).subscribe(
@@ -302,7 +302,6 @@ export class SpecificPlanComponent implements OnInit {
     let index = 0;
     let allTasks;
     for (let i = 0; i < this.sections.length; i++) {
-      this.sections[i].Content.UsersTasks = new Array;
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
         allTasks = new UsersTasks();
         allTasks.UserTasks = new Array;

@@ -13,16 +13,18 @@ export class SpecificPlanForMentorComponent implements OnInit {
   @Output() selectedUser = new EventEmitter<number>();
   @Input() isLoadedUsers: boolean;
   ischeck: number;
-  selectUser(index: number) {
-    this.ischeck=index;
+  selectUser (index: number) {
+    this.ischeck = index;
     this.selectedUser.emit(index);
   }
-  ischecked(k:number):boolean{
-    if  (this.ischeck=== undefined && k===0){ return true; }
+  ischecked (k: number): boolean {
+    if (this.ischeck === undefined && k === 0) {
+      return true;
+    }
     return k === this.ischeck ? true : false;
   }
 
-  
+
   constructor() {
   }
 
