@@ -2,8 +2,8 @@
   <div class="image-wrap" *ngIf="isLoadedUsers">
     <li *ngFor="let user of users; let k = index" >
        <img *ngIf="user.image"  [class.clicked]="ischecked(k)" [src]="user.image" class="userstates" (click)="selectUser(k)"  alt="User image" matTooltip="{{user.user.FirstName+ ' '+user.user.LastName}}">
-      <!-- <ol *ngFor="let u of user.usertasks" class="picStates">
-        <img *ngIf="u.Image" [src]="u.Image" [class.clicked]="ischecked(k)" class="state" (click)="f.click()" id="newImage" alt="User image" matTooltip={{getState(u.State)}}>
-      </ol> -->
+      <ol *ngFor="let u of user.usertasks" class="picStates">
+        <img *ngIf="u.Image" [src]="u.Image"  class="state" (click)="f.click()" id="newImage" alt="User image" matTooltip={{getState(u.State)}}>
+      </ol>
     </li>
   </div>
