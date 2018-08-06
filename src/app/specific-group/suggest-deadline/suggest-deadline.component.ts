@@ -27,12 +27,17 @@ export class SuggestDeadlineComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userTask = data.userTask;
       this.task = data.taskName;
+      if (this.userTask.ProposeEndDate) {
       this.previousProposeEndDate = new DateTime(this.userTask.ProposeEndDate.toString().split('T')[0]);
+    }
   }
 
   onCancelClick() {
-    const currentProposeEndDate = this.userTask.ProposeEndDate.toString().split('T')[0];
-    if (!this.previousProposeEndDate.isEqual(currentProposeEndDate)) {
+    let currentProposeEndDate;
+    if (this.userTask.ProposeEndDate) {
+      currentProposeEndDate = this.userTask.ProposeEndDate.toString().split('T')[0];
+    }
+    if (this.userTask.ProposeEndDate && !this.previousProposeEndDate.isEqual(currentProposeEndDate)) {
       this.dialogsService
       .confirm('Confirm Dialog', 'You have unsaved changes. Do you want to save them?')
       .subscribe(res => {
@@ -46,7 +51,14 @@ export class SuggestDeadlineComponent implements OnInit {
   }
 
   saveChanges() {
-    this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate.toISOString()).subscribe();
+    if (this.userTask.ProposeEndDate) {
+      if (this.userTask.ProposeEndDate instanceof Object) {
+        this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate.toISOString()).subscribe();
+      }
+      else {
+        this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate).subscribe();
+      }
+    }
   }
 
   onSubmitClick() {
