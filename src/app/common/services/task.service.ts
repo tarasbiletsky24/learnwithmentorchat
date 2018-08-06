@@ -150,6 +150,24 @@ export class TaskService {
     return this.http.put<string>(link, userTask.Result as string, { headers: reqHeader }).pipe(
       catchError(val => of(val)));
   }
+ 
+  updateProposedEndDate(userTaskId: number, date: string): Observable<any>{
+    const link = `${this.url}task/usertask/proposedEndDate?userTaskId=${userTaskId}&proposeEndDate=${date}`;
+    return this.http.put<string>(link, date, httpOptions).pipe(
+      catchError(val => of(val)));
+  }
+
+  deleteProposedEndDate(userTaskId: number): Observable<any>{
+    const link = `${this.url}task/usertask/proposedEndDate?userTaskId=${userTaskId}`;
+    return this.http.delete<string>(link, httpOptions).pipe(
+      catchError(val => of(val)));
+  }
+
+  updateEndDate(userTaskId: number): Observable<any>{
+    const link = `${this.url}task/usertask/endDate?userTaskId=${userTaskId}`;
+    return this.http.put<string>(link, httpOptions).pipe(
+      catchError(val => of(val)));
+  }
 
   updateProposedEndDate(userTaskId: number, date: string): Observable<any> {
     const link = `${this.url}task/usertask/proposedEndDate?userTaskId=${userTaskId}&proposeEndDate=${date}`;

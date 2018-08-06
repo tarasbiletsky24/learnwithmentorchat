@@ -148,6 +148,18 @@ export class SpecificPlanComponent implements OnInit {
     });
   }
 
+  onSuggestDeadlineClick(taskName: string, userTask: UserTask) {
+    const data = { taskName: taskName, userTask: userTask };
+    const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
+    width: '400px' });
+  }
+
+  onSuggestedDeadlineClick(taskName: string, userTask: UserTask, studentName: string) {
+    const data = { taskName: taskName, userTask: userTask, studentName};
+    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, { data: data,
+    width: '500px' });
+  }
+
   ngOnInit() {
     this.isLoadedUser = false;
     this.isLoadedUsers = false;
@@ -302,6 +314,7 @@ export class SpecificPlanComponent implements OnInit {
     let index = 0;
     let allTasks;
     for (let i = 0; i < this.sections.length; i++) {
+      this.sections[i].Content.UsersTasks = new Array;
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
         allTasks = new UsersTasks();
         allTasks.UserTasks = new Array;
@@ -320,7 +333,7 @@ export class SpecificPlanComponent implements OnInit {
     for (let i = 0; i < section.Content.Tasks.length; i++) {
       userTasks = new Array<UserTask>();
       allTasks = new UsersTasks();
-      for (let j = 0; j < this.users.length; j++) {
+      for(let j = 0; j < this.users.length; j++) {
         userTasks.push(usersTasks[j].UserTasks[i + index]);
       }
       allTasks.UserTasks = userTasks;
