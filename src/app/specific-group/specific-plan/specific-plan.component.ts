@@ -70,7 +70,7 @@ export class SpecificPlanComponent implements OnInit {
     const curentDate = new DateTime();
     return curentDate.isGreater(endDate);
   }
-  
+
   sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
       this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.done;
@@ -289,7 +289,7 @@ export class SpecificPlanComponent implements OnInit {
     for (let i = 0; i < section.Content.Tasks.length; i++) {
       userTasks = new Array<UserTask>();
       allTasks = new UsersTasks();
-      for(let j = 0; j < this.users.length; j++) {
+      for (let j = 0; j < this.users.length; j++) {
         userTasks.push(usersTasks[j].UserTasks[i + index]);
       }
       allTasks.UserTasks = userTasks;

@@ -8,6 +8,7 @@ import { User } from '../models/user';
 import { Group } from '../models/group';
 import { Plan } from '../models/plan';
 import { UserWithImage } from '../models/userWithImage';
+import { Email } from '../models/email';
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +93,4 @@ export class GroupService {
       return of(result as T);
     };
   }
-
 }

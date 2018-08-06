@@ -14,7 +14,7 @@ import { DateTime } from 'date-time-js';
   styleUrls: ['./suggest-deadline.component.css']
 })
 export class SuggestDeadlineComponent implements OnInit {
- 
+
   @Input()
   private task: string;
   private userTask: UserTask;
@@ -54,8 +54,7 @@ export class SuggestDeadlineComponent implements OnInit {
     if (this.userTask.ProposeEndDate) {
       if (this.userTask.ProposeEndDate instanceof Object) {
         this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate.toISOString()).subscribe();
-      }
-      else {
+      } else {
         this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate).subscribe();
       }
     }
@@ -64,7 +63,7 @@ export class SuggestDeadlineComponent implements OnInit {
   onSubmitClick() {
     this.saveChanges();
   }
-  
+
   ngOnInit() {
   }
 

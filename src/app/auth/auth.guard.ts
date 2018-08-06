@@ -9,6 +9,10 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
+    if (!this.auth.isEmailConfirmed() && this.auth.isValid(localStorage.getItem('userToken'))) {
+      this.router.navigate(['/email-not-confirmed']);
+      return true;
+    }
     if (this.auth.isValid(localStorage.getItem('userToken'))) {
       return true;
     }

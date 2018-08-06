@@ -6,6 +6,9 @@ import { UserService } from '../../common/services/user.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { AuthService } from '../../common/services/auth.service';
 import { Login } from '../../common/models/login';
+import { EmailService } from '../../common/services/email.service';
+import { Email } from '../../common/models/email';
+import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,8 +22,10 @@ export class SignupComponent implements OnInit {
 
   constructor(private userService: UserService,
     private authService: AuthService,
+    private emailService: EmailService,
     public thisDialogRef:  MatDialogRef<SignupComponent>,
-    private  alertwindow: AlertWindowsComponent) { }
+    private  alertwindow: AlertWindowsComponent,
+    private httpStatusCodeService: HttpStatusCodeService) { }
 
   closeSignupComponent(): void {
     this.thisDialogRef.close();
@@ -57,10 +62,31 @@ export class SignupComponent implements OnInit {
       if (data.startsWith('Succesfully')) {
         this.alertwindow.openSnackBar('You are succesfully registered' , '');
         this.authenticate(form.value.Email, form.value.Password);
+        this.sendEmailConfirmationInstructions(form.value.Email);
         this.closeSignupComponent();
       } else {
         this.alertwindow.openSnackBar('This email already exist' , '');
       }
     });
   }
+
+  sendEmailConfirmationInstructions(userEmail: string) {
+    const email: Email = {
+      Email: userEmail
+    };
+    this.emailService.sendEmailConfirmationEmail(email).subscribe(
+      resp => {
+        if (this.httpStatusCodeService.isOk(resp.status)) {
+          this.alertwindow.openSnackBar('Confirmation instructions successfully sent', 'Ok');
+        }
+        if (this.httpStatusCodeService.isNoContent(resp.status)) {
+          this.alertwindow.openSnackBar('User not found', 'Ok');
+        }
+      },
+      error => {
+        this.alertwindow.openSnackBar(error.error.Message, 'Ok');
+      }
+    );
+  }
+
 }

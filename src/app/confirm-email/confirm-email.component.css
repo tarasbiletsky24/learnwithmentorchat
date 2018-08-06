@@ -1,0 +1,41 @@
+* {    
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+.form {
+    width: 60%;
+    padding: 0%;
+  }
+.input-container {
+    display: flex;
+    justify-content: start;
+}
+.email-input {
+    width: auto;
+    padding: 0%;
+}
+.button-row {
+    display: flex;
+    justify-content: start;
+  }
+  .button-right{
+    float: right;
+  }
+  .spiner-margin {
+    margin: 0 10px;
+  }
+  .error-message {
+    display: flex;
+    justify-content: start;
+    color: red;
+    margin-top: 5px;
+  }
+  .error-message-text {
+    margin: 10px 0px;
+  }

@@ -72,6 +72,10 @@ import { AddUsersComponent } from './groups/specific-group/add-users/add-users.c
 import { PlansDisplayComponent } from './groups/specific-group/plans-display/plans-display.component';
 import { AddPlansComponent } from './groups/specific-group/add-plans/add-plans.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { BeginPasswordResetComponent } from './begin-password-reset/begin-password-reset.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-confirmed.component';
 import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
 import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 
@@ -117,6 +121,10 @@ import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-sugge
     PageNotFoundComponent,
     NotAuthorizedComponent,
     PaginationComponent,
+    BeginPasswordResetComponent,
+    PasswordResetComponent,
+    ConfirmEmailComponent,
+    EmailNotConfirmedComponent,
     SuggestDeadlineComponent,
     ReviewSuggestedDeadlinesComponent
     ],
