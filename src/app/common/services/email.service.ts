@@ -26,11 +26,11 @@ export class EmailService {
   }
 
   verifyPasswordResetToken(token: string): Observable<number> {
-    return this.http.get<number>(`${this.url}/verify-token?token=${token}`).pipe();
+    return this.http.get<number>(`${this.url}/verify-token?token=${token}`, { headers: this.reqHeader }).pipe();
   }
 
   confirmUserEmail(token: string): Observable<string> {
-    return this.http.get<string>(`${this.url}/confirm-email?token=${token}`,{ headers: this.reqHeader }).pipe();
+    return this.http.get<string>(`${this.url}/confirm-email?token=${token}`, { headers: this.reqHeader }).pipe();
   }
 
   resetPassword(id: number, password: string): Observable<HttpResponse<any>> {
