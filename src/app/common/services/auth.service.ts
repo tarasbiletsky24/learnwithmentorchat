@@ -67,7 +67,7 @@ export class AuthService {
     if (!this.getUser()) {
       return null;
     }
-    return this.getUser().EmailConfirmed === "True" ;
+    return this.getUser().EmailConfirmed === 'True' ;
   }
 
   getUserFullName(): string {
@@ -102,5 +102,4 @@ export class AuthService {
     }
     return this.getUser().email;
   }
-  
 }

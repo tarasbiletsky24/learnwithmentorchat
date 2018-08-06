@@ -30,16 +30,13 @@ export class ConfirmEmailComponent implements OnInit {
   errorMessageActive = false;
 
   ngOnInit() {
-    debugger
-    this.activateRoute.params.subscribe(params=>this.token=params['token']);
+    this.activateRoute.params.subscribe(params => this.token = params['token']);
     this.emailService.confirmUserEmail(this.token).subscribe(
       data => {
-        debugger
         this.message = data;
         this.authService.removeUserData();
       },
       (error: HttpErrorResponse) => {
-        debugger
         this.message = error.error.Message;
         this.sendConfirmationInstructionsActive = true;
       }
@@ -50,15 +47,15 @@ export class ConfirmEmailComponent implements OnInit {
     this.progresSpinerActive = true;
     const email: Email = {
       Email: form.value.Email
-    }
+    };
     this.emailService.sendEmailConfirmationEmail(email).subscribe(
       resp => {
         if (this.httpStatusCodeService.isOk(resp.status)) {
-          this.alertwindow.openSnackBar("Confirmation instructions successfully sent", 'Ok');
+          this.alertwindow.openSnackBar('Confirmation instructions successfully sent', 'Ok');
           this.errorMessageActive = false;
         }
         if (this.httpStatusCodeService.isNoContent(resp.status)) {
-          this.activateErrorMessage("User not found");
+          this.activateErrorMessage('User not found');
         }
       },
       error => {

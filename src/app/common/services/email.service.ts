@@ -18,11 +18,13 @@ export class EmailService {
   private emailConfirmPage = `${environment.uiUrl}confirm-email`;
 
   sendPasswordResetEmail(email: Email): Observable<HttpResponse<any>> {
-    return this.http.post(`${this.url}/password-reset?resetPasswordLink=${this.resetPage}`, email, { observe: 'response', headers: this.reqHeader });
+    return this.http.post(`${this.url}/password-reset?resetPasswordLink=${this.resetPage}`,
+    email, { observe: 'response', headers: this.reqHeader });
   }
 
   sendEmailConfirmationEmail(email: Email): Observable<HttpResponse<any>> {
-    return this.http.post(`${this.url}/confirm-email?emailConfirmLink=${this.emailConfirmPage}`, email, { observe: 'response', headers: this.reqHeader });
+    return this.http.post(`${this.url}/confirm-email?emailConfirmLink=${this.emailConfirmPage}`,
+    email, { observe: 'response', headers: this.reqHeader });
   }
 
   verifyPasswordResetToken(token: string): Observable<number> {

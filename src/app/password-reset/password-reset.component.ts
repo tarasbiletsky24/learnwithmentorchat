@@ -32,17 +32,14 @@ export class PasswordResetComponent implements OnInit {
   errorResetMessageActive = false;
 
   ngOnInit() {
-    debugger
     this.activateRoute.params.subscribe(params => this.token = params['token']);
     this.emailService.verifyPasswordResetToken(this.token).subscribe(
       data => {
-        debugger
         this.userId = data;
         this.tokenValid = true;
-        this.message = "Please input new password"
+        this.message = 'Please input new password';
       },
       (error: HttpErrorResponse) => {
-        debugger
         this.message = error.error.Message;
       }
     );
@@ -54,11 +51,11 @@ export class PasswordResetComponent implements OnInit {
       this.emailService.resetPassword(this.userId, form.value.Password).subscribe(
         resp => {
           if (this.httpStatusCodeService.isOk(resp.status)) {
-            this.alertwindow.openSnackBar("Password successfully changed", 'Ok');
+            this.alertwindow.openSnackBar('Password successfully changed', 'Ok');
             this.errorMessageActive = false;
           }
           if (this.httpStatusCodeService.isNoContent(resp.status)) {
-            this.activateErrorMessage("User not found");
+            this.activateErrorMessage('User not found');
           }
         },
         error => {
@@ -70,7 +67,7 @@ export class PasswordResetComponent implements OnInit {
         }
       );
     } else {
-      this.activateErrorMessage("Password must be equal in both fields");
+      this.activateErrorMessage('Password must be equal in both fields');
     }
   }
 

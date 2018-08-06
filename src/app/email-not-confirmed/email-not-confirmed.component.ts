@@ -23,14 +23,14 @@ export class EmailNotConfirmedComponent implements OnInit {
   sendEmailConfirmationInstructions() {
     const email: Email = {
       Email: this.authService.getUserEmail()
-    }
+    };
     this.emailService.sendEmailConfirmationEmail(email).subscribe(
       resp => {
         if (this.httpStatusCodeService.isOk(resp.status)) {
-          this.alertwindow.openSnackBar("Confirmation instructions successfully sent", 'Ok');
+          this.alertwindow.openSnackBar('Confirmation instructions successfully sent', 'Ok');
         }
         if (this.httpStatusCodeService.isNoContent(resp.status)) {
-          this.alertwindow.openSnackBar("User not found", 'Ok');
+          this.alertwindow.openSnackBar('User not found', 'Ok');
         }
       },
       error => {

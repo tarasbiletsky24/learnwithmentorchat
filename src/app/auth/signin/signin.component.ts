@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  hideDialog(){
+  hideDialog() {
     this.closeSigninComponent();
   }
 

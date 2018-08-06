@@ -20,7 +20,7 @@ export class BeginPasswordResetComponent implements OnInit {
   progresConfirmationSpinerActive: boolean;
   errorMessage: string;
   errorMessageActive = false;
-  confirmationActive= false;
+  confirmationActive = false;
 
   ngOnInit() {
   }
@@ -29,16 +29,16 @@ export class BeginPasswordResetComponent implements OnInit {
     this.progresConfirmationSpinerActive = true;
     const email: Email = {
       Email: form.value.Email
-    }
+    };
     this.emailService.sendEmailConfirmationEmail(email).subscribe(
       resp => {
         if (this.httpStatusCodeService.isOk(resp.status)) {
-          this.alertwindow.openSnackBar("Confirmation instructions successfully sent", 'Ok');
+          this.alertwindow.openSnackBar('Confirmation instructions successfully sent', 'Ok');
           this.errorMessageActive = false;
           this.confirmationActive = false;
         }
         if (this.httpStatusCodeService.isNoContent(resp.status)) {
-          this.alertwindow.openSnackBar("User not found", 'Ok');
+          this.alertwindow.openSnackBar('User not found', 'Ok');
         }
       },
       error => {
@@ -55,19 +55,18 @@ export class BeginPasswordResetComponent implements OnInit {
     this.progresSpinerActive = true;
     const email: Email = {
       Email: form.value.Email
-    }
+    };
     this.emailService.sendPasswordResetEmail(email).subscribe(
       resp => {
         if (this.httpStatusCodeService.isOk(resp.status)) {
-          this.alertwindow.openSnackBar("Reset instructions successfully sent", 'Ok');
+          this.alertwindow.openSnackBar('Reset instructions successfully sent', 'Ok');
         }
         if (this.httpStatusCodeService.isNoContent(resp.status)) {
-          this.activateErrorMessage("User not found");
+          this.activateErrorMessage('User not found');
         }
       },
       error => {
         if (this.httpStatusCodeService.isForbidden(error.status)) {
-          debugger
           this.confirmationActive = true;
           this.progresSpinerActive = false;
           this.activateErrorMessage(error.error.Message);
