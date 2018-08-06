@@ -25,8 +25,8 @@ export class GroupService {
 
   private url = `${environment.apiUrl}group`;
 
-  getGroup(id: number) {
-    return this.http.get(`${this.url}/${id}`).pipe(
+  getGroup(id: number): Observable<Group> {
+    return this.http.get<Group>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Group>(`getGroup id=${id}`))
     );
   }

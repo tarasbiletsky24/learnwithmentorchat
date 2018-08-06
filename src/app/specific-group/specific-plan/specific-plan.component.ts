@@ -12,6 +12,8 @@ import { GroupService } from '../../common/services/group.service';
 import { PlanService } from '../../common/services/plan.service';
 import { UserTask } from '../../common/models/userTask';
 import { Task } from '../../common/models/task';
+import { Plan } from '../../common/models/plan';
+import { Group } from '../../common/models/group';
 import { TaskSubmitorComponent } from '../../task/task-submitor/task-submitor.component';
 import { ConversationComponent } from '../../task/conversation/conversation.component';
 import { UsersTasks } from '../../common/models/usersTasks';
@@ -51,6 +53,7 @@ export class SpecificPlanComponent implements OnInit {
   isLoadedUsers = false;
   isUserSelected = false;
   selectedUser = 0;
+  info: string;
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -83,6 +86,22 @@ export class SpecificPlanComponent implements OnInit {
     }
   }
 
+  ischecked(i): boolean {
+    return i === this.selectedUser;
+  }
+  getState(state: string) {
+    if (state.toLowerCase() === 'p') {
+      return 'InProgress';
+    }
+    if (state.toLowerCase() === 'r') {
+      return 'Rejected';
+    }
+    if (state.toLowerCase() === 'a') {
+      return 'Approved';
+    }
+    return 'Done';
+  }
+
   approve(sectionId, taskId, selectedUser: number) {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
     this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.approved;
@@ -99,26 +118,34 @@ export class SpecificPlanComponent implements OnInit {
 
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    const dialogRef = this.dialog.open(TaskSubmitorComponent, { data: data,
-      width: '600px' });
+    const dialogRef = this.dialog.open(TaskSubmitorComponent, {
+      data: data,
+      width: '600px'
+    });
   }
 
   onConversationClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    const dialogRef = this.dialog.open(ConversationComponent, { data: data,
-    width: '600px' });
+    const dialogRef = this.dialog.open(ConversationComponent, {
+      data: data,
+      width: '600px'
+    });
   }
 
   onSuggestDeadlineClick(taskName: string, userTask: UserTask) {
     const data = { taskName: taskName, userTask: userTask };
-    const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
-    width: '400px' });
+    const dialogRef = this.dialog.open(SuggestDeadlineComponent, {
+      data: data,
+      width: '400px'
+    });
   }
 
   onSuggestedDeadlineClick(taskName: string, userTask: UserTask, studentName: string) {
-    const data = { taskName: taskName, userTask: userTask, studentName};
-    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, { data: data,
-    width: '500px' });
+    const data = { taskName: taskName, userTask: userTask, studentName };
+    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, {
+      data: data,
+      width: '500px'
+    });
   }
 
   ngOnInit() {
@@ -126,6 +153,11 @@ export class SpecificPlanComponent implements OnInit {
     this.isLoadedUsers = false;
     const group_id = +this.router.url.split('/')[2];
     const plan_id = +this.router.url.split('/')[4];
+    this.groupservice.getGroup(group_id).subscribe(group => {
+      this.planService.getPlan(plan_id).subscribe(plan => {
+        this.info = group.Name + ': ' + plan.Name;
+      });
+    });
     this.taskService.getTasksInSections(plan_id).subscribe(
       section => {
         this.sections = section;
@@ -270,7 +302,6 @@ export class SpecificPlanComponent implements OnInit {
     let index = 0;
     let allTasks;
     for (let i = 0; i < this.sections.length; i++) {
-      this.sections[i].Content.UsersTasks = new Array;
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
         allTasks = new UsersTasks();
         allTasks.UserTasks = new Array;
