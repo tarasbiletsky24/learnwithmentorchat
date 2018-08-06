@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="form">
+    <h2>
+      {{message}}
+    </h2>
+    <div *ngIf="sendConfirmationInstructionsActive">
+      <h3>Enter your email to send instructions one more time</h3>
+      <form class="email-form" #emailForm="ngForm">
+        <mat-form-field class="input-container">
+          <input matInput class="email-input" ngModel type="email" placeholder="Email" #Email ngModel name="Email" required (input)="onEmailChange()">
+        </mat-form-field>
+        <div class="button-row">
+          <button [disabled]="!emailForm.valid" name="submit" mat-raised-button color="primary" (click)="sendEmailConfirmationInstructions(emailForm)">
+            Send reset instructions
+          </button>
+          <mat-spinner *ngIf="progresSpinerActive" class="spiner-margin" diameter="40" strokeWidth="4" [color]="primary" [mode]="indeterminate"></mat-spinner>
+        </div>
+        <div *ngIf="errorMessageActive" class="error-message">
+          <h4 class="error-message-text">{{errorMessage}}</h4>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

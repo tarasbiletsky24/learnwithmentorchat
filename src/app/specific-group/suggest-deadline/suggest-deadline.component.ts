@@ -15,6 +15,7 @@ import { DateTime } from 'date-time-js';
 })
 export class SuggestDeadlineComponent implements OnInit {
  
+
   @Input()
   private task: string;
   private userTask: UserTask;

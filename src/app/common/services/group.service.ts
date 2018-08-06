@@ -8,6 +8,7 @@ import { User } from '../models/user';
 import { Group } from '../models/group';
 import { Plan } from '../models/plan';
 import { UserWithImage } from '../models/userWithImage';
+import { Email } from '../models/email';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class GroupService {
 
   private url = `${environment.apiUrl}group`;
 
-  getGroup(id: number) {
-    return this.http.get(`${this.url}/${id}`).pipe(
+  getGroup(id: number): Observable<Group> {
+    return this.http.get<Group>(`${this.url}/${id}`).pipe(
       catchError(this.handleError<Group>(`getGroup id=${id}`))
     );
   }
@@ -92,5 +93,4 @@ export class GroupService {
       return of(result as T);
     };
   }
-
 }

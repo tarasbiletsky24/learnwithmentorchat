@@ -12,23 +12,19 @@ export class SpecificPlanForMentorComponent implements OnInit {
   @Input() users: UsersWithTasks[];
   @Output() selectedUser = new EventEmitter<number>();
   @Input() isLoadedUsers: boolean;
-
-  selectUser(index: number) {
+  ischeck: number;
+  selectUser (index: number) {
+    this.ischeck = index;
     this.selectedUser.emit(index);
   }
-
-  getState (state: string) {
-    if (state.toLowerCase() === 'p') {
-      return 'InProgress';
+  ischecked (k: number): boolean {
+    if (this.ischeck === undefined && k === 0) {
+      return true;
     }
-    if (state.toLowerCase() === 'r') {
-      return 'Rejected';
-    }
-    if (state.toLowerCase() === 'a') {
-      return 'Approved';
-    }
-    return 'Done';
+    return k === this.ischeck ? true : false;
   }
+
+
   constructor() {
   }
 

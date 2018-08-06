@@ -1,10 +1,7 @@
-<mat-spinner *ngIf="!isLoadedUsers" class="spiner-margins" diameter="200"  strokeWidth="20" [color]="primary" [mode]="indeterminate"></mat-spinner>
-  <div class="image-wrap" *ngIf="isLoadedUsers">
-    <li *ngFor="let user of users; let k = index">
-      <img *ngIf="user.image" [src]="user.image" class="userstates" (click)="selectUser(k)" id="{{k}}" alt="User image" matTooltip="{{user.user.FirstName+ ' '+user.user.LastName}}">
-      <!-- <ol *ngFor="let u of user.usertasks" class="picStates">
-        <img *ngIf="u.Image" [src]="u.Image" class="state" (click)="f.click()" id="newImage" alt="User image" matTooltip={{getState(u.State)}}>
-      </ol> -->
-    </li>
-  </div>
-
+<mat-spinner *ngIf="!isLoadedUsers" class="spiner-margins" diameter="40" strokeWidth="5" [color]="primary" [mode]="indeterminate"></mat-spinner>
+<div class="image-wrap" *ngIf="isLoadedUsers">
+  <li *ngFor="let user of users; let k = index">
+    <img *ngIf="user.image" [class.clicked]="ischecked(k)" [src]="user.image" class="userstates" (click)="selectUser(k)" alt="User image"
+      matTooltip="{{user.user.FirstName+ ' '+user.user.LastName}}">
+  </li>
+</div>
