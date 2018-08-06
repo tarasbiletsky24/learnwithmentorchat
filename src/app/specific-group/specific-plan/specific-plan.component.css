@@ -1,20 +1,26 @@
 .content {
     margin-top: 100px;
     justify-content: space-around;  
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     display: flex ;
 }
 
 .sections{
     width: 65%;
-    margin-top: 20px;
     justify-content: space-between;  
     flex-direction: column;
     display: flex;
 }
 
-.title{
-    padding-left: 15px;
+.panel{
+    width: 65%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+::ng-deep .mat-expansion-panel-header-description, .mat-expansion-panel-header-title{
+    justify-content: space-between !important;
 }
 
 ::ng-deep .mat-expansion-panel-body{
@@ -28,6 +34,10 @@
 
 ::ng-deep .mat-content {
     overflow: visible !important;
+}
+
+::ng-deep .mat-form-field-infix{
+    width: 70px !important;
 }
 
 #group_name{
@@ -52,5 +62,16 @@ button{
 }
 
 .usersC{
-    width: auto;
+    z-index: 1;
+    /* width: auto; */
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0px; 
+    padding: 5px;
+}
+
+.stateIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

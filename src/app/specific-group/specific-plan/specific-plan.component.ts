@@ -16,8 +16,11 @@ import { TaskSubmitorComponent } from '../../task/task-submitor/task-submitor.co
 import { ConversationComponent } from '../../task/conversation/conversation.component';
 import { UsersTasks } from '../../common/models/usersTasks';
 import { UserWithImage } from '../../common/models/userWithImage';
+import { SuggestDeadlineComponent } from '../suggest-deadline/suggest-deadline.component';
+import { ReviewSuggestedDeadlinesComponent } from '../review-suggested-deadlines/review-suggested-deadlines.component';
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
+import { DateTime } from 'date-time-js';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -46,6 +49,8 @@ export class SpecificPlanComponent implements OnInit {
   planTasks: number[];
   isLoadedUser = false;
   isLoadedUsers = false;
+  isUserSelected = false;
+  selectedUser = 0;
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -60,23 +65,35 @@ export class SpecificPlanComponent implements OnInit {
     this.user = new UsersWithTasks;
   }
 
-  sendState(i: number, event: any) {
+  isUserTaskExpiration(userTask: UserTask): boolean {
+    const endDate = new DateTime(userTask.EndDate.toString().split('T')[0]);
+    const curentDate = new DateTime();
+    return curentDate.isGreater(endDate);
+  }
+
+  sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.done;
       this.taskService.updateUserTaskState(event.source.id, this.done).subscribe();
+      this.setPictureState(sectionId, taskId);
     } else {
-      this.taskService.updateUserTaskState(event.source.id, this.approved).subscribe();
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.inProgress;
+      this.taskService.updateUserTaskState(event.source.id, this.inProgress).subscribe();
+      this.setPictureState(sectionId, taskId);
     }
   }
 
-  approve(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.approved;
-    this.taskService.updateUserTaskState(id, this.approved).subscribe();
+  approve(sectionId, taskId, selectedUser: number) {
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.approved;
+    this.taskService.updateUserTaskState(userTaskId, this.approved).subscribe();
     this.setUsertasks();
   }
 
-  reject(section: number, id: number) {
-    this.sections[section].Content.UserTasks[this.sections[section].Content.UserTasks.findIndex(f => f.Id === id)].State = this.rejected;
-    this.taskService.updateUserTaskState(id, this.rejected).subscribe();
+  reject(sectionId, taskId, selectedUser: number) {
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.rejected;
+    this.taskService.updateUserTaskState(userTaskId, this.rejected).subscribe();
     this.setUsertasks();
   }
 
@@ -90,6 +107,18 @@ export class SpecificPlanComponent implements OnInit {
     const data = { userTask: userTask, task: task };
     const dialogRef = this.dialog.open(ConversationComponent, { data: data,
     width: '600px' });
+  }
+
+  onSuggestDeadlineClick(taskName: string, userTask: UserTask) {
+    const data = { taskName: taskName, userTask: userTask };
+    const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
+    width: '400px' });
+  }
+
+  onSuggestedDeadlineClick(taskName: string, userTask: UserTask, studentName: string) {
+    const data = { taskName: taskName, userTask: userTask, studentName};
+    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, { data: data,
+    width: '500px' });
   }
 
   ngOnInit() {
@@ -117,7 +146,7 @@ export class SpecificPlanComponent implements OnInit {
       });
   }
 
-  getPictureState(alluserState: UserTask[]): UserTask[] {
+  getPicturesState(alluserState: UserTask[]): UserTask[] {
     for (const userState of alluserState) {
       if (userState.State.toUpperCase() === this.inProgress) {
         userState.Image = '../../../assets/images/inprogress.png';
@@ -137,6 +166,23 @@ export class SpecificPlanComponent implements OnInit {
     return alluserState;
   }
 
+  setPictureState(section: number, id: number) {
+    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.inProgress) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
+    } else
+      if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.done) {
+        this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/done.png';
+      } else
+        if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.approved) {
+          this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/approved.png';
+        } else
+          if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.rejected) {
+            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/rejected.png';
+          } else {
+            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
+          }
+  }
+
   getUsersWithPictures(groupUsers: UserWithImage[]) {
     this.planTasks = this.getPlantasks(this.sections);
     const userids: number[] = new Array;
@@ -149,12 +195,17 @@ export class SpecificPlanComponent implements OnInit {
           const temp = new UsersWithTasks;
           temp.user = groupUsers[i];
           temp.image = this.setUserPic(groupUsers[i].Image);
-          temp.usertasks = this.getPictureState(result_allUsertaskState[i].UserTasks);
+          temp.usertasks = this.getPicturesState(result_allUsertaskState[i].UserTasks);
           this.users.push(temp);
         }
+        this.setAllUserTasks(result_allUsertaskState);
         this.isLoadedUsers = true;
       }
     );
+  }
+
+  getFullName(index: number): string {
+    return this.users[index].user.FirstName + ' ' + this.users[index].user.LastName;
   }
 
   getUserWithPictures(user: UserWithImage) {
@@ -166,7 +217,7 @@ export class SpecificPlanComponent implements OnInit {
         this.setUsertasksToSection(usersTasks);
         const temp = new UsersWithTasks;
         temp.user = user;
-        temp.usertasks = this.getPictureState(ut);
+        temp.usertasks = this.getPicturesState(ut);
         this.user = temp;
       }
     );
@@ -186,12 +237,9 @@ export class SpecificPlanComponent implements OnInit {
     return planTasks;
   }
 
-  selectedUserbyMentor(increased: UserTask[]) {
-    this.setUsertasksToSection({ UserTasks: increased });
-  }
-
-  getUserTaskId(id: number): number {
-    return this.user.usertasks[id].Id;
+  selectedUserbyMentor(index: number) {
+    this.selectedUser = index;
+    this.isUserSelected = true;
   }
 
   private isTaskDone(state: string): boolean {
@@ -220,11 +268,40 @@ export class SpecificPlanComponent implements OnInit {
 
   private setUsertasksToSection(usersTasks: UsersTasks) {
     let index = 0;
+    let allTasks;
     for (let i = 0; i < this.sections.length; i++) {
-      this.sections[i].Content.UserTasks = new Array;
+      this.sections[i].Content.UsersTasks = new Array;
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
-        this.sections[i].Content.UserTasks.push(usersTasks.UserTasks[index + j]);
+        allTasks = new UsersTasks();
+        allTasks.UserTasks = new Array;
+        allTasks.UserTasks.push(usersTasks.UserTasks[index + j]);
+        this.sections[i].Content.UsersTasks.push(allTasks);
       }
+      index += this.sections[i].Content.Tasks.length;
+    }
+    this.isLoadedUser = true;
+  }
+
+  setSection(section: Section, usersTasks: UsersTasks[], index: number): Section {
+    section.Content.UsersTasks = new Array<UsersTasks>();
+    let userTasks;
+    let allTasks;
+    for (let i = 0; i < section.Content.Tasks.length; i++) {
+      userTasks = new Array<UserTask>();
+      allTasks = new UsersTasks();
+      for (let j = 0; j < this.users.length; j++) {
+        userTasks.push(usersTasks[j].UserTasks[i + index]);
+      }
+      allTasks.UserTasks = userTasks;
+      section.Content.UsersTasks.push(allTasks);
+    }
+    return section;
+  }
+
+  setAllUserTasks(usersTasks: UsersTasks[]) {
+    let index = 0;
+    for (let i = 0; i < this.sections.length; i++) {
+      this.sections[i] = this.setSection(this.sections[i], usersTasks, index);
       index += this.sections[i].Content.Tasks.length;
     }
     this.isLoadedUser = true;
@@ -234,10 +311,10 @@ export class SpecificPlanComponent implements OnInit {
     const tasks: UserTask[] = new Array;
     for (let i = 0; i < this.sections.length; i++) {
       for (let j = 0; j < this.sections[i].Content.Tasks.length; j++) {
-        tasks.push(this.sections[i].Content.UserTasks[j]);
+        tasks.push(this.sections[i].Content.UsersTasks[j].UserTasks[this.selectedUser]);
       }
     }
-    this.users[this.users.findIndex(k => k.user.Id === tasks[0].UserId)].usertasks = this.getPictureState(tasks);
+    this.users[this.selectedUser].usertasks = this.getPicturesState(tasks);
   }
 
   private toUserWithImage(user: User): UserWithImage {

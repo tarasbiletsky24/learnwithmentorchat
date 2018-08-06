@@ -11,12 +11,13 @@ import { AuthGuard } from './auth/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule, MatNativeDateModule } from '@angular/material';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { MatListModule, MatListBase } from '@angular/material/list';
 import { TaskDetailComponent } from './task/task-detail/task-detail.component';
@@ -26,6 +27,7 @@ import { MatExpansionModule, MatAccordion, MatExpansionPanel } from '@angular/ma
 import { TaskEditorComponent } from './task/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule, MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MainPageComponent } from './main-page/main-page.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -61,7 +63,7 @@ import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
-import {MatPaginatorModule, MatTableDataSource} from '@angular/material';
+import { MatPaginatorModule, MatTableDataSource } from '@angular/material';
 import { MentorGuard } from './auth/mentor.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { SpecificGroupComponent } from './groups/specific-group/specific-group/specific-group.component';
@@ -74,6 +76,8 @@ import { BeginPasswordResetComponent } from './begin-password-reset/begin-passwo
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-confirmed.component';
+import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
+import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 
 @NgModule({
   declarations: [
@@ -120,8 +124,10 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
     BeginPasswordResetComponent,
     PasswordResetComponent,
     ConfirmEmailComponent,
-    EmailNotConfirmedComponent
-  ],
+    EmailNotConfirmedComponent,
+    SuggestDeadlineComponent,
+    ReviewSuggestedDeadlinesComponent
+    ],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -147,7 +153,10 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
     MatSnackBarModule,
     MatButtonModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatBadgeModule
     ],
 
   entryComponents: [TaskEditorComponent,
@@ -155,6 +164,7 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
     ConfirmDialogComponent,
     TaskSubmitorComponent,
     ConversationComponent,
+    SuggestDeadlineComponent,
     SigninComponent,
     SignupComponent,
     AboutPageComponent,
@@ -164,7 +174,8 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
     AddPlansComponent,
     AddTasksComponent,
     AddGroupComponent,
-    UserEditComponent
+    UserEditComponent,
+    ReviewSuggestedDeadlinesComponent
   ],
   providers: [UserService,
     AuthGuard,
