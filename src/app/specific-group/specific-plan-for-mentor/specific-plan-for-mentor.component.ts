@@ -18,21 +18,11 @@ export class SpecificPlanForMentorComponent implements OnInit {
     this.selectedUser.emit(index);
   }
   ischecked(k:number):boolean{
+    if  (this.ischeck=== undefined && k===0){ return true; }
     return k === this.ischeck ? true : false;
   }
 
-  getState (state: string) {
-    if (state.toLowerCase() === 'p') {
-      return 'InProgress';
-    }
-    if (state.toLowerCase() === 'r') {
-      return 'Rejected';
-    }
-    if (state.toLowerCase() === 'a') {
-      return 'Approved';
-    }
-    return 'Done';
-  }
+  
   constructor() {
   }
 

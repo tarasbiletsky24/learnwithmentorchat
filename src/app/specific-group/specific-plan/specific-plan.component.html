@@ -1,9 +1,8 @@
 <div class="content">
-  <div class="panel">
+  <div class="info"><h1>{{info}}</h1><br></div>
     <div class="usersC">
-        <app-specific-plan-for-mentor *ngIf="!is_student" [isLoadedUsers]="isLoadedUsers" [users]="users" (selectedUser)="selectedUserbyMentor($event)"></app-specific-plan-for-mentor>
-      </div>
-  </div>
+      <app-specific-plan-for-mentor *ngIf="!is_student" [isLoadedUsers]="isLoadedUsers" [users]="users" (selectedUser)="selectedUserbyMentor($event)"></app-specific-plan-for-mentor>
+    </div>
   <div class="sections">
     <div class="section" *ngFor="let section of sections; let j = index">
       <mat-expansion-panel [expanded]='!isExpanded'>
@@ -26,8 +25,8 @@
                   {{t.Name}}
                 </span>
                 <div class="stateIcons" *ngIf="section.Content.UsersTasks">
-                <div class="states" *ngFor="let s of section.Content.UsersTasks[i].UserTasks">
-                  <img [src]="s.Image" width="20px" height="20px" style="padding-left: 20px"/>
+                <div class="states" *ngFor="let s of section.Content.UsersTasks[i].UserTasks; let i = index">
+                  <img [src]="s.Image" [class.clicked]="ischecked(i)" class ="userstatesicons" matTooltip={{getState(s.State)}}/>
                 </div>
                 </div>
               </mat-panel-title>
@@ -56,7 +55,3 @@
     </div>
   </div>
 </div>
-
-,
-
-

@@ -12,7 +12,6 @@ input{
     border-radius: 100%;
     margin: 5px 2.5px;
 }
-
 .state{
     margin: 5px 2.5px;
     margin-left: 20% !important;
@@ -27,7 +26,6 @@ li{
 }
 .clicked{
     border: 5px solid rgba(0, 0, 255, 0.281);
-
-   margin: 0px ; 
+   margin: 0px -2.5px; 
 }
 
