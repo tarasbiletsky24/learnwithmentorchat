@@ -148,27 +148,15 @@ export class SpecificPlanComponent implements OnInit {
     });
   }
 
-  onSuggestDeadlineClick(taskName: string, userTask: UserTask) {
-    const data = { taskName: taskName, userTask: userTask };
-    const dialogRef = this.dialog.open(SuggestDeadlineComponent, { data: data,
-    width: '400px' });
-  }
-
-  onSuggestedDeadlineClick(taskName: string, userTask: UserTask, studentName: string) {
-    const data = { taskName: taskName, userTask: userTask, studentName};
-    const dialogRef = this.dialog.open(ReviewSuggestedDeadlinesComponent, { data: data,
-    width: '500px' });
-  }
+  
 
   ngOnInit() {
     this.isLoadedUser = false;
     this.isLoadedUsers = false;
     const group_id = +this.router.url.split('/')[2];
     const plan_id = +this.router.url.split('/')[4];
-    this.groupservice.getGroup(group_id).subscribe(group => {
-      this.planService.getPlan(plan_id).subscribe(plan => {
-        this.info = group.Name + ': ' + plan.Name;
-      });
+    this.planService.getPlanAndGroupInfo(group_id, plan_id).subscribe(info => {
+      this.info = info;
     });
     this.taskService.getTasksInSections(plan_id).subscribe(
       section => {
