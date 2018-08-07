@@ -53,7 +53,11 @@ export class PlanService {
       catchError(this.handleError<Plan>(`getPlan id=${id}`))
     );
   }
-
+  getPlanAndGroupInfo (groupid: number, planid: number): Observable<string> {
+    return this.http.get<string>(`${this.url}/${planid}/group/${groupid}`).pipe(
+      catchError(this.handleError<string>(`getPlanAndGroupInfo groupid=${groupid} planid${planid} `))
+    );
+  }
   updatePlan(plan: Plan): Observable<HttpResponse<any>> {
     return this.http.put(`${this.url}/${plan.Id}`, plan, { observe: 'response' }).pipe(
       catchError(r => of(r))
