@@ -10,12 +10,12 @@
     text-align: center;
     font-family: Roboto, Arial, sans-serif
 }
-.fab{
+.fab {
     position: relative; 
     top: 0; right: -60 px;
     display: inline-block;
     border-radius: 10px;  
 }
-.close-button{
+.close-button {
     margin-left: auto;
 }
