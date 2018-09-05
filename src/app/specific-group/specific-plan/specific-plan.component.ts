@@ -148,8 +148,6 @@ export class SpecificPlanComponent implements OnInit {
     });
   }
 
-  
-
   ngOnInit() {
     this.isLoadedUser = false;
     this.isLoadedUsers = false;
@@ -321,7 +319,7 @@ export class SpecificPlanComponent implements OnInit {
     for (let i = 0; i < section.Content.Tasks.length; i++) {
       userTasks = new Array<UserTask>();
       allTasks = new UsersTasks();
-      for(let j = 0; j < this.users.length; j++) {
+      for (let j = 0; j < this.users.length; j++) {
         userTasks.push(usersTasks[j].UserTasks[i + index]);
       }
       allTasks.UserTasks = userTasks;
