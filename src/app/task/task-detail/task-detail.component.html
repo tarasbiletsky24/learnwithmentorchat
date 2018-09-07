@@ -26,13 +26,13 @@
     </mat-expansion-panel>    
     <div>
       <mat-card-actions>
-        <button mat-button (click)="openEditDialog()">
+        <button *ngIf="isMentor"  mat-button (click)="openEditDialog()">
           Edit
         </button>
-        <button mat-button (click)="openSubmitDialog()">
+        <button *ngIf="isMentor" mat-button (click)="openSubmitDialog()">
           Submit
         </button>
-        <button mat-button (click)="openConversationDialog()">
+        <button *ngIf="isMentor" mat-button (click)="openConversationDialog()">
           Conversation
         </button>
       </mat-card-actions>
