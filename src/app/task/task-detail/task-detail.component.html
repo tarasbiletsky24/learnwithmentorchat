@@ -29,10 +29,10 @@
         <button *ngIf="!isStudent"  mat-button (click)="openEditDialog()">
           Edit
         </button>
-        <button *ngIf="isStudent" mat-button (click)="openSubmitDialog()">
+        <button *ngIf="!isStudent" mat-button (click)="openSubmitDialog()">
           Submit
         </button>
-        <button *ngIf="isStudent" mat-button (click)="openConversationDialog()">
+        <button *ngIf="!isStudent" mat-button (click)="openConversationDialog()">
           Conversation
         </button>
       </mat-card-actions>
