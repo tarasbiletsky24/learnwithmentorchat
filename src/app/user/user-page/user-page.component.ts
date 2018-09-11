@@ -69,10 +69,7 @@ export class UserPageComponent implements OnInit {
           );
         }
       );
-
     });
-    
-
   }
 
   onFileSelected(event) {
