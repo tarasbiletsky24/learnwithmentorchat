@@ -28,3 +28,7 @@
 .close-button {
   margin-left: auto;
 }
+
+.disable {
+  background: #ccc;
+}
