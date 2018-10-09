@@ -92,8 +92,10 @@ Raven
 export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     Raven.captureException(err.originalError);
+    Raven.showReportDialog();
   }
 }
+
 @NgModule({
   declarations: [
     AppComponent,
