@@ -33,6 +33,7 @@ export class ConversationComponent implements OnInit {
   public userTaskId: number;
   public countForMessages = 0;
 
+
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
@@ -69,6 +70,7 @@ export class ConversationComponent implements OnInit {
         CreateDate: new Date().toISOString(),
         ModDate: new Date().toISOString(),
 
+
       };
 
     } else {
@@ -82,6 +84,7 @@ export class ConversationComponent implements OnInit {
             }
         });
       }
+
   }
 
   onSendClick() {
