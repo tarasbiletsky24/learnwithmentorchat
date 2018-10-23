@@ -10,6 +10,7 @@ import {
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../../components/dialogs/dialogs.service';
 import { Pagination } from '../../../common/models/pagination';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -18,10 +19,12 @@ import { Pagination } from '../../../common/models/pagination';
 })
 
 export class UsersComponent implements OnInit {
-
-  constructor(private userService: UserService, private alertwindow: AlertWindowsComponent, private dialogsService: DialogsService) {
+  constructor (
+    private userService: UserService,
+    private alertwindow: AlertWindowsComponent,
+    private dialogsService: DialogsService,
+    private authService: AuthService) {
   }
-
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked', 'Action'];
   allUsers = -1;
   roles: Role[];
@@ -73,6 +76,13 @@ export class UsersComponent implements OnInit {
     if (selectedUsers.length === 0 || isBlocked == null) {
       this.alertwindow.openSnackBar('Choose users!', 'Ok');
       return false;
+    }
+
+    for (let numberOfUser = 0; numberOfUser < selectedUsers.length; numberOfUser++ ) {
+      if (this.authService.getUserId() === selectedUsers[numberOfUser].Id) {
+        this.alertwindow.openSnackBar('You can\'t block yourself!', 'Ok');
+        return false;
+      }
     }
 
     this.dialogsService
