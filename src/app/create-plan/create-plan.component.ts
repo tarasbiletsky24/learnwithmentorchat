@@ -75,7 +75,7 @@ export class CreatePlanComponent implements OnInit {
       };
       this.planService.updatePlan(plan as Plan).subscribe();
     }
-
+    this.alertWindow.openSnackBar('Saved', 'Ok');
   }
 
   createPlan() {
